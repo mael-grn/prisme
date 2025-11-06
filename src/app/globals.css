@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background: #000000;
+    --background-opacity: rgba(0, 0, 0, 0.75);
+    --on-background: #121212;
+    --on-background-hover: #2c2c2c;
+    --foreground: #ffffff;
+    --on-foreground: #cfcfcf;
+    --on-foreground-hover: #bfbfbf;
+    --dangerous: #c53854;
+    --dangerous-hover: #A91D3A;
+    --safe: #5ca6b3;
+    --safe-hover: #2F7C8A;
+}
+
+* {
+    box-sizing: border-box;
+    transition: all .4s ease;
+    font-family: "Lexend", sans-serif;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+body {
+    background: var(--on-background);
+    color: var(--foreground);
+}
+
+h1 {
+    font-size: 35px;
+    font-weight: 450;
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+h3 {
+    font-size: 25px;
+    font-weight: 400;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}

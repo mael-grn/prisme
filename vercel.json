@@ -1,0 +1,19 @@
+{
+    "functions": {
+        "src/app/api/getElementsForSection/route.ts": {
+            "maxDuration": 60
+        },
+        "src/app/api/getPageFromName/route.ts": {
+            "maxDuration": 60
+        },
+        "src/app/api/getSectionFromId/route.ts": {
+            "maxDuration": 60
+        },
+        "src/app/api/getSectionsForPage/route.ts": {
+            "maxDuration": 60
+        },
+        "src/app/api/search/route.ts": {
+            "maxDuration": 60
+        }
+    }
+}
