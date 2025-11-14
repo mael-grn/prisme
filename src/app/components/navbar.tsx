@@ -24,7 +24,7 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
 
 
     useEffect(() => {
-        WebsiteService.getRecursiveWebsite(websiteIdOrDomain).then((data) => {
+        WebsiteService.getRecursiveWebsite().then((data) => {
             data.pages.push({
                 id: 0,
                 sections: [],
@@ -66,7 +66,7 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
                                     transition={{ delay: index * 0.1}}
                                     onClick={() => {
                                         setDeveloped(false);
-                                        router.push("/" + websiteIdOrDomain + "/" + page.path)
+                                        router.push(page.path)
                                     }}
                                     className={"text-4xl capitalize  md:hover:opacity-100 active:opacity-100 md:hover:-translate-x-2 opacity-50 cursor-pointer"}
                                 >

@@ -13,9 +13,9 @@ export default function AdvancedPopup({show, icon="info", title, message, closeP
                 >
                     <motion.div
                         className={"bg-onBackground border-2 border-onBackgroundHover rounded-2xl md:w-1/2 max-h-[80vh] overflow-y-auto"}
-                        initial={{transform: "scale(0.5)"}}
-                        animate={{transform: "scale(1)"}}
-                        exit={{transform: "scale(0.5)"}}
+                        initial={{transform: "scale(0.8)", filter: "blur(10px)"}}
+                        animate={{transform: "scale(1)", filter: "blur(0px)"}}
+                        exit={{transform: "scale(0.8)", filter: "blur(10px)"}}
                     >
                         <div className={"flex flex-col items-center justify-center gap-4 p-6"}>
                             <img src={`/ico/${icon}.svg`} alt={"popup"} className={"w-16 invert"} />

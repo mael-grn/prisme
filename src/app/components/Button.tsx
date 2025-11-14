@@ -23,12 +23,12 @@ export default function Button({iconName, text, onClick, actionType = ActionType
         <button
             disabled={isDisabled || isLoading}
             type={isForm ? "submit" : "button"}
-            className={`flex  gap-2 cursor-pointer items-center justify-center pt-2 pb-2 pl-4 pr-4 ${ actionType === ActionTypeEnum.neutral ? isSecondary ? "bg-background text-foreground border-1 border-foreground md:hover:bg-onBackgroundHover active:bg-onBackgroundHover" : "bg-onBackground md:hover:bg-onBackgroundHover active:bg-onBackgroundHover" : actionType === ActionTypeEnum.safe ? "bg-safe md:hover:bg-safeHover active:bg-safeHover" : "bg-dangerous md:hover:bg-dangerousHover active:bg-dangerous"} rounded-lg disabled:cursor-default disabled:opacity-50 `}
+            className={`flex  gap-2 cursor-pointer items-center justify-center pt-2 pb-2 pl-4 pr-4 ${ actionType === ActionTypeEnum.neutral ? isSecondary ? "bg-background text-foreground border-1 border-foreground md:hover:bg-onBackgroundHover active:bg-onBackgroundHover" : "bg-foreground md:hover:bg-onForegroundHover active:bg-onForegroundHover text-background" : actionType === ActionTypeEnum.safe ? "bg-safe md:hover:bg-safeHover active:bg-safeHover" : "bg-dangerous md:hover:bg-dangerousHover active:bg-dangerous"} rounded-lg disabled:cursor-default disabled:opacity-50 `}
             onClick={onClick}
         >
             <>
                 {
-                    isLoading ? <img src={"/ico/loader-dark.gif"} alt={"loader-light"} className={"w-6"} /> : <img src={`/ico/${iconName}.svg`} alt={iconName} className={`w-5 invert`} />
+                    isLoading ? <img src={"/ico/loader-dark.gif"} alt={"loader-light"} className={"w-6"} /> : <img src={`/ico/${iconName}.svg`} alt={iconName} className={`w-5 ${actionType === ActionTypeEnum.neutral && !isSecondary ? "" : "invert"}`} />
                 }
 
                 {text}

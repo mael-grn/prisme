@@ -8,7 +8,7 @@ import {RecursivePage} from "@/app/models/Page";
 import LoadingPopup from "@/app/components/loadingPopup";
 import AdvancedPopup from "@/app/components/advancedPopup";
 import WebsiteService from "@/app/services/websiteService";
-import {simpleElementVariant} from "../../utils/framerUtil";
+import {simpleElementVariant} from "../utils/framerUtil";
 import {useRouter} from "next/navigation";
 
 export default function Page() {
@@ -19,15 +19,15 @@ export default function Page() {
     const [popupTitle, setPopupTitle] = useState("");
     const [popupContent, setPopupContent] = useState("");
 
-    const {websiteId, path} = useParams()
+    const {path} = useParams()
 
     const router = useRouter();
 
     useEffect(() => {
-        WebsiteService.getRecursiveWebsite(websiteId as string).then((data) => {
+        WebsiteService.getRecursiveWebsite().then((data) => {
             const page = data.pages.find((p) => p.path.substring(1) === path as string)
             if (!page) {
-                router.push("/" + websiteId);
+                router.push("/");
                 return;
             }
             setPage(page);
@@ -44,7 +44,7 @@ export default function Page() {
         <main>
 
             <motion.div
-                className={"flex flex-col  justify-start items-start gap-3"}
+                className={"flex flex-col min-h-screen justify-center items-center gap-3"}
             >
                 <motion.h1
                     initial="hidden"
