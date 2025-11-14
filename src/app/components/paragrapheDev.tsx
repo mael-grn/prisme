@@ -34,9 +34,9 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
 
                         <motion.div
                             key={"big-element-" + section.id}
-                            initial={{transform: "scale(0)", opacity: 0, transformOrigin: "bottom"}}
-                            animate={{transform: "scale(1)", opacity: 1, transformOrigin: "bottom"}}
-                            exit={{transform: "scale(0)", opacity: 0, transformOrigin: "bottom"}}
+                            initial={{transform: "scale(.7)", opacity: 0, transformOrigin: "bottom", filter: "blur(20px)"}}
+                            animate={{transform: "scale(1)", opacity: 1, transformOrigin: "bottom", filter: "blur(0px)"}}
+                            exit={{transform: "scale(.7)", opacity: 0, transformOrigin: "bottom", filter: "blur(20px)"}}
                             style={{scrollbarWidth: "none"}}
                             className={`fixed bottom-0 h-[80vh] min-h-[80vh] max-h-[80vh] box-border z-40 md:w-3/4 w-full md:left-[12.5%] left-0  bg-onBackground overflow-auto rounded-t-3xl `}
                         >
@@ -71,7 +71,7 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
 
                                 {
                                     section.elements.map((element, index) => {
-                                        return <ElementComponent delay={index*0.1} reduceImageSize={true} key={index} element={element} center={true}/>
+                                        return <ElementComponent reduceImageSize={true} key={index} element={element} center={true}/>
                                     })
                                 }
                             </div>
@@ -88,12 +88,14 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
                 id={`${section.id}`}
                 key={section.id}
                 onClick={() => setFullScreen(true)}
-                initial={{opacity: 0, transform: "translateY(20px)"}}
-                whileInView={{opacity: 1, transform: "translateY(0px)"}}
+                initial={{opacity: 0, transform: "translateY(20px)", filter: "blur(10px)"}}
+                whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
+                whileHover={{opacity: 0.8}}
+                whileTap={{opacity: 0.8}}
                 className={`
                             flex flex-col cursor-pointer 
                             relative gap-2 bg-primary w-full h-fit p-4 rounded-xl 
-                            overflow-hidden md:hover:bg-primaryHover md:max-w-[800px]
+                            overflow-hidden  md:max-w-[800px] active:scale-90
                             `}
             >
                 {

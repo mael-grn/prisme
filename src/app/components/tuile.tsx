@@ -34,9 +34,9 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
 
                         <motion.div
                             key={"big-element-"+section.id}
-                            initial={{transform: "scale(0)", opacity: 0}}
-                            animate={{transform: "scale(1)", opacity: 1}}
-                            exit={{transform: "scale(0)", opacity: 0}}
+                            initial={{transform: "scale(.7)", opacity: 0, filter: "blur(20px)"}}
+                            animate={{transform: "scale(1)", opacity: 1, filter: "blur(0px)"}}
+                            exit={{transform: "scale(.7)", opacity: 0, filter: "blur(20px)"}}
                             style={{scrollbarWidth: "none"}}
                             className={`fixed md:top-[10vh] top-[5vh] md:h-[88vh] md:min-h-[88vh] md:max-h-[88vh] h-[90vh] min-h-[90vh] max-h-[90vh] box-border md:z-40 z-50 md:w-1/3 w-[90%] md:left-1/3 left-[5%] flex flex-col bg-onBackground overflow-auto rounded-3xl items-center`}
                         >
@@ -67,7 +67,7 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
                                 </div>
                                 {
                                     section.elements.map((element, index) => {
-                                        return <ElementComponent delay={index*0.1} key={index} element={element}/>
+                                        return <ElementComponent key={index} element={element}/>
                                     })
                                 }
                             </div>
@@ -83,8 +83,10 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
                 id={`${section.id}`}
                 key={"small-element-"+section.id}
                 onClick={() => setFullScreen(true)}
-                initial={{opacity: 0, y: 20}}
-                whileInView={{opacity: 1, y: 0}}
+                initial={{opacity: 0, transform: "scale(0.8)", filter: "blur(10px)"}}
+                whileInView={{opacity: 1, transform: "scale(1)", filter: "blur(0px)"}}
+                whileHover={{opacity: 0.8}}
+                whileTap={{opacity: 0.8}}
                 transition={{delay: delay}}
                 className={`
                             flex flex-col cursor-pointer 

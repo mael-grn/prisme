@@ -1,39 +1,28 @@
+"use client";
+
 import {Element} from "@/app/models/Element";
 import {PossibleElemType} from "@/app/enums/PossibleElemType";
-import { motion } from "framer-motion";
 
-export default function ElementComponent({element, center = false, inverseColor = false, reduceImageSize=false, delay = 0.0} : {element : Element, center?:boolean, inverseColor?:boolean, reduceImageSize?:boolean, delay?: number}) {
+export default function ElementComponent({element, center = false, inverseColor = false, reduceImageSize=false} : {element : Element, center?:boolean, inverseColor?:boolean, reduceImageSize?:boolean}) {
     switch (element.element_type) {
         case PossibleElemType.image:
-            return <motion.img
-                initial={{opacity: 0, y: 20}}
-                whileInView={{opacity: 1, y: 0}}
-                transition={{delay: delay}}
+            return <img
                 key={element.id}
                 src={element.content}
-                alt={"image"} className={`${reduceImageSize ? "w-1/2" : "w-full"} rounded-xl`}
+                alt={"image"} className={`${reduceImageSize ? "w-fit h-fit max-w-1/2 max-h-[700px]" : "w-full"} object-contain rounded-xl`}
             />
         case PossibleElemType.titre:
-            return <motion.h2
-                initial={{opacity: 0, y: 20}}
-                whileInView={{opacity: 1, y: 0}}
-                transition={{delay: delay}}
+            return <h2
                 key={element.id}
                 className={`w-full ${center && "text-center"} ${inverseColor && "text-background"}`}
-            >{element.content}</motion.h2>
+            >{element.content}</h2>
         case PossibleElemType.texte:
-            return <motion.p
-                initial={{opacity: 0, y: 20}}
-                whileInView={{opacity: 1, y: 0}}
-                transition={{delay: delay}}
+            return <p
                 key={element.id}
                 className={`w-full ${center && "text-center"} ${inverseColor && "text-background"}`}
-            >{element.content}</motion.p>
+            >{element.content}</p>
         case PossibleElemType.lien:
-            return <motion.a
-                initial={{opacity: 0, y: 20}}
-                whileInView={{opacity: 1, y: 0}}
-                transition={{delay: delay}}
+            return <a
                 key={element.id}
                 href={element.content}
                 className={`${center && "text-center"} ${inverseColor && "text-background"}`}
@@ -45,6 +34,6 @@ export default function ElementComponent({element, center = false, inverseColor 
                                 element.content.startsWith("http://") ? element.content.slice(7) :
                                     element.content
                 }
-            </motion.a>
+            </a>
     }
 }

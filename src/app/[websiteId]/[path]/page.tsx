@@ -8,6 +8,8 @@ import {RecursivePage} from "@/app/models/Page";
 import LoadingPopup from "@/app/components/loadingPopup";
 import AdvancedPopup from "@/app/components/advancedPopup";
 import WebsiteService from "@/app/services/websiteService";
+import {simpleElementVariant} from "../../utils/framerUtil";
+import {useRouter} from "next/navigation";
 
 export default function Page() {
     const [loading, setLoading] = useState(true);
@@ -19,9 +21,16 @@ export default function Page() {
 
     const {websiteId, path} = useParams()
 
+    const router = useRouter();
+
     useEffect(() => {
         WebsiteService.getRecursiveWebsite(websiteId as string).then((data) => {
-            setPage(data.pages.find((p) => p.path.substring(1) === path as string) || null);
+            const page = data.pages.find((p) => p.path.substring(1) === path as string)
+            if (!page) {
+                router.push("/" + websiteId);
+                return;
+            }
+            setPage(page);
         }).catch((error) => {
             setPopupTitle("Erreur");
             setPopupContent("Une erreur s'est produite lors de la récupération des données : " + error.message);
@@ -34,29 +43,33 @@ export default function Page() {
     return (
         <main>
 
-            <div className={"flex flex-col  justify-start items-start gap-3"}>
+            <motion.div
+                className={"flex flex-col  justify-start items-start gap-3"}
+            >
                 <motion.h1
-                    initial={{opacity: 0, y: 20}}
-                    whileInView={{opacity: 1, y: 0}}
-                    transition={{ease: "easeOut", duration: 0.5}}
+                    initial="hidden"
+                    whileInView="visible"
+                    variants={simpleElementVariant}
+                    transition={{ease: "easeOut"}}
                     className={"md:text-center w-full"}>
                     {page?.title}
                 </motion.h1>
                 <motion.p
-                    initial={{opacity: 0, y: 20}}
-                    whileInView={{opacity: 1, y: 0}}
-                    transition={{delay: 0.1, ease: "easeOut", duration: 0.5}}
+                    initial="hidden"
+                    whileInView="visible"
+                    variants={simpleElementVariant}
+                    transition={{delay: 0.1, ease: "easeOut"}}
                     className={"md:text-center w-full"}>
                     {page?.description}
                 </motion.p>
-            </div>
+            </motion.div>
 
             <OrganizedSections sections={page?.sections || []}/>
 
             <AdvancedPopup show={showPopup} message={popupContent} title={popupTitle}
                            closePopup={() => setShowPopup(false)}/>
 
-            <LoadingPopup show={loading} message={"Chargement des données, merci de patienter..."}/>
+            <LoadingPopup show={loading}/>
 
         </main>
     )

@@ -50,17 +50,18 @@ export default class WebsiteService {
     private static saveWebsiteInCache(website: RecursiveWebsite) {
         if (!this.hasSessionStorage()) return;
         try {
-            sessionStorage.setItem("cached_website", JSON.stringify(website));
+            sessionStorage.setItem("cached_website_" + website.title, JSON.stringify(website));
+            sessionStorage.setItem("cached_website_" + website.id, JSON.stringify(website));
             sessionStorage.setItem("last_update", Date.now().toString());
         } catch {
             // ignore storage errors (quota, etc.)
         }
     }
 
-    private static recoverWebsiteFromCache(): RecursiveWebsite | null {
+    private static recoverWebsiteFromCache(domainOrId: string): RecursiveWebsite | null {
         if (!this.hasSessionStorage()) return null;
         try {
-            const cachedWebsite = sessionStorage.getItem("cached_website");
+            const cachedWebsite = sessionStorage.getItem("cached_website_" + domainOrId);
             if (!cachedWebsite) return null;
             return JSON.parse(cachedWebsite) as RecursiveWebsite;
         } catch {
@@ -83,7 +84,7 @@ export default class WebsiteService {
     }
 
     static async getRecursiveWebsite(domainOrId: string): Promise<RecursiveWebsite> {
-        const cachedWebsite = this.recoverWebsiteFromCache();
+        const cachedWebsite = this.recoverWebsiteFromCache(domainOrId);
         if (cachedWebsite && !this.cacheIsTooOld() && this.isCacheActive()) {
             return cachedWebsite;
         } else {

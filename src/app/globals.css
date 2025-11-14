@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,7 +21,7 @@
 * {
     box-sizing: border-box;
     transition: all .4s ease;
-    font-family: "Lexend", sans-serif;
+    font-family: "Montserrat", sans-serif;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
@@ -34,12 +34,12 @@ body {
 
 h1 {
     font-size: 35px;
-    font-weight: 450;
+    font-weight: 700;
 }
 
 h2 {
     font-size: 30px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 h3 {

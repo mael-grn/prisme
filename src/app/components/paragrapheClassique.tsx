@@ -1,3 +1,5 @@
+"use client";
+
 import {motion} from "framer-motion";
 import {useEffect, useRef, useState} from "react";
 import {RecursiveSection} from "@/app/models/Section";
@@ -20,16 +22,16 @@ export default function ParagrapheClassique({section} : {section: RecursiveSecti
 
     return (
         <motion.div
+            initial={{opacity: 0, transform: "translateY(50px)", filter: "blur(10px)"}}
+            whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
             ref={targetElement}
             id={`${section.id}`}
             key={section.id}
-            initial={{opacity: 0, y: 20}}
-            whileInView={{opacity: 1, y: 0}}
             className={`flex flex-col md:w-2/3  justify-start items-start gap-6 rounded-xl ${highLighted ? "bg-safe" : "bg-transparent"}`}
         >
             {
                 section.elements.map((element, index) => {
-                    return <ElementComponent key={index} element={element} delay={index*0.1} reduceImageSize={true}/>
+                    return <ElementComponent key={index} element={element} reduceImageSize={true}/>
                 })
             }
         </motion.div>

@@ -14,7 +14,8 @@ export default function RootLayout({
     const {websiteId} = useParams()
     return (
     <>
-        <div className={"pt-24 md:pt-24 md:p-3 p-6"}>
+        <div
+            className={"pt-24 md:pt-24 md:p-3 p-6 min-h-screen"}>
             {children}
 
         </div>

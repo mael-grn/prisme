@@ -17,6 +17,7 @@ export interface InsertableDisplayWebsite {
 }
 
 export interface RecursiveWebsite {
+    title: string;
     id: number;
     owner_id: number;
     website_domain: string;
