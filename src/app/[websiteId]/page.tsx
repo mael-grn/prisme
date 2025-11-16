@@ -52,17 +52,21 @@ export default function Home() {
 
             }
 
-            <motion.button
-                onClick={() => {
-                    router.push("/" + website?.id + "/" + website?.pages[0].path || "/" + website?.id);
-                }}
-                initial={{ transform: "scale(.5)", filter: "blur(10px)", opacity: 0 }}
-                animate={{ transform: "scale(1)", filter: "blur(0px)", opacity: 1 }}
-                transition={{ duration: .5, ease: "easeOut", delay: 1 }}
-                className={"border-0 mt-10 rounded-xl bg-primary hover:bg-primaryHover active:bg-primaryHover text-background pb-3 pt-3 pl-5 pr-5 flex gap-4 items-center"}>
-                <p className={"font-[600]"}>{website?.pages[0].title || "Commencer à explorer"} </p>
-                <img src={"/ico/rocket-solid.svg"} alt={"rocket"} className={"w-5"}/>
-            </motion.button>
+            {
+                website?.pages[0] &&
+                <motion.button
+                    onClick={() => {
+                        router.push("/" + website?.id + "/" + website?.pages[0].path || "/" + website?.id);
+                    }}
+                    initial={{ transform: "scale(.5)", filter: "blur(10px)", opacity: 0 }}
+                    animate={{ transform: "scale(1)", filter: "blur(0px)", opacity: 1 }}
+                    transition={{ duration: .5, ease: "easeOut", delay: 1 }}
+                    className={"border-0 mt-10 rounded-xl bg-primary hover:bg-primaryHover active:bg-primaryHover text-background pb-3 pt-3 pl-5 pr-5 flex gap-4 items-center"}>
+                    <p className={"font-[600]"}>{website?.pages[0].title || "Commencer à explorer"} </p>
+                    <img src={"/ico/rocket-solid.svg"} alt={"rocket"} className={"w-5"}/>
+                </motion.button>
+            }
+
 
 
             <AdvancedPopup show={showPopup} message={popupContent} title={popupTitle} closePopup={() => setShowPopup(false)} />
