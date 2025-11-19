@@ -1,4 +1,5 @@
 import {RecursivePage} from "@/app/models/Page";
+import {WebsiteColors} from "@/app/models/WebsiteColors";
 
 export interface DisplayWebsite {
     id: number;
@@ -17,12 +18,13 @@ export interface InsertableDisplayWebsite {
 }
 
 export interface RecursiveWebsite {
-    title: string;
     id: number;
     owner_id: number;
-    website_domain: string;
+    title: string;
+    website_domain?: string;
     auth_token: string;
     hero_image_url: string;
     hero_title: string;
     pages: RecursivePage[];
+    colors: WebsiteColors;
 }
