@@ -43,16 +43,16 @@ export default function Toggle({
     if (!isMounted) {
         return (
             <div className={`flex items-center gap-3 ${className}`}>
-                {leftLabel && <span className="text-xs text-onBackground">{leftLabel}</span>}
-                <div className="relative bg-onBackgroundHover w-14 h-8 rounded-full"/>
-                {rightLabel && <span className="text-xs text-onBackground">{rightLabel}</span>}
+                {leftLabel && <span className="text-xs text-[#2c2c2c]">{leftLabel}</span>}
+                <div className="relative bg-[#121212] w-14 h-8 rounded-full"/>
+                {rightLabel && <span className="text-xs text-[#121212]">{rightLabel}</span>}
             </div>
         );
     }
 
     return (
         <div className={`flex items-center gap-3 ${className}`}>
-            {leftLabel && <span className="text-xs text-onBackground">{leftLabel}</span>}
+            {leftLabel && <span className="text-xs text-[#2c2c2c]">{leftLabel}</span>}
 
             <button
                 role="switch"
@@ -62,18 +62,18 @@ export default function Toggle({
                 onKeyDown={handleKey}
                 disabled={disabled}
                 className={`relative flex items-center w-14 h-8 rounded-full focus:outline-none transition-colors duration-200
-                        ${checked ? 'bg-primary' : 'bg-onBackgroundHover'}
+                        ${checked ? 'bg-[#5ca6b3]' : 'bg-[#2c2c2c]'}
                         ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
             >
                 <motion.span
                     layout
                     transition={{type: "tween", ease: "easeOut", duration: 0.2}}
-                    className="absolute left-1 bg-background w-6 h-6 rounded-full shadow-md"
+                    className="absolute left-1 bg-black w-6 h-6 rounded-full shadow-md"
                     animate={{x: checked ? 24 : 0}}
                 />
             </button>
 
-            {rightLabel && <span className="text-xs text-onBackground">{rightLabel}</span>}
+            {rightLabel && <span className="text-xs text-[#2c2c2c]">{rightLabel}</span>}
         </div>
     );
 }

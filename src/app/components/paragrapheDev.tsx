@@ -38,7 +38,7 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
                             animate={{transform: "scale(1)", opacity: 1, transformOrigin: "bottom", filter: "blur(0px)"}}
                             exit={{transform: "scale(.7)", opacity: 0, transformOrigin: "bottom", filter: "blur(20px)"}}
                             style={{scrollbarWidth: "none"}}
-                            className={`fixed bottom-0 h-[80vh] min-h-[80vh] max-h-[80vh] box-border z-40 md:w-3/4 w-full md:left-[12.5%] left-0  bg-onBackground overflow-auto rounded-t-3xl `}
+                            className={`fixed bottom-0 h-[80vh] min-h-[80vh] max-h-[80vh] box-border z-40 md:w-3/4 w-full md:left-[12.5%] left-0 border-2 border-onBackground bg-background overflow-auto rounded-t-3xl `}
                         >
                             <div className={"sticky top-0 right-0 p-2 z-50 w-full flex justify-end"}>
 
@@ -114,7 +114,7 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
 
                 {
                     section.elements.length > 0 &&
-                    <ElementComponent element={section.elements[0]} inverseColor={true}/>
+                    <ElementComponent element={section.elements[0]}/>
                 }
             </motion.div>
         </>

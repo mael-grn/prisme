@@ -30,7 +30,9 @@ export default class WebsiteService {
     }
 
     public static isCacheActive(): boolean {
-        if (!this.hasLocalStorage()) return true; // default when no client storage
+        if (!this.hasLocalStorage()) {
+            return true;
+        } // default when no client storage
         const cacheSetting = localStorage.getItem("cache_active");
         if (cacheSetting === null) {
             return true; // Default to true if not set
@@ -50,7 +52,7 @@ export default class WebsiteService {
     private static saveWebsiteInCache(website: RecursiveWebsite) {
         if (!this.hasSessionStorage()) return;
         try {
-            sessionStorage.setItem("cached_website_" + website.title, JSON.stringify(website));
+            sessionStorage.setItem("cached_website_" + website.title.toLowerCase(), JSON.stringify(website));
             sessionStorage.setItem("cached_website_" + website.id, JSON.stringify(website));
             sessionStorage.setItem("last_update", Date.now().toString());
         } catch {
@@ -85,6 +87,7 @@ export default class WebsiteService {
 
     static async getRecursiveWebsite(domainOrId: string): Promise<RecursiveWebsite> {
         const cachedWebsite = this.recoverWebsiteFromCache(domainOrId);
+        console.log("retrieved from cache:", cachedWebsite);
         if (cachedWebsite && !this.cacheIsTooOld() && this.isCacheActive()) {
             return cachedWebsite;
         } else {

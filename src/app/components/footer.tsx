@@ -21,7 +21,7 @@ export default function Footer() {
         }
     }
     return (
-        <footer className={"w-full mt-20 bg-background flex flex-col"}>
+        <footer className={"w-full bg-black text-white flex flex-col"}>
 
             <div className={"w-full h-fit md:h-52  p-4 md:p-8 flex md:flex-row flex-col md:justify-between md:gap-6 gap-4"}>
                 <img src={"/img/icon.png"} alt={"icon"} className={"md:h-full h-48 w-fit rounded-lg"} />
@@ -47,7 +47,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <p className={"text-onForegroundHover p-4 w-full text-center"}>
+            <p className={"text-gray-500 p-4 w-full text-center"}>
                 © 2025 Maël Garnier, tous droits réservés.
             </p>
 

@@ -38,7 +38,7 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
                             animate={{transform: "scale(1)", opacity: 1, filter: "blur(0px)"}}
                             exit={{transform: "scale(.7)", opacity: 0, filter: "blur(20px)"}}
                             style={{scrollbarWidth: "none"}}
-                            className={`fixed md:top-[10vh] top-[5vh] md:h-[88vh] md:min-h-[88vh] md:max-h-[88vh] h-[90vh] min-h-[90vh] max-h-[90vh] box-border md:z-40 z-50 md:w-1/3 w-[90%] md:left-1/3 left-[5%] flex flex-col bg-onBackground overflow-auto rounded-3xl items-center`}
+                            className={`fixed md:top-[10vh] top-[5vh] md:h-[88vh] md:min-h-[88vh] md:max-h-[88vh] h-[90vh] min-h-[90vh] max-h-[90vh] box-border md:z-40 z-50 md:w-1/3 w-[90%] md:left-1/3 left-[5%] flex flex-col bg-background border-2 border-onBackground overflow-auto rounded-3xl items-center`}
                         >
                             <div className={"sticky top-0 right-0 p-2 z-50 w-full flex justify-end"}>
 

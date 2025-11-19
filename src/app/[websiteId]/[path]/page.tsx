@@ -41,10 +41,10 @@ export default function Page() {
     }, []);
 
     return (
-        <main>
+        <main className={"pt-24 p-6"}>
 
             <motion.div
-                className={"flex flex-col  justify-start items-start gap-3"}
+                className={"flex flex-col  justify-center items-center gap-3"}
             >
                 <motion.h1
                     initial="hidden"
@@ -59,7 +59,7 @@ export default function Page() {
                     whileInView="visible"
                     variants={simpleElementVariant}
                     transition={{delay: 0.1, ease: "easeOut"}}
-                    className={"md:text-center w-full"}>
+                    className={"md:text-center max-w-4xl w-full"}>
                     {page?.description}
                 </motion.p>
             </motion.div>

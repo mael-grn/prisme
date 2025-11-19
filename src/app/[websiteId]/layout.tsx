@@ -4,6 +4,8 @@ import "../globals.css";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 import {useParams} from "next/navigation";
+import {CSSProperties, useEffect, useState} from "react";
+import CssUtil from "@/app/utils/cssUtil";
 
 
 export default function RootLayout({
@@ -11,11 +13,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+    const [cssProps, setCssProps] = useState<CSSProperties>()
+
+    useEffect(() => {
+        CssUtil.getCSSPropertiesForWebsite(websiteId as string).then((props) => {
+            setCssProps(props)
+        });
+    }, [])
+
     const {websiteId} = useParams()
     return (
     <>
         <div
-            className={"pt-24 md:pt-24 md:p-3 p-6 min-h-screen"}>
+            style={cssProps}
+            className={"min-h-screen bg-background text-foreground"}>
             {children}
 
         </div>
