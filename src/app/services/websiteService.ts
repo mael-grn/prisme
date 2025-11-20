@@ -63,7 +63,7 @@ export default class WebsiteService {
     private static recoverWebsiteFromCache(domainOrId: string): RecursiveWebsite | null {
         if (!this.hasSessionStorage()) return null;
         try {
-            const cachedWebsite = sessionStorage.getItem("cached_website_" + domainOrId);
+            const cachedWebsite = sessionStorage.getItem("cached_website_" + domainOrId.toLowerCase());
             if (!cachedWebsite) return null;
             return JSON.parse(cachedWebsite) as RecursiveWebsite;
         } catch {
