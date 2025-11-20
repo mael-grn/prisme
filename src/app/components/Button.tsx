@@ -1,5 +1,8 @@
 'use client';
 
+import LoadingIcon from "@/app/components/LoadingIcon";
+import Icon from "@/app/components/Icon";
+
 export interface ButtonProps {
     iconName: string;
     text: string;
@@ -28,7 +31,7 @@ export default function Button({iconName, text, onClick, actionType = ActionType
         >
             <>
                 {
-                    isLoading ? <img src={"/ico/loader-dark.gif"} alt={"loader-light"} className={"w-6"} /> : <img src={`/ico/${iconName}.svg`} alt={iconName} className={`w-5 invert`} />
+                    isLoading ? <LoadingIcon/> : <Icon iconName={iconName} color={"foreground"}/>
                 }
 
                 {text}

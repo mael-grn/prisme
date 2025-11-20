@@ -10,9 +10,12 @@ import AdvancedPopup from "@/app/components/advancedPopup";
 import WebsiteService from "@/app/services/websiteService";
 import {simpleElementVariant} from "../../utils/framerUtil";
 import {useRouter} from "next/navigation";
+import SvgFromString from "@/app/components/SvgFromString";
+import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
 
 export default function Page() {
     const [loading, setLoading] = useState(true);
+    const [website, setWebsite] = useState<RecursiveWebsite | null>(null);
     const [page, setPage] = useState<RecursivePage | null>(null);
 
     const [showPopup, setShowPopup] = useState(false);
@@ -30,6 +33,7 @@ export default function Page() {
                 router.push("/" + websiteId);
                 return;
             }
+            setWebsite(data);
             setPage(page);
         }).catch((error) => {
             setPopupTitle("Erreur");
@@ -43,9 +47,14 @@ export default function Page() {
     return (
         <main className={"pt-24 p-6"}>
 
+
             <motion.div
                 className={"flex flex-col  justify-center items-center gap-3"}
             >
+                {
+                    page?.icon_svg &&
+                    <SvgFromString svg={page.icon_svg} color={website?.colors.text_color} className={"w-16"}/>
+                }
                 <motion.h1
                     initial="hidden"
                     whileInView="visible"

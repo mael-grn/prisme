@@ -6,6 +6,7 @@ import WebsiteService from "@/app/services/websiteService";
 import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
 import {useRouter} from "next/navigation";
 import {AnimatePresence, motion, useMotionValueEvent, useScroll} from "framer-motion";
+import SvgFromString from "@/app/components/SvgFromString";
 
 export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}) {
 
@@ -68,8 +69,12 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
                                         setDeveloped(false);
                                         router.push("/" + websiteIdOrDomain + "/" + page.path)
                                     }}
-                                    className={"text-4xl capitalize text-white md:hover:opacity-100 active:opacity-100 md:hover:-translate-x-2 opacity-50 cursor-pointer"}
+                                    className={"text-4xl flex gap-3 items-center justify-center capitalize text-white md:hover:opacity-100 active:opacity-100 md:hover:-translate-x-2 opacity-50 cursor-pointer"}
                                 >
+                                    {
+                                        page.icon_svg &&
+                                        <SvgFromString svg={page.icon_svg} color={"#ffffff"} className={"w-6"}/>
+                                    }
                                     {page.title}
                                 </motion.li>
                             ))

@@ -24,7 +24,7 @@ export default function Footer() {
         <footer className={"w-full bg-black text-white flex flex-col"}>
 
             <div className={"w-full h-fit md:h-52  p-4 md:p-8 flex md:flex-row flex-col md:justify-between md:gap-6 gap-4"}>
-                <img src={"/img/icon.png"} alt={"icon"} className={"md:h-full h-48 w-fit rounded-lg"} />
+                <img src={"/img/icon.png"} alt={"icon"} className={"md:h-full h-32 w-fit rounded-lg"} />
 
                 <div className={"flex flex-col gap-2"}>
                     <h3>Prisme</h3>

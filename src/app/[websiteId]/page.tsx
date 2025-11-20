@@ -7,6 +7,7 @@ import LoadingPopup from "@/app/components/loadingPopup";
 import WebsiteService from "@/app/services/websiteService";
 import { motion } from "framer-motion";
 import {useParams, useRouter} from "next/navigation";
+import Icon from "@/app/components/Icon";
 
 export default function Home() {
     const [loading, setLoading] = useState(true);
@@ -67,7 +68,7 @@ export default function Home() {
                 transition={{ duration: .5, ease: "easeOut", delay: 1 }}
                 className={"border-0 rounded-xl bg-primary hover:bg-primaryHover active:bg-primaryHover pb-3 pt-3 pl-5 pr-5 flex gap-4 items-center"}>
                 <p className={"font-[600]"}>{website?.pages[0].title || "Commencer à explorer"} </p>
-                <img src={"/ico/rocket-solid.svg"} alt={"rocket"} className={"w-5"}/>
+                <Icon iconName={"rocket"} color={website?.colors.text_color} />
             </motion.button>
 
 
