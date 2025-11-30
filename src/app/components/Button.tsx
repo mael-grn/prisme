@@ -2,6 +2,7 @@
 
 import LoadingIcon from "@/app/components/LoadingIcon";
 import Icon from "@/app/components/Icon";
+import { motion } from "framer-motion";
 
 export interface ButtonProps {
     iconName: string;
@@ -23,10 +24,11 @@ export enum ActionTypeEnum {
 export default function Button({iconName, text, onClick, actionType = ActionTypeEnum.neutral, isSecondary=false, isForm = false, isLoading, isDisabled = false}:ButtonProps) {
 
     return (
-        <button
+        <motion.button
+            whileHover={{opacity: 0.8}}
             disabled={isDisabled || isLoading}
             type={isForm ? "submit" : "button"}
-            className={`flex  gap-2 cursor-pointer items-center justify-center pt-2 pb-2 pl-4 pr-4 ${ actionType === ActionTypeEnum.neutral ? isSecondary ? "bg-background text-foreground border-1 border-foreground md:hover:bg-onBackgroundHover active:bg-onBackgroundHover" : "bg-onBackground md:hover:bg-onBackgroundHover active:bg-onBackgroundHover" : actionType === ActionTypeEnum.safe ? "bg-safe md:hover:bg-safeHover active:bg-safeHover" : "bg-dangerous md:hover:bg-dangerousHover active:bg-dangerous"} rounded-lg disabled:cursor-default disabled:opacity-50 `}
+            className={`flex  gap-2 cursor-pointer items-center justify-center pt-2 pb-2 pl-4 pr-4 ${ actionType === ActionTypeEnum.neutral ? isSecondary ? "bg-background text-foreground border-1 border-foreground" : "bg-onBackground" : actionType === ActionTypeEnum.safe ? "bg-safe" : "bg-dangerous"} rounded-lg disabled:cursor-default disabled:opacity-50 `}
             onClick={onClick}
         >
             <>
@@ -36,6 +38,6 @@ export default function Button({iconName, text, onClick, actionType = ActionType
 
                 {text}
             </>
-        </button>
+        </motion.button>
     );
 }

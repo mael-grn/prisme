@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import WebsiteService from "@/app/services/websiteService";
 import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
 import {useRouter} from "next/navigation";
-import {AnimatePresence, motion, useMotionValueEvent, useScroll} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import SvgFromString from "@/app/components/SvgFromString";
 
 export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}) {
@@ -13,12 +13,7 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
     const [developed, setDeveloped]  = useState(false);
     const [website, setWebsite] = useState<RecursiveWebsite | null>(null);
 
-    const { scrollY } = useScroll();
-    const [scrolled, setScrolled] = useState(false);
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        setScrolled(latest > 0);
-    });
 
     const router = useRouter();
 
@@ -40,11 +35,10 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
     }, [websiteIdOrDomain]);
 
     return (
-        <nav className={"fixed top-0 right-0 z-999 flex justify-end"}>
+        <nav className={"fixed top-0 right-0 z-999 flex transition justify-end"}>
 
-            <button onClick={() => setDeveloped(!developed)} className={`p-2 m-3 z-999 h-fit text-white bg-black/80 backdrop-blur md:hover:bg-[#2c2c2c] active:bg-[#2c2c2c] w-fit rounded-full ${developed && "scale-0 translate-x-100"}  active:scale-90 cursor-pointer flex items-center justify-center`}>
-                <p style={{fontWeight: 700}} className={`${scrolled ? "text-[0px] mr-0 ml-0" : "text-[17px] mr-2 ml-2"}`}>Explorer</p>
-                <img src={developed ? "/ico/close.svg" : "/ico/hamburger.svg"} alt={"hamburger"} className={`${scrolled ? "w-10 h-10" : "w-6 h-6 mr-2"} invert`}/>
+            <button onClick={() => setDeveloped(!developed)} className={`p-2 m-3 z-999 transition h-fit text-white bg-black/80 backdrop-blur md:hover:bg-[#2c2c2c] active:bg-[#2c2c2c] w-fit rounded-full ${developed && "scale-0 translate-x-100"}  active:scale-90 cursor-pointer flex items-center justify-center`}>
+                <img src={developed ? "/ico/close.svg" : "/ico/hamburger.svg"} alt={"hamburger"} className={`w-10 h-10 transition invert`}/>
             </button>
 
             <AnimatePresence>
@@ -55,7 +49,7 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
                         animate={{opacity: 1, transform: "translateX(0)"}}
                         exit={{opacity: 0, transform: "translateX(50px)"}}
                         className={`absolute top-0 right-0 h-screen z-99 md:w-[50vw] w-[100vw] gap-4 flex flex-col items-end pr-10 p-4 justify-center bg-gradient-to-r from-transparent to-black bg-transparent`}>
-                        <button className={"flex justify-center items-center p-2 rounded-full bg-dangerous absolute top-4 right-4 md:hover:bg-dangerousHover active:bg-dangerousHover active:scale-90 cursor-pointer"} onClick={() => setDeveloped(false)}>
+                        <button className={"flex justify-center transition items-center p-2 rounded-full bg-dangerous absolute top-4 right-4 md:hover:bg-dangerousHover active:bg-dangerousHover active:scale-90 cursor-pointer"} onClick={() => setDeveloped(false)}>
                             <img src={"/ico/close.svg"} alt={"close"} className={"w-6"}/>
                         </button>
                         {
