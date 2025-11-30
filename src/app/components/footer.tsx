@@ -28,27 +28,27 @@ export default function Footer() {
 
                 <div className={"flex flex-col gap-2"}>
                     <h3>Prisme</h3>
-                    <p>Nom non déposé, servant uniquement de nom de code pour le projet.</p>
-                    <p>Application non commercialisée ni monétisée</p>
+                    <p>Unregistered name, used solely as a code name for the project.</p>
+                    <p>This application is neither commercialized nor monetized.</p>
                 </div>
 
                 <div className={"flex flex-col gap-2"}>
                     <h3>Crédits</h3>
-                    <p>Icones utilisées : <a className={"text-blue-600 hover:underline"} href={"https://heroicons.com/"} target={"_blank"}>Heroicons</a> (Lience MIT).</p>
-                    <p>Illustrations utilisées : <a className={"text-blue-600 hover:underline"} href={"https://undraw.co/"}>Undraw</a>.</p>
+                    <p>Icons used: <a className={"text-blue-600 hover:underline"} href={"https://heroicons.com/"} target={"_blank"}>Heroicons</a> (Lience MIT).</p>
+                    <p>Illustrations used: <a className={"text-blue-600 hover:underline"} href={"https://undraw.co/"}>Undraw</a>.</p>
                 </div>
 
                 <div className={"flex flex-col gap-2"}>
-                    <h3>Paramètres</h3>
+                    <h3>Settings</h3>
                     <div className={"flex gap-4 items-center"}>
-                        <p>Utilisation du cache : </p>
+                        <p>Caching : </p>
                         <Toggle checked={cacheEnabled} onChangeAction={toggleCache} />
                     </div>
                 </div>
             </div>
 
             <p className={"text-gray-500 p-4 w-full text-center"}>
-                © 2025 Maël Garnier, tous droits réservés.
+                © 2025 Maël Garnier, All rights reserved.
             </p>
 
         </footer>

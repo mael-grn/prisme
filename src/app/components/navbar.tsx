@@ -26,7 +26,7 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
                 sections: [],
                 path: "/",
                 website_id: data.id,
-                title: "Accueil",
+                title: "Home",
                 position: -2,
             })
             data.pages = data.pages.sort((a, b) => a.position - b.position);
