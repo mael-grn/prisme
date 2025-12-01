@@ -59,18 +59,20 @@ export default function Home() {
                 className={"text-onForeground text-5xl"}>{website?.hero_title}</motion.h1>
 
 
-            <motion.button
-                onClick={() => {
-                    router.push(website?.title + "/" + website?.pages[0].path || "/");
-                }}
-                initial={{ transform: "scale(.5)", filter: "blur(10px)", opacity: 0 }}
-                animate={{ transform: "scale(1)", filter: "blur(0px)", opacity: 1 }}
-                transition={{ duration: .5, ease: "easeOut", delay: 1 }}
-                className={"border-0 rounded-xl bg-primary hover:bg-primaryHover active:bg-primaryHover pb-3 pt-3 pl-5 pr-5 flex gap-4 items-center"}>
-                <p className={"font-[600]"}>{website?.pages[0].title || "Commencer à explorer"} </p>
-                <Icon iconName={"rocket"} color={website?.colors.text_color} />
-            </motion.button>
-
+            {
+                website?.pages[0] &&
+                <motion.button
+                    onClick={() => {
+                        router.push(website?.title + "/" + website?.pages[0].path || "/");
+                    }}
+                    initial={{ transform: "scale(.5)", filter: "blur(10px)", opacity: 0 }}
+                    animate={{ transform: "scale(1)", filter: "blur(0px)", opacity: 1 }}
+                    transition={{ duration: .5, ease: "easeOut", delay: 1 }}
+                    className={"border-0 rounded-xl bg-primary hover:bg-primaryHover active:bg-primaryHover pb-3 pt-3 pl-5 pr-5 flex gap-4 items-center"}>
+                    <p className={"font-[600]"}>{website?.pages[0].title || "Commencer à explorer"} </p>
+                    <Icon iconName={"rocket"} color={website?.colors.text_color} />
+                </motion.button>
+            }
 
             <AdvancedPopup show={showPopup} message={popupContent} title={popupTitle} closePopup={() => setShowPopup(false)} />
 
