@@ -28,7 +28,10 @@ export default function ElementComponent({element, center = false, reduceImageSi
                 whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
                 key={element.id}
                 className={`w-full max-w-4xl ${center && "text-center"}`}
-            >{element.content}</motion.p>
+                dangerouslySetInnerHTML={{
+                    __html: element.content.replaceAll('\n', '<br/>')
+                }}
+            />
         case PossibleElemType.lien:
             return <motion.a
                 initial={{opacity: 0, transform: "translateY(20px)", filter: "blur(10px)"}}
