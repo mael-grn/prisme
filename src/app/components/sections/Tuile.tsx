@@ -4,6 +4,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import {useEffect, useRef, useState} from "react";
 import {RecursiveSection} from "@/app/models/Section";
 import ElementComponent from "@/app/components/page-elements/ElementComponent";
+import {simpleElementVariant} from "@/app/utils/FramerUtil";
 
 /**
  * Tuile component that displays a section in a tile format.
@@ -11,7 +12,7 @@ import ElementComponent from "@/app/components/page-elements/ElementComponent";
  * @param delay - optional delay for the animation
  * @constructor
  */
-export default function Tuile({section, delay=0.0}: { section: RecursiveSection, delay?: number }) {
+export default function Tuile({section, delay = 0.0}: { section: RecursiveSection, delay?: number }) {
 
     // State to manage full screen mode when the tile is clicked
     const [fullScreen, setFullScreen] = useState<boolean>(false);
@@ -25,7 +26,7 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
         }
         if (window.location.hash === `#${section.id}` && targetElement && targetElement.current) {
             setFullScreen(true);
-            targetElement.current.scrollIntoView({ behavior: 'smooth' });
+            targetElement.current.scrollIntoView({behavior: 'smooth'});
         }
     }, [section.id, targetElement]);
 
@@ -35,15 +36,15 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
                 {fullScreen &&
                     <>
                         <motion.span
-                            key={"background-blur-"+section.id}
+                            key={"background-blur-" + section.id}
                             initial={{opacity: 0}}
                             animate={{opacity: 1}}
                             exit={{opacity: 0}}
                             onClick={() => setFullScreen(false)}
-                            className={"fixed  md:z-30 z-50 top-0 left-0 w-full h-[100vh] backdrop-blur bg-background-opacity"}/>
+                            className={"fixed  md:z-30 z-50 top-0 left-0 w-full h-screen backdrop-blur bg-background-opacity"}/>
 
                         <motion.div
-                            key={"big-element-"+section.id}
+                            key={"big-element-" + section.id}
                             initial={{transform: "scale(.7)", opacity: 0, filter: "blur(20px)"}}
                             animate={{transform: "scale(1)", opacity: 1, filter: "blur(0px)"}}
                             exit={{transform: "scale(.7)", opacity: 0, filter: "blur(20px)"}}
@@ -52,7 +53,8 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
                         >
                             <div className={"sticky top-0 right-0 p-2 z-50 w-full flex justify-end"}>
 
-                                <div onClick={() => setFullScreen(false)} className={"flex cursor-pointer active:bg-dangerous-hover active:scale-90 bg-dangerous md:hover:bg-dangerous-hover rounded-3xl justify-center items-center p-2 z-50"}>
+                                <div onClick={() => setFullScreen(false)}
+                                     className={"flex cursor-pointer active:bg-dangerous-hover active:scale-90 bg-dangerous md:hover:bg-dangerous-hover rounded-3xl justify-center items-center p-2 z-50"}>
                                     <img src={"/ico/close-outline.svg"} alt={"close"} className={"w-6 h-6"}/>
                                 </div>
                             </div>
@@ -62,11 +64,14 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
                                     {
                                         section.categories.map((category, id) => {
                                             return (
-                                                <div  key={id} className={"flex truncate w-fit gap-2 rounded-3xl p-2 bg-on-backgroundHover"}>
+                                                <div key={id}
+                                                     className={"flex truncate w-fit gap-2 rounded-3xl p-2 bg-on-backgroundHover"}>
                                                     <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full text-background bg-primary"}>{category.name}</p>
                                                     {
                                                         category.subcategories.map((subcat, subId) => {
-                                                            return <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full bg-on-background"} key={subId}>{subcat.name}</p>
+                                                            return <p
+                                                                className={"pt-1 pb-1 pl-2 pr-2 rounded-full bg-on-background"}
+                                                                key={subId}>{subcat.name}</p>
                                                         })
                                                     }
                                                 </div>
@@ -91,17 +96,16 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
             <motion.div
                 ref={targetElement}
                 id={`${section.id}`}
-                key={"small-element-"+section.id}
+                key={"small-element-" + section.id}
                 onClick={() => setFullScreen(true)}
-                initial={{opacity: 0, transform: "scale(0.8)", filter: "blur(10px)"}}
-                whileInView={{opacity: 1, transform: "scale(1)", filter: "blur(0px)"}}
-                whileHover={{opacity: 0.8}}
-                whileTap={{opacity: 0.8}}
+                initial="hidden"
+                whileInView="visible"
+                variants={simpleElementVariant}
                 transition={{delay: delay}}
                 className={`
                             flex flex-col cursor-pointer 
-                            relative items-center gap-4 bg-primary flex-1 max-w-[120px] min-w-[150px] h-[200px] md:max-w-[200px] md:min-w-[200px] md:h-[300px] p-4 rounded-2xl 
-                            overflow-hidden active:bg-primary-hover active:scale-90 md:hover:bg-primary-hover text-background
+                           items-center gap-2 bg-primary  flex-1 max-w-30 min-w-37.5 h-50 md:max-w-50 md:min-w-50 md:h-75 p-4 rounded-2xl 
+                            overflow-hidden active:bg-primary-hover active:scale-90 md:hover:bg-primary-hover
                             `}
             >
                 {

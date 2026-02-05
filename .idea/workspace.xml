@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="amélioration de la page d'accueil">
-      <change beforePath="$PROJECT_DIR$/public/ico/document.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/ico/document.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/Icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/Icon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/SvgFromString.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/SvgFromString.tsx" afterDir="false" />
+    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="fichiers non versionnés necessaires">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/[path]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/[path]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/ElementComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/ElementComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/Tuile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/Tuile.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +130,7 @@
       <workItem from="1770274793717" duration="316000" />
       <workItem from="1770275131372" duration="8787000" />
       <workItem from="1770287721889" duration="3897000" />
-      <workItem from="1770300556640" duration="3408000" />
+      <workItem from="1770300556640" duration="4381000" />
     </task>
     <task id="LOCAL-00001" summary="Correction de bugs sur animation, et amelioration de la page d'accueil">
       <option name="closed" value="true" />
@@ -197,7 +196,23 @@
       <option name="project" value="LOCAL" />
       <updated>1770301756353</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="navbar revue">
+      <option name="closed" value="true" />
+      <created>1770304126664</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1770304126664</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fichiers non versionnés necessaires">
+      <option name="closed" value="true" />
+      <created>1770304153553</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1770304153554</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,7 +227,9 @@
     <MESSAGE value="Amélioration du code et commentaires" />
     <MESSAGE value="Amélioration de l'interface d'accueil et ajout de polices" />
     <MESSAGE value="amélioration de la page d'accueil" />
-    <option name="LAST_COMMIT_MESSAGE" value="amélioration de la page d'accueil" />
+    <MESSAGE value="navbar revue" />
+    <MESSAGE value="fichiers non versionnés necessaires" />
+    <option name="LAST_COMMIT_MESSAGE" value="fichiers non versionnés necessaires" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

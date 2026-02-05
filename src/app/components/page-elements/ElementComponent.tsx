@@ -23,21 +23,21 @@ export default function ElementComponent({element, center = false, reduceImageSi
                 whileInView={simpleElementVariant.visible}
                 key={element.id}
                 src={element.content}
-                alt={"image"} className={`${reduceImageSize ? "w-fit h-fit max-w-1/2 max-h-175" : "w-full"} object-contain rounded-xl`}
+                alt={"image"} className={`${reduceImageSize ? "w-fit h-fit max-w-1/2 max-h-175" : "w-full"} object-contain rounded-[20px]`}
             />
         case PossibleElemType.titre:
             return <motion.h2
                 initial={simpleElementVariant.hidden}
                 whileInView={simpleElementVariant.visible}
                 key={element.id}
-                className={`w-full max-w-4xl ${center && "text-center"}`}
+                className={`w-full md:text-5xl text-3xl font-bold font-boska ${center && "text-center"}`}
             >{element.content}</motion.h2>
         case PossibleElemType.texte:
             return <motion.p
                 initial={simpleElementVariant.hidden}
                 whileInView={simpleElementVariant.visible}
                 key={element.id}
-                className={`w-full max-w-4xl ${center && "text-center"}`}
+                className={`w-full ${center && "text-center"}`}
                 dangerouslySetInnerHTML={{
                     __html: element.content.replaceAll('\n', '<br/>')
                 }}

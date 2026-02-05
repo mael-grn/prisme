@@ -54,10 +54,12 @@ export default function Page() {
     }, []);
 
     return (
-        <main className={"pt-24 p-6"}>
+        <main className={" p-6 flex flex-col items-start justify-start"}>
 
             <motion.div
-                className={"flex flex-col  justify-center items-center gap-3"}
+                initial={{scale: 0.8, opacity: 0}}
+                whileInView={{scale: 1, opacity: 1}}
+                className={"flex flex-col p-10 rounded-[40px] w-full bg-on-background justify-center items-center gap-3"}
             >
                 {
                     page?.icon_svg &&
@@ -68,7 +70,7 @@ export default function Page() {
                     whileInView="visible"
                     variants={simpleElementVariant}
                     transition={{ease: "easeOut"}}
-                    className={"md:text-center w-full"}>
+                    className={"md:text-center w-full md:text-5xl text-3xl font-boska font-bold"}>
                     {page?.title}
                 </motion.h1>
                 <motion.p
