@@ -2,12 +2,12 @@
 
 import {useEffect, useState} from "react";
 import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
-import AdvancedPopup from "@/app/components/AdvancedPopup";
-import LoadingOverlay from "@/app/components/LoadingOverlay";
+import AdvancedPopup from "@/app/components/overlays/AdvancedPopup";
+import LoadingOverlay from "@/app/components/overlays/LoadingOverlay";
 import WebsiteService from "@/app/services/WebsiteService";
 import { motion } from "framer-motion";
 import {useParams, useRouter} from "next/navigation";
-import Icon from "@/app/components/Icon";
+import Icon from "@/app/components/ui-elements/Icon";
 
 /**
  * Page d'accueil du site, la première qui s'affiche quand on arrive sur le site.

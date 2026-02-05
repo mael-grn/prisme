@@ -1,6 +1,6 @@
-import ParagraphClassiqueContainer from "@/app/components/ParagrapheClassiqueContainer";
-import TuileContainer from "@/app/components/TuileContainer";
-import ParagraphDevContainer from "@/app/components/ParagrapheDevContainer";
+import ParagraphClassiqueContainer from "@/app/components/sections/containers/ParagrapheClassiqueContainer";
+import TuileContainer from "@/app/components/sections/containers/TuileContainer";
+import ParagraphDevContainer from "@/app/components/sections/containers/ParagrapheDevContainer";
 import {RecursiveSection} from "@/app/models/Section";
 import {PossibleSectionType} from "@/app/enums/PossibleSectionType";
 

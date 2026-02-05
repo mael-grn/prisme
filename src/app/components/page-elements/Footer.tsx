@@ -1,6 +1,6 @@
 "use client";
 
-import Toggle from "@/app/components/Toggle";
+import Toggle from "@/app/components/ui-elements/Toggle";
 import {useEffect, useState} from "react";
 import CacheUtil from "@/app/utils/CacheUtil";
 

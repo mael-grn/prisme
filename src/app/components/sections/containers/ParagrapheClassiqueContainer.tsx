@@ -1,6 +1,6 @@
 "use client"
 
-import ParagrapheClassique from "@/app/components/ParagrapheClassique";
+import ParagrapheClassique from "@/app/components/sections/ParagrapheClassique";
 import {RecursiveSection} from "@/app/models/Section";
 
 /**

@@ -1,4 +1,4 @@
-import ICON from "../../../public/ico/loader.json";
+import ICON from "../../../../public/ico/loader.json";
 import {Player} from "@lordicon/react";
 import {useEffect, useRef} from "react";
 

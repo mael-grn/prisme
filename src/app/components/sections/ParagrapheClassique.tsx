@@ -2,7 +2,7 @@
 
 import {useEffect, useRef, useState} from "react";
 import {RecursiveSection} from "@/app/models/Section";
-import ElementComponent from "@/app/components/ElementComponent";
+import ElementComponent from "@/app/components/page-elements/ElementComponent";
 
 /**
  * Un paragraphe classique permet de représenter une section très simplement, avec les elements les uns en dessous des autres, sans aucune mise en forme particulière.

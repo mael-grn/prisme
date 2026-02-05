@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import SvgFromString from "@/app/components/SvgFromString";
+import SvgFromString from "@/app/components/ui-elements/SvgFromString";
 
 /**
  * Composant permettant d'afficher une icône à partir de son nom. Les icônes sont chargées dynamiquement depuis le dossier public/ico.
@@ -30,5 +30,5 @@ export default function Icon({iconName, size=6, color="text"}: {iconName: string
         load();
     },[]);
 
-    return <SvgFromString svg={iconSrc} color={color} className={`w-${size}`}/>
+    return <SvgFromString svg={iconSrc} color={color}  className={size ? `w-${size}` : ""}/>
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import Tuile from "@/app/components/Tuile";
+import Tuile from "@/app/components/sections/Tuile";
 import {RecursiveSection} from "@/app/models/Section";
 
 /**

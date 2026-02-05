@@ -2,15 +2,15 @@
 
 import {useEffect, useState} from "react";
 import {motion} from "framer-motion";
-import OrganizedSections from "@/app/components/OrganizedSections";
+import OrganizedSections from "@/app/components/sections/containers/OrganizedSections";
 import {useParams} from "next/navigation";
 import {RecursivePage} from "@/app/models/Page";
-import LoadingOverlay from "@/app/components/LoadingOverlay";
-import AdvancedPopup from "@/app/components/AdvancedPopup";
+import LoadingOverlay from "@/app/components/overlays/LoadingOverlay";
+import AdvancedPopup from "@/app/components/overlays/AdvancedPopup";
 import WebsiteService from "@/app/services/WebsiteService";
 import {simpleElementVariant} from "../../utils/FramerUtil";
 import {useRouter} from "next/navigation";
-import SvgFromString from "@/app/components/SvgFromString";
+import SvgFromString from "@/app/components/ui-elements/SvgFromString";
 import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
 
 /**

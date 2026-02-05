@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Button from "@/app/components/ui-elements/Button";
 
 export default function Page() {
 
@@ -62,28 +63,21 @@ export default function Page() {
 
             </div>
 
-            <div className="z-10 flex flex-col items-center justify-center gap-3 relative">
+            <div className="z-10 flex flex-col items-center justify-center gap-8 relative">
                 <img
                     src={"/img/icon.png"}
                     alt={"icon"}
                     className={"md:w-52 w-24 h-fit"}
                 />
-                <h1 className={"text-center md:text-[75px] text-[30px] font-bold tracking-tight"}>
+                <h1 className={"text-center md:text-7xl font-array text-4xl font-bold tracking-tight"}>
                     Refract Your Vision <br/> Into Reality
                 </h1>
-                <p className={"text-center text-sm mt-8 mb-20 max-w-2xl"}>
+                <p className={"text-center text-lg font-chillax max-w-5xl"}>
                     Create, edit and manage your websites in realtime, effortlessly. This is
                     our vision : Prisme.
                 </p>
 
-                <Link
-                    href={"https://prismadmin.maelg.fr"}
-                    target={"_blank"}
-                    className={"flex items-center justify-center gap-3 text-xl px-6 py-3 bg-background-opacity rounded-full transition hover:scale-105 hover:bg-background-opacity border border-foregroundOpacity hover:border-foregroundOpacityStrong"}
-                >
-                    Get started
-                    <img src={"ico/rocket.svg"} alt={"rocket"} className={"invert w-6"}/>
-                </Link>
+                <Button text={"Get started"} iconName={"arrow-up-right"}/>
 
             </div>
         </main>

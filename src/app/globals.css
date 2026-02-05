@@ -3,21 +3,28 @@
 @import "tailwindcss";
 
 @theme {
-    --background: var(--background);
-    --background-opacity: rgba(0, 0, 0, 0.75);
-    --on-background: var(--on-background);
-    --on-background-hover: var(--on-background-hover);
-    --foreground: var(--foreground);
-    --on-foreground: var(--on-foreground);
-    --on-foreground-hover: var(--on-foreground-hover);
-    --dangerous: var(--dangerous);
-    --dangerous-hover: var(--dangerous-hover);
-    --safe: var(--safe);
-    --safe-hover: var(--safe-hover);
-    --primary: var(--primary);
-    --primary-hover: var(--primary-hover);
-    --secondary: var(--secondary);
-    --secondary-hover: var(--secondary-hover);
+    --color-background: var(--background);
+    --color-background-opacity: rgba(0, 0, 0, 0.75);
+    --color-on-background: var(--on-background);
+    --color-on-background-hover: var(--on-background-hover);
+    --color-foreground: var(--foreground);
+    --color-on-foreground: var(--on-foreground);
+    --color-on-foreground-hover: var(--on-foreground-hover);
+    --color-dangerous: var(--dangerous);
+    --color-dangerous-hover: var(--dangerous-hover);
+    --color-safe: var(--safe);
+    --color-safe-hover: var(--safe-hover);
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-secondary: var(--secondary);
+    --color-secondary-hover: var(--secondary-hover);
+    --font-array: var(--font-array);
+    --font-satoshi: var(--font-satoshi);
+    --font-chillax: var(--font-chillax);
+    --font-clashdisplay: var(--font-clashdisplay);
+    --font-excon: var(--font-excon);
+    --font-stardom: var(--font-stardom);
+    --font-sans: "Montserrat", sans-serif;
 }
 
 :root {
@@ -32,27 +39,20 @@
     --dangerous-hover: #A91D3A;
     --safe: #5ca6b3;
     --safe-hover: #2F7C8A;
+    --primary: #26377d;
+    --primary-hover: #202c59;
+    --secondary: #3d9fca;
+    --secondary-hover: #4695b8;
 }
 
 * {
     box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
 
-h1 {
-    font-size: 35px;
-    font-weight: 700;
-}
-
-h2 {
-    font-size: 30px;
-    font-weight: 500;
-}
-
-h3 {
-    font-size: 25px;
-    font-weight: 400;
+svg {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 *::-webkit-scrollbar { /* Desactivation des scrollbars */

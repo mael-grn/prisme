@@ -6,7 +6,7 @@ import WebsiteService from "@/app/services/WebsiteService";
 import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
 import {useRouter} from "next/navigation";
 import {AnimatePresence, motion} from "framer-motion";
-import SvgFromString from "@/app/components/SvgFromString";
+import SvgFromString from "@/app/components/ui-elements/SvgFromString";
 
 /**
  * Tous simplement la barre de navigation, qui s'adapte ou non au style mobile.

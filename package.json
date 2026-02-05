@@ -10,12 +10,13 @@
   },
   "dependencies": {
     "@lordicon/react": "^1.11.0",
-    "lottie-web": "^5.13.0",
     "@neondatabase/serverless": "^1.0.2",
     "@react-email/render": "^2.0.4",
     "@tailwindcss/postcss": "^4.1.18",
     "axios": "^1.13.4",
+    "dompurify": "^3.3.1",
     "framer-motion": "^12.31.0",
+    "lottie-web": "^5.13.0",
     "next": "16.1.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@types/dompurify": "^3.2.0",
     "@types/node": "^20.19.25",
     "@types/react": "19.2.11",
     "@types/react-dom": "19.2.3",

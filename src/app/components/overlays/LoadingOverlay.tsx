@@ -1,5 +1,5 @@
 import {AnimatePresence, motion} from "framer-motion";
-import LoadingIcon from "@/app/components/LoadingIcon";
+import LoadingIcon from "@/app/components/ui-elements/LoadingIcon";
 
 /**
  * un overlay, qui affiche une animation de chargement. Utile pour les actions longues.

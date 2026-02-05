@@ -1,8 +1,8 @@
 "use client"
 
 import "../globals.css";
-import Navbar from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
+import Navbar from "@/app/components/page-elements/Navbar";
+import Footer from "@/app/components/page-elements/Footer";
 import {useParams} from "next/navigation";
 import {CSSProperties, useEffect, useState} from "react";
 import CssUtil from "@/app/utils/CssUtil";
