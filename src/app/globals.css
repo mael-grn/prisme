@@ -22,8 +22,8 @@
     --font-satoshi: var(--font-satoshi);
     --font-chillax: var(--font-chillax);
     --font-clashdisplay: var(--font-clashdisplay);
-    --font-excon: var(--font-excon);
-    --font-stardom: var(--font-stardom);
+    --font-outfit: var(--font-outfit);
+    --font-boska: var(--font-boska), serif;
     --font-sans: "Montserrat", sans-serif;
 }
 

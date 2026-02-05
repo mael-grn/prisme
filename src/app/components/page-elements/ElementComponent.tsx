@@ -4,6 +4,7 @@ import {Element} from "@/app/models/Element";
 import {PossibleElemType} from "@/app/enums/PossibleElemType";
 import StringUtil from "@/app/utils/StringUtil";
 import { motion } from "framer-motion";
+import {simpleElementVariant} from "@/app/utils/FramerUtil";
 
 /**
  * Component qui affiche un élément en fonction de son type
@@ -18,23 +19,23 @@ export default function ElementComponent({element, center = false, reduceImageSi
     switch (element.element_type) {
         case PossibleElemType.image:
             return <motion.img
-                initial={{opacity: 0, transform: "translateY(20px)", filter: "blur(10px)"}}
-                whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
+                initial={simpleElementVariant.hidden}
+                whileInView={simpleElementVariant.visible}
                 key={element.id}
                 src={element.content}
                 alt={"image"} className={`${reduceImageSize ? "w-fit h-fit max-w-1/2 max-h-175" : "w-full"} object-contain rounded-xl`}
             />
         case PossibleElemType.titre:
             return <motion.h2
-                initial={{opacity: 0, transform: "translateY(20px)", filter: "blur(10px)"}}
-                whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
+                initial={simpleElementVariant.hidden}
+                whileInView={simpleElementVariant.visible}
                 key={element.id}
                 className={`w-full max-w-4xl ${center && "text-center"}`}
             >{element.content}</motion.h2>
         case PossibleElemType.texte:
             return <motion.p
-                initial={{opacity: 0, transform: "translateY(20px)", filter: "blur(10px)"}}
-                whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
+                initial={simpleElementVariant.hidden}
+                whileInView={simpleElementVariant.visible}
                 key={element.id}
                 className={`w-full max-w-4xl ${center && "text-center"}`}
                 dangerouslySetInnerHTML={{
@@ -43,8 +44,8 @@ export default function ElementComponent({element, center = false, reduceImageSi
             />
         case PossibleElemType.lien:
             return <motion.a
-                initial={{opacity: 0, transform: "translateY(20px)", filter: "blur(10px)"}}
-                whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
+                initial={simpleElementVariant.hidden}
+                whileInView={simpleElementVariant.visible}
                 key={element.id}
                 href={element.content}
                 className={`bg-on-background md:hover:bg-on-backgroundHover py-1 px-3 rounded-full ${center && "text-center"}`}

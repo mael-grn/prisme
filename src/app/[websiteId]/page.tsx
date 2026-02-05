@@ -5,9 +5,11 @@ import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
 import AdvancedPopup from "@/app/components/overlays/AdvancedPopup";
 import LoadingOverlay from "@/app/components/overlays/LoadingOverlay";
 import WebsiteService from "@/app/services/WebsiteService";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 import {useParams, useRouter} from "next/navigation";
 import Icon from "@/app/components/ui-elements/Icon";
+import Button from "@/app/components/ui-elements/Button";
+import {simpleElementVariant} from "@/app/utils/FramerUtil";
 
 /**
  * Page d'accueil du site, la première qui s'affiche quand on arrive sur le site.
@@ -45,44 +47,35 @@ export default function Home() {
     }, []);
 
     return (
-        <div className={"flex justify-end items-start flex-col gap-6"}>
+        <div className={"flex justify-center items-center flex-col gap-6"}>
             <motion.h1
-                initial={{ y:100, filter: "blur(10px)", opacity: 0 }}
-                animate={{ y: 0, filter: "blur(0px)", opacity: 1 }}
-                transition={{ duration: .8, ease: "easeOut", delay: 0.5 }}
-                className={"text-on-foreground text-[70px] w-full text-center"}>{website?.hero_title}</motion.h1>
+                initial={simpleElementVariant.hidden}
+                whileInView={simpleElementVariant.visible}
+                className={"text-on-foreground font-black font-boska text-8xl w-full md:w-6xl text-center"}>{website?.hero_title}</motion.h1>
 
             {
-                website?.pages[0] &&
-                <motion.button
+                website?.pages[0] && <Button
+                    iconName={"arrow-right"}
                     onClick={() => {
                         router.push(website?.title + "/" + website?.pages[0].path || "/");
                     }}
-                    initial={{ scale: .5, filter: "blur(10px)", opacity: 0 }}
-                    animate={{ scale: 1, filter: "blur(0px)", opacity: 1 }}
-                    transition={{ duration: .5, ease: "easeOut", delay: 1 }}
-                    className={"border-0 rounded-full bg-primary hover:bg-primary-hover active:bg-primary-hover pb-2 pt-2 pl-5 pr-2 flex gap-4 items-center"}>
-                    <p className={"font-[600]"}>{website?.pages[0].title || "Commencer à explorer"} </p>
-                    <span
-                        className={"p-2 rounded-full bg-text flex items-center justify-center"}
-                    >
-                        <Icon iconName={"rocket"} color={website?.colors.background_color} />
-                    </span>
-                </motion.button>
+                    text={website?.pages[0].title || "Commencer à explorer"}
+                />
             }
 
             {
                 website?.hero_image_url &&
                 <motion.img
-                    initial={{ scale: 0.5, filter: "blur(10px)", borderRadius: 5, opacity: 0, }}
-                    animate={{ scale: 1, filter: "blur(0px)", borderRadius: 20, opacity: 1 }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    initial={{scale: 0.5, filter: "blur(10px)", borderRadius: 5, opacity: 0,}}
+                    animate={{scale: 1, filter: "blur(0px)", borderRadius: 20, opacity: 1}}
+                    transition={{duration: .8, ease: "easeOut"}}
                     className={"w-full object-cover"}
                     src={website?.hero_image_url}
-                    alt="" />
+                    alt=""/>
             }
 
-            <AdvancedPopup show={showPopup} message={popupContent} title={popupTitle} closePopup={() => setShowPopup(false)} />
+            <AdvancedPopup show={showPopup} message={popupContent} title={popupTitle}
+                           closePopup={() => setShowPopup(false)}/>
 
             <LoadingOverlay show={loading}/>
         </div>

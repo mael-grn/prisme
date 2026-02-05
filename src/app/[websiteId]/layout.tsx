@@ -28,17 +28,29 @@ export default function RootLayout({
      */
     useEffect(() => {
         if (websiteId) {
-            WebsiteService.getCSSPropertiesForWebsite(websiteId as string).then(setCssProps);
+            WebsiteService.getCSSPropertiesForWebsite(websiteId as string).then((props) => {
+                setCssProps(props);
+
+                // Injection directe dans le DOM pour forcer Tailwind à voir les variables
+                const root = document.documentElement;
+                Object.entries(props).forEach(([key, value]) => {
+                    if (typeof value === 'string') {
+                        root.style.setProperty(key, value);
+                    }
+                });
+            });
         }
     }, [websiteId]);
 
     return (
-        <div style={cssProps} className="min-h-screen bg-background text-foreground">
-            <div className="md:p-24 p-12">
-                {children}
+        <div style={cssProps}>
+            <div className="min-h-screen bg-background font-chillax text-foreground">
+                <div className="md:p-24 p-12">
+                    {children}
+                </div>
+                <Navbar websiteIdOrDomain={websiteId as string}/>
+                <Footer/>
             </div>
-            <Navbar websiteIdOrDomain={websiteId as string}/>
-            <Footer/>
         </div>
     );
 }

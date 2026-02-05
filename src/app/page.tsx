@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import Button from "@/app/components/ui-elements/Button";
+import {motion} from "framer-motion";
+import Button, {ActionTypeEnum} from "@/app/components/ui-elements/Button";
 
 export default function Page() {
 
@@ -77,7 +76,7 @@ export default function Page() {
                     our vision : Prisme.
                 </p>
 
-                <Button text={"Get started"} iconName={"arrow-up-right"}/>
+                <Button text={"Get started"} actionType={ActionTypeEnum.neutral} iconName={"arrow-up-right"}/>
 
             </div>
         </main>

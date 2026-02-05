@@ -4,7 +4,6 @@ export const arrayFont = localFont({
     src: [
         { path: '../../public/fonts/Array-Regular.woff2', weight: '400', style: 'normal' },
         { path: '../../public/fonts/Array-Bold.woff2', weight: '700', style: 'normal' },
-        { path: '../../public/fonts/Array-BoldWide.woff2', weight: '900', style: 'normal' },
     ],
     variable: '--font-array',
 })
@@ -23,11 +22,11 @@ export const clashDisplayFont = localFont({
     variable: '--font-clashdisplay',
 })
 
-export const exconFont = localFont({
+export const boskaFont = localFont({
     src: [
-        { path: '../../public/fonts/Excon-Variable.woff2' },
+        { path: '../../public/fonts/Boska-Variable.woff2' },
     ],
-    variable: '--font-excon',
+    variable: '--font-boska',
 })
 
 export const satoshiFont = localFont({
@@ -37,9 +36,9 @@ export const satoshiFont = localFont({
     variable: '--font-satoshi',
 })
 
-export const stardomFont = localFont({
+export const outfitFont = localFont({
     src: [
-        { path: '../../public/fonts/Stardom-Regular.woff2' },
+        { path: '../../public/fonts/Outfit-Variable.woff2' },
     ],
-    variable: '--font-stardom',
+    variable: '--font-outfit',
 })

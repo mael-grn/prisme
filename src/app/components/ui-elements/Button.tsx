@@ -3,6 +3,8 @@
 import LoadingIcon from "@/app/components/ui-elements/LoadingIcon";
 import Icon from "@/app/components/ui-elements/Icon";
 import {motion} from "framer-motion";
+import {useState} from "react";
+import {simpleElementVariant} from "@/app/utils/FramerUtil";
 
 export interface ButtonProps {
     iconName: string;
@@ -18,7 +20,8 @@ export interface ButtonProps {
 export enum ActionTypeEnum {
     dangerous,
     safe,
-    neutral
+    neutral,
+    primary
 }
 
 /**
@@ -37,30 +40,54 @@ export default function Button({
                                    iconName,
                                    text,
                                    onClick,
-                                   actionType = ActionTypeEnum.neutral,
+                                   actionType = ActionTypeEnum.primary,
                                    isForm = false,
                                    isLoading,
                                    isDisabled = false
                                }: ButtonProps) {
 
+    // On définit explicitement les classes pour que Tailwind les détecte
+    const colorClasses = {
+        [ActionTypeEnum.primary]: {
+            base: "bg-primary",
+            hover: "bg-primary-hover"
+        },
+        [ActionTypeEnum.neutral]: {
+            base: "bg-background",
+            hover: "bg-on-background-hover" // ou une autre variante
+        },
+        [ActionTypeEnum.safe]: {
+            base: "bg-safe",
+            hover: "bg-safe-hover"
+        },
+        [ActionTypeEnum.dangerous]: {
+            base: "bg-dangerous",
+            hover: "bg-dangerous-hover"
+        }
+    };
+
+    const currentColors = colorClasses[actionType];
+
     return (
         <motion.button
-            initial={{scale: 1, boxShadow: "0px 0px 20px 0px var(--foreground)"}}
-            whileHover={{scale: 1.05, boxShadow: "0px 8px 20px -5px var(--foreground)"}}
-            whileTap={{scale: 0.9}}
-            transition={{duration: 0.5, ease: "easeInOut"}}
+            whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 4px 0px 0px var(--foreground)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            initial={simpleElementVariant.hidden}
+            whileInView={simpleElementVariant.visible}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             disabled={isDisabled || isLoading}
             type={isForm ? "submit" : "button"}
-            className={`flex gap-2 cursor-pointer items-center justify-center pt-2 pb-2 pl-4 pr-4 rounded-full disabled:cursor-default disabled:opacity-50 
-            ${actionType === ActionTypeEnum.neutral ? "bg-background" : actionType === ActionTypeEnum.safe ? "bg-safe" : "bg-dangerous"}`}
+            // On utilise la classe de base, et on laisse Tailwind gérer le hover nativement
+            className={`flex gap-2 cursor-pointer items-center justify-center pt-2 pb-2 pl-4 pr-4 rounded-full transition-colors
+                ${currentColors.base} hover:${currentColors.hover} 
+                disabled:cursor-default disabled:opacity-50 text-foreground`}
             onClick={onClick}
         >
-            <>
-                {text}
-                {
-                    isLoading ? <LoadingIcon/> : <Icon iconName={iconName} color={"foreground"}/>
-                }
-            </>
+            {text}
+            {isLoading ? <LoadingIcon /> : <Icon iconName={iconName} color={"foreground"} />}
         </motion.button>
     );
 }
