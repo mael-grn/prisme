@@ -1,6 +1,6 @@
-import ParagraphClassiqueContainer from "@/app/components/paragrapheClassiqueContainer";
-import TuileContainer from "@/app/components/tuileContainer";
-import ParagraphDevContainer from "@/app/components/paragrapheDevContainer";
+import ParagraphClassiqueContainer from "@/app/components/ParagrapheClassiqueContainer";
+import TuileContainer from "@/app/components/TuileContainer";
+import ParagraphDevContainer from "@/app/components/ParagrapheDevContainer";
 import {RecursiveSection} from "@/app/models/Section";
 import {PossibleSectionType} from "@/app/enums/PossibleSectionType";
 
@@ -9,10 +9,19 @@ interface GroupedSections {
     sections: RecursiveSection[];
 }
 
+/**
+ * Permet de regrouper les sections en fonction de leurs types et de les afficher dans le bon container
+ * @param sections
+ * @constructor
+ */
 export default function OrganizedSections({sections}: {sections: RecursiveSection[]}) {
 
     const groupedSections = groupSectionsByType(sections);
 
+    /**
+     * Regroupe les sections en fonction de leurs types
+     * @param sections
+     */
     function groupSectionsByType(sections: RecursiveSection[]): GroupedSections[] {
         const res : GroupedSections[] = [];
 

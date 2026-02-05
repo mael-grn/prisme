@@ -2,9 +2,13 @@
 
 import {useEffect, useRef, useState} from "react";
 import {RecursiveSection} from "@/app/models/Section";
-import ElementComponent from "@/app/components/elementComponent";
+import ElementComponent from "@/app/components/ElementComponent";
 
-
+/**
+ * Un paragraphe classique permet de représenter une section très simplement, avec les elements les uns en dessous des autres, sans aucune mise en forme particulière.
+ * @param section
+ * @constructor
+ */
 export default function ParagrapheClassique({section} : {section: RecursiveSection}) {
 
     const [highLighted, setHighLighted] = useState(false);

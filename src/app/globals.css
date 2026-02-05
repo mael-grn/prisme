@@ -1,8 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+    --background: var(--background);
+    --background-opacity: rgba(0, 0, 0, 0.75);
+    --on-background: var(--on-background);
+    --on-background-hover: var(--on-background-hover);
+    --foreground: var(--foreground);
+    --on-foreground: var(--on-foreground);
+    --on-foreground-hover: var(--on-foreground-hover);
+    --dangerous: var(--dangerous);
+    --dangerous-hover: var(--dangerous-hover);
+    --safe: var(--safe);
+    --safe-hover: var(--safe-hover);
+    --primary: var(--primary);
+    --primary-hover: var(--primary-hover);
+    --secondary: var(--secondary);
+    --secondary-hover: var(--secondary-hover);
+}
 
 :root {
     --background: #000000;
@@ -39,6 +55,6 @@ h3 {
     font-weight: 400;
 }
 
-*::-webkit-scrollbar {
+*::-webkit-scrollbar { /* Desactivation des scrollbars */
     display: none;
 }

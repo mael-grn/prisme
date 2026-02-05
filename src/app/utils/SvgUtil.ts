@@ -1,4 +1,10 @@
 export default class SvgUtil {
+
+    /**
+     * Permet de changer la couleur d'un SVG en remplaçant les attributs 'stroke' et 'stop-color' par une nouvelle couleur.
+     * @param svg Le contenu du SVG sous forme de chaîne de caractères.
+     * @param color La nouvelle couleur à appliquer. Cela peut être un code hexadécimal (ex: #ff0000), une fonction de couleur (ex: rgb(255, 0, 0)) ou une variable CSS (ex: primary).
+     */
     static changeSvgColor(svg: string, color: string): string {
         // 1. Déterminer le format de la couleur finale
         let finalColor = color;

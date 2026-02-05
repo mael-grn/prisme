@@ -12,6 +12,16 @@ type ToggleProps = {
     disabled?: boolean;
 };
 
+/**
+ * Toggle component. Its just a switch, too lazy to do it myself bc this is basic stuff so this is basically gemini.
+ * @param checked
+ * @param onChangeAction
+ * @param leftLabel
+ * @param rightLabel
+ * @param className
+ * @param disabled
+ * @constructor
+ */
 export default function Toggle({
                                    checked = false,
                                    onChangeAction,

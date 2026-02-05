@@ -1,8 +1,8 @@
 // src/app/components/SvgFromString.tsx
     import { motion } from "framer-motion";
     import React from "react";
-    import { simpleElementVariant } from "@/app/utils/framerUtil";
-import SvgUtil from "@/app/utils/svgUtil";
+    import { simpleElementVariant } from "@/app/utils/FramerUtil";
+import SvgUtil from "@/app/utils/SvgUtil";
 
     type Props = {
         svg: string | null | undefined;
@@ -11,7 +11,15 @@ import SvgUtil from "@/app/utils/svgUtil";
         className?: string;
     };
 
-    export default function SvgFromString({ svg, color, alt, className }: Props) {
+/**
+ * Display an SVG icon from a string that contains the SVG data.
+ * @param svg
+ * @param color
+ * @param alt
+ * @param className
+ * @constructor
+ */
+export default function SvgFromString({ svg, color, alt, className }: Props) {
         if (!svg) return null;
 
         const base64 = typeof window !== "undefined"

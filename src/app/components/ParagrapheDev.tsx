@@ -3,9 +3,14 @@
 import {AnimatePresence, motion} from "framer-motion";
 import {useEffect, useRef, useState} from "react";
 import {RecursiveSection} from "@/app/models/Section";
-import ElementComponent from "@/app/components/elementComponent";
+import ElementComponent from "@/app/components/ElementComponent";
 
-export default function Tuile({section, delay=0.0}: { section: RecursiveSection, delay?: number }) {
+/**
+ * Un paragraphe dev est un moyen de repprésentation d'une section. Elle affiche par defaut le premier élement de la section, au click la section est developpé pour occuper tous l'ecran.
+ * @param section
+ * @constructor
+ */
+export default function ParagrapheDev({section}: { section: RecursiveSection }) {
     const [fullScreen, setFullScreen] = useState<boolean>(false);
 
     const targetElement = useRef<HTMLDivElement>(null);
@@ -25,38 +30,41 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
                 {fullScreen &&
                     <>
                         <motion.span
-                            key={"background-blur-"+section.id}
+                            key={"background-blur-" + section.id}
                             initial={{opacity: 0}}
                             animate={{opacity: 1}}
                             exit={{opacity: 0}}
                             onClick={() => setFullScreen(false)}
-                            className={"fixed  md:z-30 z-50 top-0 left-0 w-full h-[100vh] backdrop-blur bg-backgroundOpacity"}/>
+                            className={"fixed  z-30 top-0 left-0 w-full h-[100vh] backdrop-blur bg-background-opacity"}/>
 
                         <motion.div
-                            key={"big-element-"+section.id}
-                            initial={{transform: "scale(.7)", opacity: 0, filter: "blur(20px)"}}
-                            animate={{transform: "scale(1)", opacity: 1, filter: "blur(0px)"}}
-                            exit={{transform: "scale(.7)", opacity: 0, filter: "blur(20px)"}}
+                            key={"big-element-" + section.id}
+                            initial={{transform: "scale(.7)", opacity: 0, transformOrigin: "bottom", filter: "blur(20px)"}}
+                            animate={{transform: "scale(1)", opacity: 1, transformOrigin: "bottom", filter: "blur(0px)"}}
+                            exit={{transform: "scale(.7)", opacity: 0, transformOrigin: "bottom", filter: "blur(20px)"}}
                             style={{scrollbarWidth: "none"}}
-                            className={`fixed md:top-[10vh] top-[5vh] md:h-[88vh] md:min-h-[88vh] md:max-h-[88vh] h-[90vh] min-h-[90vh] max-h-[90vh] box-border md:z-40 z-50 md:w-1/3 w-[90%] md:left-1/3 left-[5%] flex flex-col bg-background border-2 border-onBackground overflow-auto rounded-3xl items-center`}
+                            className={`fixed bottom-0 h-[80vh] min-h-[80vh] max-h-[80vh] box-border z-40 md:w-3/4 w-full md:left-[12.5%] left-0 border-2 border-on-background bg-background overflow-auto rounded-t-3xl `}
                         >
                             <div className={"sticky top-0 right-0 p-2 z-50 w-full flex justify-end"}>
 
-                                <div onClick={() => setFullScreen(false)} className={"flex cursor-pointer active:bg-dangerousHover active:scale-90 bg-dangerous md:hover:bg-dangerousHover rounded-3xl justify-center items-center p-2 z-50"}>
+                                <div onClick={() => setFullScreen(false)} className={"flex cursor-pointer bg-dangerous active:bg-dangerous-hover md:hover:bg-dangerous-hover rounded-3xl justify-center items-center w-fit h-fit p-2"}>
                                     <img src={"/ico/close-outline.svg"} alt={"close"} className={"w-6 h-6"}/>
                                 </div>
                             </div>
 
+
+
                             <div className={"flex flex-col gap-10 items-center p-8"}>
-                                <div className={"flex w-full flex-wrap justify-center items-center gap-2"}>
+
+                                <div className={"flex w-full flex-wrap gap-2 items-center justify-center"}>
                                     {
                                         section.categories.map((category, id) => {
                                             return (
-                                                <div  key={id} className={"flex truncate w-fit gap-2 rounded-3xl p-2 bg-onBackgroundHover"}>
+                                                <div  key={id} className={"flex truncate w-fit gap-2 rounded-3xl p-2 bg-on-backgroundHover"}>
                                                     <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full text-background bg-primary"}>{category.name}</p>
                                                     {
                                                         category.subcategories.map((subcat, subId) => {
-                                                            return <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full bg-onBackground"} key={subId}>{subcat.name}</p>
+                                                            return <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full bg-on-background"} key={subId}>{subcat.name}</p>
                                                         })
                                                     }
                                                 </div>
@@ -65,12 +73,14 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
                                         })
                                     }
                                 </div>
+
                                 {
                                     section.elements.map((element, index) => {
-                                        return <ElementComponent key={index} element={element}/>
+                                        return <ElementComponent reduceImageSize={true} key={index} element={element} center={true}/>
                                     })
                                 }
                             </div>
+
 
 
                         </motion.div>
@@ -81,23 +91,35 @@ export default function Tuile({section, delay=0.0}: { section: RecursiveSection,
             <motion.div
                 ref={targetElement}
                 id={`${section.id}`}
-                key={"small-element-"+section.id}
+                key={section.id}
                 onClick={() => setFullScreen(true)}
-                initial={{opacity: 0, transform: "scale(0.8)", filter: "blur(10px)"}}
-                whileInView={{opacity: 1, transform: "scale(1)", filter: "blur(0px)"}}
+                initial={{opacity: 0, transform: "translateY(20px)", filter: "blur(10px)"}}
+                whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
                 whileHover={{opacity: 0.8}}
                 whileTap={{opacity: 0.8}}
-                transition={{delay: delay}}
                 className={`
                             flex flex-col cursor-pointer 
-                            relative items-center gap-4 bg-primary flex-1 max-w-[120px] min-w-[150px] h-[200px] md:max-w-[200px] md:min-w-[200px] md:h-[300px] p-4 rounded-2xl 
-                            overflow-hidden active:bg-primaryHover active:scale-90 md:hover:bg-primaryHover text-background
+                            relative gap-2 bg-primary w-full h-fit p-4 rounded-xl 
+                            overflow-hidden  md:max-w-[800px] active:scale-90
                             `}
             >
                 {
-                    section.elements.map((element, index) => {
-                        return <ElementComponent key={index} element={element}/>
-                    })
+                    section.categories.length > 0 &&
+                    <div className={"flex flex-wrap w-full gap-1"}>
+                        {
+                            section.categories.map((tag, id) => {
+                                return (
+                                    <p key={id}
+                                       className={"bg-on-background pt-1 pb-1 pl-3 pr-3 rounded-3xl text-xs"}>{tag.name}</p>
+                                )
+                            })
+                        }
+                    </div>
+                }
+
+                {
+                    section.elements.length > 0 &&
+                    <ElementComponent element={section.elements[0]}/>
                 }
             </motion.div>
         </>

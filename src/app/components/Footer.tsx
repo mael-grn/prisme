@@ -1,23 +1,27 @@
 "use client";
 
-import Toggle from "@/app/components/toggle";
-import WebsiteService from "@/app/services/websiteService";
+import Toggle from "@/app/components/Toggle";
 import {useEffect, useState} from "react";
+import CacheUtil from "@/app/utils/CacheUtil";
 
+/**
+ * Simplement le footer de l'application, affichant des informations sur le projet, les crédits et une option pour activer/désactiver le cache.
+ * @constructor
+ */
 export default function Footer() {
 
     const [cacheEnabled, setCacheEnabled] = useState(true);
 
     useEffect(() => {
-        setCacheEnabled(WebsiteService.isCacheActive());
+        setCacheEnabled(CacheUtil.isCacheActive());
     }, [])
 
     function toggleCache(v: boolean) {
         setCacheEnabled(v);
         if (v) {
-            WebsiteService.enable_cache();
+            CacheUtil.enable_cache();
         } else {
-            WebsiteService.disable_cache();
+            CacheUtil.disable_cache();
         }
     }
     return (

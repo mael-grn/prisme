@@ -2,9 +2,18 @@
 
 import {Element} from "@/app/models/Element";
 import {PossibleElemType} from "@/app/enums/PossibleElemType";
-import StringUtil from "@/app/utils/stringUtil";
+import StringUtil from "@/app/utils/StringUtil";
 import { motion } from "framer-motion";
 
+/**
+ * Component qui affiche un élément en fonction de son type
+ * Permet d'afficher une image, un titre, un texte ou un lien
+ * Le composant utilise des animations pour faire apparaître les éléments de manière fluide
+ * @param element
+ * @param center Permet de centrer le texte ou le titre
+ * @param reduceImageSize Permet de réduire la taille de l'image pour les éléments de type image (utile pour les images qui prennent trop de place)
+ * @constructor
+ */
 export default function ElementComponent({element, center = false, reduceImageSize=false} : {element : Element, center?:boolean, inverseColor?:boolean, reduceImageSize?:boolean}) {
     switch (element.element_type) {
         case PossibleElemType.image:
@@ -13,7 +22,7 @@ export default function ElementComponent({element, center = false, reduceImageSi
                 whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
                 key={element.id}
                 src={element.content}
-                alt={"image"} className={`${reduceImageSize ? "w-fit h-fit max-w-1/2 max-h-[700px]" : "w-full"} object-contain rounded-xl`}
+                alt={"image"} className={`${reduceImageSize ? "w-fit h-fit max-w-1/2 max-h-175" : "w-full"} object-contain rounded-xl`}
             />
         case PossibleElemType.titre:
             return <motion.h2
@@ -38,7 +47,7 @@ export default function ElementComponent({element, center = false, reduceImageSi
                 whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
                 key={element.id}
                 href={element.content}
-                className={`bg-onBackground md:hover:bg-onBackgroundHover py-1 px-3 rounded-full ${center && "text-center"}`}
+                className={`bg-on-background md:hover:bg-on-backgroundHover py-1 px-3 rounded-full ${center && "text-center"}`}
             >
                 {
                     StringUtil.truncateString(element.content.startsWith("https://www.") ? element.content.slice(12) :

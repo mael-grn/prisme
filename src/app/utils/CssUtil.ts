@@ -1,9 +1,17 @@
 import {getDefaultColors, WebsiteColors} from "@/app/models/WebsiteColors";
 import {CSSProperties} from "react";
-import WebsiteService from "@/app/services/websiteService";
+import WebsiteService from "@/app/services/WebsiteService";
 
+/**
+ * Utilitaire pour manipuler du css
+ */
 export default class CssUtil {
-    private static websiteColorsToCSS(colors: WebsiteColors): CSSProperties {
+
+    /**
+     * permet de convertir les données contenues dans un objet WebsiteColors en propriétés CSS utilisables dans une feuille de style
+     * @param colors les couleurs d'un site web
+     */
+    public static websiteColorsToCSS(colors: WebsiteColors): CSSProperties {
         return {
             '--primary': colors.primary_color,
             '--primary-hover': colors.primary_variant,
@@ -20,15 +28,8 @@ export default class CssUtil {
             '--dangerous-hover': "#A91D3A",
             '--safe': "#5ca6b3",
             '--safe-hover': "#2F7C8A"
-        } as CSSProperties;
+        } as React.CSSProperties & { [key: string]: string };
     }
 
-    public static async getCSSPropertiesForWebsite(websiteId: string): Promise<CSSProperties> {
-        const website = await WebsiteService.getRecursiveWebsite(websiteId);
-        if (website && website.colors) {
-            return this.websiteColorsToCSS(website.colors);
-        } else {
-            return this.websiteColorsToCSS(getDefaultColors(-1) as WebsiteColors);
-        }
-    }
+
 }

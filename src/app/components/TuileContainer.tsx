@@ -1,8 +1,13 @@
 "use client"
 
-import Tuile from "@/app/components/tuile";
+import Tuile from "@/app/components/Tuile";
 import {RecursiveSection} from "@/app/models/Section";
 
+/**
+ * Une tuile est une section, un TuileContainer est donc le conteneur de toutes ces sections qui permet de correctement les organiser
+ * @param sections les sections, qui doivent être affichées en tuiles
+ * @constructor
+ */
 export default function TuileContainer({sections}: {sections: RecursiveSection[]}) {
 
     return (

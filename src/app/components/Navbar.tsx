@@ -2,22 +2,23 @@
 
 
 import {useEffect, useState} from "react";
-import WebsiteService from "@/app/services/websiteService";
+import WebsiteService from "@/app/services/WebsiteService";
 import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
 import {useRouter} from "next/navigation";
 import {AnimatePresence, motion} from "framer-motion";
 import SvgFromString from "@/app/components/SvgFromString";
 
+/**
+ * Tous simplement la barre de navigation, qui s'adapte ou non au style mobile.
+ * @param websiteIdOrDomain L'id ou le domaine du site, nécessaire pour récupérer les pages et les afficher dans la navbar.
+ * @constructor
+ */
 export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}) {
 
     const [developed, setDeveloped]  = useState(false);
     const [website, setWebsite] = useState<RecursiveWebsite | null>(null);
 
-
-
     const router = useRouter();
-
-
 
     useEffect(() => {
         WebsiteService.getRecursiveWebsite(websiteIdOrDomain).then((data) => {
@@ -49,7 +50,7 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
                         animate={{opacity: 1, transform: "translateX(0)"}}
                         exit={{opacity: 0, transform: "translateX(50px)"}}
                         className={`absolute top-0 right-0 h-screen z-99 md:w-[50vw] w-[100vw] gap-4 flex flex-col items-end pr-10 p-4 justify-center bg-gradient-to-r from-transparent to-black bg-transparent`}>
-                        <button className={"flex justify-center transition items-center p-2 rounded-full bg-dangerous absolute top-4 right-4 md:hover:bg-dangerousHover active:bg-dangerousHover active:scale-90 cursor-pointer"} onClick={() => setDeveloped(false)}>
+                        <button className={"flex justify-center transition items-center p-2 rounded-full bg-dangerous absolute top-4 right-4 md:hover:bg-dangerous-hover active:bg-dangerous-hover active:scale-90 cursor-pointer"} onClick={() => setDeveloped(false)}>
                             <img src={"/ico/close.svg"} alt={"close"} className={"w-6"}/>
                         </button>
                         {

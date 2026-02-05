@@ -1,6 +1,18 @@
 import {AnimatePresence, motion} from "framer-motion";
 import Button, { ButtonProps} from "@/app/components/Button";
 
+/**
+ * Une popup qui affiche assez simplement un message avec un titre et une icone, mais qui peut aussi afficher des actions et du contenu personnalisé
+ * Son affichage est géré par la prop "show", et elle peut être fermée en cliquant sur le bouton "Fermer".
+ * @param show
+ * @param icon
+ * @param title
+ * @param message
+ * @param closePopup necessaire, mettre la fonction permettant de mettre "show" à false
+ * @param actions
+ * @param children possibilité d'afficher du contenu personnalisé dans la popup, en dessous du message et au dessus des actions
+ * @constructor
+ */
 export default function AdvancedPopup({show, icon="info", title, message, closePopup, actions, children} : {show: boolean, icon?: string, message: string, title: string, closePopup: () => void, actions?: ButtonProps[], children?: React.ReactNode}) {
     return (
         <AnimatePresence>
@@ -12,7 +24,7 @@ export default function AdvancedPopup({show, icon="info", title, message, closeP
                     exit={{opacity: 0}}
                 >
                     <motion.div
-                        className={"bg-onBackground border-2 border-onBackgroundHover rounded-2xl md:w-1/2 max-h-[80vh] overflow-y-auto"}
+                        className={"bg-on-background border-2 border-on-backgroundHover rounded-2xl md:w-1/2 max-h-[80vh] overflow-y-auto"}
                         initial={{transform: "scale(0.5)"}}
                         animate={{transform: "scale(1)"}}
                         exit={{transform: "scale(0.5)"}}
@@ -25,7 +37,7 @@ export default function AdvancedPopup({show, icon="info", title, message, closeP
                             {children}
                         </div>
 
-                        <div className={"flex flex-1 gap-2 items-center justify-end border-t-2 border-onBackgroundHover w-full p-3"}>
+                        <div className={"flex flex-1 gap-2 items-center justify-end border-t-2 border-on-backgroundHover w-full p-3"}>
                             <Button iconName={"close"} text={"Fermer"} onClick={closePopup} />
                             {
                                 actions && actions.map((action, index) => (
