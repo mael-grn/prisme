@@ -12,10 +12,11 @@ import {simpleElementVariant} from "@/app/utils/FramerUtil";
  * Le composant utilise des animations pour faire apparaître les éléments de manière fluide
  * @param element
  * @param center Permet de centrer le texte ou le titre
+ * @param mini
  * @param reduceImageSize Permet de réduire la taille de l'image pour les éléments de type image (utile pour les images qui prennent trop de place)
  * @constructor
  */
-export default function ElementComponent({element, center = false, reduceImageSize=false} : {element : Element, center?:boolean, inverseColor?:boolean, reduceImageSize?:boolean}) {
+export default function ElementComponent({element, center = false, mini=false, reduceImageSize=false} : {element : Element, center?:boolean, inverseColor?:boolean, mini?:boolean, reduceImageSize?:boolean}) {
     switch (element.element_type) {
         case PossibleElemType.image:
             return <motion.img
@@ -23,14 +24,14 @@ export default function ElementComponent({element, center = false, reduceImageSi
                 whileInView={simpleElementVariant.visible}
                 key={element.id}
                 src={element.content}
-                alt={"image"} className={`${reduceImageSize ? "w-fit h-fit max-w-1/2 max-h-175" : "w-full"} object-contain rounded-[20px]`}
+                alt={"image"} className={`${mini || reduceImageSize ? "w-fit h-fit max-w-1/2 max-h-175 rounded-[10px]" : "w-full rounded-[20px]"} object-contain `}
             />
         case PossibleElemType.titre:
             return <motion.h2
                 initial={simpleElementVariant.hidden}
                 whileInView={simpleElementVariant.visible}
                 key={element.id}
-                className={`w-full md:text-5xl text-3xl font-bold font-boska ${center && "text-center"}`}
+                className={`w-full ${mini ? "md:text-3xl text-2xl" : "md:text-5xl text-3xl"} font-bold font-boska ${center && "text-center"}`}
             >{element.content}</motion.h2>
         case PossibleElemType.texte:
             return <motion.p

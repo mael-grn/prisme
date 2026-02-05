@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="fichiers non versionnés necessaires">
+    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="amélioration des elements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/[path]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/[path]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/ElementComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/ElementComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/sections/Tuile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/Tuile.tsx" afterDir="false" />
     </list>
@@ -14,6 +13,11 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/home/mael/Dev/prisme" value="36C0XC4k7gzqFaRX29K8CxJ4F5d" />
+    </persistenceIdMap>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -51,28 +55,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/mael/Dev/prisme&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;web-ide.project.structure&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/mael/Dev/prisme/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "master",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "/home/mael/Dev/prisme",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Next.js: server-side.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "/home/mael/Dev/prisme/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/fonts" />
@@ -100,7 +104,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.143" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.30387.83" />
       </set>
     </attachedChunks>
   </component>
@@ -130,7 +134,11 @@
       <workItem from="1770274793717" duration="316000" />
       <workItem from="1770275131372" duration="8787000" />
       <workItem from="1770287721889" duration="3897000" />
-      <workItem from="1770300556640" duration="4381000" />
+      <workItem from="1770300556640" duration="4521000" />
+      <workItem from="1770323095999" duration="50000" />
+      <workItem from="1770323204121" duration="45000" />
+      <workItem from="1770323310520" duration="666000" />
+      <workItem from="1770324083182" duration="2913000" />
     </task>
     <task id="LOCAL-00001" summary="Correction de bugs sur animation, et amelioration de la page d'accueil">
       <option name="closed" value="true" />
@@ -212,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770304153554</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="amélioration des elements">
+      <option name="closed" value="true" />
+      <created>1770305056364</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1770305056364</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +245,8 @@
     <MESSAGE value="amélioration de la page d'accueil" />
     <MESSAGE value="navbar revue" />
     <MESSAGE value="fichiers non versionnés necessaires" />
-    <option name="LAST_COMMIT_MESSAGE" value="fichiers non versionnés necessaires" />
+    <MESSAGE value="amélioration des elements" />
+    <option name="LAST_COMMIT_MESSAGE" value="amélioration des elements" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
