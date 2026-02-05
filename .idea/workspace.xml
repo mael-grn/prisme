@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="amélioration de la page d'accueil">
+      <change beforePath="$PROJECT_DIR$/public/ico/document.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/ico/document.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/Icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/Icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/SvgFromString.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/SvgFromString.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mael-grn&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mael-grn/prisme.git&quot;,
+    &quot;accountId&quot;: &quot;fdaa12b1-4ce2-4883-b739-6f964bfb90d8&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="36C0XC4k7gzqFaRX29K8CxJ4F5d" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/mael/Dev/prisme&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;web-ide.project.structure&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/mael/Dev/prisme/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/fonts" />
+      <recent name="$PROJECT_DIR$/src/app/components/ui-elements" />
+      <recent name="$PROJECT_DIR$/src/app/components/page-elements" />
+      <recent name="$PROJECT_DIR$/src/app/components/overlays" />
+      <recent name="$PROJECT_DIR$/src/app/components/sections/containers" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.143" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="" />
+      <created>1764495284825</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1764495284825</updated>
+      <workItem from="1764495287221" duration="25000" />
+      <workItem from="1764495313092" duration="5012000" />
+      <workItem from="1764529010723" duration="240000" />
+      <workItem from="1764597950299" duration="180000" />
+      <workItem from="1764660054554" duration="99000" />
+      <workItem from="1764682971053" duration="13000" />
+      <workItem from="1765312704115" duration="43000" />
+      <workItem from="1765312774150" duration="998000" />
+      <workItem from="1765976707011" duration="41000" />
+      <workItem from="1770125010102" duration="1140000" />
+      <workItem from="1770126246589" duration="1051000" />
+      <workItem from="1770127408579" duration="322000" />
+      <workItem from="1770127784478" duration="2870000" />
+      <workItem from="1770236835763" duration="1237000" />
+      <workItem from="1770238084356" duration="155000" />
+      <workItem from="1770238248357" duration="2606000" />
+      <workItem from="1770274793717" duration="316000" />
+      <workItem from="1770275131372" duration="8787000" />
+      <workItem from="1770287721889" duration="3897000" />
+      <workItem from="1770300556640" duration="3408000" />
+    </task>
+    <task id="LOCAL-00001" summary="Correction de bugs sur animation, et amelioration de la page d'accueil">
+      <option name="closed" value="true" />
+      <created>1764500960334</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1764500960334</updated>
+    </task>
+    <task id="LOCAL-00002" summary="traduction en anglais">
+      <option name="closed" value="true" />
+      <created>1764529152733</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1764529152733</updated>
+    </task>
+    <task id="LOCAL-00003" summary="correction de bug">
+      <option name="closed" value="true" />
+      <created>1764598012673</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1764598012673</updated>
+    </task>
+    <task id="LOCAL-00004" summary="rajout possibilité selection">
+      <option name="closed" value="true" />
+      <created>1765312729429</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765312729429</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Ajout des sauts de lignes dans les textes">
+      <option name="closed" value="true" />
+      <created>1765313054451</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1765313054451</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Amélioration du code et commentaires">
+      <option name="closed" value="true" />
+      <created>1770277782380</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1770277782380</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Amélioration de l'interface d'accueil et ajout de polices">
+      <option name="closed" value="true" />
+      <created>1770289089743</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1770289089743</updated>
+    </task>
+    <task id="LOCAL-00008" summary="amélioration de la page d'accueil">
+      <option name="closed" value="true" />
+      <created>1770301756353</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1770301756353</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Correction de bugs sur animation, et amelioration de la page d'accueil" />
+    <MESSAGE value="traduction en anglais" />
+    <MESSAGE value="correction de bug" />
+    <MESSAGE value="rajout possibilité selection" />
+    <MESSAGE value="Ajout des sauts de lignes dans les textes" />
+    <MESSAGE value="Amélioration du code et commentaires" />
+    <MESSAGE value="Amélioration de l'interface d'accueil et ajout de polices" />
+    <MESSAGE value="amélioration de la page d'accueil" />
+    <option name="LAST_COMMIT_MESSAGE" value="amélioration de la page d'accueil" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
