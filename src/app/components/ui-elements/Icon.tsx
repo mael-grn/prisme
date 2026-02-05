@@ -8,7 +8,7 @@ import SvgFromString from "@/app/components/ui-elements/SvgFromString";
  * @param color
  * @constructor
  */
-export default function Icon({iconName, size=6, color="text"}: {iconName: string, size?: number, color?:string}) {
+export default function Icon({iconName, size=6, color="foreground"}: {iconName: string, size?: number, color?:string}) {
     const [iconSrc, setIconSrc] =  useState<string>("<svg></svg>");
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function Icon({iconName, size=6, color="text"}: {iconName: string
         }
 
         load();
-    },[]);
+    },[iconName, color]);
 
-    return <SvgFromString svg={iconSrc} color={color}  className={size ? `w-${size}` : ""}/>
+    return <SvgFromString svg={iconSrc} color={color}  className={size ? `w-${size} h-${size}` : ""}/>
 }

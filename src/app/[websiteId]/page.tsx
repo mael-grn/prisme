@@ -51,7 +51,7 @@ export default function Home() {
             <motion.h1
                 initial={simpleElementVariant.hidden}
                 whileInView={simpleElementVariant.visible}
-                className={"text-on-foreground font-black font-boska text-8xl w-full md:w-6xl text-center"}>{website?.hero_title}</motion.h1>
+                className={"text-on-foreground font-black font-boska md:text-8xl text-5xl w-full md:w-6xl text-center"}>{website?.hero_title}</motion.h1>
 
             {
                 website?.pages[0] && <Button

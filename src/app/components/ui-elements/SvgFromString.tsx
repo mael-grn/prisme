@@ -22,7 +22,7 @@ export default function SvgFromString({ svg, color, className }: Props) {
         if (!svg) return null;
 
         return (
-            <div className={`${className} h-4 w-4`} dangerouslySetInnerHTML={{ __html: color ? SvgUtil.changeSvgColor(svg, color) : svg }}>
+            <div className={className ? className : `h-4 w-4`} dangerouslySetInnerHTML={{ __html: color ? SvgUtil.changeSvgColor(svg, color) : svg }}>
 
             </div>
         );

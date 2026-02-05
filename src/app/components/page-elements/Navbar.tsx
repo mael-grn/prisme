@@ -4,21 +4,23 @@
 import {useEffect, useState} from "react";
 import WebsiteService from "@/app/services/WebsiteService";
 import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
-import {useRouter} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import {AnimatePresence, motion} from "framer-motion";
 import SvgFromString from "@/app/components/ui-elements/SvgFromString";
+import Icon from "@/app/components/ui-elements/Icon";
 
 /**
  * Tous simplement la barre de navigation, qui s'adapte ou non au style mobile.
  * @param websiteIdOrDomain L'id ou le domaine du site, nécessaire pour récupérer les pages et les afficher dans la navbar.
  * @constructor
  */
-export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}) {
+export default function Navbar({websiteIdOrDomain}: { websiteIdOrDomain: string }) {
 
-    const [developed, setDeveloped]  = useState(false);
+    const [developed, setDeveloped] = useState(false);
     const [website, setWebsite] = useState<RecursiveWebsite | null>(null);
 
     const router = useRouter();
+    const {path} = useParams()
 
     useEffect(() => {
         WebsiteService.getRecursiveWebsite(websiteIdOrDomain).then((data) => {
@@ -38,37 +40,45 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
     return (
         <nav className={"fixed top-0 right-0 z-999 flex transition justify-end"}>
 
-            <button onClick={() => setDeveloped(!developed)} className={`p-2 m-3 z-999 transition h-fit text-white bg-black/80 backdrop-blur md:hover:bg-[#2c2c2c] active:bg-[#2c2c2c] w-fit rounded-full ${developed && "scale-0 translate-x-100"}  active:scale-90 cursor-pointer flex items-center justify-center`}>
-                <img src={developed ? "/ico/close.svg" : "/ico/hamburger.svg"} alt={"hamburger"} className={`w-10 h-10 transition invert`}/>
+            <button onClick={() => setDeveloped(!developed)}
+                    className={`${developed ? "gap-0 text-[0px] p-2 bg-dangerous md:hover:bg-dangerous-hover m-10" : "gap-2 text-[18px] px-4 py-2 bg-on-background md:hover:bg-on-background-hover m-3"}   z-999 transition-all h-fit text-foreground  w-fit rounded-full  active:scale-95 cursor-pointer flex items-center justify-center`}>
+                {path ? path : "HOME"}
+                <Icon iconName={developed ? "close" : "hamburger"} size={6}/>
             </button>
 
             <AnimatePresence>
                 {
                     developed &&
                     <motion.ul
-                        initial={{opacity: 0, transform: "translateX(50px)"}}
-                        animate={{opacity: 1, transform: "translateX(0)"}}
-                        exit={{opacity: 0, transform: "translateX(50px)"}}
-                        className={`absolute top-0 right-0 h-screen z-99 md:w-[50vw] w-[100vw] gap-4 flex flex-col items-end pr-10 p-4 justify-center bg-gradient-to-r from-transparent to-black bg-transparent`}>
-                        <button className={"flex justify-center transition items-center p-2 rounded-full bg-dangerous absolute top-4 right-4 md:hover:bg-dangerous-hover active:bg-dangerous-hover active:scale-90 cursor-pointer"} onClick={() => setDeveloped(false)}>
-                            <img src={"/ico/close.svg"} alt={"close"} className={"w-6"}/>
-                        </button>
+                        initial={{opacity: 0, scale: 0, borderRadius: "500px", transformOrigin: "top right"}}
+                        animate={{opacity: 1, scale: 1, borderRadius: "40px", transformOrigin: "top right"}}
+                        exit={{opacity: 0, scale: 0, borderRadius: "500px", transformOrigin: "top right"}}
+                        transition={{
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 30,
+                            mass: 1
+                        }}
+                        className={`absolute top-5 right-5 z-99 max-w-[calc(100vw - 40px)] w-fit gap-4 flex flex-col items-end p-10 pt-20 rounded-[40px] justify-center bg-on-background-hover`}>
+
                         {
                             website?.pages.map((page, index) => (
                                 <motion.li key={index}
-                                    initial={{filter: "opacity(0) blur(5px)", transform: "translateX(50px)"}}
-                                    animate={{filter: "opacity(1) blur(0px)", transform: "translateX(0px)"}}
-                                    exit={{filter: "opacity(0)", transform: "translateX(50px)"}}
-                                    transition={{ delay: index * 0.1}}
-                                    onClick={() => {
-                                        setDeveloped(false);
-                                        router.push("/" + websiteIdOrDomain + "/" + page.path)
-                                    }}
-                                    className={"text-4xl flex gap-3 items-center justify-center capitalize text-white md:hover:opacity-100 active:opacity-100 md:hover:-translate-x-2 opacity-50 cursor-pointer"}
+                                           initial={{opacity: 0, y: "-50px", x: "0px"}}
+                                           animate={{opacity: 0.70, y: "0px", x: "0px"}}
+                                           exit={{opacity: 0, y: "-50px", x: "0px"}}
+                                           whileHover={{opacity: 1, y: "0px", x: "-10px"}}
+                                           transition={{delay: index * 0.05}}
+                                           onClick={() => {
+                                               setDeveloped(false);
+                                               router.push("/" + websiteIdOrDomain + "/" + page.path)
+                                           }}
+                                           className={"text-4xl flex gap-3 items-center justify-center text-foreground cursor-pointer"}
                                 >
                                     {
-                                        page.icon_svg &&
-                                        <SvgFromString svg={page.icon_svg} color={"#ffffff"} className={"w-6"}/>
+                                        page.icon_svg ?
+                                        <SvgFromString svg={page.icon_svg} className={"w-6"}/> :
+                                        path ? <Icon iconName={"document"} size={6}/> : <Icon iconName={"home"} size={6}/>
                                     }
                                     {page.title}
                                 </motion.li>
@@ -78,10 +88,6 @@ export default function Navbar({websiteIdOrDomain} : {websiteIdOrDomain: string}
 
                 }
             </AnimatePresence>
-
-
-
-
 
 
         </nav>
