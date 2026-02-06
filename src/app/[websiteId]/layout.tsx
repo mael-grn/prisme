@@ -45,10 +45,11 @@ export default function RootLayout({
     return (
         <div style={cssProps}>
             <div className="min-h-screen bg-background font-chillax text-foreground">
+                <Navbar websiteIdOrDomain={websiteId as string}/>
+
                 <div className="md:p-24 p-12">
                     {children}
                 </div>
-                <Navbar websiteIdOrDomain={websiteId as string}/>
                 <Footer/>
             </div>
         </div>

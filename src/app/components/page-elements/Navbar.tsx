@@ -41,7 +41,7 @@ export default function Navbar({websiteIdOrDomain}: { websiteIdOrDomain: string 
         <nav className={"fixed top-0 right-0 z-999 flex transition justify-end"}>
 
             <button onClick={() => setDeveloped(!developed)}
-                    className={`${developed ? "gap-0 text-[0px] p-2 bg-dangerous md:hover:bg-dangerous-hover m-10" : "gap-2 text-[18px] px-4 py-2 bg-on-background md:hover:bg-on-background-hover m-3"}   z-999 transition-all h-fit text-foreground  w-fit rounded-full  active:scale-95 cursor-pointer flex items-center justify-center`}>
+                    className={`${developed ? "gap-0 text-[0px] p-2 bg-dangerous md:hover:bg-dangerous-hover m-10" : "gap-2 text-[18px] px-4 py-2 bg-on-background md:hover:bg-on-background-hover m-3"}   z-99 transition-all h-fit text-foreground  w-fit rounded-full  active:scale-95 cursor-pointer flex items-center justify-center`}>
                 {path ? path : "HOME"}
                 <Icon iconName={developed ? "close" : "hamburger"} size={6}/>
             </button>
@@ -59,7 +59,7 @@ export default function Navbar({websiteIdOrDomain}: { websiteIdOrDomain: string 
                             damping: 30,
                             mass: 1
                         }}
-                        className={`absolute top-5 right-5 z-99 max-w-[calc(100vw - 40px)] w-fit gap-4 flex flex-col items-end p-10 pt-20 rounded-[40px] justify-center bg-on-background-hover`}>
+                        className={`absolute top-5 right-5 z-98 max-w-[calc(100vw - 40px)] w-fit gap-4 flex flex-col items-end p-10 pt-20 rounded-[40px] justify-center bg-on-background-hover`}>
 
                         {
                             website?.pages.map((page, index) => (

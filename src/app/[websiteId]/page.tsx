@@ -38,8 +38,8 @@ export default function Home() {
         WebsiteService.getRecursiveWebsite(websiteId as string).then((data) => {
             setWebsite(data);
         }).catch((error) => {
-            setPopupTitle("Erreur");
-            setPopupContent("Une erreur s'est produite lors de la récupération des données : " + error.message);
+            setPopupTitle("Couldn't load the website");
+            setPopupContent("The server didn't gave the expected answer.");
             setShowPopup(true);
         }).finally(() => {
             setLoading(false);
@@ -47,7 +47,17 @@ export default function Home() {
     }, []);
 
     return (
-        <div className={"flex justify-center items-center flex-col gap-6"}>
+        <div className={"flex justify-center items-center flex-col gap-6 min-h-screen"}>
+            {
+                !loading && website == null &&
+                <div className={"w-full flex items-center justify-center flex-col gap-6"}>
+                    <h1
+                        className={"text-on-foreground font-black font-array md:text-8xl text-5xl w-full md:w-6xl text-center"}>It
+                        seems the page you requested does not exist</h1>
+                    <p>Check the website ID you are looking for in the URL. If you think it&apos;s an error, please
+                        contact us.</p>
+                </div>
+            }
             <motion.h1
                 initial={simpleElementVariant.hidden}
                 whileInView={simpleElementVariant.visible}

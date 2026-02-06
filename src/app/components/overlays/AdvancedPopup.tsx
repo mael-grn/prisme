@@ -1,5 +1,6 @@
 import {AnimatePresence, motion} from "framer-motion";
-import Button, { ButtonProps} from "@/app/components/ui-elements/Button";
+import Button, {ActionTypeEnum, ButtonProps} from "@/app/components/ui-elements/Button";
+import Icon from "@/app/components/ui-elements/Icon";
 
 /**
  * Une popup qui affiche assez simplement un message avec un titre et une icone, mais qui peut aussi afficher des actions et du contenu personnalisé
@@ -18,27 +19,24 @@ export default function AdvancedPopup({show, icon="info", title, message, closeP
         <AnimatePresence>
             {
                 show && <motion.div
-                    className={"fixed top-0 left-0 w-full h-full flex items-center justify-center bg-background-opacity backdrop-blur z-50"}
+                    className={"fixed top-0 left-0 w-full h-full flex items-center justify-center bg-background-opacity backdrop-blur z-999"}
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
                     exit={{opacity: 0}}
                 >
                     <motion.div
-                        className={"bg-on-background border-2 border-on-backgroundHover rounded-2xl md:w-1/2 max-h-[80vh] overflow-y-auto"}
+                        className={"bg-on-background rounded-4xl md:w-1/3 w-full max-h-[80vh] overflow-y-auto flex flex-col items-center justify-center gap-4 p-6"}
                         initial={{transform: "scale(0.5)"}}
                         animate={{transform: "scale(1)"}}
                         exit={{transform: "scale(0.5)"}}
                     >
-                        <div className={"flex flex-col items-center justify-center gap-4 p-6"}>
-                            <img src={`/ico/${icon}.svg`} alt={"popup"} className={"w-16 invert"} />
-                            <h2 className={"text-center"}>{title}</h2>
-                            <p className={"text-center"}>{message}</p>
+                        <h2 className={"text-center md:text-5xl text-3xl font-array font-bold"}>{title}</h2>
+                        <p className={"text-center w-full bg-on-background-hover p-3 rounded-2xl"}>{message}</p>
 
-                            {children}
-                        </div>
+                        {children}
 
-                        <div className={"flex flex-1 gap-2 items-center justify-end border-t-2 border-on-backgroundHover w-full p-3"}>
-                            <Button iconName={"close"} text={"Fermer"} onClick={closePopup} />
+                        <div className={"flex gap-2 items-center justify-end w-full"}>
+                            <Button iconName={"close"} text={"Close"} onClick={closePopup} actionType={ActionTypeEnum.dangerous} />
                             {
                                 actions && actions.map((action, index) => (
                                     <Button
