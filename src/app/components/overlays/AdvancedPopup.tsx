@@ -1,6 +1,5 @@
 import {AnimatePresence, motion} from "framer-motion";
 import Button, {ActionTypeEnum, ButtonProps} from "@/app/components/ui-elements/Button";
-import Icon from "@/app/components/ui-elements/Icon";
 
 /**
  * Une popup qui affiche assez simplement un message avec un titre et une icone, mais qui peut aussi afficher des actions et du contenu personnalisé
