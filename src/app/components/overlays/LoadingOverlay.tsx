@@ -15,8 +15,9 @@ export default function LoadingOverlay({show} : {show: boolean, message?: string
                     initial={{ opacity: 0}}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className={"fixed top-0 left-0 w-full h-full flex items-center justify-center bg-background-opacity backdrop-blur z-50 gap-6 flex-col"}>
+                    className={"fixed top-0 left-0 w-full h-full flex items-center justify-center bg-background backdrop-blur z-999 gap-6 flex-col"}>
                     <LoadingIcon/>
+                    <p>Loading website data...</p>
                 </motion.div>
             }
 
