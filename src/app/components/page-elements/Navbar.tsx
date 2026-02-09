@@ -8,6 +8,7 @@ import {useParams, useRouter} from "next/navigation";
 import {AnimatePresence, motion} from "framer-motion";
 import SvgFromString from "@/app/components/ui-elements/SvgFromString";
 import Icon from "@/app/components/ui-elements/Icon";
+import {RecursivePage} from "@/app/models/Page";
 
 /**
  * Tous simplement la barre de navigation, qui s'adapte ou non au style mobile.
@@ -18,6 +19,7 @@ export default function Navbar({websiteIdOrDomain}: { websiteIdOrDomain: string 
 
     const [developed, setDeveloped] = useState(false);
     const [website, setWebsite] = useState<RecursiveWebsite | null>(null);
+    const [page, setPage] = useState<RecursivePage | null>(null);
 
     const router = useRouter();
     const {path} = useParams()
@@ -33,16 +35,17 @@ export default function Navbar({websiteIdOrDomain}: { websiteIdOrDomain: string 
                 position: -2,
             })
             data.pages = data.pages.sort((a, b) => a.position - b.position);
+            setPage(data?.pages.find((p) => p.path.substring(1) === path as string) || null)
             setWebsite(data);
         })
-    }, [websiteIdOrDomain]);
+    }, [websiteIdOrDomain, path]);
 
     return (
         <nav className={"fixed md:left-auto left-0 top-0 right-0 z-999 flex transition justify-end"}>
 
             <button onClick={() => setDeveloped(!developed)}
                     className={`${developed ? "gap-0 text-[0px] p-2 bg-dangerous md:hover:bg-dangerous-hover m-6 md:m-10" : "gap-2 text-[18px] px-4 py-2 bg-on-background md:hover:bg-on-background-hover m-3"}   z-99 transition-all h-fit text-foreground  w-fit rounded-full  active:scale-95 cursor-pointer flex items-center justify-center`}>
-                {path ? path : "HOME"}
+                {page?.title}
                 <Icon iconName={developed ? "close" : "hamburger"} size={6}/>
             </button>
 
