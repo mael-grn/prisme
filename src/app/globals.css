@@ -27,6 +27,14 @@
     --font-sans: "Montserrat", sans-serif;
 }
 
+@utility scrollbar-hide {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 :root {
     --background: #000000;
     --background-opacity: rgba(0, 0, 0, 0.75);

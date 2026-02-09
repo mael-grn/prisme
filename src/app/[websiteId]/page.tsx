@@ -47,7 +47,7 @@ export default function Home() {
     }, []);
 
     return (
-        <div className={"flex justify-center items-center flex-col gap-6 min-h-screen"}>
+        <div className={"flex items-center flex-col gap-6 min-h-screen"}>
             {
                 !loading && website == null &&
                 <div className={"w-full flex items-center justify-center flex-col gap-6"}>

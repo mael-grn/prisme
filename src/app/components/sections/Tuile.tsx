@@ -42,7 +42,7 @@ export default function Tuile({ section, delay = 0.0 }: { section: RecursiveSect
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setFullScreen(false)}
-                            className={"fixed md:z-30 z-50 top-0 left-0 w-full h-screen backdrop-blur bg-background-opacity"}
+                            className={"fixed md:z-999 z-999 top-0 left-0 w-full h-screen bg-background-opacity"}
                         />
 
                         {/* GRANDE TUILE */}
@@ -50,7 +50,7 @@ export default function Tuile({ section, delay = 0.0 }: { section: RecursiveSect
                             key={"big-element-" + section.id}
                             layoutId={`card-${section.id}`}
                             transition={{ ease: "easeInOut"}}
-                            className={`fixed md:top-[10vh] top-[5vh] md:h-[88vh] md:min-h-[88vh] md:max-h-[88vh] h-[90vh] min-h-[90vh] max-h-[90vh] box-border md:z-40 z-50 md:w-1/3 w-[90%] md:left-1/3 left-[5%] flex flex-col bg-background border-2 border-on-background overflow-auto rounded-3xl items-center`}
+                            className={`fixed md:top-[10vh] top-[5vh] md:h-[88vh] md:min-h-[88vh] md:max-h-[88vh] h-[90vh] min-h-[90vh] max-h-[90vh] box-border md:z-999 z-999 md:w-1/3 w-[90%] md:left-1/3 left-[5%] flex flex-col bg-background border-3 scrollbar-hide border-on-background-hover overflow-auto overscroll-none rounded-3xl items-center`}
                         >
                             {/* Le contenu interne peut avoir besoin d'un délai pour apparaître proprement après l'expansion */}
                             <motion.div
@@ -59,26 +59,31 @@ export default function Tuile({ section, delay = 0.0 }: { section: RecursiveSect
                                 transition={{ delay: 0.1 }}
                                 className="w-full h-full flex flex-col items-center"
                             >
-                                <div className={"sticky top-0 right-0 p-2 z-50 w-full flex justify-end"}>
-                                    <div onClick={(e) => { e.stopPropagation(); setFullScreen(false); }}
-                                         className={"flex transition-all cursor-pointer active:bg-dangerous-hover active:scale-90 bg-dangerous md:hover:bg-dangerous-hover rounded-3xl justify-center items-center p-2 z-50"}>
-                                        <img src={"/ico/close-outline.svg"} alt={"close"} className={"w-6 h-6"} />
+                                <div className={"sticky top-0 right-0 p-2 z-50 w-full flex flex-col"}>
+                                    <div className={"w-full flex justify-end bg-background"}>
+                                        <div className={"flex flex-1 w-full gap-2 flex-col flex-wrap"}>
+                                            {section.categories.map((category, id) => {
+                                                return (
+                                                    <div key={id} className={"flex gap-2 truncate w-fit rounded-full bg-on-backgroundHover"}>
+                                                        <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full text-background bg-primary"}>{category.name}</p>
+                                                        {category.subcategories.map((subcat, subId) => {
+                                                            return <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full bg-on-background"} key={subId}>{subcat.name}</p>
+                                                        })}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                        <div onClick={(e) => { e.stopPropagation(); setFullScreen(false); }}
+                                             className={"flex transition-all cursor-pointer active:bg-dangerous-hover active:scale-90 bg-dangerous md:hover:bg-dangerous-hover rounded-3xl justify-center h-8 w-8 min-h-8 max-h-8 min-w-8 max-w-8 items-center p-2 z-50"}>
+                                            <img src={"/ico/close-outline.svg"} alt={"close"} className={"w-6 h-6"} />
+                                        </div>
                                     </div>
+                                    <span className={"w-full h-16 bg-linear-to-b from-background to-transparent"}/>
                                 </div>
 
-                                <div className={"flex flex-col gap-10 items-center p-8"}>
-                                    <div className={"flex w-full flex-wrap justify-center items-center gap-2"}>
-                                        {section.categories.map((category, id) => {
-                                            return (
-                                                <div key={id} className={"flex truncate w-fit gap-2 rounded-3xl p-2 bg-on-backgroundHover"}>
-                                                    <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full text-background bg-primary"}>{category.name}</p>
-                                                    {category.subcategories.map((subcat, subId) => {
-                                                        return <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full bg-on-background"} key={subId}>{subcat.name}</p>
-                                                    })}
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
+
+                                <div className={"flex flex-col gap-10 items-center px-8 pb-8"}>
+
                                     {section.elements.map((element, index) => {
                                         return <ElementComponent key={index} element={element} reduceImageSize={true} />
                                     })}

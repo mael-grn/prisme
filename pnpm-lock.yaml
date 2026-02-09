@@ -44,6 +44,9 @@ importers:
       resend:
         specifier: ^6.9.1
         version: 6.9.1(@react-email/render@2.0.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+      tailwind-scrollbar-hide:
+        specifier: ^4.0.0
+        version: 4.0.0(tailwindcss@4.1.18)
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
@@ -2064,6 +2067,11 @@ packages:
 
   svix@1.84.1:
     resolution: {integrity: sha512-K8DPPSZaW/XqXiz1kEyzSHYgmGLnhB43nQCMeKjWGCUpLIpAMMM8kx3rVVOSm6Bo6EHyK1RQLPT4R06skM/MlQ==}
+
+  tailwind-scrollbar-hide@4.0.0:
+    resolution: {integrity: sha512-gobtvVcThB2Dxhy0EeYSS1RKQJ5baDFkamkhwBvzvevwX6L4XQfpZ3me9s25Ss1ecFVT5jPYJ50n+7xTBJG9WQ==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >= 4.0.0 || >= 4.0.0-beta.8 || >= 4.0.0-alpha.20'
 
   tailwindcss@4.1.18:
     resolution: {integrity: sha512-4+Z+0yiYyEtUVCScyfHCxOYP06L5Ne+JiHhY2IjR2KWMIWhJOYZKLSGZaP5HkZ8+bY0cxfzwDE5uOmzFXyIwxw==}
@@ -4370,6 +4378,10 @@ snapshots:
     dependencies:
       standardwebhooks: 1.0.0
       uuid: 10.0.0
+
+  tailwind-scrollbar-hide@4.0.0(tailwindcss@4.1.18):
+    dependencies:
+      tailwindcss: 4.1.18
 
   tailwindcss@4.1.18: {}
 

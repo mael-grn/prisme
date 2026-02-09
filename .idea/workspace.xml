@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="amélioration des tuiles">
+    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="correction de bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/overlays/AdvancedPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/overlays/AdvancedPopup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/Tuile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/Tuile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +142,9 @@
       <workItem from="1770323204121" duration="45000" />
       <workItem from="1770323310520" duration="666000" />
       <workItem from="1770324083182" duration="3733000" />
-      <workItem from="1770358019403" duration="1042000" />
+      <workItem from="1770358019403" duration="1303000" />
+      <workItem from="1770400261186" duration="82000" />
+      <workItem from="1770622929807" duration="1887000" />
     </task>
     <task id="LOCAL-00001" summary="Correction de bugs sur animation, et amelioration de la page d'accueil">
       <option name="closed" value="true" />
@@ -239,7 +242,31 @@
       <option name="project" value="LOCAL" />
       <updated>1770327197140</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="amélioration erreur site non trouvé et popup">
+      <option name="closed" value="true" />
+      <created>1770359146528</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1770359146528</updated>
+    </task>
+    <task id="LOCAL-00014" summary="amélioration loading overlay">
+      <option name="closed" value="true" />
+      <created>1770359274723</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1770359274723</updated>
+    </task>
+    <task id="LOCAL-00015" summary="correction de bugs">
+      <option name="closed" value="true" />
+      <created>1770359317194</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1770359317195</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,7 +285,10 @@
     <MESSAGE value="fichiers non versionnés necessaires" />
     <MESSAGE value="amélioration des elements" />
     <MESSAGE value="amélioration des tuiles" />
-    <option name="LAST_COMMIT_MESSAGE" value="amélioration des tuiles" />
+    <MESSAGE value="amélioration erreur site non trouvé et popup" />
+    <MESSAGE value="amélioration loading overlay" />
+    <MESSAGE value="correction de bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction de bugs" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

@@ -54,7 +54,7 @@ export default function Page() {
     }, []);
 
     return (
-        <main className={" p-6 flex flex-col items-start justify-start"}>
+        <main className={"flex flex-col items-start justify-start"}>
 
             <motion.div
                 initial={{scale: 0.8, opacity: 0}}
