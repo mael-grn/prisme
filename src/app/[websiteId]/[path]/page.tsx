@@ -70,7 +70,7 @@ export default function Page() {
                     whileInView="visible"
                     variants={simpleElementVariant}
                     transition={{ease: "easeOut"}}
-                    className={"md:text-center w-full md:text-5xl text-3xl font-boska font-bold"}>
+                    className={"text-center w-full md:text-5xl text-3xl font-boska font-bold"}>
                     {page?.title}
                 </motion.h1>
                 <motion.p
@@ -78,7 +78,7 @@ export default function Page() {
                     whileInView="visible"
                     variants={simpleElementVariant}
                     transition={{delay: 0.1, ease: "easeOut"}}
-                    className={"md:text-center max-w-4xl w-full"}>
+                    className={"text-center max-w-4xl w-full"}>
                     {page?.description}
                 </motion.p>
             </motion.div>
