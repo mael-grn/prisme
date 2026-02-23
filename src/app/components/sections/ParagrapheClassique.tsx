@@ -27,7 +27,7 @@ export default function ParagrapheClassique({section} : {section: RecursiveSecti
         <div
             ref={targetElement}
             key={section.id}
-            className={`flex flex-col md:w-2/3  justify-start items-start gap-6 rounded-xl ${highLighted ? "bg-safe" : "bg-transparent"}`}
+            className={`flex flex-col justify-start items-start gap-6 rounded-xl ${highLighted ? "bg-safe" : "bg-transparent"}`}
         >
             {
                 section.elements.map((element, index) => {

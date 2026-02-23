@@ -44,7 +44,7 @@ export default function RootLayout({
 
     return (
         <div style={cssProps}>
-            <div className="min-h-screen bg-background font-chillax text-foreground">
+            <div className="min-h-screen bg-background font-chillax text-foreground ">
                 <Navbar websiteIdOrDomain={websiteId as string}/>
 
                 <div className="md:p-24 pt-20 p-6">

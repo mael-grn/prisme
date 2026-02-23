@@ -10,11 +10,11 @@ import {RecursiveSection} from "@/app/models/Section";
  */
 export default function ParagraphDevContainer({sections}: {sections: RecursiveSection[]}) {
     return (
-        <div key={sections[0]?.id || 0} className={" pt-16 md:pt-32 flex flex-col justify-center items-center gap-6"}>
+        <div key={sections[0]?.id || 0} className={"  mt-10 md:mt-20 p-4 rounded-[40px] bg-on-background flex w-full flex-col justify-start items-start gap-2"}>
             {
-                sections?.map((section) => {
+                sections?.map((section, index) => {
                     return (
-                        <ParagrapheDev section={section} key={section.id}/>
+                        <ParagrapheDev section={section} isFisrt={index==0 && sections.length > 1} isLast={index == sections.length - 1 && sections.length > 1} key={section.id}/>
                     )
                 })
             }

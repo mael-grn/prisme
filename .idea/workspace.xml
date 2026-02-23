@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="correction de style mobile">
+    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="correction style mpobile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/[path]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/[path]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/overlays/LoadingOverlay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/overlays/LoadingOverlay.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/ParagrapheClassique.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/ParagrapheClassique.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/ParagrapheDev.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/ParagrapheDev.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/Tuile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/Tuile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/containers/OrganizedSections.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/containers/OrganizedSections.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/containers/ParagrapheClassiqueContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/containers/ParagrapheClassiqueContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/containers/ParagrapheDevContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/containers/ParagrapheDevContainer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/sections/containers/TuileContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/containers/TuileContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/Icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/Icon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/LoadingIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/LoadingIcon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,6 +154,10 @@
       <workItem from="1770358019403" duration="1303000" />
       <workItem from="1770400261186" duration="82000" />
       <workItem from="1770622929807" duration="2865000" />
+      <workItem from="1770648489158" duration="2072000" />
+      <workItem from="1770792996622" duration="2244000" />
+      <workItem from="1770821687175" duration="80000" />
+      <workItem from="1770976343403" duration="2538000" />
     </task>
     <task id="LOCAL-00001" summary="Correction de bugs sur animation, et amelioration de la page d'accueil">
       <option name="closed" value="true" />
@@ -271,7 +287,23 @@
       <option name="project" value="LOCAL" />
       <updated>1770625116944</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="correction de bug navbar">
+      <option name="closed" value="true" />
+      <created>1770648695805</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1770648695805</updated>
+    </task>
+    <task id="LOCAL-00018" summary="correction style mpobile">
+      <option name="closed" value="true" />
+      <created>1770648723012</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1770648723012</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +326,9 @@
     <MESSAGE value="amélioration loading overlay" />
     <MESSAGE value="correction de bugs" />
     <MESSAGE value="correction de style mobile" />
-    <option name="LAST_COMMIT_MESSAGE" value="correction de style mobile" />
+    <MESSAGE value="correction de bug navbar" />
+    <MESSAGE value="correction style mpobile" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction style mpobile" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

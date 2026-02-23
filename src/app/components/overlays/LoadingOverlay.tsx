@@ -1,5 +1,11 @@
+"use client";
+
 import {AnimatePresence, motion} from "framer-motion";
 import LoadingIcon from "@/app/components/ui-elements/LoadingIcon";
+import ColorUtil from "@/app/utils/ColorUtil";
+import {useEffect} from "react";
+import WebsiteService from "@/app/services/WebsiteService";
+import {useParams} from "next/navigation";
 
 /**
  * un overlay, qui affiche une animation de chargement. Utile pour les actions longues.
@@ -7,6 +13,10 @@ import LoadingIcon from "@/app/components/ui-elements/LoadingIcon";
  * @constructor
  */
 export default function LoadingOverlay({show} : {show: boolean, message?: string}) {
+
+
+    const {websiteId} = useParams()
+
     return (
         <AnimatePresence>
             {

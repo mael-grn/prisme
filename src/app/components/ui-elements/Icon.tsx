@@ -30,5 +30,5 @@ export default function Icon({iconName, size=6, color="foreground"}: {iconName: 
         load();
     },[iconName, color]);
 
-    return <SvgFromString svg={iconSrc} color={color}  className={size ? `w-${size} h-${size}` : ""}/>
+    return <SvgFromString svg={iconSrc} color={color}  className={size ? `w-${size} h-${size} min-w-${size} flex-shrink-0 max-w-${size} min-h-${size} max-h-${size}` : ""}/>
 }

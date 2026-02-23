@@ -10,7 +10,7 @@ import {RecursiveSection} from "@/app/models/Section";
  */
 export default function ParagraphClassiqueContainer({sections}: {sections: RecursiveSection[]}) {
     return (
-        <div key={sections[0]?.id || 0} className={" p-0 pt-16 md:pt-32 flex flex-col justify-center items-center gap-32"}>
+        <div key={sections[0]?.id || 0} className={" p-6 mt-20 flex flex-col justify-start items-start gap-20"}>
             {
                 sections?.map((section) => {
                     return (

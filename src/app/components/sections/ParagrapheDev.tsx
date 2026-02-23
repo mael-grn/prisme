@@ -4,13 +4,21 @@ import {AnimatePresence, motion} from "framer-motion";
 import {useEffect, useRef, useState} from "react";
 import {RecursiveSection} from "@/app/models/Section";
 import ElementComponent from "@/app/components/page-elements/ElementComponent";
+import {simpleElementVariant} from "@/app/utils/FramerUtil";
+import Icon from "@/app/components/ui-elements/Icon";
 
 /**
  * Un paragraphe dev est un moyen de repprésentation d'une section. Elle affiche par defaut le premier élement de la section, au click la section est developpé pour occuper tous l'ecran.
  * @param section
+ * @param isFisrt
+ * @param isLast
  * @constructor
  */
-export default function ParagrapheDev({section}: { section: RecursiveSection }) {
+export default function ParagrapheDev({section, isFisrt, isLast}: {
+    section: RecursiveSection,
+    isFisrt: boolean,
+    isLast: boolean
+}) {
     const [fullScreen, setFullScreen] = useState<boolean>(false);
 
     const targetElement = useRef<HTMLDivElement>(null);
@@ -20,7 +28,7 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
         }
         if (window.location.hash === `#${section.id}` && targetElement && targetElement.current) {
             setFullScreen(true);
-            targetElement.current.scrollIntoView({ behavior: 'smooth' });
+            targetElement.current.scrollIntoView({behavior: 'smooth'});
         }
     }, [section.id, targetElement]);
 
@@ -35,23 +43,23 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
                             animate={{opacity: 1}}
                             exit={{opacity: 0}}
                             onClick={() => setFullScreen(false)}
-                            className={"fixed  z-30 top-0 left-0 w-full h-[100vh] backdrop-blur bg-background-opacity"}/>
+                            className={"fixed  z-999 top-0 left-0 w-full h-screen bg-background-opacity"}/>
 
                         <motion.div
                             key={"big-element-" + section.id}
-                            initial={{transform: "scale(.7)", opacity: 0, transformOrigin: "bottom", filter: "blur(20px)"}}
-                            animate={{transform: "scale(1)", opacity: 1, transformOrigin: "bottom", filter: "blur(0px)"}}
-                            exit={{transform: "scale(.7)", opacity: 0, transformOrigin: "bottom", filter: "blur(20px)"}}
+                            initial={{y: 200, opacity: 0, transformOrigin: "bottom"}}
+                            animate={{y: 0, opacity: 1, transformOrigin: "bottom"}}
+                            exit={{y: 200, opacity: 0, transformOrigin: "bottom"}}
                             style={{scrollbarWidth: "none"}}
-                            className={`fixed bottom-0 h-[80vh] min-h-[80vh] max-h-[80vh] box-border z-40 md:w-3/4 w-full md:left-[12.5%] left-0 border-2 border-on-background bg-background overflow-auto rounded-t-3xl `}
+                            className={`fixed bottom-0 h-[80vh] min-h-[80vh] max-h-[80vh] box-border z-999 md:w-3/4 w-full md:left-[12.5%] left-0 border-2 border-on-background bg-background overflow-auto overscroll-none scrollbar-hide rounded-t-3xl `}
                         >
                             <div className={"sticky top-0 right-0 p-2 z-50 w-full flex justify-end"}>
 
-                                <div onClick={() => setFullScreen(false)} className={"flex cursor-pointer bg-dangerous active:bg-dangerous-hover md:hover:bg-dangerous-hover rounded-3xl justify-center items-center w-fit h-fit p-2"}>
+                                <div onClick={() => setFullScreen(false)}
+                                     className={"flex cursor-pointer bg-dangerous active:bg-dangerous-hover md:hover:bg-dangerous-hover rounded-3xl justify-center items-center w-fit h-fit p-2"}>
                                     <img src={"/ico/close-outline.svg"} alt={"close"} className={"w-6 h-6"}/>
                                 </div>
                             </div>
-
 
 
                             <div className={"flex flex-col gap-10 items-center p-8"}>
@@ -60,11 +68,14 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
                                     {
                                         section.categories.map((category, id) => {
                                             return (
-                                                <div  key={id} className={"flex truncate w-fit gap-2 rounded-3xl p-2 bg-on-backgroundHover"}>
+                                                <div key={id}
+                                                     className={"flex truncate w-fit gap-2 rounded-3xl p-2 bg-on-backgroundHover"}>
                                                     <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full text-background bg-primary"}>{category.name}</p>
                                                     {
                                                         category.subcategories.map((subcat, subId) => {
-                                                            return <p className={"pt-1 pb-1 pl-2 pr-2 rounded-full bg-on-background"} key={subId}>{subcat.name}</p>
+                                                            return <p
+                                                                className={"pt-1 pb-1 pl-2 pr-2 rounded-full bg-on-background"}
+                                                                key={subId}>{subcat.name}</p>
                                                         })
                                                     }
                                                 </div>
@@ -75,12 +86,18 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
                                 </div>
 
                                 {
-                                    section.elements.map((element, index) => {
-                                        return <ElementComponent reduceImageSize={true} key={index} element={element} center={true}/>
-                                    })
+                                    section.elements.length > 0 ?
+                                        section.elements.map((element, index) => {
+                                            return <ElementComponent reduceImageSize={true} key={index}
+                                                                     element={element} center={true}/>
+                                        }) :
+                                        <div className={"flex flex-col items-center gap-4"}>
+                                            <Icon iconName={"exclamation-solid"} size={24}/>
+                                            <h1 className={"text-center w-full md:text-5xl text-3xl font-boska font-bold"}>Nothing to show</h1>
+                                            <p className={"text-center"}>There is currently no content in this section. Maybe come back later.</p>
+                                        </div>
                                 }
                             </div>
-
 
 
                         </motion.div>
@@ -93,14 +110,15 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
                 id={`${section.id}`}
                 key={section.id}
                 onClick={() => setFullScreen(true)}
-                initial={{opacity: 0, transform: "translateY(20px)", filter: "blur(10px)"}}
-                whileInView={{opacity: 1, transform: "translateY(0px)", filter: "blur(0px)"}}
-                whileHover={{opacity: 0.8}}
-                whileTap={{opacity: 0.8}}
+                initial="hidden"
+                whileInView="visible"
+                variants={simpleElementVariant}
+                style={{opacity: fullScreen ? 0 : 1}}
+                transition={{ease: "easeInOut"}}
                 className={`
                             flex flex-col cursor-pointer 
-                            relative gap-2 bg-primary w-full h-fit p-4 rounded-xl 
-                            overflow-hidden  md:max-w-[800px] active:scale-90
+                            relative gap-2 bg-primary md:hover:bg-primary-hover active:bg-primary-hover transition-[background] w-full h-fit p-4 rounded-[15px] ${isFisrt ? "rounded-t-[30px]" : isLast ? "rounded-b-[30px]" : ""}
+                            overflow-hidden
                             `}
             >
                 {
@@ -118,8 +136,9 @@ export default function ParagrapheDev({section}: { section: RecursiveSection }) 
                 }
 
                 {
-                    section.elements.length > 0 &&
-                    <ElementComponent element={section.elements[0]}/>
+                    section.elements.length > 0 ?
+                        <ElementComponent element={section.elements[0]}/> :
+                        <p>Nothing to show</p>
                 }
             </motion.div>
         </>

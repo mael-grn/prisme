@@ -2,8 +2,11 @@
 
 import {motion} from "framer-motion";
 import Button, {ActionTypeEnum} from "@/app/components/ui-elements/Button";
+import {useRouter} from "next/navigation";
 
 export default function Page() {
+
+    const router = useRouter()
 
     // Valeurs d'animation
     const animateValues = {
@@ -76,7 +79,7 @@ export default function Page() {
                     our vision : Prisme.
                 </p>
 
-                <Button text={"Get started"} actionType={ActionTypeEnum.neutral} iconName={"arrow-up-right"}/>
+                <Button text={"Get started"} actionType={ActionTypeEnum.neutral} iconName={"arrow-up-right"} onClick={() => window.open('https://prismadmin.maelg.fr/', '_blank')}/>
 
             </div>
         </main>

@@ -11,7 +11,7 @@ import {RecursiveSection} from "@/app/models/Section";
 export default function TuileContainer({sections}: {sections: RecursiveSection[]}) {
 
     return (
-        <div key={sections[0]?.id || 0} className={" p-0 pt-16 md:pt-32 flex flex-wrap justify-center w-full items-center gap-4"}>
+        <div key={sections[0]?.id || 0} className={" mt-10 md:p-6 p-3 rounded-[40px] self-center bg-on-background flex flex-wrap justify-center items-start gap-3 md:gap-4"}>
             {
                 sections?.map((section, index) => {
                     return (

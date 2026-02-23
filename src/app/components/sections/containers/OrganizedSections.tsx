@@ -24,10 +24,11 @@ export default function OrganizedSections({sections}: {sections: RecursiveSectio
      */
     function groupSectionsByType(sections: RecursiveSection[]): GroupedSections[] {
         const res : GroupedSections[] = [];
-
         for (const section of sections) {
+
             if (res[res.length - 1]?.type === section.section_type) {
                 res[res.length - 1].sections.push(section);
+
             } else {
                 res.push({
                     type: section.section_type as PossibleSectionType,

@@ -19,6 +19,7 @@ export default function LoadingIcon() {
         <Player
             ref={playerRef}
             icon={ ICON }
+            colorize={"var(--foreground)"}
             onComplete={() => playerRef.current?.playFromBeginning()}
         />
     )
