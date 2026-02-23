@@ -2,9 +2,6 @@
 
 import {AnimatePresence, motion} from "framer-motion";
 import LoadingIcon from "@/app/components/ui-elements/LoadingIcon";
-import ColorUtil from "@/app/utils/ColorUtil";
-import {useEffect} from "react";
-import WebsiteService from "@/app/services/WebsiteService";
 import {useParams} from "next/navigation";
 
 /**

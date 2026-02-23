@@ -1,4 +1,3 @@
-import WebsiteService from "@/app/services/WebsiteService";
 
 /**
  * Utilitaire pour gérer les couleurs
