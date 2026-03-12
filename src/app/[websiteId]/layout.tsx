@@ -5,7 +5,6 @@ import Navbar from "@/app/components/page-elements/Navbar";
 import Footer from "@/app/components/page-elements/Footer";
 import {useParams} from "next/navigation";
 import {CSSProperties, useEffect, useState} from "react";
-import CssUtil from "@/app/utils/CssUtil";
 import WebsiteService from "@/app/services/WebsiteService";
 
 /**
@@ -32,12 +31,16 @@ export default function RootLayout({
                 setCssProps(props);
 
                 // Injection directe dans le DOM pour forcer Tailwind à voir les variables
+                /*
                 const root = document.documentElement;
+
                 Object.entries(props).forEach(([key, value]) => {
                     if (typeof value === 'string') {
                         root.style.setProperty(key, value);
                     }
                 });
+
+                 */
             });
         }
     }, [websiteId]);

@@ -5,3 +5,12 @@ export interface RecursiveCategory {
     name: string;
     subcategories: Subcategory[];
 }
+
+export interface Category {
+    id: number;
+    name: string;
+}
+
+export interface InsertableCategory {
+    name: string;
+}

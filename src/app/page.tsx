@@ -79,7 +79,7 @@ export default function Page() {
                     our vision : Prisme.
                 </p>
 
-                <Button text={"Get started"} actionType={ActionTypeEnum.neutral} iconName={"arrow-up-right"} onClick={() => window.open('https://prismadmin.maelg.fr/', '_blank')}/>
+                <Button text={"Get started"} actionType={ActionTypeEnum.neutral} iconName={"arrow-up-right"} onClick={() => router.push('/secure')}/>
 
             </div>
         </main>

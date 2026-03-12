@@ -10,3 +10,21 @@ export interface RecursivePage {
     description?: string;
     position: number;
 }
+
+export interface Page {
+    id: number;
+    path: string;
+    website_id: number;
+    icon_svg?: string;
+    title: string;
+    description?: string;
+    position: number;
+}
+
+export interface InsertablePage {
+    path: string;
+    website_id: number;
+    icon_svg?: string;
+    title: string;
+    description?: string;
+}

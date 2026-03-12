@@ -30,6 +30,7 @@ export default function RootLayout({
           ${outfitFont.variable} 
           ${boskaFont.variable} 
           antialiased
+          bg-background
         `}
       >
         {children}

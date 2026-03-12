@@ -1,9 +1,10 @@
-import axios from "axios";
-import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
+import axios, { AxiosError } from "axios";
+import {DisplayWebsite, InsertableDisplayWebsite, RecursiveWebsite} from "@/app/models/DisplayWebsite";
 import {CSSProperties} from "react";
 import CssUtil from "@/app/utils/CssUtil";
-import {getDefaultColors, WebsiteColors} from "@/app/models/WebsiteColors";
+import {getDefaultColors, InsertableWebsiteColors, WebsiteColors} from "@/app/models/WebsiteColors";
 import CacheUtil from "@/app/utils/CacheUtil";
+import StringUtil from "@/app/utils/StringUtil";
 
 /**
  * Service pour gérer et traiter les données des sites web, y compris la mise en cache côté client.
@@ -18,7 +19,7 @@ export default class WebsiteService {
      */
     private static async fetchWebsite(idOrDomain : string): Promise<RecursiveWebsite> {
         try {
-            const response = await axios.get(`/api/website/${idOrDomain}`);
+            const response = await axios.get(`/api/websites/${idOrDomain}`);
             return response.data; // No cast necessary, the data is already in the correct format
         } catch (error) {
             throw new Error(`Failed to fetch data for domain : ${error}`);
@@ -101,6 +102,75 @@ export default class WebsiteService {
             return CssUtil.websiteColorsToCSS(website.colors);
         } else {
             return CssUtil.websiteColorsToCSS(getDefaultColors(-1) as WebsiteColors);
+        }
+    }
+
+    static async insertColors(websiteId: number, colors: InsertableWebsiteColors): Promise<void> {
+        try {
+            await axios.post(`/api/websites/${websiteId}/colors`, colors);
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
+    }
+
+    static async updateColors(websiteId: number, colors: InsertableWebsiteColors): Promise<void> {
+        try {
+            await axios.put(`/api/websites/${websiteId}/colors`, colors);
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
+    }
+
+    static async getColors(websiteId: number): Promise<WebsiteColors> {
+        try {
+            const response = await axios.get(`/api/websites/${websiteId}/colors`);
+            return response.data.data as WebsiteColors;
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
+    }
+
+    static async createNewWebsite(newWebsite: InsertableDisplayWebsite) {
+        try {
+            const response = await axios.post('/api/me/websites', newWebsite);
+            return response.data.data as DisplayWebsite;
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
+    }
+
+    static async getMyWebsites(): Promise<DisplayWebsite[]> {
+        try {
+            const response = await axios.get('/api/me/websites');
+            return response.data.data as DisplayWebsite[];
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
+    }
+
+    static async deleteWebsite(websiteId: number): Promise<void> {
+        try {
+            await axios.delete(`/api/websites/${websiteId}`);
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
+    }
+
+    static async updateWebsite(editedWebsite: DisplayWebsite) {
+        try {
+            const response = await axios.put(`/api/websites/${editedWebsite.id}`, editedWebsite);
+            return response.data.data as DisplayWebsite;
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
+    }
+
+    static async getWebsiteById(websiteId: number): Promise<DisplayWebsite> {
+        try {
+            const response = await axios.get(`/api/websites/${websiteId}`);
+            return response.data.data as DisplayWebsite;
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
     }
 }
