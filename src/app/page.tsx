@@ -71,7 +71,7 @@ export default function Page() {
                     alt={"icon"}
                     className={"md:w-52 w-24 h-fit"}
                 />
-                <h1 className={"text-center md:text-7xl font-array text-4xl font-bold tracking-tight"}>
+                <h1 style={{fontSize: "50px"}} className={"text-center font-array font-bold tracking-tight"}>
                     Refract Your Vision <br/> Into Reality
                 </h1>
                 <p className={"text-center text-lg font-chillax max-w-5xl"}>

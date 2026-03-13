@@ -42,7 +42,7 @@ export default function AdvancedPopup({show, icon, title, message, closePopup, a
                     animate={{opacity: 1}}
                     exit={{opacity: 0}}
                 >
-                    <StandardContainerForDataManagement className={"md:min-w-1/2"} title={title} icon={icon} actions={defaultActions.concat(actions || [])} children={children}/>
+                    <StandardContainerForDataManagement className={"md:min-w-1/3"} title={title} message={message} icon={icon} actions={defaultActions.concat(actions || [])} children={children}/>
                 </motion.div>
             }
         </AnimatePresence>

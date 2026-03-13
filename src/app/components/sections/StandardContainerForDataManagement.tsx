@@ -3,14 +3,15 @@ import { motion } from "framer-motion";
 import Icon from "@/app/components/ui-elements/Icon";
 import LoadingIcon from "@/app/components/ui-elements/LoadingIcon";
 import Illustration, {IllustrationSizes} from "@/app/components/ui-elements/Illustration";
+import {simpleElementVariant} from "@/app/utils/FramerUtil";
 
 export default function StandardContainerForDataManagement({children, title, message, illustrationName, actions, icon, loading=false, flex1=false, className}: { children?: React.ReactNode, message?: string, title?: string, illustrationName?: string, icon?: string, actions?: ButtonProps[], loading?: boolean, flex1?: boolean, className?: string }) {
     return (
         <motion.div
             className={`overflow-y-auto min-w-fit scrollbar-hide max-w-full max-h-full relative flex flex-col gap-4 h-fit w-fit rounded-3xl bg-background border-2 border-on-background ${flex1 ? "flex-1" : ""} ${className}`}
-            initial={{scale: 0.5, opacity: 0}}
-            animate={{scale: 1, opacity: 1}}
-            exit={{scale: 0.5, opacity: 0}}
+            initial={simpleElementVariant.hidden}
+            whileInView={simpleElementVariant.visible}
+            exit={simpleElementVariant.hidden}
         >
             <div className={"flex flex-col gap-4 p-4"}>
                 <div className={"flex md:flex-row flex-col gap-4 items-center"}>

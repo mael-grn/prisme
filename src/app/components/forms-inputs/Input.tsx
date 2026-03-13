@@ -1,6 +1,5 @@
 'use client';
 
-import {useState} from "react";
 import Icon from "@/app/components/ui-elements/Icon";
 import {AnimatePresence, motion} from "framer-motion";
 

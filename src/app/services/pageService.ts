@@ -56,7 +56,8 @@ export default class PageService {
             const response = await axios.post(`/api/websites/${newPage.website_id}/pages`, newPage);
             return response.data.data as Page;
         } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+            const perso = {code: 409, message: "The page name is already used. Please choose another name."}
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1, perso)
         }
     }
 
@@ -69,7 +70,8 @@ export default class PageService {
             const response = await axios.put(`/api/pages/${updatedPage.id}`, updatedPage);
             return response.data.data as Page;
         } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+            const perso = {code: 409, message: "The page name is already used. Please choose another name."}
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1, perso)
         }
     }
 

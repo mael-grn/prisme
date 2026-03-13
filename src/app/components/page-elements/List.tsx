@@ -9,6 +9,7 @@ import {AnimatePresence, motion} from "framer-motion";
 export interface ListElementProps {
     text: string;
     isImage?: boolean;
+    tag?: string;
     onClick?: () => void;
     actions?: ButtonProps[];
 }
@@ -45,9 +46,11 @@ function ListElement({props, index, isLast}: { props: ListElementProps, index: n
             </AnimatePresence>
 
             <div
-                className={`flex w-full p-2 ${props.onClick && "md:hover:bg-on-background h-10 active:bg-on-background active:opacity-70 cursor-pointer"} ${!isLast && "border-b-2 border-on-background"} bg-background`}
+                className={`flex w-full p-2 ${props.onClick && "md:hover:bg-on-background flex items-center gap-2 h-10 active:bg-on-background active:opacity-70 cursor-pointer"} ${!isLast && "border-b-2 border-on-background"} bg-background`}
                 onClick={props.onClick}>
-
+                {
+                    props.tag && <p className={"text-sm px-2 py-0.5 rounded-full bg-on-background-hover"}>{props.tag}</p>
+                }
                 {
                     props.isImage ?
                         <img src={props.text} alt={"image"} className={"max-h-52 max-w-fit object-contain w-fit rounded-lg"}/> :

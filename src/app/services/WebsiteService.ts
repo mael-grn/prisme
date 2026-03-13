@@ -135,7 +135,8 @@ export default class WebsiteService {
             const response = await axios.post('/api/me/websites', newWebsite);
             return response.data.data as DisplayWebsite;
         } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+            const perso = {code: 409, message: "The page name is already used. Please choose another name."}
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1, perso)
         }
     }
 
@@ -161,7 +162,8 @@ export default class WebsiteService {
             const response = await axios.put(`/api/websites/${editedWebsite.id}`, editedWebsite);
             return response.data.data as DisplayWebsite;
         } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+            const perso = {code: 409, message: "The page name is already used. Please choose another name."}
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1, perso)
         }
     }
 

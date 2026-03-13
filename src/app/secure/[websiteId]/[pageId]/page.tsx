@@ -12,7 +12,7 @@ import MainPageWrapper from "@/app/components/page-elements/MainPageWrapper";
 import List from "@/app/components/page-elements/List";
 import {DisplayWebsite} from "@/app/models/DisplayWebsite";
 import WebsiteService from "@/app/services/WebsiteService";
-import {ActionTypeEnum} from "@/app/components/ui-elements/Button";
+import Button, {ActionTypeEnum} from "@/app/components/ui-elements/Button";
 import StandardContainerForDataManagement from "@/app/components/sections/StandardContainerForDataManagement";
 import SvgFromString from "@/app/components/ui-elements/SvgFromString";
 import AdvancedPopup from "@/app/components/overlays/AdvancedPopup";
@@ -21,11 +21,17 @@ import Input from "@/app/components/forms-inputs/Input";
 import StringUtil from "@/app/utils/StringUtil";
 import Textarea from "@/app/components/forms-inputs/textarea";
 import DropDown from "@/app/components/forms-inputs/DropDown";
+import Illustration from "@/app/components/ui-elements/Illustration";
+import LoadingIcon from "@/app/components/ui-elements/LoadingIcon";
+import {AnimatePresence, motion} from "framer-motion";
+import Icon from "@/app/components/ui-elements/Icon";
+import {simpleElementVariant} from "@/app/utils/FramerUtil";
 
 export default function PageVisu() {
 
     const [loading, setLoading] = useState(true);
     const [sectionsLoading, setSectionsLoading] = useState(true);
+    const [iconHovered, setIconHovered] = useState(false);
 
     const [sectionToVisualize, setSectionToVisualize] = useState<Section | null>(null);
 
@@ -304,95 +310,99 @@ export default function PageVisu() {
         <>
             <MainPageWrapper loading={loading}>
 
-                <p className={"opacity-70"}>{website?.title}</p>
-                <h2>{page?.title}</h2>
+                {
+                    website && website.hero_image_url && <img src={website.hero_image_url} alt={"hero image"}
+                                                              className={"fixed top-0 left-0 bottom-0 right-0 w-full h-screen object-cover select-none z-0"}/>
+                }
 
-                <StandardContainerForDataManagement
-                    flex1={true}
-                    title={"Title"}
-                    actions={[{
-                        isLoading: editTitleLoading,
-                        text: "Edit",
-                        onClick: () => setShowPopupEditTitle(true),
-                        iconName: "edit",
-                    }]}>
-                    <p>{page?.title}</p>
-                </StandardContainerForDataManagement>
+                <Button iconName={"arrow-back"} text={"Back to " + website?.title} actionType={ActionTypeEnum.neutral}
+                        onClick={() => router.push("/secure/" + websiteId)}/>
+                <div className={"flex justify-center w-full relative gap-4 items-center flex-col"}>
+                    <div className={"relative"}>
+                        {
+                            editIconLoading ? <LoadingIcon/> :
+                            page?.icon_svg
+                                ? <div className={"p-6 bg-background border-2 border-on-background rounded-full"}>
+                                    <SvgFromString className={"w-10 h-10"} svg={page!.icon_svg} color={"foreground"} alt="icone"/>
+                                </div> : <Illustration name={"document"}/>
+                        }
+                        <div
+                            className={"absolute top-0 left-0 w-full h-full flex items-center justify-center cursor-pointer"}
+                            onMouseEnter={() => setIconHovered(true)}
+                            onMouseLeave={() => setIconHovered(false)}
+                            onClick={() => {setShowPopupEditIcon(true); setIconHovered(false)}}
+                        >
+                            <AnimatePresence>
+                                {
+                                    iconHovered &&
+                                    <motion.div className={"bg-background/70 backdrop-blur-lg p-3 rounded-full"}
+                                    initial={simpleElementVariant.hidden}
+                                    animate={simpleElementVariant.visible}
+                                    exit={simpleElementVariant.hidden}
+                                    >
+                                        <Icon iconName={"edit"}/>
+                                    </motion.div>
+                                }
+                            </AnimatePresence>
+                        </div>
+                    </div>
 
-                <StandardContainerForDataManagement
-                    flex1={true}
-                    title={"Path"}
-                    actions={[{
-                        isLoading: editPathLoading,
-                        text: "Edit",
-                        onClick: () => setShowPopupEditPath(true),
-                        iconName: "edit",
-                    }]}>
-                    <p>{page?.path}</p>
-                </StandardContainerForDataManagement>
 
-                <StandardContainerForDataManagement
-                    flex1={true}
-                    title={"Description"}
-                    actions={[{
-                        isLoading: editDescriptionLoading,
-                        text: "Edit",
-                        onClick: () => setShowPopupEditDescription(true),
-                        iconName: "edit",
-                    }]}>
-                    <p>{page?.description || "Your page does not have any description for the moment."}</p>
-                </StandardContainerForDataManagement>
+                    <div className={"flex gap-4 items-center justify-center"}>
+                        <h1 className={"text-center"}>{page?.title}</h1>
+                        <Button
+                            actionType={ActionTypeEnum.neutral}
+                            isLoading={editTitleLoading}
+                            onClick={() => setShowPopupEditTitle(true)}
+                            iconName={"edit"}/>
+                    </div>
 
-                <StandardContainerForDataManagement
-                    flex1={true}
-                    title={"Icon"}
-                    actions={[{
-                        isLoading: editIconLoading,
-                        text: "Edit",
-                        onClick: () => setShowPopupEditIcon(true),
-                        iconName: "edit",
-                    }]}>
-                    {
-                        page?.icon_svg
-                            ? <SvgFromString svg={page!.icon_svg} alt="icone" className="w-12 h-12 invert"/>
-                            : <p>Your page does not have any icone for the moment.</p>
-                    }
-                </StandardContainerForDataManagement>
+                    <div className={`flex gap-2 items-center justify-center bg-background border-2 border-on-background p-1 ${!editPathLoading && "pl-3"} rounded-full`}>
+                        {
+                            editPathLoading ? <LoadingIcon size={15}/> : <>
+                                <p className={"text-center"}>{page?.path}</p>
+                                <Button
+                                    actionType={ActionTypeEnum.neutral}
+                                    onClick={() => setShowPopupEditPath(true)}
+                                    small={true}
+                                    iconName={"edit"}/>
+                            </>
+                        }
 
-                <StandardContainerForDataManagement
-                    flex1={true}
-                    title={"Delete"} actions={[{
-                    isLoading: deleteLoading,
-                    text: "Delete",
-                    onClick: () => setShowPopupDelete(true),
-                    iconName: "trash",
-                    actionType: ActionTypeEnum.dangerous
-                }]}>
-                    <p>Deleting this page will cause the loss of all it&apos;s content.</p>
-                </StandardContainerForDataManagement>
+                    </div>
+                    <StandardContainerForDataManagement
+                        illustrationName={"pencil"}
+                        flex1={true}
+                        title={"Description"}
+                        message={page?.description || "Your page does not have any description for the moment."}
+                        actions={[{
+                            isLoading: editDescriptionLoading,
+                            text: "Edit",
+                            onClick: () => setShowPopupEditDescription(true),
+                            iconName: "edit",
+                        }]}>
+                    </StandardContainerForDataManagement>
+                </div>
 
                 <List
                     title={"Page's content"}
                     actions={modifySectionOrder ? [
                         {
-                            text: "Cancel",
                             iconName: "close",
                             onClick: cancelModifySectionOrder,
                             actionType: ActionTypeEnum.dangerous
                         },
                         {
-                            text: "Done",
                             iconName: "check",
                             onClick: validateModifySectionOrder,
                         }
                     ] : [
                         {
-                            text: "Reorder",
                             iconName: "order",
+                            actionType: ActionTypeEnum.neutral,
                             onClick: beginModifySectionOrder,
                         },
                         {
-                            text: "Create",
                             isLoading: addSectionLoading,
                             onClick: () => setShowPopupNewSection(true),
                             iconName: "add",
@@ -401,7 +411,8 @@ export default function PageVisu() {
                     ]}
                     elements={sections?.map((sect) => {
                         return {
-                            text: sect.title + " (" + sect.section_type + ")",
+                            text: sect.title,
+                            tag: sect.section_type,
                             onClick: () => setSectionToVisualize(sect),
                             actions: modifySectionOrder ? [{
                                 iconName: "up",
@@ -409,6 +420,22 @@ export default function PageVisu() {
                             }, {iconName: "down", onClick: () => moveSectionDown(sect)}] : undefined
                         }
                     }) ?? []}/>
+
+                <div className={"w-full flex items-center justify-center"}>
+                    <StandardContainerForDataManagement
+                        illustrationName={"bin"}
+                        message={"Deleting this page will cause the loss of all itss content."}
+                        title={"Delete"} actions={[{
+                        isLoading: deleteLoading,
+                        text: "Delete",
+                        onClick: () => setShowPopupDelete(true),
+                        iconName: "trash",
+                        actionType: ActionTypeEnum.dangerous
+                    }]}>
+                    </StandardContainerForDataManagement>
+                </div>
+
+
 
 
             </MainPageWrapper>
@@ -441,11 +468,17 @@ export default function PageVisu() {
                     message={"Provide the new title of the page :"}
                     title={"Edit page's title"}
                     actions={[
-                        {text: "Edit", iconName: "check", isForm: true, actionType: ActionTypeEnum.primary},
+                        {
+                            text: "Edit",
+                            isDisabled: StringUtil.basicStringValidator(newTitle) !== null,
+                            iconName: "check",
+                            isForm: true,
+                            actionType: ActionTypeEnum.primary},
+
                     ]}
                     closePopup={() => setShowPopupEditTitle(false)}
                 >
-                    <Input placeholder={"title"} value={newTitle} setValueAction={setNewTitle}
+                    <Input placeholder={"title"} value={newTitle} setValueAction={setNewTitle} validatorAction={StringUtil.basicStringValidator}
                     />
                 </AdvancedPopup>
             </Form>
@@ -457,7 +490,11 @@ export default function PageVisu() {
                     message={"Provide the new path of the page :"}
                     title={"Edit page's path"}
                     actions={[
-                        {text: "Edit", iconName: "check", isForm: true, actionType: ActionTypeEnum.primary},
+                        {text: "Edit",
+                            iconName: "check",
+                            isDisabled: StringUtil.pathStringValidator(newPath) !== null,
+                            isForm: true,
+                            actionType: ActionTypeEnum.primary},
                     ]}
                     closePopup={() => setShowPopupEditPath(false)}
                 >
@@ -491,14 +528,17 @@ export default function PageVisu() {
                     message={"Provide the new SVG icon of the page :"}
                     title={"Edit page's icon"}
                     actions={[
-                        {text: "Edit", iconName: "check", isForm: true},
+                        {text: "Edit",
+                            iconName: "check",
+                            isDisabled: StringUtil.svgOrEmptyStringValidator(newIcon) !== null,
+                            isForm: true},
                     ]}
                     closePopup={() => setShowPopupEditIcon(false)}
                 >
-                    <Textarea placeholder={"SVG icon"} value={newIcon} onChangeAction={setNewIcon}
+                    <Textarea placeholder={"SVG icon"} value={newIcon} onChangeAction={setNewIcon} validatorAction={StringUtil.svgOrEmptyStringValidator}
                     />
                     <div className={"flex gap-2 items-center"}>
-                        <img src={"/ico/question.svg"} alt={"tip"} className={"invert w-6 h-6"}/>
+                        <Icon iconName={"question"}/>
                         <p>To find an icon for your page, you can use <a className={"text-blue-600 underline"}
                                                                          target={"_blank"} href={"https://heroicons.com/"}>Hero
                             Icon</a>. Copy the icon of your choice and paste it right there.</p>
@@ -514,31 +554,29 @@ export default function PageVisu() {
                     message={"The title will not be visible to users, but will allow you to find the section more easily when making changes."}
                     title={'Create a section'}
                     actions={[
-                        {text: "Create", iconName: "check", isForm: true},
+                        {text: "Create",
+                            isDisabled: StringUtil.basicStringValidator(newSectionTitle) !== null || !newSectionType,
+                            iconName: "check",
+                            isForm: true},
                     ]}
                     closePopup={() => setShowPopupNewSection(false)}
                 >
-                    <Input placeholder={"title"} value={newSectionTitle} setValueAction={setNewSectionTitle}/>
+                    <Input placeholder={"title"} value={newSectionTitle} setValueAction={setNewSectionTitle} validatorAction={StringUtil.basicStringValidator}/>
 
+                    <h3>Please also select a way for the section to be displayed</h3>
                     <DropDown items={sectionTypes} selectedItem={newSectionType} setSelectedItemAction={setNewSectionType}/>
-                    <div className={"flex gap-4 items-center"}>
-                        <img src={"/ico/question.svg"} alt={"tip"} className={"invert w-10 h-10"}/>
+
+                    <p className={"w-125"}>
                         {
                             newSectionType === "classic" ?
-                                <p>A classic section containing various elements that will be displayed one after the
-                                    other.</p> :
+                                "A classic section containing various elements that will be displayed one after the other." :
                                 newSectionType === "develop" ?
-                                    <p>This resembles a standard section, except that only the title is displayed by
-                                        default. You need to click on it to see the full content. This is recommended when
-                                        there is a lot of content to display, to avoid overloading the page.</p> :
+                                    "This resembles a standard section, except that only the title is displayed by default. You need to click on it to see the full content. This is recommended when there is a lot of content to display, to avoid overloading the page." :
                                     newSectionType === "tile" ?
-                                        <p>Similar to an expanded section, but the default formatting changes: instead of a
-                                            list where items are displayed one after the other and take up all the space,
-                                            the items are sort of like small &apos;squares&apos; with a layout that
-                                            optimizes space.</p> :
-                                        <p>Unknown section type.</p>
-                        }                    </div>
-
+                                        "Similar to an expanded section, but the default formatting changes: instead of a list where items are displayed one after the other and take up all the space, the items are sort of like small 'squares' with a layout that optimizes space." :
+                                        "Unknown section type."
+                        }
+                    </p>
 
                 </AdvancedPopup>
             </Form>

@@ -2,6 +2,8 @@
 
 import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
+import Illustration from "@/app/components/ui-elements/Illustration";
+import Icon, {IconSize} from "@/app/components/ui-elements/Icon";
 
 export default function DropDown({
                                      items,
@@ -17,11 +19,11 @@ export default function DropDown({
     return (
         <div className={"relative"}>
             <div
-                className={` pt-2 pb-2 pl-3 pr-3 rounded-lg bg-background w-fit flex items-center justify-between gap-2 cursor-pointer md:hover:bg-onBackgroundHover target:bg-onBackgroundHover`}
+                className={` py-2 px-3 h-10 rounded-xl bg-background w-fit flex items-center justify-between gap-2 cursor-pointer border-2 border-on-background hover:bg-on-background`}
                 onMouseUp={() => setShowItems(!showItems)}
             >
                 {selectedItem}
-                <img src={"/ico/down.svg"} alt={"drown-down"} className={"h-4 w-4 invert"}/>
+                <Icon size={IconSize.sm} iconName={showItems ? "up" : "down"}/>
             </div>
             <AnimatePresence>
                 {
@@ -31,12 +33,12 @@ export default function DropDown({
                             initial={{opacity: 0, transform: "scaleY(0)", transformOrigin: "top"}}
                             animate={{opacity: 1, transform: "scaleY(1)", transformOrigin: "top"}}
                             exit={{opacity: 0, transform: "scaleY(0)", transformOrigin: "top"}}
-                            className={"top-0 z-10 left-0 w-full rounded-lg absolute bg-onBackground min-w-fit h-fit p-2 flex flex-col gap-2 border-2 border-onBackgroundHover"}>
+                            className={"top-12 z-10 left-0 overflow-hidden w-fit rounded-2xl absolute bg-background h-fit flex flex-col border-2 border-on-background"}>
                             {
                                 items.map((item, index) => (
                                     <li
                                         key={index}
-                                        className={`p-2 rounded-lg cursor-pointer  ${selectedItem === item ? "bg-foreground text-background" : "md:hover:bg-onBackgroundHover"}`}
+                                        className={`p-2 cursor-pointer  ${selectedItem === item ? "bg-on-background-hover" : "hover:bg-on-background"}`}
                                         onMouseUp={() => {
                                             setSelectedItemAction(item);
                                             setShowItems(false);

@@ -86,6 +86,32 @@ export default class StringUtil {
         return null;
     }
 
+    /**
+     * Valide si une chaîne de caractères est au format SVG.
+     * Vérifie la présence des balises et effectue un contrôle de sécurité basique.
+     * @param svgString La chaîne à valider.
+     */
+    static svgOrEmptyStringValidator(svgString: string): string | null {
+        const trimmedSvg = svgString.trim().toLowerCase();
+
+        if (trimmedSvg === "") {
+            return null; // Accepte une chaîne vide
+        }
+
+        // Vérifie si la chaîne commence et finit par les balises svg
+        if (!trimmedSvg.startsWith("<svg") || !trimmedSvg.endsWith("</svg>")) {
+            return "The SVG format is invalid. It must start with '<svg' and end with '</svg>'.";
+        }
+
+        // Vérification de sécurité contre l'injection de scripts (XSS)
+        const dangerousPatterns = /<script|on\w+=/i;
+        if (dangerousPatterns.test(svgString)) {
+            return "The SVG contains prohibited scripts or event handlers.";
+        }
+
+        return null;
+    }
+
     static emptyableDomainValidator(domain: string): string | null {
         if (domain === "") return null;
         const domainRegex = /^(?!-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$/;
