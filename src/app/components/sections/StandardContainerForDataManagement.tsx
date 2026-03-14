@@ -8,7 +8,7 @@ import {simpleElementVariant} from "@/app/utils/FramerUtil";
 export default function StandardContainerForDataManagement({children, title, message, illustrationName, actions, icon, loading=false, flex1=false, className}: { children?: React.ReactNode, message?: string, title?: string, illustrationName?: string, icon?: string, actions?: ButtonProps[], loading?: boolean, flex1?: boolean, className?: string }) {
     return (
         <motion.div
-            className={`overflow-y-auto min-w-fit scrollbar-hide max-w-full max-h-full relative flex flex-col gap-4 h-fit w-fit rounded-3xl bg-background border-2 border-on-background ${flex1 ? "flex-1" : ""} ${className}`}
+            className={`overflow-y-auto overscroll-contain min-w-fit scrollbar-hide max-w-full max-h-full relative flex flex-col gap-4 h-fit w-fit rounded-3xl bg-background border-2 border-on-background ${flex1 ? "flex-1" : ""} ${className}`}
             initial={simpleElementVariant.hidden}
             whileInView={simpleElementVariant.visible}
             exit={simpleElementVariant.hidden}
@@ -21,7 +21,7 @@ export default function StandardContainerForDataManagement({children, title, mes
                             title &&
                             <div className={"flex gap-3 items-center"}>
                                 {
-                                    icon && <Icon size={8} iconName={icon} />
+                                    icon && <Icon size={6} iconName={icon} />
                                 }
                                 <h2 className={"max-w-3/4"}>{title}</h2>
                             </div>

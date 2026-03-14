@@ -26,6 +26,7 @@ import LoadingIcon from "@/app/components/ui-elements/LoadingIcon";
 import {AnimatePresence, motion} from "framer-motion";
 import Icon from "@/app/components/ui-elements/Icon";
 import {simpleElementVariant} from "@/app/utils/FramerUtil";
+import SectionAsPopup from "@/app/components/page-elements/SectionAsPopup";
 
 export default function PageVisu() {
 
@@ -582,13 +583,9 @@ export default function PageVisu() {
             </Form>
 
 
-            {
-                /*
-                <SectionAsPopup section={sectionToVisualize} deleteSectionAction={deleteSectionAction}
+            <SectionAsPopup section={sectionToVisualize} deleteSectionAction={deleteSectionAction}
                             updateSectionAction={updateSectionAction}
                             setSectionNullAction={() => setSectionToVisualize(null)}/>
-                 */
-            }
 
         </>
     );

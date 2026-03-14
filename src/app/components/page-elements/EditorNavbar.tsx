@@ -27,15 +27,15 @@ export default function EditorNavbar() {
         <nav className={"z-99 fixed top-0 left-0 right-0 w-full h-fit flex gap-3 items-center justify-end p-4 bg-linear-to-b from-background to-transparent"}>
             <NavbarItem>
                 {userLoading ?
-                    <LoadingIcon size={15}/> :
+                    <LoadingIcon size={25}/> :
                     user ?
                     <Link href={user ? "https://account.maelg.fr/users/" + user.id : "https://account.maelg.fr/login"} target="_blank" rel="noopener noreferrer" className={"flex gap-2 items-center"}>
-                        <p>{user.first_name}</p>
+                        <p className={"pl-3"}>{user.first_name}</p>
                         <div className="p-2 bg-on-background rounded-full">
                             <Icon iconName={"user"} size={4}/>
                         </div>
                     </Link> :
-                        <p>You are not logged in</p>
+                        <p className={"pl-3"}>You are not logged in</p>
                 }
             </NavbarItem>
         </nav>
@@ -44,7 +44,7 @@ export default function EditorNavbar() {
 
 function NavbarItem({children, onClick} : {children: React.ReactNode, onClick?: () => void}) {
     return (
-        <div className="pl-4 p-1 flex items-center gap-2 transition-all rounded-full cursor-pointer border border-on-background bg-background hover:opacity-70 active:scale-90" onClick={onClick}>
+        <div className=" p-1 flex items-center gap-2 transition-all rounded-full cursor-pointer border border-on-background bg-background hover:opacity-70 active:scale-90" onClick={onClick}>
             {children}
         </div>
     )

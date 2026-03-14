@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="grosse revision et première fusion de prisme et prismadmin">
-      <change afterPath="$PROJECT_DIR$/public/illustrations/document.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/illustrations/pencil.png" afterDir="false" />
+    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="page edition de page">
+      <change afterPath="$PROJECT_DIR$/public/illustrations/lego.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/page-elements/SectionAsPopup.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/DropDown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms-inputs/DropDown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/Input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms-inputs/Input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/textarea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms-inputs/textarea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/overlays/AdvancedPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/overlays/AdvancedPopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/List.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/List.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/categorySelection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms-inputs/categorySelection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/EditorNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/EditorNavbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/sections/StandardContainerForDataManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/StandardContainerForDataManagement.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/Illustration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/Illustration.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/secure/[websiteId]/[pageId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/secure/[websiteId]/[pageId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/pageService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/pageService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/utils/StringUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/StringUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/secure/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/secure/[websiteId]/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,35 +67,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHELLCHECK.PATH": "I do mind",
-    "git-widget-placeholder": "dev",
-    "javascript.preferred.runtime.type.id": "node",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "/home/mael/Dev/prisme/src/app/api",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.Next.js: server-side.executor": "Run",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "ts.external.directory.path": "/home/mael/Dev/prisme/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;I do mind&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/mael/Dev/prisme/src/app/api&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/mael/Dev/prisme/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app/api" />
@@ -199,7 +193,10 @@
       <workItem from="1773301900165" duration="28000" />
       <workItem from="1773302096646" duration="8405000" />
       <workItem from="1773324460289" duration="14630000" />
-      <workItem from="1773392789916" duration="4728000" />
+      <workItem from="1773392789916" duration="4915000" />
+      <workItem from="1773411497595" duration="739000" />
+      <workItem from="1773412818203" duration="4809000" />
+      <workItem from="1773478662782" duration="1034000" />
     </task>
     <task id="LOCAL-00001" summary="Correction de bugs sur animation, et amelioration de la page d'accueil">
       <option name="closed" value="true" />
@@ -369,7 +366,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773338902513</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="page edition de page">
+      <option name="closed" value="true" />
+      <created>1773398382781</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1773398382781</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,7 +402,8 @@
     <MESSAGE value="correction ui mobile" />
     <MESSAGE value="correction bug" />
     <MESSAGE value="grosse revision et première fusion de prisme et prismadmin" />
-    <option name="LAST_COMMIT_MESSAGE" value="grosse revision et première fusion de prisme et prismadmin" />
+    <MESSAGE value="page edition de page" />
+    <option name="LAST_COMMIT_MESSAGE" value="page edition de page" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

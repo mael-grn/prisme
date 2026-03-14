@@ -449,8 +449,6 @@ export default function Pages() {
 
                 <div className={"flex w-full justify-center items-center"}>
                     <StandardContainerForDataManagement
-                        className={"max-w-125"}
-                        flex1={true}
                         title={"Home page's content"}
                         message={"The content of the landing page of your website. This is the first page visitors will see when they access your website."}
                         illustrationName={"editing"}
