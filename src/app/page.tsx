@@ -4,6 +4,11 @@ import {motion} from "framer-motion";
 import Button, {ActionTypeEnum} from "@/app/components/ui-elements/Button";
 import {useRouter} from "next/navigation";
 
+/**
+ * The root page of the website. It juste show some nice colors refractions with a single button to start creating on prisme
+ * Nothing more
+ * @constructor
+ */
 export default function Page() {
 
     const router = useRouter()

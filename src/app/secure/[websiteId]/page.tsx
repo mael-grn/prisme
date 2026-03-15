@@ -393,7 +393,7 @@ export default function Pages() {
                                     initial={{ opacity: 0, scale: 0, transformOrigin: "top center" }}
                                     animate={{ opacity: 1, scale: 1, transformOrigin: "top center" }}
                                     exit={{ opacity: 0, scale: 0, transformOrigin: "center" }}
-                                    className={"flex gap-2 flex-wrap items-center justify-center max-w-125"}
+                                    className={"flex gap-2 max-w-full flex-wrap items-center justify-center w-125"}
                                 >
                                     {
 

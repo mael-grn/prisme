@@ -1,24 +1,16 @@
 
-import { jwtVerify, SignJWT, JWTPayload } from 'jose';
+import { jwtVerify} from 'jose';
 
+/**
+ * Class to manage token over the app
+ */
 export class TokenUtil {
 
     static secret = process.env.JWT_SECRET!;
 
     /**
-     * Créer un token JWT à partir d'un id
-     * @param id
-     */
-    static async createTokenFromId(id: number): Promise<string> {
-        const encoder = new TextEncoder();
-        return await new SignJWT({id: id} as unknown as JWTPayload)
-            .setProtectedHeader({ alg: 'HS256' })
-            .setExpirationTime('1y')
-            .sign(encoder.encode(TokenUtil.secret));
-    }
-
-    /**
-     * Vérifie la validité d'un token JWT en retournant un booléen
+     * Verify token's validity and return a boolean
+     * The token encryption key is supposed to be the same on the login's project (azimut) so that the verification can be done here
      * @param token
      */
     static async verifyToken(token: string): Promise<boolean> {
@@ -32,8 +24,7 @@ export class TokenUtil {
     }
 
     /**
-     * Retourne l'id correspondant à un token JWT
-     * Retourne null si le token n'est pas valide
+     * Return the id encrypted in the token
      * @param token
      */
     static async getIdFromToken(token: string): Promise<number | null> {

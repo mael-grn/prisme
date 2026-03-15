@@ -5,7 +5,7 @@ import {useEffect, useRef, useState} from "react";
 import {RecursiveSection} from "@/app/models/Section";
 import ElementComponent from "@/app/components/page-elements/ElementComponent";
 import {simpleElementVariant} from "@/app/utils/FramerUtil";
-import Icon from "@/app/components/ui-elements/Icon";
+import Icon, {IconSize} from "@/app/components/ui-elements/Icon";
 
 /**
  * Un paragraphe dev est un moyen de repprésentation d'une section. Elle affiche par defaut le premier élement de la section, au click la section est developpé pour occuper tous l'ecran.
@@ -92,7 +92,7 @@ export default function ParagrapheDev({section, isFisrt, isLast}: {
                                                                      element={element} center={true}/>
                                         }) :
                                         <div className={"flex flex-col items-center gap-4"}>
-                                            <Icon iconName={"exclamation-solid"} size={24}/>
+                                            <Icon iconName={"exclamation-solid"} size={IconSize.lg}/>
                                             <h1 className={"text-center w-full md:text-5xl text-3xl font-boska font-bold"}>Nothing to show</h1>
                                             <p className={"text-center"}>There is currently no content in this section. Maybe come back later.</p>
                                         </div>

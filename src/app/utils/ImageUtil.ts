@@ -1,6 +1,14 @@
 import {put} from "@vercel/blob";
 
+/**
+ * Utility class for image management in vercel's blob storage
+ */
 export class ImageUtil {
+
+    /**
+     * Yes, it upload an image
+     * @param file
+     */
     static async uploadImage(file: File): Promise<string> {
         if (!file) {
             throw "No file provided";

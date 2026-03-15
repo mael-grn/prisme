@@ -52,6 +52,12 @@ export default class StringUtil {
         }
     }
 
+    /**
+     * Check if no invalid character is being used, and if there is at least on character
+     * @param value
+     * @param minLength
+     * @param maxLength
+     */
     static basicStringValidator(value: string, minLength?: number, maxLength?: number): string | null {
         const invalidCaracters = /[!@#$%^&*(),.?":{}|<>]/g;
 
@@ -64,22 +70,38 @@ export default class StringUtil {
         }
     }
 
+    /**
+     * Only check the lenght of the password
+     * @param password
+     */
     static passwordStringValidator(password: string): string | null {
         if (password.length < 8) return "The password must contain at least 8 characters.";
         return null;
     }
 
+    /**
+     * Check a path (in a url) format
+     * @param path
+     */
     static pathStringValidator(path: string): string | null {
         if (!path.startsWith("/") || path.length < 2 || path.includes(' ')) return "The path must start with '/' and contain no spaces.";
         return null;
     }
 
+    /**
+     * Check email format
+     * @param email
+     */
     static emailStringValidator(email: string): string | null {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) return "The email address is invalid.";
         return null;
     }
 
+    /**
+     * check website domain format
+     * @param domain
+     */
     static domainValidator(domain: string): string | null {
         const domainRegex = /^(?!-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$/;
         if (!domainRegex.test(domain)) return "The domain is invalid.";
@@ -112,6 +134,10 @@ export default class StringUtil {
         return null;
     }
 
+    /**
+     * Check the format of the domain, but it can also be an empty string
+     * @param domain
+     */
     static emptyableDomainValidator(domain: string): string | null {
         if (domain === "") return null;
         const domainRegex = /^(?!-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,63}$/;
@@ -119,12 +145,20 @@ export default class StringUtil {
         return null;
     }
 
+    /**
+     * Check if the provided string is an hex color
+     * @param color
+     */
     static hexColorValidator(color: string): string | null {
         const hexColorRegex = /^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/;
         if (!hexColorRegex.test(color)) return "The HEX color code is invalid.";
         return null;
     }
 
+    /**
+     * Check if a string is actually a number
+     * @param value
+     */
     static isInteger(value: string): boolean {
         // accepts +/- signs, digits only
         return /^[+-]?\d+$/.test(value.trim());

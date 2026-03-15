@@ -2,20 +2,26 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import {cookies} from "next/headers";
 import {TokenUtil} from "@/app/utils/tokenUtil";
-import {SqlUtil} from "@/app/utils/sqlUtil";
 
+/**
+ * This file prevent users to make request and load protected pages
+ * If an unauthorized user wants to access protected ressource, he will be:
+ * - Redirected to the login page if he tries to access protected web pages
+ * - Receive a 401 error if he tries to access protected endpoints
+ * @param request
+ */
 export async function middleware(request: NextRequest) {
 
-    // On exclue les requetes GET sur l'api, car les données doivent être publiques
+    // GET requests arent protected on the API
     if (request.nextUrl.pathname.startsWith('/api') && request.method === 'GET') {
         return NextResponse.next();
     }
 
-    // On récupère le cookie 'token' pour vérifier l'authentification
+    // Loading the token in the cookies
     const cookieStore = await cookies()
     const token = cookieStore.get('token')
 
-    // Si le token existe pas erreur 401
+    // If no token error or redirect to login page depending of the request
     if (!token || !token.value || token.value.length === 0) {
         if (request.nextUrl.pathname.startsWith('/api')) {
             return NextResponse.json("Non autorisé", { status: 401 });
@@ -24,10 +30,8 @@ export async function middleware(request: NextRequest) {
         }
     }
 
-    // On vérifie le token
+    // Checkin token
     const res = await TokenUtil.verifyToken(token.value);
-
-    // Si le token est invalide ou expiré, on supprime le cookie et retourne une erreur 401
     if (!res) {
         cookieStore.delete('token');
         cookieStore.delete('user');
@@ -39,7 +43,9 @@ export async function middleware(request: NextRequest) {
     }
 }
 
-// See "Matching Paths" below to learn more
+/**
+ * Protected pages are those rooting in /secure and /api
+ */
 export const config = {
     matcher: [
         '/secure/:path*',

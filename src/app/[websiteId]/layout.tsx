@@ -31,7 +31,7 @@ export default function RootLayout({
                 setCssProps(props);
 
                 // Injection directe dans le DOM pour forcer Tailwind à voir les variables
-                /*
+
                 const root = document.documentElement;
 
                 Object.entries(props).forEach(([key, value]) => {
@@ -40,7 +40,7 @@ export default function RootLayout({
                     }
                 });
 
-                 */
+
             });
         }
     }, [websiteId]);

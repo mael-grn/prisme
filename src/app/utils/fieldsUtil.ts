@@ -1,5 +1,4 @@
 // typescript
-import {InsertableUser} from "@/app/models/User";
 import {InsertableDisplayWebsite} from "@/app/models/DisplayWebsite";
 import {InsertablePage} from "@/app/models/Page";
 import {InsertableSection} from "@/app/models/Section";
@@ -11,6 +10,9 @@ import {InsertableWebsiteColors} from "@/app/models/WebsiteColors";
 
 export type ValidationResult = { valid: boolean; errors: string[] };
 
+/**
+ * Check if newly created entities are in correct format
+ */
 export class FieldsUtil {
     private static isNonEmptyString(v: unknown) {
         return typeof v === "string" && v.trim().length > 0;
@@ -93,38 +95,13 @@ export class FieldsUtil {
         return {valid: errors.length === 0, errors};
     }
 
-    public static checkUser(user: InsertableUser): ValidationResult {
-        const errors: string[] = [];
-        if (!user) {
-            return {valid: false, errors: ["user is required"]};
-        }
-
-        if (!this.isNonEmptyString(user.email)) {
-            errors.push("email is required and must be a non-empty string");
-        } else if (!this.isValidEmail(user.email)) {
-            errors.push("email does not have a valid format");
-        }
-
-        if (!this.isNonEmptyString(user.first_name)) {
-            errors.push("firstName is required and must be a non-empty string");
-        }
-
-        if (!this.isNonEmptyString(user.last_name)) {
-            errors.push("lastName is required and must be a non-empty string");
-        }
-
-        if (!this.isNonEmptyString(user.password)) {
-            errors.push("password is required and must be a non-empty string");
-        } else if (user.password.length < 8) {
-            errors.push("password must contain at least 8 characters");
-        }
-
-        return {valid: errors.length === 0, errors};
-    }
-
     public static checkDisplayWebsite(w: InsertableDisplayWebsite): ValidationResult {
         const errors: string[] = [];
         if (!w) return {valid: false, errors: ["display website is required"]};
+
+        if (w.title === "secure" || w.title === "api") {
+            errors.push("You cannot name a website with secure or api.");
+        }
 
         if (!this.isPositiveInteger(w.owner_id)) {
             errors.push("ownerId is required and must be a positive integer (referencing users)");

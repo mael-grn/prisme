@@ -1,3 +1,6 @@
+/**
+ * Some useful this to be done on svg
+ */
 export default class SvgUtil {
 
     /**

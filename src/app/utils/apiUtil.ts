@@ -11,6 +11,11 @@ import UserService from "@/app/services/UserService";
 import {UserNotLoggedIn} from "@/app/errors/UserNotLoggedIn";
 import axios from "axios";
 
+/**
+ * Utility class for API, that centralize API behavior
+ * Globally, every check and action on the API will throw an error if there is a problem (user not connected, SQL error, ...)
+ * At the end of every endpoint, the errors are catch and treated in order to return the correct http error code
+ */
 export class ApiUtil {
 
     /**
@@ -38,6 +43,9 @@ export class ApiUtil {
         }
     }
 
+    /**
+     * Check if there is a token and verify it, throw if token not found or invalid
+     */
     static async verifyTokenOrThrow() : Promise<void> {
         'use server';
         const cookieStore = await cookies();
@@ -50,7 +58,11 @@ export class ApiUtil {
         }
     }
 
-
+    /**
+     * Return a well formated NextResponse object in case everything happened successfully
+     * @param data if there is data to return
+     * @param newFieldCreated weather to return 201 or 200 http code
+     */
     static getSuccessNextResponse<T>(data? : T, newFieldCreated = false) {
         if (data) {
             return NextResponse.json({
@@ -64,6 +76,12 @@ export class ApiUtil {
         }
     }
 
+    /**
+     * Well formatted NextResponse object for errors
+     * @param message
+     * @param error
+     * @param statusCode
+     */
     static getErrorNextResponse(message?: string, error?: Error, statusCode = 500) {
         return NextResponse.json({
             success: false,
@@ -73,11 +91,18 @@ export class ApiUtil {
         }, {status: statusCode});
     }
 
+    /**
+     * Check if there is a recursive == true in url parameters
+     * @param request
+     */
     static isRecursiveRequest(request: Request): boolean {
         const url = new URL(request.url);
         return url.searchParams.get("recursive") === "true";
     }
 
+    /**
+     * Does what is says
+     */
     static async getConnectedUserOrNull() : Promise<User | null> {
         try {
             return UserService.getMyUser()
@@ -86,6 +111,10 @@ export class ApiUtil {
         }
     }
 
+    /**
+     * Return the correct NextResponse error depending on the type of Error
+     * @param e
+     */
     static handleNextErrors(e: Error) {
         console.error(e);
         if (e instanceof NeonDbError) {

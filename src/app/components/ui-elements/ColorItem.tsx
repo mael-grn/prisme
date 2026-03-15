@@ -1,4 +1,6 @@
-import {useEffect, useState} from "react";
+"use client";
+
+import {useEffect, useRef, useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Button, {ActionTypeEnum} from "@/app/components/ui-elements/Button";
 import StringUtil from "@/app/utils/StringUtil";
@@ -13,6 +15,22 @@ export default function ColorItem({ colorHexCode, colorName, changeColorAction }
     useEffect(() => {
         setNewColor(colorHexCode ?? "");
     }, [colorHexCode]);
+
+    /**
+     * check if the popup is out of the screen, and by how much
+     */
+    const getOverflowOr0 = () => {
+        if (typeof window === "undefined") {
+            return 0;
+        }
+        const offset = window.innerWidth - window.screen.width;
+
+        if (offset > 0) {
+            return offset;
+        } else {
+            return 0;
+        }
+    };
 
     return (
         <div className="relative">
@@ -32,7 +50,7 @@ export default function ColorItem({ colorHexCode, colorName, changeColorAction }
                         initial={{ opacity: 0, scale: 0, translateY: -20, translateX: 20, transformOrigin: "top left" }}
                         animate={{ opacity: 1, scale: 1, translateY: 0, translateX: 0, transformOrigin: "top left" }}
                         exit={{ opacity: 0, scale: 0, translateY: -20, translateX: 20, transformOrigin: "top left" }}
-                        className={"absolute p-4 flex flex-col items-center gap-4 justify-between top-10 left-0 z-10 rounded-2xl bg-background border-2 border-on-background"}
+                        className={`absolute p-4 flex flex-col items-center gap-4 justify-between top-10 left-0 right-auto z-10 rounded-2xl bg-background border-2 border-on-background`}
                     >
                         <HexColorPicker color={newColor} onChange={setNewColor} />
                         <Input validatorAction={StringUtil.hexColorValidator} iconName={"paint"} placeholder={"Couleur au format HEX"} value={newColor} setValueAction={setNewColor}/>

@@ -64,11 +64,7 @@ export default function Button({
     const currentColors = colorClasses[actionType];
 
     return (
-        <motion.button
-            whileTap={{scale: 0.95}}
-            initial={simpleElementVariant.hidden}
-            whileInView={simpleElementVariant.visible}
-            transition={{duration: 0.3, ease: "easeInOut"}}
+        <button
             disabled={isDisabled || isLoading}
             type={isForm ? "submit" : "button"}
             className={`flex gap-1 w-fit text-sm h-fit cursor-pointer items-center justify-center ${small ? "py-1" : "py-2"} ${text ? `rounded-lg ${small ? "px-2" : "px-3"}` : `rounded-full ${small ? "px-1" : "px-2"}`}
@@ -78,6 +74,6 @@ export default function Button({
         >
             {isLoading ? <LoadingIcon size={15}/> : <Icon iconName={iconName} color={"foreground"} size={small ? IconSize.xs : IconSize.sm}/>}
             {text}
-        </motion.button>
+        </button>
     );
 }

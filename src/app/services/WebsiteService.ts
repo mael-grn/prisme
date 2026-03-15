@@ -19,8 +19,8 @@ export default class WebsiteService {
      */
     private static async fetchWebsite(idOrDomain : string): Promise<RecursiveWebsite> {
         try {
-            const response = await axios.get(`/api/websites/${idOrDomain}`);
-            return response.data; // No cast necessary, the data is already in the correct format
+            const response = await axios.get(`/api/websites/${idOrDomain}?recursive=true`);
+            return response.data.data; // No cast necessary, the data is already in the correct format
         } catch (error) {
             throw new Error(`Failed to fetch data for domain : ${error}`);
         }

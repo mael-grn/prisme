@@ -37,7 +37,7 @@ export default function AdvancedPopup({show, icon, title, message, closePopup, a
         <AnimatePresence>
             {
                 show && <motion.div
-                    className={"fixed top-0 p-10 left-0 w-full h-full flex items-center justify-center bg-background-opacity z-999"}
+                    className={"fixed top-0 md:p-10 p-5 left-0 w-full h-full flex items-center justify-center bg-background-opacity z-999"}
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
                     exit={{opacity: 0}}

@@ -4,16 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="page edition de page">
-      <change afterPath="$PROJECT_DIR$/public/illustrations/lego.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/components/page-elements/SectionAsPopup.tsx" afterDir="false" />
+    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="fonctionnel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/categorySelection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/forms-inputs/categorySelection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/EditorNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/EditorNavbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_bd_portfolio.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/overlays/AdvancedPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/overlays/AdvancedPopup.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/sections/StandardContainerForDataManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/StandardContainerForDataManagement.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/Illustration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/Illustration.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/secure/[websiteId]/[pageId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/secure/[websiteId]/[pageId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/ColorItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/ColorItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/fonts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/fonts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/secure/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/secure/[websiteId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/CacheUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/CacheUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/ImageUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/ImageUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/StringUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/StringUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/SvgUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/SvgUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/apiUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/apiUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/fieldsUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/fieldsUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/passwordUtil.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/sqlUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/sqlUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/tokenUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/tokenUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +211,8 @@
       <workItem from="1773392789916" duration="4915000" />
       <workItem from="1773411497595" duration="739000" />
       <workItem from="1773412818203" duration="4809000" />
-      <workItem from="1773478662782" duration="1034000" />
+      <workItem from="1773478662782" duration="4077000" />
+      <workItem from="1773568611271" duration="3791000" />
     </task>
     <task id="LOCAL-00001" summary="Correction de bugs sur animation, et amelioration de la page d'accueil">
       <option name="closed" value="true" />
@@ -374,7 +390,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773398382781</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="fonctionnel">
+      <option name="closed" value="true" />
+      <created>1773479829012</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1773479829012</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,7 +427,8 @@
     <MESSAGE value="correction bug" />
     <MESSAGE value="grosse revision et première fusion de prisme et prismadmin" />
     <MESSAGE value="page edition de page" />
-    <option name="LAST_COMMIT_MESSAGE" value="page edition de page" />
+    <MESSAGE value="fonctionnel" />
+    <option name="LAST_COMMIT_MESSAGE" value="fonctionnel" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

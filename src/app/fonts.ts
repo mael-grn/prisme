@@ -1,5 +1,9 @@
 import localFont from 'next/font/local';
 
+/**
+ * All font declarations, loaded from local files
+ */
+
 export const arrayFont = localFont({
     src: [
         { path: '../../public/fonts/Array-Regular.woff2', weight: '400', style: 'normal' },

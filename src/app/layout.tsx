@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   description: "",
 };
 
+/**
+ * Standard root layout. All used fonts are loaded here
+ * @param children
+ * @constructor
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

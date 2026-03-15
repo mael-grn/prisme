@@ -5,7 +5,7 @@ import {useEffect, useRef, useState} from "react";
 import {RecursiveSection} from "@/app/models/Section";
 import ElementComponent from "@/app/components/page-elements/ElementComponent";
 import {simpleElementVariant} from "@/app/utils/FramerUtil";
-import Icon from "@/app/components/ui-elements/Icon";
+import Icon, {IconSize} from "@/app/components/ui-elements/Icon";
 
 /**
  * Tuile component that displays a section in a tile format.
@@ -98,7 +98,7 @@ export default function Tuile({section, delay = 0.0}: { section: RecursiveSectio
                                                                          element={element} center={true}/>
                                             }) :
                                             <div className={"flex flex-col items-center gap-4"}>
-                                                <Icon iconName={"exclamation-solid"} size={24}/>
+                                                <Icon iconName={"exclamation-solid"} size={IconSize.lg}/>
                                                 <h1 className={"text-center w-full md:text-5xl text-3xl font-boska font-bold"}>Nothing
                                                     to show</h1>
                                                 <p className={"text-center"}>There is currently no content in this

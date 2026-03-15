@@ -36,6 +36,7 @@ export default function Home() {
     useEffect(() => {
 
         WebsiteService.getRecursiveWebsite(websiteId as string).then((data) => {
+            console.log(data);
             setWebsite(data);
         }).catch((error) => {
             setPopupTitle("Couldn't load the website");
