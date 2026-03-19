@@ -33,7 +33,7 @@ export default function StandardContainerForDataManagement({children, title, mes
                 </div>
 
 
-                { loading ? <LoadingIcon/> : children}
+                { loading ? <div className={"flex w-full h-full justify-center items-center"}><LoadingIcon/></div> : children}
 
             </div>
 

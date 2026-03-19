@@ -106,7 +106,7 @@ export default function Home() {
                                 websites.length > 0 ?
                                     <>
                                         <div className={"w-full h-full flex flex-col gap-4 items-center justify-center"}>
-                                            <Illustration name={"blueprint"}/>
+                                            <Illustration name={"prism"}/>
                                             <h2>Hello, {user.first_name}</h2>
                                             <p>Here are your websites. Feel free to create as much as you want!</p>
                                             <Button iconName={"add"} text={"Create a new website"}

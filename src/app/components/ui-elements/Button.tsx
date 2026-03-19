@@ -67,7 +67,7 @@ export default function Button({
         <button
             disabled={isDisabled || isLoading}
             type={isForm ? "submit" : "button"}
-            className={`flex gap-1 w-fit text-sm h-fit cursor-pointer items-center justify-center ${small ? "py-1" : "py-2"} ${text ? `rounded-lg ${small ? "px-2" : "px-3"}` : `rounded-full ${small ? "px-1" : "px-2"}`}
+            className={`flex gap-1 relative w-fit text-sm h-fit cursor-pointer items-center justify-center ${small ? "py-1" : "py-2"} ${text ? `rounded-lg ${small ? "px-2" : "px-3"}` : `rounded-full ${small ? "px-1" : "px-2"}`}
                 ${currentColors.base} hover:${currentColors.hover} hover:opacity-80
                 disabled:cursor-default disabled:opacity-50 text-foreground`}
             onClick={onClick}

@@ -32,13 +32,13 @@ export default function Pages() {
     const [colors, setColors] = useState<WebsiteColors | null>(null);
 
     const [loading, setLoading] = useState<boolean>(true);
-    const [pagesLoading, setPagesLoading] = useState<boolean>(true);
+    const [pagesLoading, setPagesLoading] = useState<boolean>(false);
     const [addPageLoading, setAddPageLoading] = useState<boolean>(false);
     const [titleLoading, setTitleLoading] = useState<boolean>(false);
     const [domainLoading, setDomainLoading] = useState<boolean>(false);
     const [heroLoading, setHeroLoading] = useState<boolean>(false);
     const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
-    const [colorsLoading, setColorsLoading] = useState<boolean>(true);
+    const [colorsLoading, setColorsLoading] = useState<boolean>(false);
 
     const [showPopupForm, setShowPopupForm] = useState<boolean>(false);
 
@@ -78,36 +78,31 @@ export default function Pages() {
 
 
     useEffect(() => {
-        WebsiteService.getWebsiteById(parseInt(websiteId as string))
-            .then((website) => {
-                setWebsite(website)
-                setNewWebsiteDomain(website.website_domain || null)
-                setNewWebsiteTitle(website.title)
-                setNewWebsiteHeroTitle(website.hero_title)
-            }).catch((e) => {
-            setPopupTitle("Something went wrong");
-            setPopupText(e);
-            setShowPopup(true);
-        }).finally(() => setLoading(false));
 
-        WebsiteService.getColors(parseInt(websiteId as string))
-            .then((c) => {
-                setColors(c);
-                setNewColors(c)
-            })
-            .catch((e) => {
-                console.log(e);
-                setColors(null);
-                setNewColors(() => getDefaultColors(parseInt(websiteId as string)));
-            }).finally(() => setColorsLoading(false));
+        async function loadData() {
+            try {
+                const loadedWebsite = await WebsiteService.getWebsiteById(parseInt(websiteId as string));
+                setWebsite(loadedWebsite)
+                setNewWebsiteDomain(loadedWebsite.website_domain || null)
+                setNewWebsiteTitle(loadedWebsite.title)
+                setNewWebsiteHeroTitle(loadedWebsite.hero_title)
 
-        PageService.getMyPagesFromWebsite(parseInt(websiteId as string))
-            .then((p) => setPages(p))
-            .catch((e) => {
+                const loadedColors = await WebsiteService.getColors(parseInt(websiteId as string));
+                setColors(loadedColors);
+                setNewColors(loadedColors);
+
+                const loadedPages = await PageService.getMyPagesFromWebsite(parseInt(websiteId as string));
+                setPages(loadedPages);
+            } catch (e) {
                 setPopupTitle("Something went wrong");
-                setPopupText(e);
+                setPopupText(String(e));
                 setShowPopup(true);
-            }).finally(() => setPagesLoading(false));
+            } finally {
+                setLoading(false);
+            }
+        }
+        loadData()
+
     }, [websiteId]);
 
     async function deleteWebsiteAction() {
@@ -375,7 +370,7 @@ export default function Pages() {
                         onClick={() => router.push("/secure")}/>
 
                 <div className={"flex justify-center w-full relative gap-4 items-center flex-col"}>
-                    <Illustration name={"website"}/>
+                    <Illustration name={"blueprint"}/>
                     <div className={"flex gap-4 items-center justify-center"}>
                         <h1 className={"text-center"}>{website?.title}</h1>
                         <Button

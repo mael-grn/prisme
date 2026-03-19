@@ -487,7 +487,7 @@ export default function SectionAsPopup({section, updateSectionAction, deleteSect
                         exit={{opacity: 0}}
                     >
                         <StandardContainerForDataManagement
-                            className={"md:min-w-1/3"}
+                            className={"w-full"}
                             title={"Edit your section"}
                             actions={[
                                 {
@@ -505,7 +505,7 @@ export default function SectionAsPopup({section, updateSectionAction, deleteSect
                             ]}>
 
                             <div className={"w-full flex flex-col justify-center items-center"}>
-                                <Illustration name={"lego"}/>
+                                <Illustration name={"section"}/>
                                 <div className={"flex items-center gap-2"}>
                                     <h1>{section?.title}</h1>
                                     <Button
@@ -622,7 +622,7 @@ export default function SectionAsPopup({section, updateSectionAction, deleteSect
                                         },
                                         {
                                             iconName: "trash",
-                                            type: ActionTypeEnum.dangerous,
+                                            actionType: ActionTypeEnum.dangerous,
                                             onClick: () => {
                                                 setElementToDelete(elem.id);
                                                 setShowPopupDeleteElement(true);
@@ -687,8 +687,11 @@ export default function SectionAsPopup({section, updateSectionAction, deleteSect
                     ]}
                     closePopup={() => setShowPopupEditSectionType(false)}
                 >
-                    <DropDown items={SectionService.getSectionTypes()} selectedItem={newSectionType}
-                              setSelectedItemAction={setNewSectionType}/>
+                    <div className={"flex flex-col gap-4 items-center justify-center"}>
+                        <DropDown items={SectionService.getSectionTypes()} selectedItem={newSectionType}
+                                  setSelectedItemAction={setNewSectionType}/>
+                    </div>
+
                 </AdvancedPopup>
             </Form>
 

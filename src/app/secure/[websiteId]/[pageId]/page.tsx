@@ -31,7 +31,7 @@ import SectionAsPopup from "@/app/components/page-elements/SectionAsPopup";
 export default function PageVisu() {
 
     const [loading, setLoading] = useState(true);
-    const [sectionsLoading, setSectionsLoading] = useState(true);
+    const [sectionsLoading, setSectionsLoading] = useState(false);
     const [iconHovered, setIconHovered] = useState(false);
 
     const [sectionToVisualize, setSectionToVisualize] = useState<Section | null>(null);
@@ -89,15 +89,14 @@ export default function PageVisu() {
             setSectionsLoading(false);
         }
 
-        try {
-            loadData();
-        } catch (e) {
+        loadData().catch((e) => {
             setPopupTitle("Something went wrong");
             setPopupText(typeof e === 'string' ? e : 'Unknown error');
             setShowPopup(true);
-        } finally {
+        }).finally(() => {
             setLoading(false);
-        }
+        })
+
 
     }, [websiteId, pageId]);
 
