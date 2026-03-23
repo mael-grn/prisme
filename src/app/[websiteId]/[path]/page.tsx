@@ -12,17 +12,20 @@ import {simpleElementVariant} from "../../utils/FramerUtil";
 import {useRouter} from "next/navigation";
 import SvgFromString from "@/app/components/ui-elements/SvgFromString";
 import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
+import TranslationService from "@/app/services/TranslationService";
+import {Page} from "@/app/models/Page";
 
 /**
  * Page qui permet d'afficher une page d'un site, avec ses sections et ses éléments. C'est la page principale du site, celle qui affiche le contenu.
  * @constructor
  */
-export default function Page() {
+export default function PageUi() {
 
     // States pour gérer le chargement de la page, les données de la page et du site, et les popups d'erreur.
     const [loading, setLoading] = useState(true);
     const [website, setWebsite] = useState<RecursiveWebsite | null>(null);
     const [page, setPage] = useState<RecursivePage | null>(null);
+    const [translatedPage, setTranslatedPage] = useState<Page | null>(null);
     const [showPopup, setShowPopup] = useState(false);
     const [popupTitle, setPopupTitle] = useState("");
     const [popupContent, setPopupContent] = useState("");
@@ -44,6 +47,11 @@ export default function Page() {
             }
             setWebsite(data);
             setPage(page);
+            TranslationService.getTranslatedPage(page.id ).then((translation) => {
+                setTranslatedPage(translation);
+            }).catch((e) => {
+                console.error(e);
+            })
         }).catch((error) => {
             setPopupTitle("Erreur");
             setPopupContent("Une erreur s'est produite lors de la récupération des données : " + error.message);
@@ -71,7 +79,7 @@ export default function Page() {
                     variants={simpleElementVariant}
                     transition={{ease: "easeOut"}}
                     className={"text-center w-full md:text-5xl text-3xl font-boska font-bold"}>
-                    {page?.title}
+                    {translatedPage?.title || page?.title}
                 </motion.h1>
                 <motion.p
                     initial="hidden"
@@ -79,7 +87,7 @@ export default function Page() {
                     variants={simpleElementVariant}
                     transition={{delay: 0.1, ease: "easeOut"}}
                     className={"text-center max-w-4xl w-full"}>
-                    {page?.description}
+                    {translatedPage?.description || page?.description}
                 </motion.p>
             </motion.div>
 

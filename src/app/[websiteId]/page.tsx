@@ -1,7 +1,7 @@
 "use client"
 
 import {useEffect, useState} from "react";
-import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
+import {DisplayWebsite, RecursiveWebsite} from "@/app/models/DisplayWebsite";
 import AdvancedPopup from "@/app/components/overlays/AdvancedPopup";
 import LoadingOverlay from "@/app/components/overlays/LoadingOverlay";
 import WebsiteService from "@/app/services/WebsiteService";
@@ -10,6 +10,8 @@ import {useParams, useRouter} from "next/navigation";
 import Icon from "@/app/components/ui-elements/Icon";
 import Button from "@/app/components/ui-elements/Button";
 import {simpleElementVariant} from "@/app/utils/FramerUtil";
+import TranslationService from "@/app/services/TranslationService";
+import {Page} from "@/app/models/Page";
 
 /**
  * Page d'accueil du site, la première qui s'affiche quand on arrive sur le site.
@@ -24,6 +26,8 @@ export default function Home() {
     const [showPopup, setShowPopup] = useState(false);
     const [popupTitle, setPopupTitle] = useState("");
     const [popupContent, setPopupContent] = useState("");
+    const [websiteTranslation, setWebsiteTranslation] = useState<DisplayWebsite | null>(null);
+    const [firstPageTitleTranslation, setFirstPageTitleTranslation] = useState<Page | null>(null);
 
     // Récupération du websiteId dans l'url
     const {websiteId} = useParams()
@@ -38,6 +42,18 @@ export default function Home() {
         WebsiteService.getRecursiveWebsite(websiteId as string).then((data) => {
             console.log(data);
             setWebsite(data);
+            TranslationService.getTranslatedWebsite(data.id).then((translation) => {
+                setWebsiteTranslation(translation);
+            }).catch((e) => {
+                console.error(e);
+            })
+            if (data?.pages[0]) {
+                TranslationService.getTranslatedPage(data.pages[0].id).then((translation) => {
+                    setFirstPageTitleTranslation(translation);
+                }).catch((e) => {
+                    console.error(e);
+                })
+            }
         }).catch((error) => {
             setPopupTitle("Couldn't load the website");
             setPopupContent("The server didn't gave the expected answer.");
@@ -62,7 +78,7 @@ export default function Home() {
             <motion.h1
                 initial={simpleElementVariant.hidden}
                 whileInView={simpleElementVariant.visible}
-                className={"text-on-foreground font-black font-boska md:text-8xl text-5xl w-full md:w-6xl text-center"}>{website?.hero_title}</motion.h1>
+                className={"text-on-foreground font-black font-boska md:text-8xl text-5xl w-full md:w-6xl text-center"}>{websiteTranslation?.hero_title || website?.hero_title}</motion.h1>
 
             {
                 website?.pages[0] && <Button
@@ -70,7 +86,7 @@ export default function Home() {
                     onClick={() => {
                         router.push(website?.title + "/" + website?.pages[0].path || "/");
                     }}
-                    text={website?.pages[0].title || "Commencer à explorer"}
+                    text={firstPageTitleTranslation?.title || website?.pages[0].title || "Start exploring"}
                 />
             }
 

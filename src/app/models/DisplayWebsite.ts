@@ -1,5 +1,6 @@
 import {RecursivePage} from "@/app/models/Page";
 import {WebsiteColors} from "@/app/models/WebsiteColors";
+import {Language} from "@/app/models/TextToTranslate";
 
 export interface RecursiveWebsite {
     id: number;
@@ -11,6 +12,7 @@ export interface RecursiveWebsite {
     hero_title: string;
     pages: RecursivePage[];
     colors: WebsiteColors;
+    lang: string;
 }
 
 export interface DisplayWebsite {
@@ -21,6 +23,7 @@ export interface DisplayWebsite {
     auth_token: string;
     hero_image_url: string;
     hero_title: string;
+    lang: Language;
 }
 
 export interface InsertableDisplayWebsite {
@@ -29,4 +32,5 @@ export interface InsertableDisplayWebsite {
     website_domain?: string;
     hero_image_url?: string;
     hero_title: string;
+    lang?: Language;
 }

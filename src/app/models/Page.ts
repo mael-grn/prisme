@@ -1,4 +1,5 @@
 import {RecursiveSection} from "@/app/models/Section";
+import {Language} from "@/app/models/TextToTranslate";
 
 export interface RecursivePage {
     id: number;
@@ -9,6 +10,7 @@ export interface RecursivePage {
     title: string;
     description?: string;
     position: number;
+    lang: Language;
 }
 
 export interface Page {
@@ -19,6 +21,7 @@ export interface Page {
     title: string;
     description?: string;
     position: number;
+        lang: Language;
 }
 
 export interface InsertablePage {
@@ -27,4 +30,5 @@ export interface InsertablePage {
     icon_svg?: string;
     title: string;
     description?: string;
+    lang?: Language;
 }

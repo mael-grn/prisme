@@ -5,6 +5,8 @@ import {PossibleElemType} from "@/app/enums/PossibleElemType";
 import StringUtil from "@/app/utils/StringUtil";
 import { motion } from "framer-motion";
 import {simpleElementVariant} from "@/app/utils/FramerUtil";
+import TranslationService from "@/app/services/TranslationService";
+import {useEffect, useState} from "react";
 
 /**
  * Component qui affiche un élément en fonction de son type
@@ -17,6 +19,22 @@ import {simpleElementVariant} from "@/app/utils/FramerUtil";
  * @constructor
  */
 export default function ElementComponent({element, center = false, mini=false, reduceImageSize=false} : {element : Element, center?:boolean, inverseColor?:boolean, mini?:boolean, reduceImageSize?:boolean}) {
+
+    const [content, setContent] = useState<string>(element.content);
+
+    useEffect(() => {
+        if (element.element_type === PossibleElemType.titre || element.element_type === PossibleElemType.texte) {
+            if (element.lang === TranslationService.getLanguage()) {
+                return;
+            }
+            TranslationService.getTranslatedElement(element.id).then((translation) => {
+                setContent(translation.content)
+            }).catch((error) => {
+                console.error(error);
+            })
+        }
+    }, [element.content, element.element_type])
+
     switch (element.element_type) {
         case PossibleElemType.image:
             return <motion.img
@@ -32,7 +50,7 @@ export default function ElementComponent({element, center = false, mini=false, r
                 whileInView={simpleElementVariant.visible}
                 key={element.id}
                 className={`w-full ${mini ? "md:text-3xl text-2xl" : "md:text-5xl text-3xl"} font-bold font-boska ${center && "text-center"}`}
-            >{element.content}</motion.h2>
+            >{content}</motion.h2>
         case PossibleElemType.texte:
             return <motion.p
                 initial={simpleElementVariant.hidden}
@@ -40,7 +58,7 @@ export default function ElementComponent({element, center = false, mini=false, r
                 key={element.id}
                 className={`w-full ${center && "text-center"}`}
                 dangerouslySetInnerHTML={{
-                    __html: element.content.replaceAll('\n', '<br/>')
+                    __html: content.replaceAll('\n', '<br/>')
                 }}
             />
         case PossibleElemType.lien:

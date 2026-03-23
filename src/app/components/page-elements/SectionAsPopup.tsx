@@ -446,7 +446,8 @@ export default function SectionAsPopup({section, updateSectionAction, deleteSect
         const updatedElement: Element = {
             ...insertableElement,
             id: element.id,
-            position: element.position
+            position: element.position,
+            lang: element.lang
         }
 
         if (element.element_type === 'image') {

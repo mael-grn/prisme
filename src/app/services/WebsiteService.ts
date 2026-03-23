@@ -5,6 +5,7 @@ import CssUtil from "@/app/utils/CssUtil";
 import {getDefaultColors, InsertableWebsiteColors, WebsiteColors} from "@/app/models/WebsiteColors";
 import CacheUtil from "@/app/utils/CacheUtil";
 import StringUtil from "@/app/utils/StringUtil";
+import StorageUtil from "@/app/utils/StorageUtil";
 
 /**
  * Service pour gérer et traiter les données des sites web, y compris la mise en cache côté client.
@@ -32,7 +33,7 @@ export default class WebsiteService {
      * @private
      */
     private static saveWebsiteInCache(website: RecursiveWebsite) {
-        if (!CacheUtil.hasSessionStorage()) return;
+        if (!StorageUtil.hasSessionStorage()) return;
         try {
             sessionStorage.setItem("cached_website_" + website.title.toLowerCase(), JSON.stringify(website));
             sessionStorage.setItem("cached_website_" + website.id, JSON.stringify(website));
@@ -48,7 +49,7 @@ export default class WebsiteService {
      * @private
      */
     private static recoverWebsiteFromCache(domainOrId: string): RecursiveWebsite | null {
-        if (!CacheUtil.hasSessionStorage()) return null;
+        if (!StorageUtil.hasSessionStorage()) return null;
         try {
             const cachedWebsite = sessionStorage.getItem("cached_website_" + domainOrId.toLowerCase());
             if (!cachedWebsite) return null;
@@ -63,7 +64,7 @@ export default class WebsiteService {
      * @private
      */
     private static cacheIsTooOld(): boolean {
-        if (!CacheUtil.hasSessionStorage()) return true;
+        if (!StorageUtil.hasSessionStorage()) return true;
         try {
             const lastUpdate = sessionStorage.getItem("last_update");
             if (!lastUpdate) return true;

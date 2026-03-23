@@ -4,20 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="correction de bugs pret pour release">
-      <change afterPath="$PROJECT_DIR$/public/illustrations/prism.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/illustrations/section.png" afterDir="false" />
+    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="correction de bugs">
+      <change afterPath="$PROJECT_DIR$/src/app/api/elements/[elementId]/translate/[lang]/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/pages/[pageId]/translate/[lang]/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/translate/[lang]/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/models/TextToTranslate.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/models/Translation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/TranslationService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/utils/DeeplUtil.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/utils/StorageUtil.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/icon192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/List.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/List.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/[path]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/[path]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/ElementComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/ElementComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/SectionAsPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/SectionAsPopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/sections/StandardContainerForDataManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/StandardContainerForDataManagement.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/DisplayWebsite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/DisplayWebsite.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Element.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Element.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Page.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/secure/[websiteId]/[pageId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/secure/[websiteId]/[pageId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/secure/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/secure/[websiteId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/secure/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/secure/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sql/create.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/sql/create.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/CacheUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/CacheUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/fieldsUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/fieldsUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +45,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="tsconfig.json" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -74,49 +85,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHELLCHECK.PATH&quot;: &quot;I do mind&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/mael/Dev/prisme/public/illustrations&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/mael/Dev/prisme/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHELLCHECK.PATH": "I do mind",
+    "git-widget-placeholder": "master",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "/home/mael/Dev/prisme/src/app/api/pages/[pageId]",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Next.js: server-side.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "/home/mael/Dev/prisme/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/api/pages/[pageId]" />
+      <recent name="$PROJECT_DIR$/src/app/[websiteId]" />
       <recent name="$PROJECT_DIR$/public/illustrations" />
       <recent name="$PROJECT_DIR$/src/app/api" />
       <recent name="$PROJECT_DIR$/src/app/components/forms-inputs" />
-      <recent name="$PROJECT_DIR$/src/app/components/ui-elements" />
-      <recent name="$PROJECT_DIR$/src/app/create" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/api/websites/[websiteId]" />
+      <recent name="$PROJECT_DIR$/src/app/api/elements/[elementId]/translate" />
+      <recent name="$PROJECT_DIR$/src/app/api/elements/[elementId]" />
+      <recent name="$PROJECT_DIR$/src/app/api/translations/[elementId]/[lang]" />
       <recent name="$PROJECT_DIR$/public/illustrations" />
-      <recent name="$PROJECT_DIR$/src/app" />
-      <recent name="$PROJECT_DIR$/public/img" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/public/fonts" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
@@ -208,7 +219,8 @@
       <workItem from="1773572803724" duration="122000" />
       <workItem from="1773732486866" duration="1609000" />
       <workItem from="1773737796935" duration="1551000" />
-      <workItem from="1773913518589" duration="332000" />
+      <workItem from="1773913518589" duration="5725000" />
+      <workItem from="1774257176791" duration="7691000" />
     </task>
     <task id="LOCAL-00001" summary="Correction de bugs sur animation, et amelioration de la page d'accueil">
       <option name="closed" value="true" />
@@ -394,7 +406,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773479829012</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="correction de bugs">
+      <option name="closed" value="true" />
+      <created>1773914127655</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1773914127655</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,7 +435,6 @@
     <MESSAGE value="amélioration des tuiles" />
     <MESSAGE value="amélioration erreur site non trouvé et popup" />
     <MESSAGE value="amélioration loading overlay" />
-    <MESSAGE value="correction de bugs" />
     <MESSAGE value="correction de style mobile" />
     <MESSAGE value="correction de bug navbar" />
     <MESSAGE value="correction style mpobile" />
@@ -424,7 +443,8 @@
     <MESSAGE value="grosse revision et première fusion de prisme et prismadmin" />
     <MESSAGE value="page edition de page" />
     <MESSAGE value="fonctionnel" />
-    <option name="LAST_COMMIT_MESSAGE" value="fonctionnel" />
+    <MESSAGE value="correction de bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction de bugs" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

@@ -170,7 +170,8 @@ export default function PageVisu() {
         const updatedPage: Page = {
             position: page.position,
             ...insertablePage,
-            id: page.id
+            id: page.id,
+            lang: page.lang,
         }
 
         setEditTitleLoading(editingTitle);

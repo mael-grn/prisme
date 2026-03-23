@@ -55,6 +55,7 @@ export class FieldsUtil {
         }
     }
 
+
     public static checkWebsiteColors(colors: InsertableWebsiteColors): ValidationResult {
         const errors: string[] = [];
         if (!colors) {

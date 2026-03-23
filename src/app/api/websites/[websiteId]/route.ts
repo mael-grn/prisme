@@ -84,6 +84,7 @@ export async function GET(request: Request, {params}: { params: Promise<{ websit
                          ORDER BY position`) as Element[]
             : ([] as Element[]);
 
+
         // 4) Récupérer les catégories + sous-catégories liées aux sections
         const catRows = sectionIds.length
             ? (await sql`
@@ -110,7 +111,8 @@ export async function GET(request: Request, {params}: { params: Promise<{ websit
                 section_id: el.section_id,
                 element_type: el.element_type,
                 position: el.position,
-                content: el.content
+                content: el.content,
+                lang: el.lang
             });
             elementsBySection.set(el.section_id, arr);
         }
@@ -167,7 +169,8 @@ export async function GET(request: Request, {params}: { params: Promise<{ websit
             icon_svg: p.icon_svg ?? undefined,
             title: p.title,
             description: p.description ?? undefined,
-            position: p.position
+            position: p.position,
+            lang: p.lang ?? undefined,
         }));
 
         // Recuperation des couleurs
@@ -185,7 +188,9 @@ export async function GET(request: Request, {params}: { params: Promise<{ websit
             hero_image_url: res.hero_image_url,
             hero_title: res.hero_title,
             pages: recursivePages,
-            colors: colors as WebsiteColors
+            colors: colors as WebsiteColors,
+            lang: res.lang ?? undefined,
+
         };
 
         return ApiUtil.getSuccessNextResponse<RecursiveWebsite>(recursiveWebsite);

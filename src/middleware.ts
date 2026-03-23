@@ -12,6 +12,10 @@ import {TokenUtil} from "@/app/utils/tokenUtil";
  */
 export async function middleware(request: NextRequest) {
 
+    if (request.nextUrl.pathname.startsWith('/api/translations')) {
+        return NextResponse.next();
+    }
+
     // GET requests arent protected on the API
     if (request.nextUrl.pathname.startsWith('/api') && request.method === 'GET') {
         return NextResponse.next();
