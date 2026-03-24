@@ -90,6 +90,7 @@ export default function Pages() {
                 try {
                     const loadedColors = await WebsiteService.getColors(parseInt(websiteId as string));
                     setColors(loadedColors);
+                    setNewColors(loadedColors);
                 } catch (e) {
                    // colors can ben null if not set by the user
                     const defaultColors = getDefaultColors(parseInt(websiteId as string));
@@ -368,11 +369,6 @@ export default function Pages() {
 
             <MainPageWrapper loading={loading}>
 
-                {
-                    website && website.hero_image_url && <img src={website.hero_image_url} alt={"hero image"}
-                                                              className={"fixed top-0 left-0 bottom-0 right-0 w-full h-screen object-cover select-none z-0"}/>
-                }
-
                 <Button iconName={"arrow-back"} text={"Back to all websites"} actionType={ActionTypeEnum.neutral}
                         onClick={() => router.push("/secure")}/>
 
@@ -462,14 +458,15 @@ export default function Pages() {
                             actionType: ActionTypeEnum.primary
                         }]}
                     >
-                        <h3>Title</h3>
-                        <p>{website?.hero_title}</p>
-                        <h3>Image</h3>
-                        {website?.hero_image_url ?
-                            <img src={website?.hero_image_url} alt={"Image de la landing page"}
-                                 className={"md:max-w-96 max-w-full h-auto mb-4 rounded-lg"}/> :
-                            <p className={"text-onForeground italic"}>You haven&apos;t uploaded any image yet</p>
-                        }
+                        <div style={{backgroundColor: colors?.background_color}} className={`flex flex-col gap-4 items-center justify-center p-6 rounded-xl`}>
+                            <h3 style={{color: colors?.text_variant}} className={"font-black font-boska"}>{website?.hero_title}</h3>
+                            {website?.hero_image_url ?
+                                <img src={website?.hero_image_url} alt={"Image de la landing page"}
+                                     className={"md:max-w-72 max-w-full h-auto mb-4 rounded-lg"}/> :
+                                <p className={"text-onForeground italic"}>You haven&apos;t uploaded any image yet</p>
+                            }
+                        </div>
+
                     </StandardContainerForDataManagement>
                 </div>
 
