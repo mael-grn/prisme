@@ -87,9 +87,16 @@ export default function Pages() {
                 setNewWebsiteTitle(loadedWebsite.title)
                 setNewWebsiteHeroTitle(loadedWebsite.hero_title)
 
-                const loadedColors = await WebsiteService.getColors(parseInt(websiteId as string));
-                setColors(loadedColors);
-                setNewColors(loadedColors);
+                try {
+                    const loadedColors = await WebsiteService.getColors(parseInt(websiteId as string));
+                    setColors(loadedColors);
+                } catch (e) {
+                   // colors can ben null if not set by the user
+                    const defaultColors = getDefaultColors(parseInt(websiteId as string));
+                    setNewColors(defaultColors);
+
+                }
+
 
                 const loadedPages = await PageService.getMyPagesFromWebsite(parseInt(websiteId as string));
                 setPages(loadedPages);

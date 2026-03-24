@@ -135,7 +135,7 @@ export default class WebsiteService {
             const response = await axios.post('/api/me/websites', newWebsite);
             return response.data.data as DisplayWebsite;
         } catch (e) {
-            const perso = {code: 409, message: "The page name is already used. Please choose another name."}
+            const perso = {code: 409, message: "This website title is already used. Please choose another title."}
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1, perso)
         }
     }

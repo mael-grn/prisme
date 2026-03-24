@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="implementation de la fonctionnalité de traduction">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/sections/StandardContainerForDataManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/sections/StandardContainerForDataManagement.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/ColorItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/ColorItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/Illustration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/ui-elements/Illustration.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/secure/[websiteId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/secure/[websiteId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/secure/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/secure/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
