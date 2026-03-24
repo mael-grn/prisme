@@ -5,7 +5,7 @@ import LoadingIcon from "@/app/components/ui-elements/LoadingIcon";
 import Illustration, {IllustrationSizes} from "@/app/components/ui-elements/Illustration";
 import {simpleElementVariant} from "@/app/utils/FramerUtil";
 
-export default function StandardContainerForDataManagement({children, title, message, illustrationName, actions, icon, loading=false, flex1=false, className}: { children?: React.ReactNode, message?: string, title?: string, illustrationName?: string, icon?: string, actions?: ButtonProps[], loading?: boolean, flex1?: boolean, className?: string }) {
+export default function StandardContainerForDataManagement({children, title, message, illustrationName, actions, icon, loading=false, flex1=false, className, truncateTitle=false}: { children?: React.ReactNode, message?: string, title?: string, illustrationName?: string, icon?: string, actions?: ButtonProps[], loading?: boolean, flex1?: boolean, className?: string, truncateTitle?: boolean }) {
     return (
         <motion.div
             className={`overflow-y-auto overscroll-contain min-w-fit scrollbar-hide max-w-full max-h-full relative flex flex-col h-fit w-fit rounded-3xl bg-background border-2 border-on-background ${flex1 ? "flex-1" : ""} ${className}`}
@@ -23,7 +23,7 @@ export default function StandardContainerForDataManagement({children, title, mes
                                 {
                                     icon && <Icon size={6} iconName={icon} />
                                 }
-                                <h2 className={"max-w-3/4"}>{title}</h2>
+                                <h2 className={`${truncateTitle && "truncate"}`}>{title}</h2>
                             </div>
                         }
                         {

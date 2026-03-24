@@ -370,7 +370,6 @@ export default function Pages() {
                         onClick={() => router.push("/secure")}/>
 
                 <div className={"flex justify-center w-full relative gap-4 items-center flex-col"}>
-                    <Illustration name={"blueprint"}/>
                     <div className={"flex gap-4 items-center justify-center"}>
                         <h1 className={"text-center"}>{website?.title}</h1>
                         <Button
@@ -444,6 +443,7 @@ export default function Pages() {
 
                 <div className={"flex w-full justify-center items-center"}>
                     <StandardContainerForDataManagement
+                        flex1={true}
                         title={"Home page's content"}
                         message={"The content of the landing page of your website. This is the first page visitors will see when they access your website."}
                         illustrationName={"editing"}

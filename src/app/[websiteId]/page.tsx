@@ -40,7 +40,6 @@ export default function Home() {
     useEffect(() => {
 
         WebsiteService.getRecursiveWebsite(websiteId as string).then((data) => {
-            console.log(data);
             setWebsite(data);
             TranslationService.getTranslatedWebsite(data.id).then((translation) => {
                 setWebsiteTranslation(translation);

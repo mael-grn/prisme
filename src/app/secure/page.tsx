@@ -18,6 +18,7 @@ import ImageInput from "@/app/components/forms-inputs/imageInput";
 import Link from "next/link";
 import Illustration from "@/app/components/ui-elements/Illustration";
 import StringUtil from "@/app/utils/StringUtil";
+import Image from "next/image";
 
 export default function Home() {
 
@@ -150,7 +151,7 @@ export default function Home() {
                                         >
                                             {
                                                 website.hero_image_url &&
-                                                <img className={"w-52 h-32 object-cover rounded-lg"}
+                                                <Image width={208} height={128} className={"w-52 h-32 object-cover rounded-lg"}
                                                      src={website.hero_image_url} alt={"hero image"}/>
 
                                             }

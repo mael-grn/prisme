@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export enum IllustrationSizes {
     SMALL = 'SMALL',
     MEDIUM = 'MEDIUM',
@@ -14,7 +16,9 @@ const sizeClasses: Record<IllustrationSizes, string> = {
 
 export default function Illustration({ name, size = IllustrationSizes.MEDIUM }: { name: string, size?: IllustrationSizes }) {
     return (
-        <img
+        <Image
+            width={64}
+            height={64}
             src={`/illustrations/${name}.png`}
             className={`${sizeClasses[size]} object-contain w-4`}
             alt={name}

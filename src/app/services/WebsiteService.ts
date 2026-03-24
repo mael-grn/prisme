@@ -83,7 +83,6 @@ export default class WebsiteService {
      */
     static async getRecursiveWebsite(domainOrId: string): Promise<RecursiveWebsite> {
         const cachedWebsite = this.recoverWebsiteFromCache(domainOrId);
-        console.log("retrieved from cache:", cachedWebsite);
         if (cachedWebsite && !this.cacheIsTooOld() && CacheUtil.isCacheActive()) {
             return cachedWebsite;
         } else {

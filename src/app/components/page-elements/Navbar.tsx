@@ -36,9 +36,11 @@ export default function Navbar({websiteIdOrDomain}: { websiteIdOrDomain: string 
         setNewLanguage(TranslationService.getLanguage())
         WebsiteService.getRecursiveWebsite(websiteIdOrDomain).then((data) => {
             let translated = []
+
             for (const page of data.pages) {
                 if (page.lang !== TranslationService.getLanguage()) {
                     TranslationService.getTranslatedPage(page.id).then((translation) => {
+
                         translated.push(translation)
                         if (translation.path.substring(1) === path) {
                             setPage(translation)
@@ -46,6 +48,8 @@ export default function Navbar({websiteIdOrDomain}: { websiteIdOrDomain: string 
                     }).catch((e) => {
                         console.error(e);
                     });
+                } else {
+                    translated.push(page)
                 }
             }
             translated.push({
@@ -58,6 +62,7 @@ export default function Navbar({websiteIdOrDomain}: { websiteIdOrDomain: string 
                 lang: TranslationService.getLanguage(),
             })
             translated = translated.sort((a, b) => a.position - b.position);
+
             setTranslatedPages(translated);
             setWebsite(data);
         })
