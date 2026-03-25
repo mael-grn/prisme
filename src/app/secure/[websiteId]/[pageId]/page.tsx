@@ -311,11 +311,6 @@ export default function PageVisu() {
         <>
             <MainPageWrapper loading={loading}>
 
-                {
-                    website && website.hero_image_url && <img src={website.hero_image_url} alt={"hero image"}
-                                                              className={"fixed top-0 left-0 bottom-0 right-0 w-full h-screen object-cover select-none z-0"}/>
-                }
-
                 <Button iconName={"arrow-back"} text={"Back to " + website?.title} actionType={ActionTypeEnum.neutral}
                         onClick={() => router.push("/secure/" + websiteId)}/>
                 <div className={"flex justify-center w-full relative gap-4 items-center flex-col"}>
