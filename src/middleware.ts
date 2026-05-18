@@ -12,8 +12,13 @@ import {TokenUtil} from "@/app/utils/tokenUtil";
  */
 export async function middleware(request: NextRequest) {
 
-    if (request.nextUrl.pathname.startsWith('/portfolio')) {
+    console.log(request.nextUrl.pathname)
+    if (request.nextUrl.pathname.includes('/portfolio')) {
         return NextResponse.redirect("https://old.maelg.fr");
+    }
+
+    if (!request.nextUrl.pathname.startsWith('/api') && !request.nextUrl.pathname.startsWith('/secure')) {
+        return NextResponse.next();
     }
 
     if (request.nextUrl.pathname.startsWith('/api/translations')) {
@@ -56,7 +61,6 @@ export async function middleware(request: NextRequest) {
  */
 export const config = {
     matcher: [
-        '/secure/:path*',
-        '/api/:path*',
+        '/:path*',
     ],
 }
