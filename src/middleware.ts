@@ -12,6 +12,10 @@ import {TokenUtil} from "@/app/utils/tokenUtil";
  */
 export async function middleware(request: NextRequest) {
 
+    if (request.nextUrl.pathname.startsWith('/portfolio')) {
+        return NextResponse.redirect("https://old.maelg.fr");
+    }
+
     if (request.nextUrl.pathname.startsWith('/api/translations')) {
         return NextResponse.next();
     }
