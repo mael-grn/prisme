@@ -4,10 +4,102 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="correction de bugs">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
+    <list default="true" id="933e89d3-67eb-4833-9b4f-6d0a251b6e15" name="Changes" comment="correction redirection vers ancien portfolio">
+      <change afterPath="$PROJECT_DIR$/public/img/serac.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/elements/[elementId]/move/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/pages/[pageId]/elements/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/pages/[pageId]/move/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/utils/LexicalPositionUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prisme.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/serac.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/Array-Bold.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/Array-BoldWide.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/Array-Regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/Boska-Variable.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/Chillax-Variable.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/ClashDisplay-Variable.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/Outfit-Variable.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/Satoshi-Variable.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/desert.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/error.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/portrait.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/search.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/[path]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[websiteId]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/categories/[categoryId]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/tags/[tagId]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/categories/[categoryId]/subcategories/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/categories/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/tags/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/elements/[elementId]/move_position/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/elements/[elementId]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/elements/[elementId]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/elements/[elementId]/translate/[lang]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/elements/[elementId]/translate/[lang]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/me/websites/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/me/websites/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/pages/[pageId]/move_position/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/pages/[pageId]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/pages/[pageId]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/pages/[pageId]/sections/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/pages/[pageId]/translate/[lang]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/pages/[pageId]/translate/[lang]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/sections/[sectionId]/elements/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/sections/[sectionId]/move_position/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/sections/[sectionId]/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/sections/[sectionId]/subcategories/[subcategoryId]/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/sections/[sectionId]/subcategories/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/subcategories/[subcategoryId]/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/colors/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/colors/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/pages/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/pages/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/translate/[lang]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/websites/[websiteId]/translate/[lang]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/Input.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/categorySelection.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/itemSelection.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/subcatSelector.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/forms-inputs/textarea.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/EditorNavbar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/ElementComponent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/List.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/MainPageWrapper.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/page-elements/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/page-elements/SectionAsPopup.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/ParagrapheClassique.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/ParagrapheDev.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/StandardContainerForDataManagement.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/Tuile.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/containers/OrganizedSections.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/containers/ParagrapheClassiqueContainer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/containers/ParagrapheDevContainer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/sections/containers/TuileContainer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/ui-elements/Button.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/enums/PossibleSectionType.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Category.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Tag.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/DisplayWebsite.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Website.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Element.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Element.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/Page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Section.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/Subcategory.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/secure/[websiteId]/[pageId]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/secure/[websiteId]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/secure/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/secure/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/TranslationService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/TranslationService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/UserService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/UserService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/WebsiteService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/categoryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/TagService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/elementService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/elementService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/pageService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/pageService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/sectionService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/subCategoryService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sql/create.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sql/drop.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/sql/insert_categories.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/apiUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/apiUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/utils/fieldsUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/utils/fieldsUtil.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +117,8 @@
         <option value="JavaScript File" />
         <option value="tsconfig.json" />
         <option value="TypeScript JSX File" />
-        <option value="TypeScript File" />
         <option value="Dockerfile" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -47,7 +139,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/mael-grn/prisme.git&quot;,
-    &quot;accountId&quot;: &quot;fdaa12b1-4ce2-4883-b739-6f964bfb90d8&quot;
+    &quot;accountId&quot;: &quot;4fdd5826-939d-4fb4-b6ac-9efbc54e47a4&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -65,37 +157,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Docker.Dockerfile.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHELLCHECK.PATH": "I do mind",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
-    "javascript.preferred.runtime.type.id": "node",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "/home/mael/Dev/prisme/src/app/api/pages/[pageId]",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.Next.js: server-side.executor": "Run",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "ts.external.directory.path": "/home/mael/Dev/prisme/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Docker.Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;I do mind&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Dev&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/mael/Dev/prisme/src/app/api/pages/[pageId]&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/mael/Dev/prisme/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app/api/pages/[pageId]" />
@@ -112,7 +204,7 @@
       <recent name="$PROJECT_DIR$/public/illustrations" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.Dockerfile">
+  <component name="RunManager" selected="npm.Next.js: server-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
     </configuration>
@@ -225,7 +317,12 @@
       <workItem from="1774257176791" duration="7841000" />
       <workItem from="1774272965368" duration="1277000" />
       <workItem from="1774360577719" duration="307000" />
-      <workItem from="1779115313001" duration="410000" />
+      <workItem from="1779115313001" duration="1064000" />
+      <workItem from="1779202903034" duration="1339000" />
+      <workItem from="1779214288508" duration="3341000" />
+      <workItem from="1779265867588" duration="6406000" />
+      <workItem from="1779279473927" duration="2593000" />
+      <workItem from="1779282288176" duration="769000" />
     </task>
     <task id="LOCAL-00001" summary="Correction de bugs sur animation, et amelioration de la page d'accueil">
       <option name="closed" value="true" />
@@ -435,15 +532,37 @@
       <option name="project" value="LOCAL" />
       <updated>1774361768725</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="redirection vers l'ancien portfolio">
+      <option name="closed" value="true" />
+      <created>1779115752676</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1779115752676</updated>
+    </task>
+    <task id="LOCAL-00028" summary="correction">
+      <option name="closed" value="true" />
+      <created>1779115955588</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1779115955588</updated>
+    </task>
+    <task id="LOCAL-00029" summary="correction redirection vers ancien portfolio">
+      <option name="closed" value="true" />
+      <created>1779116372619</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1779116372619</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Correction de bugs sur animation, et amelioration de la page d'accueil" />
-    <MESSAGE value="traduction en anglais" />
     <MESSAGE value="correction de bug" />
     <MESSAGE value="rajout possibilité selection" />
     <MESSAGE value="Ajout des sauts de lignes dans les textes" />
@@ -466,7 +585,21 @@
     <MESSAGE value="fonctionnel" />
     <MESSAGE value="implementation de la fonctionnalité de traduction" />
     <MESSAGE value="correction de bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="correction de bugs" />
+    <MESSAGE value="redirection vers l'ancien portfolio" />
+    <MESSAGE value="correction" />
+    <MESSAGE value="correction redirection vers ancien portfolio" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction redirection vers ancien portfolio" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/middleware.ts</url>
+          <line>19</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

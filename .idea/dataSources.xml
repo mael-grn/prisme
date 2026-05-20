@@ -5,7 +5,7 @@
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ep-icy-credit-a2dmeewu-pooler.eu-central-1.aws.neon.tech:5432/neondb</jdbc-url>
+      <jdbc-url>jdbc:postgresql://ep-icy-credit-a2dmeewu-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

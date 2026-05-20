@@ -1,10 +1,9 @@
-import {Language, TextToTranslate} from "@/app/models/TextToTranslate";
+import {Language} from "@/app/models/TextToTranslate";
 import axios, {AxiosError} from "axios";
 import StringUtil from "@/app/utils/StringUtil";
 import StorageUtil from "@/app/utils/StorageUtil";
-import CacheUtil from "@/app/utils/CacheUtil";
-import Translation, {InsertableTranslation} from "@/app/models/Translation";
-import {DisplayWebsite} from "@/app/models/DisplayWebsite";
+import Translation from "@/app/models/Translation";
+import {Website} from "../models/Website";
 import {Page} from "@/app/models/Page";
 
 export default class TranslationService {
@@ -23,7 +22,7 @@ export default class TranslationService {
         return lang as Language;
     }
 
-    static async getTranslatedWebsite(websiteId: number): Promise<DisplayWebsite> {
+    static async getTranslatedWebsite(websiteId: number): Promise<Website> {
         const language = this.getLanguage();
 
         const cacheKey = `translation_website_${websiteId}_${language}`;
@@ -36,7 +35,7 @@ export default class TranslationService {
         try {
             const response = await axios.get(`/api/websites/${websiteId}/translate/${language}`);
 
-            const data = response.data.data as DisplayWebsite;
+            const data = response.data.data as Website;
             if (StorageUtil.hasLocalStorage()) {
                 localStorage.setItem(cacheKey, JSON.stringify(data));
             }

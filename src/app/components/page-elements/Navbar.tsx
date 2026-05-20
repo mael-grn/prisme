@@ -3,7 +3,7 @@
 
 import {useEffect, useState} from "react";
 import WebsiteService from "@/app/services/WebsiteService";
-import {RecursiveWebsite} from "@/app/models/DisplayWebsite";
+import {RecursiveWebsite} from "../../models/Website";
 import {useParams, useRouter} from "next/navigation";
 import {AnimatePresence, motion} from "framer-motion";
 import SvgFromString from "@/app/components/ui-elements/SvgFromString";
@@ -34,7 +34,7 @@ export default function Navbar({websiteIdOrDomain}: { websiteIdOrDomain: string 
     useEffect(() => {
         setLanguage(TranslationService.getLanguage())
         setNewLanguage(TranslationService.getLanguage())
-        WebsiteService.getRecursiveWebsite(websiteIdOrDomain).then((data) => {
+        WebsiteService.getWebsite(websiteIdOrDomain).then((data) => {
             let translated = []
 
             for (const page of data.pages) {

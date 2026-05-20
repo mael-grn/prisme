@@ -44,6 +44,17 @@ export class ApiUtil {
     }
 
     /**
+     * Does what is says
+     */
+    static async getConnectedUserOrNull() : Promise<User | null> {
+        try {
+            return UserService.getMyUser()
+        } catch (e) {
+            return null;
+        }
+    }
+
+    /**
      * Check if there is a token and verify it, throw if token not found or invalid
      */
     static async verifyTokenOrThrow() : Promise<void> {
@@ -82,7 +93,7 @@ export class ApiUtil {
      * @param error
      * @param statusCode
      */
-    static getErrorNextResponse(message?: string, error?: Error, statusCode = 500) {
+    static getErrorNextResponse(message?: string, statusCode = 500, error?: Error) {
         return NextResponse.json({
             success: false,
             message: message || "API error",
@@ -91,25 +102,6 @@ export class ApiUtil {
         }, {status: statusCode});
     }
 
-    /**
-     * Check if there is a recursive == true in url parameters
-     * @param request
-     */
-    static isRecursiveRequest(request: Request): boolean {
-        const url = new URL(request.url);
-        return url.searchParams.get("recursive") === "true";
-    }
-
-    /**
-     * Does what is says
-     */
-    static async getConnectedUserOrNull() : Promise<User | null> {
-        try {
-            return UserService.getMyUser()
-        } catch (e) {
-            return null;
-        }
-    }
 
     /**
      * Return the correct NextResponse error depending on the type of Error
@@ -118,18 +110,18 @@ export class ApiUtil {
     static handleNextErrors(e: Error) {
         console.error(e);
         if (e instanceof NeonDbError) {
-            return this.getErrorNextResponse("SQL error", e, SqlUtil.getHttpCodeFromSqlError(e.code));
+            return this.getErrorNextResponse("SQL error", SqlUtil.getHttpCodeFromSqlError(e.code), e);
         }else if (e instanceof UserNotFoundError) {
-            return this.getErrorNextResponse("User not found", e, 404);
+            return this.getErrorNextResponse("User not found",  404, e);
         }else if (e instanceof UserNotLoggedIn) {
-            return this.getErrorNextResponse("User not connected", e, 401);
+            return this.getErrorNextResponse("User not connected", 401, e);
         }else if (e instanceof InvalidFieldsError) {
-            return this.getErrorNextResponse("Object has invalid fields", e, 422);
+            return this.getErrorNextResponse("Object has invalid fields", 422, e);
 
         } else if (e instanceof InvalidParamsError) {
-            return this.getErrorNextResponse("Missing or invalid query parameters", e, 400);
+            return this.getErrorNextResponse("Missing or invalid query parameters", 400, e);
         } else {
-            return this.getErrorNextResponse("API error", e, 500);
+            return this.getErrorNextResponse("API error", 500, e);
         }
     }
 

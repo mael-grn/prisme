@@ -2,7 +2,7 @@ import {NextResponse} from "next/server";
 import {SqlUtil} from "@/app/utils/sqlUtil";
 import {ApiUtil} from "@/app/utils/apiUtil";
 import {FieldsUtil} from "@/app/utils/fieldsUtil";
-import {InsertablePage, Page, RecursivePage} from "@/app/models/Page";
+import {InsertablePage, Page} from "@/app/models/Page";
 import SectionService from "@/app/services/sectionService";
 
 export async function GET(request: Request, {params}: { params: Promise<{ pageId: string }> }) {
@@ -13,31 +13,19 @@ export async function GET(request: Request, {params}: { params: Promise<{ pageId
         const sql = SqlUtil.getSql()
         //le domaine se termine jamais par un slash, la path commence toujours par un slash
         const [res] = await sql`
-            SELECT pages.*
-            FROM pages,
-                 display_websites
-            WHERE pages.id = ${pageId}
+            SELECT page.*
+            FROM page,
+                 website
+            WHERE page.id = ${pageId}
                or website_domain || path = ${pageId}
             LIMIT 1
         `;
 
-        const recursive = ApiUtil.isRecursiveRequest(request);
-
         if (!res) {
-            return ApiUtil.getErrorNextResponse("Page not found", undefined, 404);
+            return ApiUtil.getErrorNextResponse("Page not found", 404);
         }
 
-        if (!recursive) {
-            return ApiUtil.getSuccessNextResponse<Page>(res as Page);
-        }
-
-        const recursiveSections = await SectionService.getRecursiveSectionsForPageId(res.id);
-        const recursivePage : RecursivePage = {
-            ...res as Page,
-            sections: recursiveSections
-        }
-
-        return ApiUtil.getSuccessNextResponse<RecursivePage>(recursivePage);
+        return ApiUtil.getSuccessNextResponse<Page>(res as Page);
     } catch (error) {
         return ApiUtil.handleNextErrors(error as Error);
     }
@@ -57,22 +45,22 @@ export async function DELETE(request: Request, {params}: { params: Promise<{ pag
 
         //on récupère la page
         const [page] = await sql`
-            SELECT pages.*
-            FROM pages,
-                 display_websites
-            WHERE (pages.id = ${pageId} or website_domain || path = ${pageId})
+            SELECT page.*
+            FROM page,
+                 website
+            WHERE (page.id = ${pageId} or website_domain || path = ${pageId})
               and owner_id = ${user.id}
             LIMIT 1
         `;
 
         if (!page) {
-            return ApiUtil.getErrorNextResponse("Page not found or you are not the owner", undefined, 404);
+            return ApiUtil.getErrorNextResponse("Page not found or you are not the owner", 404);
         }
 
         //On supprime le site
         await sql`
             DELETE
-            FROM pages
+            FROM page
             WHERE id = ${page.id}
         `;
 
@@ -98,25 +86,25 @@ export async function PUT(request: Request, {params}: { params: Promise<{ pageId
 
         //on récupère le site internet
         const [website] = await sql`
-            SELECT display_websites.*
-            FROM display_websites,
-                 pages
-            WHERE pages.id = ${pageId}
-              and display_websites.id = pages.website_id
+            SELECT website.*
+            FROM website,
+                 page
+            WHERE page.id = ${pageId}
+              and website.id = page.website_id
             LIMIT 1
         `;
 
         // On vérifie que le site appartient bien à l'utilisateur
         if (website.owner_id !== user.id) {
-            return ApiUtil.getErrorNextResponse("You are not the owner", undefined, 403);
+            return ApiUtil.getErrorNextResponse("You are not the owner", 403);
         }
 
         // On vérifie que le nouveau site internet appartient bien à l'utilisateur, si on veut le modifier
         if (insertablePage.website_id !== website.id) {
             const [newWebsite] = await sql`
-                SELECT display_websites.*
-                FROM display_websites
-                WHERE display_websites.id = ${insertablePage.website_id}
+                SELECT website.*
+                FROM website
+                WHERE website.id = ${insertablePage.website_id}
                 LIMIT 1
             `;
             if (!newWebsite || newWebsite.owner_id !== user.id) {
@@ -127,15 +115,14 @@ export async function PUT(request: Request, {params}: { params: Promise<{ pageId
         // Validation des données
         FieldsUtil.checkFieldsOrThrow<InsertablePage>(FieldsUtil.checkPage, insertablePage)
 
-        await sql`UPDATE pages
+        const [res] = await sql`UPDATE page
                   SET title      = ${insertablePage.title},
                       path       = ${insertablePage.path},
                       website_id = ${insertablePage.website_id},
-                        icon_svg   = ${insertablePage.icon_svg},
-                        description = ${insertablePage.description}
-                  WHERE id = ${pageId}`;
+                        icon_svg   = ${insertablePage.icon_svg}
+                  WHERE id = ${pageId} RETURNING *`;
 
-        return ApiUtil.getSuccessNextResponse();
+        return ApiUtil.getSuccessNextResponse<Page>(res as Page);
     } catch (e) {
         return ApiUtil.handleNextErrors(e as Error);
     }

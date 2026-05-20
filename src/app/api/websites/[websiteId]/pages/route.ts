@@ -1,8 +1,8 @@
-import {InsertablePage, Page, RecursivePage} from "@/app/models/Page";
+import {InsertablePage, Page} from "@/app/models/Page";
 import {ApiUtil} from "@/app/utils/apiUtil";
 import {SqlUtil} from "@/app/utils/sqlUtil";
 import {FieldsUtil} from "@/app/utils/fieldsUtil";
-import PageService from "@/app/services/pageService";
+import {LexicalPositionUtil} from "@/app/utils/LexicalPositionUtil";
 
 export async function POST(request: Request, { params }: { params: Promise<{ websiteId: string }> }) {
 
@@ -19,12 +19,12 @@ export async function POST(request: Request, { params }: { params: Promise<{ web
 
         //on récupère le site internet
         const [website] = await sql`
-        SELECT * FROM display_websites WHERE id = ${websiteId} or website_domain = ${websiteId} LIMIT 1
+        SELECT * FROM website WHERE id = ${websiteId} or website_domain = ${websiteId} LIMIT 1
     `;
 
         // On vérifie que le site appartient bien à l'utilisateur
         if (website.owner_id !== user.id) {
-            return ApiUtil.getErrorNextResponse("You are not the owner of this website", undefined, 403);
+            return ApiUtil.getErrorNextResponse("You are not the owner of this website", 403);
         }
 
         // Récupération des données dans le body
@@ -33,14 +33,14 @@ export async function POST(request: Request, { params }: { params: Promise<{ web
         // Validation des données
         FieldsUtil.checkFieldsOrThrow<InsertablePage>(FieldsUtil.checkPage, insertablePage)
 
-        const [maxPositionReq] = await sql`SELECT MAX(position) as max_position FROM pages WHERE website_id = ${website.id}`;
-        const maxPosition = maxPositionReq?.max_position || 0;
-        const pagePosition = maxPosition + 1;
-        await sql`INSERT INTO pages (path, website_id, icon_svg, title, description, position)
-              VALUES (${insertablePage.path}, ${website.id}, ${insertablePage.icon_svg}, ${insertablePage.title}, ${insertablePage.description}, ${pagePosition})
-              `;
+        const pages : Page[] = await sql`SELECT * FROM page WHERE website_id = ${website.id}` as unknown as Page[];
+        const pos = LexicalPositionUtil.getNextPosition(pages);
+        const [res] = await sql`INSERT INTO page (path, website_id, icon_svg, title, position)
+              VALUES (${insertablePage.path}, ${website.id}, ${insertablePage.icon_svg}, ${insertablePage.title}, ${pos})
+              RETURNING *`;
 
-        return ApiUtil.getSuccessNextResponse(undefined, true);
+
+        return ApiUtil.getSuccessNextResponse<Page>(res as Page, true);
     } catch (error) {
         return ApiUtil.handleNextErrors(error as Error)
     }
@@ -55,19 +55,9 @@ export async function GET(request: Request, { params }: { params: Promise<{ webs
 
         const sql = SqlUtil.getSql()
         const res = await sql`
-        SELECT pages.* FROM display_websites, pages WHERE (display_websites.id = ${websiteId} or website_domain = ${websiteId}) and pages.website_id = display_websites.id ORDER BY pages.position
+        SELECT page.* FROM website, page WHERE (website.id = ${websiteId} or website_domain = ${websiteId}) and page.website_id = website.id ORDER BY page.position
     `;
-        if (!ApiUtil.isRecursiveRequest(request)) {
-            return ApiUtil.getSuccessNextResponse<Page[]>(res as Page[]);
-        }
-
-        const recursivePages: RecursivePage[] = [];
-
-        for (const page of res as Page[]) {
-            recursivePages.push(await PageService.getRecursivePageById(page.id));
-        }
-
-        return ApiUtil.getSuccessNextResponse<RecursivePage[]>(recursivePages);
+        return ApiUtil.getSuccessNextResponse<Page[]>(res as Page[]);
     } catch (e) {
         return ApiUtil.handleNextErrors(e as Error)
     }

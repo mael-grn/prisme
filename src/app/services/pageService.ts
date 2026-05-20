@@ -1,4 +1,4 @@
-import {InsertablePage, Page, RecursivePage} from "@/app/models/Page";
+import {InsertablePage, Page} from "@/app/models/Page";
 import axios, {AxiosError} from "axios";
 import StringUtil from "@/app/utils/StringUtil";
 
@@ -7,19 +7,10 @@ export default class PageService {
     /**
      * Get all pages for the current logged in user
      */
-    static async getMyPagesFromWebsite( websiteId : number) : Promise<Page[]> {
+    static async getMyPages(websiteId : number) : Promise<Page[]> {
         try {
             const response = await axios.get(`/api/websites/${websiteId}/pages`);
             return response.data.data as Page[];
-        } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
-        }
-    }
-
-    static async getMyRecursivePagesFromWebsite(websiteId : number) : Promise<RecursivePage[]> {
-        try {
-            const response = await axios.get(`/api/websites/${websiteId}/pages?recursive=true`);
-            return response.data.data as RecursivePage[];
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
@@ -29,19 +20,10 @@ export default class PageService {
      * Get a page by its id
      * @param pageId
      */
-    static async getPageById(pageId: number) : Promise<Page>  {
+    static async getPage(pageId: number) : Promise<Page>  {
         try {
             const response = await axios.get(`/api/pages/${pageId}`);
             return response.data.data as Page;
-        } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
-        }
-    }
-
-    static async getRecursivePageById(pageId: number) : Promise<RecursivePage>  {
-        try {
-            const response = await axios.get(`/api/pages/${pageId}?recursive=true`);
-            return response.data.data as RecursivePage;
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
@@ -87,9 +69,10 @@ export default class PageService {
         }
     }
 
-    static async movePage(pageWithNewPos: Page) : Promise<void> {
+    static async movePage(targetId: number, referenceId: number, direction: 'up' | 'down') : Promise<Page> {
         try {
-            await axios.post(`/api/pages/${pageWithNewPos.id}/move_position`, pageWithNewPos);
+            const response = await axios.post(`/api/pages/${targetId}/move`, {referencedId: referenceId, direction: direction});
+            return response.data.data as Page;
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }

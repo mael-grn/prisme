@@ -1,11 +1,9 @@
 import axios, { AxiosError } from "axios";
-import {DisplayWebsite, InsertableDisplayWebsite, RecursiveWebsite} from "@/app/models/DisplayWebsite";
+import {Website, InsertableDisplayWebsite} from "../models/Website";
 import {CSSProperties} from "react";
 import CssUtil from "@/app/utils/CssUtil";
-import {getDefaultColors, InsertableWebsiteColors, WebsiteColors} from "@/app/models/WebsiteColors";
-import CacheUtil from "@/app/utils/CacheUtil";
+import {InsertableWebsiteColors, WebsiteColors} from "@/app/models/WebsiteColors";
 import StringUtil from "@/app/utils/StringUtil";
-import StorageUtil from "@/app/utils/StorageUtil";
 
 /**
  * Service pour gérer et traiter les données des sites web, y compris la mise en cache côté client.
@@ -13,82 +11,15 @@ import StorageUtil from "@/app/utils/StorageUtil";
 export default class WebsiteService {
 
     /**
-     * Send the query and recover the website's data from the server.
-     * It fetches un recursive website, which includes all nested pages and resources. Therefore, it is NOT fast.
-     * @param idOrDomain either the website's ID or its domain name.
-     * @private
-     */
-    private static async fetchWebsite(idOrDomain : string): Promise<RecursiveWebsite> {
-        try {
-            const response = await axios.get(`/api/websites/${idOrDomain}?recursive=true`);
-            return response.data.data; // No cast necessary, the data is already in the correct format
-        } catch (error) {
-            throw new Error(`Failed to fetch data for domain : ${error}`);
-        }
-    }
-
-    /**
-     * Save the website data in the session storage for caching.
-     * @param website
-     * @private
-     */
-    private static saveWebsiteInCache(website: RecursiveWebsite) {
-        if (!StorageUtil.hasSessionStorage()) return;
-        try {
-            sessionStorage.setItem("cached_website_" + website.title.toLowerCase(), JSON.stringify(website));
-            sessionStorage.setItem("cached_website_" + website.id, JSON.stringify(website));
-            sessionStorage.setItem("last_update", Date.now().toString());
-        } catch {
-            // ignore storage errors (quota, etc.)
-        }
-    }
-
-    /**
-     * Try to recover the website data from the session storage cache. Returns null if not found.
-     * @param domainOrId
-     * @private
-     */
-    private static recoverWebsiteFromCache(domainOrId: string): RecursiveWebsite | null {
-        if (!StorageUtil.hasSessionStorage()) return null;
-        try {
-            const cachedWebsite = sessionStorage.getItem("cached_website_" + domainOrId.toLowerCase());
-            if (!cachedWebsite) return null;
-            return JSON.parse(cachedWebsite) as RecursiveWebsite;
-        } catch {
-            return null;
-        }
-    }
-
-    /**
-     * Check if the cached data is too old (older than 1 hour).
-     * @private
-     */
-    private static cacheIsTooOld(): boolean {
-        if (!StorageUtil.hasSessionStorage()) return true;
-        try {
-            const lastUpdate = sessionStorage.getItem("last_update");
-            if (!lastUpdate) return true;
-            const lastUpdateTime = parseInt(lastUpdate, 10);
-            const currentTime = Date.now();
-            const oneHour = 60 * 60 * 1000;
-            return (currentTime - lastUpdateTime) > oneHour;
-        } catch {
-            return true;
-        }
-    }
-
-    /**
      * Get the recursive website data, either from cache or by fetching it from the server.
      * @param domainOrId
      */
-    static async getRecursiveWebsite(domainOrId: string): Promise<RecursiveWebsite> {
-        const cachedWebsite = this.recoverWebsiteFromCache(domainOrId);
-        if (cachedWebsite && !this.cacheIsTooOld() && CacheUtil.isCacheActive()) {
-            return cachedWebsite;
-        } else {
-            const website = await this.fetchWebsite(domainOrId);
-            this.saveWebsiteInCache(website);
-            return website;
+    static async getWebsite(domainOrId: string): Promise<Website> {
+        try {
+            const response = await axios.get(`/api/websites/${domainOrId}`);
+            return response.data.data; // No cast necessary, the data is already in the correct format
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
     }
 
@@ -97,31 +28,34 @@ export default class WebsiteService {
      * @param websiteId
      */
     public static async getCSSPropertiesForWebsite(websiteId: string): Promise<CSSProperties> {
-        const website = await WebsiteService.getRecursiveWebsite(websiteId);
-        if (website && website.colors) {
-            return CssUtil.websiteColorsToCSS(website.colors);
-        } else {
-            return CssUtil.websiteColorsToCSS(getDefaultColors(-1) as WebsiteColors);
-        }
-    }
-
-    static async insertColors(websiteId: number, colors: InsertableWebsiteColors): Promise<void> {
+        const website = await WebsiteService.getWebsite(websiteId);
         try {
-            await axios.post(`/api/websites/${websiteId}/colors`, colors);
+            const response = await axios.get(`/api/websites/${websiteId}/colors`);
+            return CssUtil.websiteColorsToCSS(await this.getColors(websiteId));
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
     }
 
-    static async updateColors(websiteId: number, colors: InsertableWebsiteColors): Promise<void> {
+    static async insertColors(websiteId: string, colors: InsertableWebsiteColors): Promise<WebsiteColors> {
         try {
-            await axios.put(`/api/websites/${websiteId}/colors`, colors);
+            const response = await axios.post(`/api/websites/${websiteId}/colors`, colors);
+            return response.data.data;
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
     }
 
-    static async getColors(websiteId: number): Promise<WebsiteColors> {
+    static async updateColors(websiteId: string, colors: InsertableWebsiteColors): Promise<WebsiteColors> {
+        try {
+            const response = await axios.put(`/api/websites/${websiteId}/colors`, colors);
+            return response.data.data;
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
+    }
+
+    static async getColors(websiteId: string): Promise<WebsiteColors> {
         try {
             const response = await axios.get(`/api/websites/${websiteId}/colors`);
             return response.data.data as WebsiteColors;
@@ -130,20 +64,20 @@ export default class WebsiteService {
         }
     }
 
-    static async createNewWebsite(newWebsite: InsertableDisplayWebsite) {
+    static async createWebsite(newWebsite: InsertableDisplayWebsite): Promise<Website> {
         try {
             const response = await axios.post('/api/me/websites', newWebsite);
-            return response.data.data as DisplayWebsite;
+            return response.data.data as Website;
         } catch (e) {
             const perso = {code: 409, message: "This website title is already used. Please choose another title."}
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1, perso)
         }
     }
 
-    static async getMyWebsites(): Promise<DisplayWebsite[]> {
+    static async getMyWebsites(): Promise<Website[]> {
         try {
             const response = await axios.get('/api/me/websites');
-            return response.data.data as DisplayWebsite[];
+            return response.data.data as Website[];
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
@@ -157,22 +91,4 @@ export default class WebsiteService {
         }
     }
 
-    static async updateWebsite(editedWebsite: DisplayWebsite) {
-        try {
-            const response = await axios.put(`/api/websites/${editedWebsite.id}`, editedWebsite);
-            return response.data.data as DisplayWebsite;
-        } catch (e) {
-            const perso = {code: 409, message: "The page name is already used. Please choose another name."}
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1, perso)
-        }
-    }
-
-    static async getWebsiteById(websiteId: number): Promise<DisplayWebsite> {
-        try {
-            const response = await axios.get(`/api/websites/${websiteId}`);
-            return response.data.data as DisplayWebsite;
-        } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
-        }
-    }
 }

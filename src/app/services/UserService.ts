@@ -1,7 +1,5 @@
 import {User} from "@/app/models/User";
 import axios, {AxiosError} from "axios";
-import {UserNotFoundError} from "@/app/errors/UserNotFoundError";
-import {UserNotLoggedIn} from "@/app/errors/UserNotLoggedIn";
 import StringUtil from "@/app/utils/StringUtil";
 
 export default class UserService {

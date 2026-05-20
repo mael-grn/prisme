@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import {
-    arrayFont,
-    boskaFont,
-    chillaxFont,
-    clashDisplayFont, outfitFont,
-    satoshiFont,
-} from "@/app/fonts";
+import { Montserrat } from "next/font/google";
 
+const montserrat = Montserrat({
+    subsets: ["latin"],
+    weight: ["300", "400", "500", "700"],
+    variable: "--font-montserrat",
+});
 
 export const metadata: Metadata = {
-  title: "Prisme",
+  title: "Serac",
   description: "",
 };
 
@@ -28,12 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body
           className={`
-          ${arrayFont.variable} 
-          ${satoshiFont.variable} 
-          ${chillaxFont.variable} 
-          ${clashDisplayFont.variable} 
-          ${outfitFont.variable} 
-          ${boskaFont.variable} 
+          ${montserrat.className} 
           antialiased
           bg-background
         `}

@@ -1,10 +1,8 @@
 import {Language} from "@/app/models/TextToTranslate";
 import {ApiUtil} from "@/app/utils/apiUtil";
 import {SqlUtil} from "@/app/utils/sqlUtil";
-import {Element} from "@/app/models/Element";
-import Translation from "@/app/models/Translation";
 import {deeplTranslate} from "@/app/utils/DeeplUtil";
-import {DisplayWebsite} from "@/app/models/DisplayWebsite";
+import {Website} from "@/app/models/Website";
 
 
 
@@ -17,18 +15,18 @@ export async function GET(request: Request, {params}: { params: Promise<{ websit
 
         const sql = SqlUtil.getSql()
 
-        let [website] = await sql`SELECT * FROM display_websites WHERE id = ${websiteId} LIMIT 1` as DisplayWebsite[];
+        let [website] = await sql`SELECT * FROM website" WHERE id = ${websiteId} LIMIT 1` as Website[];
         if (!website) {
-            return ApiUtil.getErrorNextResponse("Website does not exists", undefined, 404);
+            return ApiUtil.getErrorNextResponse("Website does not exists", 404);
         }
 
         if (website.lang === lang) {
-            return ApiUtil.getSuccessNextResponse<DisplayWebsite>(website as DisplayWebsite);
+            return ApiUtil.getSuccessNextResponse<Website>(website as Website);
         }
 
-        website.hero_title = await deeplTranslate(website.hero_title, lang as Language);
+        website.title = await deeplTranslate(website.title, lang as Language);
 
-        return ApiUtil.getSuccessNextResponse<DisplayWebsite>(website as DisplayWebsite);
+        return ApiUtil.getSuccessNextResponse<Website>(website as Website);
     } catch (error) {
         return ApiUtil.handleNextErrors(error as Error);
     }

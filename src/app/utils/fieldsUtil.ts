@@ -1,9 +1,9 @@
 // typescript
-import {InsertableDisplayWebsite} from "@/app/models/DisplayWebsite";
+import {InsertableDisplayWebsite} from "../models/Website";
 import {InsertablePage} from "@/app/models/Page";
 import {InsertableSection} from "@/app/models/Section";
 import {InsertableElement} from "@/app/models/Element";
-import {InsertableCategory} from "@/app/models/Category";
+import {InsertableTag} from "../models/Tag";
 import {InsertableSubcategory} from "@/app/models/Subcategory";
 import {InvalidFieldsError} from "@/app/errors/InvalidFieldsError";
 import {InsertableWebsiteColors} from "@/app/models/WebsiteColors";
@@ -262,7 +262,7 @@ export class FieldsUtil {
         return {valid: errors.length === 0, errors};
     }
 
-    public static checkCategory(c: InsertableCategory): ValidationResult {
+    public static checkCategory(c: InsertableTag): ValidationResult {
         const errors: string[] = [];
         if (!c) return {valid: false, errors: ["category is required"]};
 

@@ -11,10 +11,10 @@ export async function GET(request: Request, {params}: { params: Promise<{ elemen
 
         const sql = SqlUtil.getSql()
 
-        const [element] = await sql`SELECT * FROM elements WHERE id = ${elementId} LIMIT 1`;
+        const [element] = await sql`SELECT * FROM element WHERE id = ${elementId} LIMIT 1`;
 
         if (!element) {
-            return ApiUtil.getErrorNextResponse("Element not found", undefined, 404);
+            return ApiUtil.getErrorNextResponse("Element not found", 404);
         }
         return ApiUtil.getSuccessNextResponse<Element>(element as Element);
     } catch (e) {
@@ -39,32 +39,30 @@ export async function PUT(request: Request, {params}: { params: Promise<{ elemen
 
         //on récupère le site internet
         const [website] = await sql`
-            SELECT display_websites.*
-            FROM display_websites,
-                 pages,
-                 sections,
-                 elements
+            SELECT website.*
+            FROM website,
+                 page,
+                 element
             WHERE 
-                elements.id = ${elementId}
-             and elements.section_id = sections.id
-            and pages.id = sections.page_id
-              and display_websites.id = pages.website_id
+                element.id = ${elementId}
+             and element.page_id = page.id
+            and page.website_id = website.id
             LIMIT 1
         `;
 
         // On vérifie que le site appartient bien à l'utilisateur
         if (website.owner_id !== user.id) {
-            return ApiUtil.getErrorNextResponse("You are not the owner", undefined, 403);
+            return ApiUtil.getErrorNextResponse("You are not the owner", 403);
         }
 
         // Validation des données
         FieldsUtil.checkFieldsOrThrow<InsertableElement>(FieldsUtil.checkElement, element);
 
-        await sql`UPDATE elements
+        const [res] = await sql`UPDATE element
                   SET element_type      = ${element.element_type}, content = ${element.content}
-                  WHERE id = ${elementId}`;
+                  WHERE id = ${elementId} returning *`;
 
-        return ApiUtil.getSuccessNextResponse();
+        return ApiUtil.getSuccessNextResponse<Element>(res as Element);
     } catch (e) {
         return ApiUtil.handleNextErrors(e as Error);
     }
@@ -84,25 +82,23 @@ export async function DELETE(request: Request, {params}: { params: Promise<{ ele
 
         //on récupère le site internet
         const [website] = await sql`
-            SELECT display_websites.*
-            FROM display_websites,
-                 pages,
-                 sections,
-                 elements
-            WHERE 
-                elements.id = ${elementId}
-             and elements.section_id = sections.id
-            and pages.id = sections.page_id
-              and display_websites.id = pages.website_id
+            SELECT website.*
+            FROM website,
+                 page,
+                 element
+            WHERE
+                element.id = ${elementId}
+              and element.page_id = page.id
+              and page.website_id = website.id
             LIMIT 1
         `;
 
         // On vérifie que le site appartient bien à l'utilisateur
         if (website.owner_id !== user.id) {
-            return ApiUtil.getErrorNextResponse("You are not the owner", undefined, 403);
+            return ApiUtil.getErrorNextResponse("You are not the owner", 403);
         }
 
-        await sql`DELETE FROM elements where elements.id = ${elementId}`;
+        await sql`DELETE FROM element where element.id = ${elementId}`;
 
         return ApiUtil.getSuccessNextResponse();
     } catch (e) {

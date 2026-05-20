@@ -1,8 +1,7 @@
-import {DisplayWebsite, InsertableDisplayWebsite} from "@/app/models/DisplayWebsite";
+import {Website, InsertableDisplayWebsite} from "@/app/models/Website";
 import {ApiUtil} from "@/app/utils/apiUtil";
 import {FieldsUtil} from "@/app/utils/fieldsUtil";
 import {SqlUtil} from "@/app/utils/sqlUtil";
-import {cookies} from "next/headers";
 
 /**
  * Create a new display website for the connected user
@@ -23,25 +22,23 @@ export async function POST(request: Request) {
 
         // Insertion en base de données
         const sql = SqlUtil.getSql()
+        let res : Website;
         if (insertableWebsite.website_domain) {
-            await sql`
-            INSERT INTO display_websites (owner_id, title, website_domain, hero_image_url, hero_title)
-            VALUES (${user.id}, ${insertableWebsite.title}, ${insertableWebsite.website_domain},
-                    ${insertableWebsite.hero_image_url},
-                    ${insertableWebsite.hero_title})
-        `
+            [res] = await sql`
+            INSERT INTO website (owner_id, title, website_domain)
+            VALUES (${user.id}, ${insertableWebsite.title}, ${insertableWebsite.website_domain})
+            returning *
+        ` as unknown as Website[]
         } else {
-            await sql`
-            INSERT INTO display_websites (owner_id, title, hero_image_url, hero_title)
-            VALUES (${user.id}, ${insertableWebsite.title},
-                    ${insertableWebsite.hero_image_url},
-                    ${insertableWebsite.hero_title})
-        `
+            [res] = await sql`
+            INSERT INTO website (owner_id, title)
+            VALUES (${user.id}, ${insertableWebsite.title}) returning *
+        ` as unknown as Website[]
         }
 
 
         // Retour de la nouvelle ressource avec le token en clair, disponible uniquement une fois
-        return ApiUtil.getSuccessNextResponse();
+        return ApiUtil.getSuccessNextResponse<Website>(res);
     } catch (error) {
         return ApiUtil.handleNextErrors(error as Error);
     }
@@ -54,21 +51,21 @@ export async function GET() {
         const sql = SqlUtil.getSql()
         const res = await sql`
             SELECT *
-            FROM display_websites
+            FROM website
             WHERE owner_id = ${user.id}
         `;
 
-        const modifiedList: DisplayWebsite[] = [];
+        const modifiedList: Website[] = [];
         for (const website of res) {
-            const modifiedWebsite: DisplayWebsite = {
-                ...website as DisplayWebsite,
+            const modifiedWebsite: Website = {
+                ...website as Website,
             }
             if (modifiedWebsite.website_domain && (modifiedWebsite.website_domain === "" || modifiedWebsite.website_domain === "null" || modifiedWebsite.website_domain === null)) {
                 modifiedWebsite.website_domain = undefined;
             }
             modifiedList.push(modifiedWebsite)
         }
-        return ApiUtil.getSuccessNextResponse<DisplayWebsite[]>(modifiedList);
+        return ApiUtil.getSuccessNextResponse<Website[]>(modifiedList);
     } catch (error) {
         return ApiUtil.handleNextErrors(error as Error);
     }

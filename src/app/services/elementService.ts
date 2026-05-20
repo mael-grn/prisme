@@ -2,15 +2,16 @@ import {InsertableElement} from "@/app/models/Element";
 import axios, {AxiosError} from "axios";
 import StringUtil from "@/app/utils/StringUtil";
 import {Element} from "@/app/models/Element";
+import {PossibleElemType} from "@/app/enums/PossibleElemType";
 export default class ElementService {
 
     /**
-     * Récupère tous les éléments dont la section correspond à l'id passé en paramètre
-     * @param sectionId
+     * Récupère tous les éléments dont la page correspond à l'id passé en paramètre
+     * @param pageId
      */
-    static async getElementsFromSectionId(sectionId: number) : Promise<Element[]> {
+    static async getMyElements(pageId: number) : Promise<Element[]> {
         try {
-            const response = await axios.get(`/api/sections/${sectionId}/elements`);
+            const response = await axios.get(`/api/pages/${pageId}/elements`);
             return response.data.data as Element[];
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
@@ -18,19 +19,14 @@ export default class ElementService {
     }
 
     static getElementTypes() : string[] {
-        return [
-            "title",
-            "text",
-            "link",
-            "image"
-        ]
+        return Object.values(PossibleElemType);
     }
 
     /**
      * Récupère un élément par son id. Ne peut pas récupérer un élément n'appartenant pas à l'utilisateur connecté
      * @param elementId
      */
-    static async getElementById(elementId: number) : Promise<Element>  {
+    static async getElement(elementId: number) : Promise<Element>  {
         try {
             const response = await axios.get(`/api/elements/${elementId}`);
             return response.data.data as Element;
@@ -44,9 +40,10 @@ export default class ElementService {
      * Retourne l'élément inséré avec son id.
      * @param newElement
      */
-    static async insertElement(newElement : InsertableElement) : Promise<void> {
+    static async insertElement(newElement : InsertableElement) : Promise<Element> {
         try {
-            await axios.post(`/api/sections/${newElement.section_id}/elements`, newElement);
+            const response = await axios.post(`/api/pages/${newElement.page_id}/elements`, newElement);
+            return response.data.data as Element;
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
@@ -58,9 +55,10 @@ export default class ElementService {
      * Ne change pas la position.
      * @param updatedElement
      */
-    static async updateElement(updatedElement: Element) : Promise<void> {
+    static async updateElement(updatedElement: Element) : Promise<Element> {
         try {
-            await axios.put(`/api/elements/${updatedElement.id}`, updatedElement);
+            const response = await axios.put(`/api/elements/${updatedElement.id}`, updatedElement);
+            return response.data.data as Element;
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
@@ -75,9 +73,10 @@ export default class ElementService {
      * Ne fait rien si l'élément ne peut pas être déplacé (déplacement hors des limites de la section).
      * Modifie egalement la position des autres elements pour que les positions restent cohérentes.
      */
-    static async moveElement(element: Element) : Promise<void> {
+    static async moveElement(element: Element) : Promise<Element> {
         try {
-            await axios.post(`/api/elements/${element.id}/move_position`, element);
+            const response = await axios.post(`/api/elements/${element.id}/move`, element);
+            return response.data.data as Element;
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
