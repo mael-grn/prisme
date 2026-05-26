@@ -4,27 +4,17 @@
 
 @theme {
     --color-background: var(--background);
-    --color-background-opacity: rgba(0, 0, 0, 0.75);
-    --color-on-background: var(--on-background);
-    --color-on-background-hover: var(--on-background-hover);
+    --color-background-variant: var(--background-variant);
     --color-foreground: var(--foreground);
-    --color-on-foreground: var(--on-foreground);
-    --color-on-foreground-hover: var(--on-foreground-hover);
+    --color-foreground-variant: var(--foreground-variant);
     --color-dangerous: var(--dangerous);
-    --color-dangerous-hover: var(--dangerous-hover);
+    --color-dangerous-variant: var(--dangerous-variant);
     --color-safe: var(--safe);
-    --color-safe-hover: var(--safe-hover);
+    --color-safe-variant: var(--safe-variant);
     --color-primary: var(--primary);
-    --color-primary-hover: var(--primary-hover);
+    --color-primary-variant: var(--primary-variant);
     --color-secondary: var(--secondary);
-    --color-secondary-hover: var(--secondary-hover);
-    --font-array: var(--font-array);
-    --font-satoshi: var(--font-satoshi);
-    --font-chillax: var(--font-chillax);
-    --font-clashdisplay: var(--font-clashdisplay);
-    --font-outfit: var(--font-outfit);
-    --font-boska: var(--font-boska), serif;
-    --font-sans: "Montserrat", sans-serif;
+    --color-secondary-variant: var(--secondary-variant);
 }
 
 @utility scrollbar-hide {
@@ -36,42 +26,30 @@
 }
 
 :root {
-    --background: #0A0F0D;
-    --background-opacity: rgba(0, 0, 0, 0.75);
-    --on-background: #1D2925;
-    --on-background-hover: #263731;
-    --foreground: #E0E6E3;
-    --on-foreground: #BCCBC3;
-    --on-foreground-hover: #a2aea7;
+    --background: #ffffff;
+    --background-variant: #cfcfcf;
+    --foreground: #000000;
+    --foreground-variant: #1e1e1e;
     --dangerous: #c53854;
-    --dangerous-hover: #A91D3A;
+    --dangerous-variant: #A91D3A;
     --safe: #5ca6b3;
-    --safe-hover: #2F7C8A;
-    --primary: #2D7A5F;
-    --primary-hover: #3A9677;
-    --secondary: #1B3022;
-    --secondary-hover: #1D2925;
+    --safe-variant: #2F7C8A;
+    --primary: #8a8a8a;
+    --primary-variant: #6c6c6c;
+    --secondary: #8a8a8a;
+    --secondary-variant: #6c6c6c;
 }
 
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    transition: background-color .5s ease;
 }
 
-h1 {
-    font-weight: 700;
-    font-size: 32px;
+p {
+    color: var(--foreground);
 }
 
-h2 {
-    font-weight: 700;
-    font-size: 24px;
-}
-
-h3 {
-    font-weight: 700;
-    font-size: 18px;
-}
 svg {
     width: 100% !important;
     height: 100% !important;

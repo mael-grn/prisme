@@ -1,4 +1,5 @@
-import {InsertableWebsiteColors} from "@/app/models/WebsiteColors";
+import {WebsiteColors} from "@/app/models/WebsiteColors";
+import { Vibrant } from "node-vibrant/node";
 
 /**
  * Utilitaire pour gérer les couleurs
@@ -98,30 +99,31 @@ export default class ColorUtil {
         }
     }
 
-    static setPrimaryColorAuto(colors: InsertableWebsiteColors, newPrimary: string): InsertableWebsiteColors {
-        colors.primary_color = newPrimary;
-        colors.primary_variant = this.autoContrastHex(newPrimary, 0.3);
-        return colors;
-    }
+    static async getColorsFromImage(src: string): Promise<WebsiteColors> {
+        // 1. Récupération de l'image en tant que Buffer (nécessaire pour l'environnement Node)
+        const response = await fetch(src);
+        const arrayBuffer = await response.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
 
-    static setSecondaryColorAuto(colors: InsertableWebsiteColors, newSecondary: string): InsertableWebsiteColors {
-        colors.secondary_color = newSecondary;
-        colors.secondary_variant = this.autoContrastHex(newSecondary, 0.3);
-        return colors;
-    }
+        // 2. Extraction de la palette depuis le buffer
+        const palette = await Vibrant.from(buffer).getPalette();
 
-    static setBackgroundColorAuto(colors: InsertableWebsiteColors, newBackground: string): InsertableWebsiteColors {
-        colors.background_color = newBackground;
-        colors.background_variant = this.autoContrastHex(newBackground, 0.1);
-        colors.background_variant_variant = this.autoContrastHex(colors.background_variant, 0.1);
-        return colors;
-    }
+        const fallback = '#ffffff';
 
-    static setTextColorAuto(colors: InsertableWebsiteColors, newText: string): InsertableWebsiteColors {
-        colors.text_color = newText;
-        colors.text_variant = this.autoContrastHex(newText, 0.1);
-        colors.text_variant_variant = this.autoContrastHex(colors.text_variant, 0.1);
-        return colors;
+        // 3. Construction de l'objet de couleurs
+        return {
+            primary: this.darkenHex(palette.Vibrant?.hex || fallback, 0.3),
+            primary_variant: this.autoContrastHex(palette.Vibrant?.hex || fallback, 0.4),
+
+            secondary: this.darkenHex(palette.Muted?.hex || fallback, 0.3),
+            secondary_variant: this.autoContrastHex(palette.Muted?.hex || fallback, 0.4),
+
+            foreground: this.darkenHex(palette.DarkMuted?.hex || fallback, 0.3),
+            foreground_variant: this.autoContrastHex(palette.DarkMuted?.hex || fallback, 0.4),
+
+            background: this.lightenHex(palette.LightMuted?.hex || fallback, 0.3),
+            background_variant: this.autoContrastHex(palette.LightMuted?.hex || fallback, 0.4),
+        };
     }
 
 

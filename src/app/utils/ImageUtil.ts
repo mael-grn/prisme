@@ -24,4 +24,15 @@ export class ImageUtil {
             throw (error as Error).message;
         }
     }
+
+    static getRandomBackgroundImage() : string {
+        const images = [
+            "forest",
+            "hills",
+            "mountain",
+            "path",
+            "wave"
+        ]
+        return "/img/" + images[Math.floor(Math.random() * images.length)] + ".jpg";
+    }
 }

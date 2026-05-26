@@ -9,7 +9,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Serac",
+  title: "Panorama",
   description: "",
 };
 

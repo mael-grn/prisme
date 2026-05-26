@@ -25,6 +25,10 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
+    if (request.nextUrl.pathname.startsWith('/api/colors')) {
+        return NextResponse.next();
+    }
+
     // GET requests arent protected on the API
     if (request.nextUrl.pathname.startsWith('/api') && request.method === 'GET') {
         return NextResponse.next();

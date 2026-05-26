@@ -2,8 +2,9 @@ import axios, { AxiosError } from "axios";
 import {Website, InsertableDisplayWebsite} from "../models/Website";
 import {CSSProperties} from "react";
 import CssUtil from "@/app/utils/CssUtil";
-import {InsertableWebsiteColors, WebsiteColors} from "@/app/models/WebsiteColors";
+import {WebsiteColors} from "@/app/models/WebsiteColors";
 import StringUtil from "@/app/utils/StringUtil";
+import ColorUtil from "@/app/utils/ColorUtil";
 
 /**
  * Service pour gérer et traiter les données des sites web, y compris la mise en cache côté client.
@@ -23,42 +24,12 @@ export default class WebsiteService {
         }
     }
 
-    /**
-     * Get the CSS properties for a given website, based on its colors.
-     * @param websiteId
-     */
+
     public static async getCSSPropertiesForWebsite(websiteId: string): Promise<CSSProperties> {
         const website = await WebsiteService.getWebsite(websiteId);
         try {
             const response = await axios.get(`/api/websites/${websiteId}/colors`);
-            return CssUtil.websiteColorsToCSS(await this.getColors(websiteId));
-        } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
-        }
-    }
-
-    static async insertColors(websiteId: string, colors: InsertableWebsiteColors): Promise<WebsiteColors> {
-        try {
-            const response = await axios.post(`/api/websites/${websiteId}/colors`, colors);
-            return response.data.data;
-        } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
-        }
-    }
-
-    static async updateColors(websiteId: string, colors: InsertableWebsiteColors): Promise<WebsiteColors> {
-        try {
-            const response = await axios.put(`/api/websites/${websiteId}/colors`, colors);
-            return response.data.data;
-        } catch (e) {
-            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
-        }
-    }
-
-    static async getColors(websiteId: string): Promise<WebsiteColors> {
-        try {
-            const response = await axios.get(`/api/websites/${websiteId}/colors`);
-            return response.data.data as WebsiteColors;
+            return CssUtil.getCSSPropertiesFromImage((response.data.data as Website).image_src);
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }

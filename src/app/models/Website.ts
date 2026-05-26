@@ -7,6 +7,7 @@ export interface Website {
     title: string;
     website_domain?: string;
     lang: Language;
+    image_src?: string;
 }
 
 export interface InsertableDisplayWebsite {
@@ -14,4 +15,5 @@ export interface InsertableDisplayWebsite {
     title: string;
     website_domain?: string;
     lang?: Language;
+    image_src?: string;
 }

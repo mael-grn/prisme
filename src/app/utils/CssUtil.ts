@@ -1,6 +1,9 @@
-import {getDefaultColors, WebsiteColors} from "@/app/models/WebsiteColors";
+import {WebsiteColors} from "@/app/models/WebsiteColors";
 import {CSSProperties} from "react";
-import WebsiteService from "@/app/services/WebsiteService";
+import ColorUtil from "@/app/utils/ColorUtil";
+import StringUtil from "@/app/utils/StringUtil";
+import axios, {AxiosError} from "axios";
+import {Website} from "@/app/models/Website";
 
 /**
  * Utilitaire pour manipuler du css
@@ -13,22 +16,30 @@ export default class CssUtil {
      */
     public static websiteColorsToCSS(colors: WebsiteColors): CSSProperties {
         return {
-            '--primary': colors.primary_color,
-            '--primary-hover': colors.primary_variant,
-            '--secondary': colors.secondary_color,
-            '--secondary-hover': colors.secondary_variant,
-            '--background': colors.background_color,
-            '--background-opacity': "rgba(0, 0, 0, 0.75)",
-            '--on-background': colors.background_variant,
-            '--on-background-hover': colors.background_variant_variant,
-            '--foreground': colors.text_color,
-            '--on-foreground': colors.text_variant,
-            '--on-foreground-hover': colors.text_variant_variant,
+            '--primary': colors.primary,
+            '--primary-variant': colors.primary_variant,
+            '--secondary': colors.secondary,
+            '--secondary-variant': colors.secondary_variant,
+            '--background': colors.background,
+            '--background-variant': colors.background_variant,
+            '--foreground': colors.foreground,
+            '--foreground-variant': colors.foreground_variant,
             '--dangerous': "#c53854",
-            '--dangerous-hover': "#A91D3A",
+            '--dangerous-variant': "#A91D3A",
             '--safe': "#5ca6b3",
-            '--safe-hover': "#2F7C8A"
+            '--safe-variant': "#2F7C8A"
         } as React.CSSProperties & { [key: string]: string };
+    }
+
+    public static async getCSSPropertiesFromImage(imageSrc: string | undefined = "/img/mountain.jpg"): Promise<CSSProperties> {
+        try {
+            const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+            const response = await axios.post('/api/colors', {"imageSrc": baseUrl+imageSrc});
+            const colors = response.data.data as WebsiteColors;
+            return CssUtil.websiteColorsToCSS(colors);
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
     }
 
 

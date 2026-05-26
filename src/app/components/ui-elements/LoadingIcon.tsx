@@ -7,7 +7,12 @@ import {useEffect, useRef} from "react";
  * L'animation se répète indéfiniment tant que le composant est monté.
  * @constructor
  */
-export default function LoadingIcon({size = 30} : {size?: number}) {
+
+export enum LoadingIconColor {
+    light = "var(--background)",
+    dark = "var(--foreground)"
+}
+export default function LoadingIcon({size = 30, color = LoadingIconColor.dark} : {size?: number, color?: LoadingIconColor}) {
 
     const playerRef = useRef<Player>(null);
 
@@ -20,7 +25,7 @@ export default function LoadingIcon({size = 30} : {size?: number}) {
             ref={playerRef}
             size={size}
             icon={ ICON }
-            colorize={"var(--foreground)"}
+            colorize={color}
             onComplete={() => playerRef.current?.playFromBeginning()}
         />
     )
