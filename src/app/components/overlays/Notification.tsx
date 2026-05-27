@@ -1,6 +1,7 @@
 import Button from "@/app/components/ui-elements/Button";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
+import Container from "@/app/components/page-elements/Container";
 
 export interface NotificationProps {
     title: string;
@@ -38,14 +39,21 @@ export default function Notification({title, iconSrc, description, onCloseAction
                 }}
                 // Remplacement de left-auto right-auto par left-1/2
                 // Ajout de overflow-hidden pour que la barre de progression épouse les arrondis rounded-3xl
-                className={`fixed top-5 left-1/2 justify-center md:max-w-1/2 backdrop-blur w-fit h-fit items-center rounded-3xl bg-background/70 p-3 pb-4 flex gap-4 shadow-lg z-50 overflow-hidden ${!iconSrc && "pl-5"}`}
+                className={`fixed top-5 left-1/2 justify-center md:max-w-1/2 backdrop-blur rounded-3xl overflow-hidden h-fit items-center z-50`}
             >
-                {iconSrc && <img src={iconSrc} alt={"icon"} className={"w-12 h-12"}/>}
-                <div className={"flex flex-col items-center"}>
-                    <h2 className="font-bold w-full">{title}</h2>
-                    {description && <p className="text-sm w-full opacity-90">{description}</p>}
-                </div>
-                <Button iconSrc={"/ico/close.svg"} onClickAction={onCloseAction}/>
+                <Container>
+                    <div className={"flex items-center justify-center gap-4"}>
+                        {iconSrc && <img src={iconSrc} alt={"icon"} className={"w-12 h-12"}/>}
+                        <div className={"flex flex-col items-center"}>
+                            <h2 className="font-bold w-full">{title}</h2>
+                            {description && <p className="text-sm w-full opacity-90">{description}</p>}
+                        </div>
+                        <Button iconSrc={"/ico/close.svg"} onClickAction={onCloseAction}/>
+
+                    </div>
+
+
+                </Container>
 
                 {/* Barre de progression en bas */}
                 <motion.div
@@ -54,6 +62,7 @@ export default function Notification({title, iconSrc, description, onCloseAction
                     transition={{ duration: 5, ease: "linear" }}
                     className="absolute bottom-0 left-0 h-1 bg-primary"
                 />
+
             </motion.div>
         }
     </AnimatePresence>

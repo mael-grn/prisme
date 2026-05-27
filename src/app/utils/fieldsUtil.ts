@@ -1,12 +1,9 @@
 // typescript
 import {InsertableDisplayWebsite} from "../models/Website";
 import {InsertablePage} from "@/app/models/Page";
-import {InsertableSection} from "@/app/models/Section";
 import {InsertableElement} from "@/app/models/Element";
 import {InsertableTag} from "../models/Tag";
-import {InsertableSubcategory} from "@/app/models/Subcategory";
 import {InvalidFieldsError} from "@/app/errors/InvalidFieldsError";
-import {InsertableWebsiteColors} from "@/app/models/WebsiteColors";
 
 export type ValidationResult = { valid: boolean; errors: string[] };
 
@@ -56,52 +53,14 @@ export class FieldsUtil {
     }
 
 
-    public static checkWebsiteColors(colors: InsertableWebsiteColors): ValidationResult {
-        const errors: string[] = [];
-        if (!colors) {
-            return {valid: false, errors: ["colors are required"]};
-        }
 
-        if (!this.isHexColor(colors.primary_color)) {
-            errors.push("The primary color is not a valid hexadecimal code");
-        }
-        if (!this.isHexColor(colors.primary_variant)) {
-            errors.push("The primary color variant is not a valid hexadecimal code");
-        }
-        if (!this.isHexColor(colors.secondary_color)) {
-            errors.push("The secondary color is not a valid hexadecimal code");
-        }
-        if (!this.isHexColor(colors.secondary_variant)) {
-            errors.push("The secondary color variant is not a valid hexadecimal code");
-        }
-        if (!this.isHexColor(colors.background_color)) {
-            errors.push("The background color is not a valid hexadecimal code");
-        }
-        if (!this.isHexColor(colors.background_variant)) {
-            errors.push("The background color variant is not a valid hexadecimal code");
-        }
-        if (!this.isHexColor(colors.background_variant_variant)) {
-            errors.push("The second background color variant is not a valid hexadecimal code");
-        }
-        if (!this.isHexColor(colors.text_color)) {
-            errors.push("The text color is not a valid hexadecimal code");
-        }
-        if (!this.isHexColor(colors.text_variant)) {
-            errors.push("The text color variant is not a valid hexadecimal code");
-        }
-        if (!this.isHexColor(colors.text_variant_variant)) {
-            errors.push("The second text color variant is not a valid hexadecimal code");
-        }
 
-        return {valid: errors.length === 0, errors};
-    }
-
-    public static checkDisplayWebsite(w: InsertableDisplayWebsite): ValidationResult {
+    public static checkWebsite(w: InsertableDisplayWebsite): ValidationResult {
         const errors: string[] = [];
         if (!w) return {valid: false, errors: ["display website is required"]};
 
-        if (w.title === "secure" || w.title === "api") {
-            errors.push("You cannot name a website with secure or api.");
+        if (w.title === "secure" || w.title === "api" || w.title === "dashboard") {
+            errors.push("You cannot name a website with secure or api or dashboard.");
         }
 
         if (!this.isPositiveInteger(w.owner_id)) {
@@ -110,10 +69,6 @@ export class FieldsUtil {
 
         if (!this.isNonEmptyString(w.title)) {
             errors.push("the website must have a name");
-        }
-
-        if (!this.isNonEmptyString(w.hero_title)) {
-            errors.push("the website must have a title on the home page");
         }
 
         if (this.isNonEmptyString(w.website_domain)) {
@@ -126,24 +81,13 @@ export class FieldsUtil {
             }
         }
 
-        if (w.hero_image_url !== undefined && w.hero_image_url !== null && w.hero_image_url !== "") {
-            if (typeof w.hero_image_url !== "string") {
+        if (w.image_src !== undefined && w.image_src !== null && w.image_src !== "") {
+            if (typeof w.image_src !== "string") {
                 errors.push("heroImageUrl must be a string if provided");
-            } else if (!this.isValidUrl(w.hero_image_url)) {
+            } else if (!this.isValidUrl(w.image_src)) {
                 errors.push("heroImageUrl must be a valid URL (http(s)://...)");
             }
         }
-
-        if (w.hero_title !== undefined && w.hero_title !== null) {
-            if (typeof w.hero_title !== "string") {
-                errors.push("heroTitle must be a string if provided");
-            } else if (w.hero_title.length > 300) {
-                errors.push("heroTitle is too long (recommended limit 300 characters)");
-            }
-        }
-
-        // Note: auth_token exists in database but is not in InsertableDisplayWebsite:
-        // creation must generate/assign auth_token server-side.
 
         return {valid: errors.length === 0, errors};
     }
@@ -192,38 +136,6 @@ export class FieldsUtil {
             }
         }
 
-        // description (optional) — if provided must be a string
-        if (p.description !== undefined && p.description !== null) {
-            if (typeof p.description !== "string") {
-                errors.push("description must be a string if provided");
-            } else if (p.description.length > 2000) {
-                errors.push("description is too long");
-            }
-        }
-
-        return {valid: errors.length === 0, errors};
-    }
-
-    public static checkSection(s: InsertableSection): ValidationResult {
-        const errors: string[] = [];
-        if (!s) return {valid: false, errors: ["section is required"]};
-
-        if (!this.isPositiveInteger(s.page_id)) {
-            errors.push("pageId is required and must be a positive integer (referencing pages)");
-        }
-
-        if (!this.isInteger(s.position)) {
-            errors.push("position is required and must be an integer");
-        } else if ((s.position as number) < 0) {
-            errors.push("position must be >= 0");
-        }
-
-        if (!this.isNonEmptyString(s.section_type)) {
-            errors.push("type is required and must be a non-empty string (element_type in DB)");
-        } else if (s.section_type.length > 100) {
-            errors.push("type is too long");
-        }
-
         return {valid: errors.length === 0, errors};
     }
 
@@ -231,7 +143,7 @@ export class FieldsUtil {
         const errors: string[] = [];
         if (!e) return {valid: false, errors: ["element is required"]};
 
-        if (!this.isPositiveInteger(e.section_id)) {
+        if (!this.isPositiveInteger(e.page_id)) {
             errors.push("sectionId is required and must be a positive integer (referencing sections)");
         }
 
@@ -269,23 +181,6 @@ export class FieldsUtil {
         if (!this.isNonEmptyString(c.name)) {
             errors.push("name is required and must be a non-empty string");
         } else if (c.name.length > 200) {
-            errors.push("name is too long");
-        }
-
-        return {valid: errors.length === 0, errors};
-    }
-
-    public static checkSubCategory(sc: InsertableSubcategory): ValidationResult {
-        const errors: string[] = [];
-        if (!sc) return {valid: false, errors: ["subcategory is required"]};
-
-        if (!this.isPositiveInteger(sc.category_id)) {
-            errors.push("categoryId is required and must be a positive integer (referencing categories)");
-        }
-
-        if (!this.isNonEmptyString(sc.name)) {
-            errors.push("name is required and must be a non-empty string");
-        } else if (sc.name.length > 200) {
             errors.push("name is too long");
         }
 

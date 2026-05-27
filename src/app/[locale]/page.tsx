@@ -1,0 +1,79 @@
+"use client";
+
+import Image from "next/image";
+import {CSSProperties, useEffect, useState} from "react";
+import {ImageUtil} from "@/app/utils/ImageUtil";
+import CssUtil from "@/app/utils/CssUtil";
+import Button, {ButtonType} from "@/app/components/ui-elements/Button";
+import UserService from "@/app/services/UserService";
+import {useParams, useRouter} from "next/navigation";
+import {User} from "@/app/models/User";
+import Notification, {NotificationProps} from "@/app/components/overlays/Notification";
+import Container from "@/app/components/page-elements/Container";
+import ButtonLink from "@/app/components/ui-elements/ButtonLink";
+import {useTranslations} from "next-intl";
+
+export default function Page() {
+
+    const t = useTranslations('Home');
+
+    const [cssProps, setCssProps] = useState<CSSProperties>()
+    const [imageSrc, setImageSrc] = useState<string>("/img/mountain.jpg")
+    const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true)
+
+    const [notification, setNotification] = useState<NotificationProps | null>(null);
+
+    const router = useRouter();
+
+    useEffect(() => {
+        UserService.getMyUser().then((res) => {
+            setUser(res);
+            setNotification({
+                title: t('welcomeTitleToUser') + res.first_name + " !",
+                description: t('welcomeTextToUser')
+            })
+        }).catch(() => {
+            console.log("not logged in");
+        }).finally(() => {
+            setLoading(false);
+        })
+        const image : string = ImageUtil.getRandomBackgroundImage()
+        setImageSrc(image)
+        CssUtil.getCSSPropertiesFromImage(image).then((props) => {
+            setCssProps(props)
+            const root = document.documentElement;
+
+            Object.entries(props).forEach(([key, value]) => {
+                if (typeof value === 'string') {
+                    root.style.setProperty(key, value);
+                }
+            });
+        })
+    }, []);
+
+    return (
+        <>
+            <Image width={3000} height={2000} src={imageSrc} alt={"background"} className={"fixed top-0 left-0 h-screen object-cover w-full"}/>
+
+            <main style={cssProps} className={"relative flex flex-col gap-6 justify-center w-full h-screen items-center"}>
+                <Container rounded={"full"} >
+                    <Image width={1000} height={1000} src={"/img/icon.png"} alt="icon" className={"w-72"}/>
+                </Container>
+
+                <Container className={"md:max-w-2/3"}>
+                    <h1 className={"text-8xl font-bold text-primary w-full text-center"}>Panorama</h1>
+                    <p className={"text-center"}>{t('appIntroText')}</p>
+
+                </Container>
+
+                <div className="flex gap-4 items-center justify-center">
+                    <Button iconSrc={"/illustrations/magnifier.png"} text={t('exploreName')}/>
+                    <ButtonLink href={"/dashboard"} loading={loading} iconSrc={"/illustrations/rocket.png"} btnType={ButtonType.Primary} text={user ? t('dashboardName') : t('startName')}/>
+                </div>
+            </main>
+            <Notification show={notification != null} onCloseAction={() => setNotification(null)} title={notification?.title || "Error"} description={notification?.description} iconSrc={notification?.iconSrc}/>
+        </>
+
+    );
+}

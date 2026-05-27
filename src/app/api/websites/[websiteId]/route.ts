@@ -118,7 +118,7 @@ export async function PUT(request: Request, {params}: { params: Promise<{ websit
         }
 
         const insertableWebsite: InsertableDisplayWebsite = await request.json();
-        FieldsUtil.checkFieldsOrThrow<InsertableDisplayWebsite>(FieldsUtil.checkDisplayWebsite, insertableWebsite);
+        FieldsUtil.checkFieldsOrThrow<InsertableDisplayWebsite>(FieldsUtil.checkWebsite, insertableWebsite);
 
         const [res] = await sql`
             UPDATE website

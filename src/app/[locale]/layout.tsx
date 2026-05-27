@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import { Montserrat } from "next/font/google";
+import {routing} from "../../i18n/routing";
+import {notFound} from "next/navigation";
+import {getMessages} from "next-intl/server";
+import {NextIntlClientProvider} from "next-intl";
 
 const montserrat = Montserrat({
     subsets: ["latin"],
@@ -18,13 +22,20 @@ export const metadata: Metadata = {
  * @param children
  * @constructor
  */
-export default function RootLayout({
+export default async function RootLayout({
   children,
+    params
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+    const { locale } = await params;
+    if (!routing.locales.includes(locale as any)) {
+        notFound();
+    }
+    const messages = await getMessages();
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body
           className={`
           ${montserrat.className} 
@@ -32,7 +43,9 @@ export default function RootLayout({
           bg-background
         `}
       >
-        {children}
+      <NextIntlClientProvider messages={messages}>
+          {children}
+      </NextIntlClientProvider>
       </body>
     </html>
   );

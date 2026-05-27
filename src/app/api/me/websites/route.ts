@@ -18,7 +18,7 @@ export async function POST(request: Request) {
         const insertableWebsite: InsertableDisplayWebsite = await request.json();
 
         // Validation des données
-        FieldsUtil.checkFieldsOrThrow<InsertableDisplayWebsite>(FieldsUtil.checkDisplayWebsite, insertableWebsite);
+        FieldsUtil.checkFieldsOrThrow<InsertableDisplayWebsite>(FieldsUtil.checkWebsite, insertableWebsite);
 
         // Insertion en base de données
         const sql = SqlUtil.getSql()

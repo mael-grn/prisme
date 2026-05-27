@@ -2,33 +2,25 @@
 
 import { motion } from "framer-motion";
 import LoadingIcon, { LoadingIconColor } from "@/app/components/ui-elements/LoadingIcon";
+import {ButtonType} from "@/app/components/ui-elements/Button";
 
-export enum ButtonType {
-    Primary = "bg-primary/70",
-    Secondary = "bg-secondary/70",
-    Neutral = "bg-background/60",
-    Danger = "bg-dangerous/70",
-    Safe = "bg-safe/70",
-}
-
-export interface buttonProps {
+export interface buttonLinkProps {
     text?: string;
     btnType?: ButtonType;
     iconSrc?: string;
-    onClickAction?: () => void;
+    href?: string;
     loading?: boolean;
     disabled?: boolean;
-    className?: string;
+    newTab?: boolean;
 }
 
-export default function Button({ text, iconSrc, className, disabled, loading, onClickAction, btnType = ButtonType.Neutral }: buttonProps) {
+export default function ButtonLink({ text, iconSrc, disabled, loading, href, newTab, btnType = ButtonType.Neutral }: buttonLinkProps) {
     const isIconOnly = iconSrc && !text;
 
     return (
-        <motion.button
-            disabled={disabled || loading}
-            onClick={onClickAction}
-
+        <motion.a
+            href={(!disabled && !loading) ? href : undefined}
+            target={newTab ? "_blank" : undefined}
             // 1. APPARITION "BULLE" EN VIEWPORT (Avec valeurs de secours)
             initial={{ scale: 0.5, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -51,7 +43,6 @@ export default function Button({ text, iconSrc, className, disabled, loading, on
             whileTap={!disabled && !loading ? { scale: 0.97 } : undefined}
 
             className={`
-            
                 relative
                 flex gap-2 max-h-fit items-center text-lg font-bold justify-center 
                 ${(disabled || loading) ? "cursor-default opacity-50" : "cursor-pointer"} 
@@ -70,7 +61,6 @@ export default function Button({ text, iconSrc, className, disabled, loading, on
                 shadow-lg shadow-black/10 shadow-inner
                 
                 ${btnType === ButtonType.Neutral ? "text-foreground" : "text-white"}
-                ${className}
             `}
         >
             {/* 3. REFLET SUPÉRIEUR NETTOYÉ (Épouse à 100% la forme sans aucune bordure parasite) */}
@@ -95,6 +85,6 @@ export default function Button({ text, iconSrc, className, disabled, loading, on
                 )}
                 {text && <span>{text}</span>}
             </div>
-        </motion.button>
+        </motion.a>
     );
 }
