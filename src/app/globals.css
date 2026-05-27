@@ -1,20 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
-    --color-background: var(--background);
-    --color-background-variant: var(--background-variant);
-    --color-foreground: var(--foreground);
-    --color-foreground-variant: var(--foreground-variant);
-    --color-dangerous: var(--dangerous);
-    --color-dangerous-variant: var(--dangerous-variant);
-    --color-safe: var(--safe);
-    --color-safe-variant: var(--safe-variant);
-    --color-primary: var(--primary);
-    --color-primary-variant: var(--primary-variant);
-    --color-secondary: var(--secondary);
-    --color-secondary-variant: var(--secondary-variant);
+    /* Fond : Blanc pur et gris très clair pour les contrastes légers */
+    --color-background: var(--background, #ffffff);
+    --color-background-variant: var(--background-variant, #f5f5f5);
+
+    /* Texte : Gris presque noir et gris moyen pour les textes secondaires */
+    --color-foreground: var(--foreground, #171717);
+    --color-foreground-variant: var(--foreground-variant, #525252);
+
+    /* Alertes : Couleurs sémantiques standardisées mais sobres */
+    --color-dangerous: var(--dangerous, #dc2626);
+    --color-dangerous-variant: var(--dangerous-variant, #b91c1c);
+    --color-safe: var(--safe, #16a34a);
+    --color-safe-variant: var(--safe-variant, #15803d);
+
+    /* Actions primaires : Noir / Gris très foncé (minimaliste) */
+    --color-primary: var(--primary, #171717);
+    --color-primary-variant: var(--primary-variant, #404040);
+
+    /* Actions secondaires : Gris clair discret */
+    --color-secondary: var(--secondary, #e5e5e5);
+    --color-secondary-variant: var(--secondary-variant, #d4d4d4);
 }
 
 @utility scrollbar-hide {
@@ -25,34 +32,12 @@
     scrollbar-width: none;  /* Firefox */
 }
 
-:root {
-    --background: #ffffff;
-    --background-variant: #cfcfcf;
-    --foreground: #000000;
-    --foreground-variant: #1e1e1e;
-    --dangerous: #c53854;
-    --dangerous-variant: #A91D3A;
-    --safe: #5ca6b3;
-    --safe-variant: #2F7C8A;
-    --primary: #8a8a8a;
-    --primary-variant: #6c6c6c;
-    --secondary: #8a8a8a;
-    --secondary-variant: #6c6c6c;
-}
-
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
-    transition: background-color .5s ease;
 }
 
-p {
-    color: var(--foreground);
-}
 
-h1 {
-    color: var(--primary );
-}
 svg {
     width: 100% !important;
     height: 100% !important;
@@ -61,3 +46,4 @@ svg {
 *::-webkit-scrollbar { /* Desactivation des scrollbars */
     display: none;
 }
+

@@ -5,6 +5,8 @@ import {routing} from "../../i18n/routing";
 import {notFound} from "next/navigation";
 import {getMessages} from "next-intl/server";
 import {NextIntlClientProvider} from "next-intl";
+import {UserProvider} from "@/app/context/UserContext";
+import {ThemeProvider} from "@/app/context/ThemeContext";
 
 const montserrat = Montserrat({
     subsets: ["latin"],
@@ -44,7 +46,11 @@ export default async function RootLayout({
         `}
       >
       <NextIntlClientProvider messages={messages}>
-          {children}
+          <UserProvider>
+              <ThemeProvider>
+                  {children}
+              </ThemeProvider>
+          </UserProvider>
       </NextIntlClientProvider>
       </body>
     </html>

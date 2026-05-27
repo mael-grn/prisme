@@ -7,7 +7,22 @@
     "exploreName": "Explorer",
     "dashboardName": "Tableau de bord"
   },
-  "Dashboard": {
 
+  "Dashboard": {
+    "dashboardName": "Tableau de bord",
+    "websitesName": "Sites internet",
+    "settingsName": "Paramètres",
+    "accountName": "Compte utilisateur",
+    "aboutName": "À propos"
+  },
+
+  "Dashboard-default": {
+    "unavailableTitle": "Désolé, ce paramètre n'est pas encore disponible",
+    "unavailableText": "Ce projet est encore en beta, et certaines options peuvent ne pas être encore disponible. Merci de revenir plus tard."
+  },
+
+  "Dashboard-websites": {
+    "websiteListName": "Vos sites internet",
+    "createWebsiteName": "Créer"
   }
 }

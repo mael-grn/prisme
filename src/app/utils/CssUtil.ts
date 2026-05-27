@@ -24,10 +24,6 @@ export default class CssUtil {
             '--background-variant': colors.background_variant,
             '--foreground': colors.foreground,
             '--foreground-variant': colors.foreground_variant,
-            '--dangerous': "#c53854",
-            '--dangerous-variant': "#A91D3A",
-            '--safe': "#5ca6b3",
-            '--safe-variant': "#2F7C8A"
         } as React.CSSProperties & { [key: string]: string };
     }
 
