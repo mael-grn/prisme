@@ -7,6 +7,8 @@ import {getMessages} from "next-intl/server";
 import {NextIntlClientProvider} from "next-intl";
 import {UserProvider} from "@/app/context/UserContext";
 import {ThemeProvider} from "@/app/context/ThemeContext";
+import {NotificationProvider} from "@/app/context/NotificationContext";
+import {DialogProvider} from "@/app/context/DialogContext";
 
 const montserrat = Montserrat({
     subsets: ["latin"],
@@ -46,11 +48,15 @@ export default async function RootLayout({
         `}
       >
       <NextIntlClientProvider messages={messages}>
-          <UserProvider>
-              <ThemeProvider>
-                  {children}
-              </ThemeProvider>
-          </UserProvider>
+          <DialogProvider>
+              <NotificationProvider>
+                  <UserProvider>
+                      <ThemeProvider>
+                          {children}
+                      </ThemeProvider>
+                  </UserProvider>
+              </NotificationProvider>
+          </DialogProvider>
       </NextIntlClientProvider>
       </body>
     </html>
