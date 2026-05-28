@@ -1,10 +1,10 @@
 import {ApiUtil} from "@/app/utils/apiUtil";
 import {SqlUtil} from "@/app/utils/sqlUtil";
-import {Page} from "@/app/models/Page";
 import {Element} from "@/app/models/Element";
-import {FieldsUtil} from "@/app/utils/fieldsUtil";
 import {LexicalPositionUtil} from "@/app/utils/LexicalPositionUtil";
 import {InsertableElement} from "@/app/models/Element";
+import {pageSchema} from "@/app/schemas/PageSchema";
+import {elementSchema} from "@/app/schemas/ElementSchema";
 
 export async function GET(request: Request, {params}: { params: Promise<{ pageId: string }> }) {
 
@@ -59,8 +59,10 @@ export async function POST(request: Request, { params }: { params: Promise<{ pag
         }
 
         // Validation des données
-        FieldsUtil.checkFieldsOrThrow<InsertableElement>(FieldsUtil.checkElement, insertableElement)
-
+        const resultat = elementSchema.safeParse(insertableElement);
+        if (!resultat.success) {
+            return ApiUtil.getErrorNextResponse("Entity not good", 422);
+        }
         const elements : Element[] = await sql`SELECT * FROM element WHERE page_id = ${website.id}` as unknown as Element[];
         const pos = LexicalPositionUtil.getNextPosition(elements);
         const [res] = await sql`INSERT INTO element (page_id, element_type, content, position, father_element_id)

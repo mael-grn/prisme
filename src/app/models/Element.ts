@@ -1,4 +1,6 @@
-export interface Element {
+import {Generic} from "@/app/models/Generic";
+
+export interface Element extends Generic {
     id: number;
     page_id: number;
     element_type: string;
@@ -8,7 +10,7 @@ export interface Element {
     father_element_id?: number;
 }
 
-export interface InsertableElement {
+export interface InsertableElement extends Generic {
     page_id: number;
     element_type: string;
     content: string;

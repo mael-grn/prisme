@@ -1,6 +1,7 @@
 import {Language} from "@/app/models/TextToTranslate";
+import {Generic} from "@/app/models/Generic";
 
-export interface Page {
+export interface Page extends Generic {
     id: number;
     path: string;
     website_id: number;
@@ -10,7 +11,7 @@ export interface Page {
     lang: Language;
 }
 
-export interface InsertablePage {
+export interface InsertablePage extends Generic {
     path: string;
     website_id: number;
     icon_svg?: string;

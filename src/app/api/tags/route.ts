@@ -1,14 +1,17 @@
-import {FieldsUtil} from "@/app/utils/fieldsUtil";
 import {SqlUtil} from "@/app/utils/sqlUtil";
 import {ApiUtil} from "@/app/utils/apiUtil";
 import {Tag, InsertableTag} from "../../models/Tag";
+import {pageSchema} from "@/app/schemas/PageSchema";
+import {TagSchema} from "@/app/schemas/TagSchema";
 
 export async function POST(request: Request) {
     try {
         // Récupération des données dans le body
         const insertableCategory: InsertableTag = await request.json();
-        FieldsUtil.checkFieldsOrThrow<InsertableTag>(FieldsUtil.checkCategory, insertableCategory)
-
+        const resultat = TagSchema.safeParse(insertableCategory);
+        if (!resultat.success) {
+            return ApiUtil.getErrorNextResponse("Entity not good", 422);
+        }
         // Insertion en base de données
         const sql = SqlUtil.getSql()
         const [res] = await sql`

@@ -1,8 +1,8 @@
-import type {Website, InsertableDisplayWebsite} from "@/app/models/Website";
+import type {Website, InsertableWebsite} from "@/app/models/Website";
 import {SqlUtil} from "@/app/utils/sqlUtil";
 import {ApiUtil} from "@/app/utils/apiUtil";
-import {FieldsUtil} from "@/app/utils/fieldsUtil";
 import StringUtil from "@/app/utils/StringUtil";
+import {websiteSchema} from "@/app/schemas/WebsiteSchema";
 
 export async function GET(request: Request, {params}: { params: Promise<{ websiteId: string }> }) {
     try {
@@ -117,9 +117,11 @@ export async function PUT(request: Request, {params}: { params: Promise<{ websit
             return ApiUtil.getErrorNextResponse("You are not the owner of this website", 403);
         }
 
-        const insertableWebsite: InsertableDisplayWebsite = await request.json();
-        FieldsUtil.checkFieldsOrThrow<InsertableDisplayWebsite>(FieldsUtil.checkWebsite, insertableWebsite);
-
+        const insertableWebsite: InsertableWebsite = await request.json();
+        const resultat = websiteSchema.safeParse(insertableWebsite);
+        if (!resultat.success) {
+            return ApiUtil.getErrorNextResponse("Entity not good", 422);
+        }
         const [res] = await sql`
             UPDATE website
             SET website_domain = ${insertableWebsite.website_domain},

@@ -1,7 +1,8 @@
 
 import {Language} from "@/app/models/TextToTranslate";
+import {Generic} from "@/app/models/Generic";
 
-export interface Website {
+export interface Website extends Generic {
     id: number;
     owner_id: number;
     title: string;
@@ -10,7 +11,7 @@ export interface Website {
     image_src?: string;
 }
 
-export interface InsertableDisplayWebsite {
+export interface InsertableWebsite extends Generic {
     owner_id: number;
     title: string;
     website_domain?: string;

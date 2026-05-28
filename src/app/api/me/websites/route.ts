@@ -1,7 +1,8 @@
-import {Website, InsertableDisplayWebsite} from "@/app/models/Website";
+import {Website, InsertableWebsite} from "@/app/models/Website";
 import {ApiUtil} from "@/app/utils/apiUtil";
-import {FieldsUtil} from "@/app/utils/fieldsUtil";
 import {SqlUtil} from "@/app/utils/sqlUtil";
+import {elementSchema} from "@/app/schemas/ElementSchema";
+import {websiteSchema} from "@/app/schemas/WebsiteSchema";
 
 /**
  * Create a new display website for the connected user
@@ -15,11 +16,13 @@ export async function POST(request: Request) {
         const user = await ApiUtil.getConnectedUser();
 
         // Récupération des données dans le body
-        const insertableWebsite: InsertableDisplayWebsite = await request.json();
+        const insertableWebsite: InsertableWebsite = await request.json();
 
         // Validation des données
-        FieldsUtil.checkFieldsOrThrow<InsertableDisplayWebsite>(FieldsUtil.checkWebsite, insertableWebsite);
-
+        const resultat = websiteSchema.safeParse(insertableWebsite);
+        if (!resultat.success) {
+            return ApiUtil.getErrorNextResponse("Entity not good", 422);
+        }
         // Insertion en base de données
         const sql = SqlUtil.getSql()
         let res : Website;

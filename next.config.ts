@@ -7,6 +7,7 @@ const withNextIntl = createNextIntlPlugin(
 
 const nextConfig: NextConfig = {
     output: 'standalone',
+    allowedDevOrigins: ['local.maelg.fr'],
     images: {
         remotePatterns: [
             {

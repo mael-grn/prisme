@@ -19,9 +19,10 @@ export interface buttonProps {
     loading?: boolean;
     disabled?: boolean;
     className?: string;
+    submit?: boolean;
 }
 
-export default function Button({ text, iconSrc, className, disabled, loading, onClickAction, btnType = ButtonType.Neutral }: buttonProps) {
+export default function Button({ text, submit, iconSrc, className, disabled, loading, onClickAction, btnType = ButtonType.Neutral }: buttonProps) {
     const isIconOnly = iconSrc && !text;
 
     return (
@@ -29,6 +30,7 @@ export default function Button({ text, iconSrc, className, disabled, loading, on
             disabled={disabled || loading}
             onClick={onClickAction}
 
+            type={submit ? "submit" : "button"}
             // 1. APPARITION "BULLE" EN VIEWPORT (Avec valeurs de secours)
             initial={{ scale: 0.5, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}

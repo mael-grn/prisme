@@ -1,7 +1,7 @@
 import {ApiUtil} from "@/app/utils/apiUtil";
 import {SqlUtil} from "@/app/utils/sqlUtil";
-import {FieldsUtil} from "@/app/utils/fieldsUtil";
 import {InsertableTag, Tag} from "@/app/models/Tag";
+import {TagSchema} from "@/app/schemas/TagSchema";
 
 export async function PUT(request: Request, {params}: { params: Promise<{ categoryId: string }> }) {
 
@@ -9,8 +9,10 @@ export async function PUT(request: Request, {params}: { params: Promise<{ catego
         const {categoryId} = await params;
         ApiUtil.checkParam(categoryId);
         const insertableCategory: InsertableTag = await request.json();
-        FieldsUtil.checkFieldsOrThrow<InsertableTag>(FieldsUtil.checkCategory, insertableCategory)
-
+        const resultat = TagSchema.safeParse(insertableCategory);
+        if (!resultat.success) {
+            return ApiUtil.getErrorNextResponse("Entity not good", 422);
+        }
         const sql = SqlUtil.getSql()
 
         //on récupère le site internet

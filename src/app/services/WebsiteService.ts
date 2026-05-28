@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import {Website, InsertableDisplayWebsite} from "../models/Website";
+import {Website, InsertableWebsite} from "../models/Website";
 import {CSSProperties} from "react";
 import CssUtil from "@/app/utils/CssUtil";
 import {WebsiteColors} from "@/app/models/WebsiteColors";
@@ -35,7 +35,7 @@ export default class WebsiteService {
         }
     }
 
-    static async createWebsite(newWebsite: InsertableDisplayWebsite): Promise<Website> {
+    static async createWebsite(newWebsite: InsertableWebsite): Promise<Website> {
         try {
             const response = await axios.post('/api/me/websites', newWebsite);
             return response.data.data as Website;

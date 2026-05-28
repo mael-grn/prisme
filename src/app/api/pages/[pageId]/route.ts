@@ -1,9 +1,9 @@
 import {NextResponse} from "next/server";
 import {SqlUtil} from "@/app/utils/sqlUtil";
 import {ApiUtil} from "@/app/utils/apiUtil";
-import {FieldsUtil} from "@/app/utils/fieldsUtil";
 import {InsertablePage, Page} from "@/app/models/Page";
-import SectionService from "@/app/services/sectionService";
+import {TagSchema} from "@/app/schemas/TagSchema";
+import {pageSchema} from "@/app/schemas/PageSchema";
 
 export async function GET(request: Request, {params}: { params: Promise<{ pageId: string }> }) {
     try {
@@ -113,8 +113,10 @@ export async function PUT(request: Request, {params}: { params: Promise<{ pageId
         }
 
         // Validation des données
-        FieldsUtil.checkFieldsOrThrow<InsertablePage>(FieldsUtil.checkPage, insertablePage)
-
+        const resultat = pageSchema.safeParse(insertablePage);
+        if (!resultat.success) {
+            return ApiUtil.getErrorNextResponse("Entity not good", 422);
+        }
         const [res] = await sql`UPDATE page
                   SET title      = ${insertablePage.title},
                       path       = ${insertablePage.path},

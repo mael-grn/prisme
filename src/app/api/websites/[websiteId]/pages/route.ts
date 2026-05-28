@@ -1,8 +1,9 @@
 import {InsertablePage, Page} from "@/app/models/Page";
 import {ApiUtil} from "@/app/utils/apiUtil";
 import {SqlUtil} from "@/app/utils/sqlUtil";
-import {FieldsUtil} from "@/app/utils/fieldsUtil";
 import {LexicalPositionUtil} from "@/app/utils/LexicalPositionUtil";
+import {websiteSchema} from "@/app/schemas/WebsiteSchema";
+import {pageSchema} from "@/app/schemas/PageSchema";
 
 export async function POST(request: Request, { params }: { params: Promise<{ websiteId: string }> }) {
 
@@ -31,8 +32,10 @@ export async function POST(request: Request, { params }: { params: Promise<{ web
         const insertablePage: InsertablePage = await request.json();
 
         // Validation des données
-        FieldsUtil.checkFieldsOrThrow<InsertablePage>(FieldsUtil.checkPage, insertablePage)
-
+        const resultat = pageSchema.safeParse(insertablePage);
+        if (!resultat.success) {
+            return ApiUtil.getErrorNextResponse("Entity not good", 422);
+        }
         const pages : Page[] = await sql`SELECT * FROM page WHERE website_id = ${website.id}` as unknown as Page[];
         const pos = LexicalPositionUtil.getNextPosition(pages);
         const [res] = await sql`INSERT INTO page (path, website_id, icon_svg, title, position)

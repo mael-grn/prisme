@@ -1,9 +1,10 @@
+import {Generic} from "@/app/models/Generic";
 
-export interface Tag {
+export interface Tag extends Generic {
     id: number;
     name: string;
 }
 
-export interface InsertableTag {
+export interface InsertableTag extends Generic {
     name: string;
 }

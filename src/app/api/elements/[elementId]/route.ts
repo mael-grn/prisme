@@ -1,7 +1,8 @@
 import {ApiUtil} from "@/app/utils/apiUtil";
 import {SqlUtil} from "@/app/utils/sqlUtil";
-import {FieldsUtil} from "@/app/utils/fieldsUtil";
 import {InsertableElement, Element} from "@/app/models/Element";
+import {websiteSchema} from "@/app/schemas/WebsiteSchema";
+import {elementSchema} from "@/app/schemas/ElementSchema";
 
 export async function GET(request: Request, {params}: { params: Promise<{ elementId: string }> }) {
 
@@ -56,8 +57,10 @@ export async function PUT(request: Request, {params}: { params: Promise<{ elemen
         }
 
         // Validation des données
-        FieldsUtil.checkFieldsOrThrow<InsertableElement>(FieldsUtil.checkElement, element);
-
+        const resultat = elementSchema.safeParse(element);
+        if (!resultat.success) {
+            return ApiUtil.getErrorNextResponse("Entity not good", 422);
+        }
         const [res] = await sql`UPDATE element
                   SET element_type      = ${element.element_type}, content = ${element.content}
                   WHERE id = ${elementId} returning *`;

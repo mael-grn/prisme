@@ -1,5 +1,5 @@
 // typescript
-import {InsertableDisplayWebsite} from "../models/Website";
+import {InsertableWebsite} from "../models/Website";
 import {InsertablePage} from "@/app/models/Page";
 import {InsertableElement} from "@/app/models/Element";
 import {InsertableTag} from "../models/Tag";
@@ -55,7 +55,7 @@ export class FieldsUtil {
 
 
 
-    public static checkWebsite(w: InsertableDisplayWebsite): ValidationResult {
+    public static checkWebsite(w: InsertableWebsite): ValidationResult {
         const errors: string[] = [];
         if (!w) return {valid: false, errors: ["display website is required"]};
 

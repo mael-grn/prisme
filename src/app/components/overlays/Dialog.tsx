@@ -11,6 +11,7 @@ export interface DialogProps {
     onCloseAction?: () => void;
     onValidateAction?: () => void;
     children?: React.ReactNode;
+    submitForValidation?: boolean;
 }
 
 export default function Dialog({title, iconSrc, description, onCloseAction, onValidateAction, children, show}: DialogProps) {
@@ -38,16 +39,19 @@ export default function Dialog({title, iconSrc, description, onCloseAction, onVa
                     }}
                     className={`z-50 md:max-w-2/3 md:max-h-2/3`}
                 >
-                    <Container className={"w-full h-full overflow-auto"}>
-                        <h2 className="font-bold text-3xl w-full">{title}</h2>
-                        {description && <p className="text-sm w-full opacity-90">{description}</p>}
-                        {iconSrc && <img src={iconSrc} alt={"icon"} className={"w-12 h-12"}/>}
-                        {children}
-                        <div className={"w-full flex mt-6 justify-end items-center gap-2"}>
-                            {onValidateAction && <Button btnType={ButtonType.Safe} iconSrc={"/ico/check.svg"} onClickAction={onCloseAction}/>}
-                            <Button  btnType={ButtonType.Danger} iconSrc={"/ico/close.svg"} onClickAction={onCloseAction}/>
-                        </div>
-                    </Container>
+                    <div>
+                        <Container className={"w-full h-full overflow-auto"}>
+                            <h2 className="font-bold text-3xl w-full">{title}</h2>
+                            {description && <p className="text-sm w-full opacity-90">{description}</p>}
+                            {iconSrc && <img src={iconSrc} alt={"icon"} className={"w-12 h-12"}/>}
+                            {children}
+                            <div className={"w-full flex mt-6 justify-end items-center gap-2"}>
+                                {onValidateAction && <Button btnType={ButtonType.Safe} iconSrc={"/ico/check.svg"} onClickAction={onValidateAction} submit={true}/>}
+                                <Button  btnType={ButtonType.Danger} iconSrc={"/ico/close.svg"} onClickAction={onCloseAction}/>
+                            </div>
+                        </Container>
+                    </div>
+
 
                 </motion.div>
             </motion.div>
