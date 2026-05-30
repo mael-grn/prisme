@@ -52,7 +52,7 @@ export default function Layout({
 
     return <>
         <Background/>
-        <main style={themeStyles} className={"relative flex flex-col gap-4 p-6 w-full h-screen max-h-screen"}>
+        <main style={themeStyles} className={"relative flex flex-col gap-4 md:p-6 p-3 w-full h-screen max-h-screen"}>
             <Container animationType={"glass-reveal"} orientation={"row"} justify={"between"} className={"w-full"}>
                 <div className={"flex items-center justify-center gap-2"}>
                     <Image width={50} height={50} src={"/img/icon.png"} alt="icon"/>

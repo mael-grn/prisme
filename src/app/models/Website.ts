@@ -7,7 +7,7 @@ export interface Website extends Generic {
     owner_id: number;
     title: string;
     website_domain?: string;
-    lang: Language;
+    lang?: Language;
     image_src?: string;
 }
 

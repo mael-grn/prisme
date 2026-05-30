@@ -15,13 +15,15 @@ const _websiteSchema = z.object({
     website_domain: z.union([
         z.string()
             .regex(/^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$/, "Le format du domaine est invalide (ex: monsite.com).")
-            .refine(val => !val.endsWith("/"), "Le domaine ne doit pas se terminer par '/'."),
+            .refine(val => !val.endsWith("/"), "Le domaine ne doit pas se terminer par '/'.")
+            .nullable(),
         z.literal(""),
     ]).optional(),
 
     image_src: z.union([
         z.string().url("L'URL de l'image doit être une adresse web valide (http/https)."),
-        z.literal(""),
+        z.literal("")
+            .nullable(),
     ]).optional(),
 });
 

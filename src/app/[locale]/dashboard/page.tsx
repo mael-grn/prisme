@@ -8,10 +8,11 @@ import {InsertableWebsite, Website} from "@/app/models/Website";
 import Container from "@/app/components/page-elements/Container";
 import Image from "next/image";
 import {useFormDialog} from "@/app/context/FormContext";
-import WebsiteForm from "@/app/components/forms/WebsiteForm";
+import CreateWebsiteForm from "../../components/forms/CreateWebsiteForm";
 import {useDialog} from "@/app/context/DialogContext";
 import {useNotification} from "@/app/context/NotificationContext";
 import {ButtonType} from "@/app/components/ui-elements/ButtonView";
+import EditWebsiteForm from "@/app/components/forms/EditWebsiteForm";
 
 const fetcher = async () => await WebsiteService.getMyWebsites();
 
@@ -33,7 +34,7 @@ export default function WebsitesDashboardSubpage() {
                 await mutate();
                 return result;
             },
-            form: WebsiteForm
+            form: CreateWebsiteForm
         });
     };
 
@@ -88,6 +89,7 @@ function WebsiteListItem({website}: { website: Website }) {
     const t = useTranslations('Dashboard-websites');
     const {showDialog} = useDialog();
     const {showNotification} = useNotification();
+    const {openForm} = useFormDialog();
 
     const deleteWebsite = async (id: number) => {
         try {
@@ -107,6 +109,23 @@ function WebsiteListItem({website}: { website: Website }) {
 
     }
 
+    const handleEditWebsiteClick = () => {
+        openForm({
+            title: t('editWebsiteTitle'),
+            description: t('editWebsiteDescription'),
+            errorMsg: t('editWebsiteError'),
+            successMsg: t('editWebsiteSuccess'),
+            iconSrc: "/illustrations/pencil.png",
+            initialValue: website,
+            onSubmit: async (data) => {
+                const result = await WebsiteService.editWebsite(data as Website);
+                await mutate();
+                return result;
+            },
+            form: EditWebsiteForm
+        });
+    };
+
     return (
         <Container orientation="row" justify="between"
                    className={`w-full cursor-pointer ${!website.image_src && "bg-secondary"}`}>
@@ -114,7 +133,7 @@ function WebsiteListItem({website}: { website: Website }) {
                 <Image src={website.image_src} alt="background" fill className="object-cover -z-10" sizes="100vw"/>}
             <h3 className="text-xl font-bold">{website.title}</h3>
             <div className="flex gap-2">
-                <Button iconSrc="/illustrations/pencil.png"/>
+                <Button iconSrc="/illustrations/pencil.png" onClickAction={handleEditWebsiteClick} />
                 <Button
                     iconSrc="/illustrations/bin.png"
                     btnType={ButtonType.Danger}

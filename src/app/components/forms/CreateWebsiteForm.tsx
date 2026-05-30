@@ -9,7 +9,7 @@ import StringUtil from "@/app/utils/StringUtil";
 import {useTranslations} from "next-intl";
 import {websiteSchema} from "@/app/schemas/WebsiteSchema";
 
-export default function WebsiteForm({ setDataAction, initialValue, setDataValidAction }: ChildFormProps<InsertableWebsite>) {
+export default function CreateWebsiteForm({ setDataAction, initialValue, setDataValidAction }: ChildFormProps<InsertableWebsite>) {
     const {user} = useUser();
     const t = useTranslations('fields-names');
 
@@ -27,6 +27,7 @@ export default function WebsiteForm({ setDataAction, initialValue, setDataValidA
         }
         const res = websiteSchema.safeParse(website);
         setDataValidAction(res.success);
+        console.log(res);
     }
 
     useEffect(() => {

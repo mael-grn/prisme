@@ -45,6 +45,17 @@ export default class WebsiteService {
         }
     }
 
+    static async editWebsite(edited: Website): Promise<Website> {
+        try {
+            const response = await axios.put('/api/websites/'+edited.id, edited);
+            return response.data.data as Website;
+        } catch (e) {
+            const perso = {code: 409, message: "This website title is already used. Please choose another title."}
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1, perso)
+        }
+    }
+
+
     static async getMyWebsites(): Promise<Website[]> {
         try {
             const response = await axios.get('/api/me/websites');
