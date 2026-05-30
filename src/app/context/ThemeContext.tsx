@@ -1,30 +1,35 @@
-"use client";
+'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode, CSSProperties } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode, CSSProperties, useRef } from "react";
 import { ImageUtil } from "@/app/utils/ImageUtil";
 import CssUtil from "@/app/utils/CssUtil";
 
 interface ThemeContextType {
     themeImage: string;
     themeStyles: CSSProperties;
-    themeLoading: boolean; // Ajout du type
+    themeLoading: boolean;
     changeTheme: (imageUrl: string) => Promise<void>;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-    const [themeImage, setThemeImage] = useState<string>("/img/white.png");
+    // 1. On initialise avec une chaîne vide pour détecter le rendu serveur
+    const [themeImage, setThemeImage] = useState<string>("");
     const [themeStyles, setThemeStyles] = useState<CSSProperties>({});
-    const [themeLoading, setThemeLoading] = useState<boolean>(true); // Ajout du state initialisé à true
+    const [themeLoading, setThemeLoading] = useState<boolean>(true);
+    const isInitialized = useRef(false);
 
-    // Fonction pour changer le thème à la volée depuis n'importe quel composant
+    // Fonction pour changer le thème à la volée
     const changeTheme = async (imageUrl: string) => {
-        setThemeLoading(true); // On repasse à true si on change de thème en cours de route
+        setThemeLoading(true);
         try {
-            const props = await CssUtil.getCSSPropertiesFromImage(imageUrl);
+            // On applique l'image IMMÉDIATEMENT côté client pour éviter de rester bloqué sur l'état initial
             setThemeImage(imageUrl);
+
+            const props = await CssUtil.getCSSPropertiesFromImage(imageUrl);
             setThemeStyles(props);
+
             const root = document.documentElement;
             Object.entries(props).forEach(([key, value]) => {
                 if (typeof value === 'string') {
@@ -34,19 +39,26 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         } catch (error) {
             console.error("Erreur lors du calcul du CSS de l'image :", error);
         } finally {
-            setThemeLoading(false); // Le chargement est terminé (succès ou erreur)
+            setThemeLoading(false);
         }
     };
 
-    // Initialisation unique au premier chargement (F5)
+    // Initialisation unique au premier chargement au niveau du navigateur
     useEffect(() => {
+        if (isInitialized.current) return;
+        isInitialized.current = true;
+
         const initialImage = ImageUtil.getRandomBackgroundImage();
         changeTheme(initialImage);
     }, []);
 
+    // 2. IMPORTANT : Si on est encore sur le serveur (themeImage vide),
+    // on peut optionnellement retourner un loader ou attendre l'hydratation
+    // pour éviter le flash blanc persistant sur Vercel.
+    const currentThemeImage = themeImage || "/img/white.png";
+
     return (
-        // Injection de themeLoading dans le Provider
-        <ThemeContext.Provider value={{ themeImage, themeStyles, themeLoading, changeTheme }}>
+        <ThemeContext.Provider value={{ themeImage: currentThemeImage, themeStyles, themeLoading, changeTheme }}>
             {children}
         </ThemeContext.Provider>
     );
