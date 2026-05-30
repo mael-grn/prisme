@@ -1,4 +1,6 @@
 import {put} from "@vercel/blob";
+import axios, {AxiosError} from "axios";
+import StringUtil from "@/app/utils/StringUtil";
 
 /**
  * Utility class for image management in vercel's blob storage
@@ -13,15 +15,20 @@ export class ImageUtil {
         if (!file) {
             throw "No file provided";
         }
-        const token = process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN;
+        const formData = new FormData();
+
+        formData.append("image", file);
+
         try {
-            const blobRes = await put(file.name, file, {
-                access: 'public',
-                token: token,
+            const response = await axios.post("/api/images", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
-            return blobRes.url;
-        } catch (error) {
-            throw (error as Error).message;
+            return response.data.data.url;
+        } catch (e) {
+            console.error(e);
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
     }
 

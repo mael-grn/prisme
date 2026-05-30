@@ -122,6 +122,7 @@ export default function BubbleContainer({
             <motion.div
                 initial={currentAnimation.initial}
                 animate={currentAnimation.animate}
+                exit={currentAnimation.initial}
                 viewport={{ once: true, amount: 0.1 }}
                 style={{ transformOrigin: "center center" }}
                 className={`

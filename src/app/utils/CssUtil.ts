@@ -30,7 +30,8 @@ export default class CssUtil {
     public static async getCSSPropertiesFromImage(imageSrc: string | undefined = "/img/mountain.jpg"): Promise<CSSProperties> {
         try {
             const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-            const response = await axios.post('/api/colors', {"imageSrc": baseUrl+imageSrc});
+            const url = imageSrc.startsWith("http") ? imageSrc : baseUrl+imageSrc;
+            const response = await axios.post('/api/colors', {"imageSrc": url});
             const colors = response.data.data as WebsiteColors;
             return CssUtil.websiteColorsToCSS(colors);
         } catch (e) {

@@ -47,8 +47,11 @@ export function FormDialogProvider({ children }: { children: ReactNode }) {
     };
 
     const submit = async () => {
+        console.log("submit", form);
         if (!form) return;
+        console.log("data", data);
         if (!data) return;
+        console.log("valid", dataIsValid);
         if (!dataIsValid) return;
         closeForm();
 

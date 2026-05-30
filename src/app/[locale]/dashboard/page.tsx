@@ -13,6 +13,9 @@ import {useDialog} from "@/app/context/DialogContext";
 import {useNotification} from "@/app/context/NotificationContext";
 import {ButtonType} from "@/app/components/ui-elements/ButtonView";
 import EditWebsiteForm from "@/app/components/forms/EditWebsiteForm";
+import {AnimatePresence} from "framer-motion";
+import Link from "next/link";
+import ButtonLink from "@/app/components/ui-elements/ButtonLink";
 
 const fetcher = async () => await WebsiteService.getMyWebsites();
 
@@ -58,10 +61,12 @@ export default function WebsitesDashboardSubpage() {
                         <WebsiteListItemSkeleton />
                     </>
                 )}
-                {error && <p className="text-red-500">Erreur de chargement.</p>}
-                {websites?.map((site) => (
-                    <WebsiteListItem website={site} key={site.id}/>
-                ))}
+                {error && <Container className={"w-full bg-dangerous"}><p>{t('loadingError')}</p></Container>}
+                <AnimatePresence>
+                    {websites?.map((site) => (
+                        <WebsiteListItem website={site} key={site.id}/>
+                    ))}
+                </AnimatePresence>
             </div>
 
             <span className={"h-6"}/>
@@ -128,28 +133,28 @@ function WebsiteListItem({website}: { website: Website }) {
 
     return (
         <Container orientation="row" justify="between"
-                   className={`w-full cursor-pointer ${!website.image_src && "bg-secondary"}`}>
-            {website.image_src &&
-                <Image src={website.image_src} alt="background" fill className="object-cover -z-10" sizes="100vw"/>}
-            <h3 className="text-xl font-bold">{website.title}</h3>
-            <div className="flex gap-2">
-                <Button iconSrc="/illustrations/pencil.png" onClickAction={handleEditWebsiteClick} />
-                <Button
-                    iconSrc="/illustrations/bin.png"
-                    btnType={ButtonType.Danger}
-                    onClickAction={() =>
-                        showDialog({
-                            title: t("deleteValidationTitle"),
-                            description: t("deleteValidationDesc"),
-                            onValidateAction: () => {
-                                deleteWebsite(website.id);
-                            },
-                            iconSrc: "/illustrations/bin.png"
-                        })
-                    }
+                       className={`w-full bg-secondary`}>
 
-                />
-            </div>
-        </Container>
+                <h3 className="text-xl font-bold">{website.title}</h3>
+                <div className="flex gap-2">
+                    <ButtonLink href={`/${website.id}`} iconSrc="/illustrations/binoculars.png"/>
+                    <Button iconSrc="/illustrations/pencil.png" onClickAction={handleEditWebsiteClick} />
+                    <Button
+                        iconSrc="/illustrations/bin.png"
+                        btnType={ButtonType.Danger}
+                        onClickAction={() =>
+                            showDialog({
+                                title: t("deleteValidationTitle"),
+                                description: t("deleteValidationDesc"),
+                                onValidateAction: () => {
+                                    deleteWebsite(website.id);
+                                },
+                                iconSrc: "/illustrations/bin.png"
+                            })
+                        }
+
+                    />
+                </div>
+            </Container>
     );
 }

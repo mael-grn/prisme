@@ -125,7 +125,8 @@ export async function PUT(request: Request, {params}: { params: Promise<{ websit
         const [res] = await sql`
             UPDATE website
             SET website_domain = ${insertableWebsite.website_domain},
-                title     = ${insertableWebsite.title}
+                title     = ${insertableWebsite.title},
+                image_src = ${insertableWebsite.image_src}
             WHERE id = ${website.id}
             RETURNING *
         `;
