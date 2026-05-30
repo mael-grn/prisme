@@ -27,43 +27,43 @@ export default function Notification({title, iconSrc, description, onCloseAction
     return <AnimatePresence>
         {
             show &&
-            <motion.div
-                // On intègre le x: "-50%" directement dans Framer Motion pour éviter les conflits
-                initial={{ opacity: 0, scale: 0, x: "-50%" }}
-                animate={{ opacity: 1, scale: 1, x: "-50%" }}
-                exit={{ opacity: 0, scale: 0, x: "-50%" }}
-                style={{ transformOrigin: "top center" }} // Plus propre de le mettre dans le style inline
-                transition={{
-                    duration: 1.3,
-                    ease: [0.16, 1, 0.3, 1]
-                }}
-                // Remplacement de left-auto right-auto par left-1/2
-                // Ajout de overflow-hidden pour que la barre de progression épouse les arrondis rounded-3xl
-                className={`fixed top-5 left-1/2 justify-center md:max-w-1/2 backdrop-blur rounded-3xl overflow-hidden h-fit items-center z-50`}
-            >
-                <Container>
-                    <div className={"flex items-center justify-center gap-4"}>
-                        {iconSrc && <img src={iconSrc} alt={"icon"} className={"w-12 h-12"}/>}
-                        <div className={"flex flex-col items-center"}>
-                            <h2 className="font-bold w-full">{title}</h2>
-                            {description && <p className="text-sm w-full opacity-90">{description}</p>}
-                        </div>
-                        <Button iconSrc={"/ico/close.svg"} onClickAction={onCloseAction}/>
-
-                    </div>
-
-
-                </Container>
-
-                {/* Barre de progression en bas */}
+            <div className={"fixed top-5 left-5 right-5 md:top-3 md:left-3 md:right-3 flex justify-center items-center"}>
                 <motion.div
-                    initial={{ width: "100%" }}
-                    animate={{ width: "0%" }}
-                    transition={{ duration: 5, ease: "linear" }}
-                    className="absolute bottom-0 left-0 h-1 bg-primary"
-                />
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0}}
+                    style={{ transformOrigin: "top center" }}
+                    transition={{
+                        duration: 1.3,
+                        ease: [0.16, 1, 0.3, 1]
+                    }}
+                    className={` justify-center md:max-w-1/2 max-w-full rounded-3xl backdrop-blur overflow-hidden h-fit items-center z-50`}
+                >
+                    <Container>
+                        <div className={"flex items-center justify-center gap-4"}>
+                            {iconSrc && <img src={iconSrc} alt={"icon"} className={"w-16 min-w-16 min-h-16 h-16"}/>}
+                            <div className={"flex flex-col items-center"}>
+                                <h2 className="font-bold w-full">{title}</h2>
+                                {description && <p className="text-sm w-full opacity-90">{description}</p>}
+                            </div>
+                            <Button iconSrc={"/ico/close.svg"} onClickAction={onCloseAction}/>
 
-            </motion.div>
+                        </div>
+
+
+                    </Container>
+
+                    {/* Barre de progression en bas */}
+                    <motion.div
+                        initial={{ width: "100%" }}
+                        animate={{ width: "0%" }}
+                        transition={{ duration: 5, ease: "linear" }}
+                        className="absolute bottom-0 left-0 h-1 bg-primary"
+                    />
+
+                </motion.div>
+            </div>
+
         }
     </AnimatePresence>
 }

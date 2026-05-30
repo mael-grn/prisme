@@ -1,13 +1,15 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode, useCallback, useRef } from "react";
+import React, { createContext, useContext, useState, ReactNode} from "react";
 import Dialog from "@/app/components/overlays/Dialog";
 import { useNotification } from "@/app/context/NotificationContext";
-import {InsertableWebsite} from "@/app/models/Website";
+import {useTranslations} from "next-intl";
+import {websiteSchema} from "@/app/schemas/WebsiteSchema";
 
 export interface ChildFormProps<T> {
     setDataAction: (data: T) => void;
     initialValue?: T;
+    setDataValidAction: (valid: boolean) => void;
 }
 
 export interface FormOptions<T> {
@@ -31,6 +33,9 @@ const FormDialogContext = createContext<FormDialogContextType | undefined>(undef
 export function FormDialogProvider({ children }: { children: ReactNode }) {
     const [form, setForm] = useState<FormOptions<any> | null>(null);
     const [data, setData] = useState(null);
+    const [dataIsValid, setDataIsValid] = useState(false);
+    const t = useTranslations('form');
+
     const { showNotification } = useNotification();
 
     const openForm = <T,>(options: FormOptions<T>) => {
@@ -44,17 +49,18 @@ export function FormDialogProvider({ children }: { children: ReactNode }) {
     const submit = async () => {
         if (!form) return;
         if (!data) return;
+        if (!dataIsValid) return;
         closeForm();
 
         try {
             await form.onSubmit(data);
             showNotification({
-                title: form.successMsg || "Succès",
-                iconSrc: "/illustrations/success.png"
+                title: form.successMsg || t('defaultSuccessMessage'),
+                iconSrc: "/illustrations/check.png"
             });
         } catch (error) {
             showNotification({
-                title: form.errorMsg || "Une erreur s'est produite",
+                title: form.errorMsg || t('defaultErrorMessage'),
                 iconSrc: "/illustrations/error.png"
             });
         }
@@ -71,15 +77,19 @@ export function FormDialogProvider({ children }: { children: ReactNode }) {
             }}>
                 <Dialog
                     title={form?.title || "Formulaire"}
+                    description={form?.description || undefined}
                     show={form !== null}
                     onCloseAction={closeForm}
-                    onValidateAction={() => {}}
+                    onValidateAction={() => {
+                    }}
                     submitForValidation={true}
+                    disableValidate={!dataIsValid}
                 >
                     {FormComponent && (
                         <FormComponent
                             initialValue={form?.initialValue}
                             setDataAction={setData}
+                            setDataValidAction={setDataIsValid}
                         />
                     )}
                 </Dialog>

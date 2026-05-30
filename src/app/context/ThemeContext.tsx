@@ -7,6 +7,7 @@ import CssUtil from "@/app/utils/CssUtil";
 interface ThemeContextType {
     themeImage: string;
     themeStyles: CSSProperties;
+    themeLoading: boolean; // Ajout du type
     changeTheme: (imageUrl: string) => Promise<void>;
 }
 
@@ -15,9 +16,11 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: ReactNode }) {
     const [themeImage, setThemeImage] = useState<string>("/img/white.png");
     const [themeStyles, setThemeStyles] = useState<CSSProperties>({});
+    const [themeLoading, setThemeLoading] = useState<boolean>(true); // Ajout du state initialisé à true
 
     // Fonction pour changer le thème à la volée depuis n'importe quel composant
     const changeTheme = async (imageUrl: string) => {
+        setThemeLoading(true); // On repasse à true si on change de thème en cours de route
         try {
             const props = await CssUtil.getCSSPropertiesFromImage(imageUrl);
             setThemeImage(imageUrl);
@@ -30,6 +33,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
             });
         } catch (error) {
             console.error("Erreur lors du calcul du CSS de l'image :", error);
+        } finally {
+            setThemeLoading(false); // Le chargement est terminé (succès ou erreur)
         }
     };
 
@@ -40,7 +45,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }, []);
 
     return (
-        <ThemeContext.Provider value={{ themeImage, themeStyles, changeTheme }}>
+        // Injection de themeLoading dans le Provider
+        <ThemeContext.Provider value={{ themeImage, themeStyles, themeLoading, changeTheme }}>
             {children}
         </ThemeContext.Provider>
     );

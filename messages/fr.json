@@ -23,6 +23,23 @@
 
   "Dashboard-websites": {
     "websiteListName": "Vos sites internet",
-    "createWebsiteName": "Créer"
+    "createWebsiteName": "Créer",
+    "createWebsiteTitle": "Créer un site internet",
+    "createWebsiteDescription": "Vous pouvez remplir les champs suivants afin d'ajouter un nouveau site internet à votre collection !",
+    "createWebsiteSuccess": "Le site a été créé avec succès !",
+    "createWebsiteError": "Une erreur s'est produite lors de la création",
+    "deleteValidationTitle": "Voulez-vous vraiment supprimer ce site internet ?",
+    "deleteValidationDesc": "Tout le contenu de ce site, incluant pages et elements seront supprimés.",
+    "deleteError":"Une erreur s'est produite lors de la suppression du site internet",
+    "deleteSuccess": "Le site a bien été supprimé"
+  },
+
+  "fields-names": {
+    "websiteTitle" : "Titre"
+  },
+
+  "form": {
+    "defaultSuccessMessage": "L'opération à réussi !",
+    "defaultErrorMessage": "L'opération à échoué"
   }
 }

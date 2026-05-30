@@ -61,8 +61,8 @@ export default class StringUtil {
     static basicStringValidator(value: string, minLength?: number, maxLength?: number): string | null {
         const invalidCaracters = /[!@#$%^&*(),.?":{}|<>]/g;
 
-        if (value.length < (minLength || 2) || (maxLength && value.length > maxLength)) {
-            return `The text must contain between ${minLength || 2} and ${maxLength || "an infinite number of"} characters.`;
+        if (value.length < (minLength || 1) || (maxLength && value.length > maxLength)) {
+            return `The text must contain between ${minLength || 1} and ${maxLength || "an infinite number of"} characters.`;
         } else if (invalidCaracters.test(value)) {
             return "The text must not contain special characters.";
         } else {
