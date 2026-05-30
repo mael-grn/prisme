@@ -1,4 +1,3 @@
-import {categorySchema} from "@/app/models/schemas";
 import {z} from "zod";
 
 export const elementSchema = z.object({

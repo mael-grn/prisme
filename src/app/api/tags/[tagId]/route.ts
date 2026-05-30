@@ -3,11 +3,11 @@ import {SqlUtil} from "@/app/utils/sqlUtil";
 import {InsertableTag, Tag} from "@/app/models/Tag";
 import {TagSchema} from "@/app/schemas/TagSchema";
 
-export async function PUT(request: Request, {params}: { params: Promise<{ categoryId: string }> }) {
+export async function PUT(request: Request, {params}: { params: Promise<{ tagId: string }> }) {
 
     try {
-        const {categoryId} = await params;
-        ApiUtil.checkParam(categoryId);
+        const {tagId} = await params;
+        ApiUtil.checkParam(tagId);
         const insertableCategory: InsertableTag = await request.json();
         const resultat = TagSchema.safeParse(insertableCategory);
         if (!resultat.success) {
@@ -17,7 +17,7 @@ export async function PUT(request: Request, {params}: { params: Promise<{ catego
 
         //on récupère le site internet
         const [res] = await sql`
-            update tag set name = ${insertableCategory.name} where id = ${categoryId} returning *
+            update tag set name = ${insertableCategory.name} where id = ${tagId} returning *
         `;
         return ApiUtil.getSuccessNextResponse<Tag>(res as Tag);
     } catch (e) {
@@ -26,16 +26,16 @@ export async function PUT(request: Request, {params}: { params: Promise<{ catego
 
 }
 
-export async function DELETE(request: Request, {params}: { params: Promise<{ categoryId: string }> }) {
+export async function DELETE(request: Request, {params}: { params: Promise<{ tagId: string }> }) {
 
     try {
-        const {categoryId} = await params;
-        ApiUtil.checkParam(categoryId);
+        const {tagId} = await params;
+        ApiUtil.checkParam(tagId);
 
         const sql = SqlUtil.getSql()
 
         const sectionsWithCategory = await sql`
-            select 1 from element_tag where element_tag.tag_id = ${categoryId} limit 1
+            select 1 from element_tag where element_tag.tag_id = ${tagId} limit 1
         `;
 
         if (sectionsWithCategory.length > 0) {
@@ -44,7 +44,7 @@ export async function DELETE(request: Request, {params}: { params: Promise<{ cat
 
         //on récupère le site internet
         await sql`
-            delete from tag where id = ${categoryId}
+            delete from tag where id = ${tagId}
         `;
         return ApiUtil.getSuccessNextResponse();
     } catch (e) {
