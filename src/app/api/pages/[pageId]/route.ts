@@ -117,6 +117,9 @@ export async function PUT(request: Request, {params}: { params: Promise<{ pageId
         if (!resultat.success) {
             return ApiUtil.getErrorNextResponse("Entity not good", 422);
         }
+        if (insertablePage.path === "/" || insertablePage.path === "") {
+            insertablePage.path = "root";
+        }
         const [res] = await sql`UPDATE page
                   SET title      = ${insertablePage.title},
                       path       = ${insertablePage.path},

@@ -137,7 +137,7 @@ function WebsiteListItem({website}: { website: Website }) {
 
                 <h3 className="text-xl font-bold">{website.title}</h3>
                 <div className="flex gap-2">
-                    <ButtonLink href={`/${website.id}`} iconSrc="/illustrations/binoculars.png"/>
+                    <ButtonLink href={`/${website.title}`} iconSrc="/illustrations/binoculars.png"/>
                     <Button iconSrc="/illustrations/pencil.png" onClickAction={handleEditWebsiteClick} />
                     <Button
                         iconSrc="/illustrations/bin.png"

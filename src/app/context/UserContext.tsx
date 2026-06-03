@@ -22,7 +22,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
             const res = await UserService.getMyUser();
             setUser(res);
         } catch (error) {
-            console.log("Not logged in");
             setUser(null);
         } finally {
             setuserLoading(false);

@@ -27,7 +27,6 @@ export default function CreateWebsiteForm({ setDataAction, initialValue, setData
         }
         const res = websiteSchema.safeParse(website);
         setDataValidAction(res.success);
-        console.log(res);
     }
 
     useEffect(() => {

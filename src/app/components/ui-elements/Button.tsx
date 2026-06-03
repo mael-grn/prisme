@@ -15,6 +15,7 @@ export default function Button(props: ButtonProps) {
 
     return (
         <motion.button
+            layout
             disabled={!isInteractive}
             onClick={onClickAction}
             type={submit ? "submit" : "button"}
@@ -25,7 +26,7 @@ export default function Button(props: ButtonProps) {
             transition={buttonTransition}
             viewport={{ once: true, amount: 0.1 }}
             {...getHoverTapProps(isInteractive)}
-            className={takeFullWidth ? "block w-full" : "inline-block w-fit"}
+            className={takeFullWidth ? "block w-full" : "inline-block min-w-fit w-fit"}
         >
             <ButtonView {...props} />
         </motion.button>

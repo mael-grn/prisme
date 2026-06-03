@@ -1,14 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { UIEvent } from 'react';
 import { motion, MotionConfig, TargetAndTransition } from 'framer-motion';
 
-export type RoundedSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full';
+export type RoundedSize = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full';
 export type Orientation = "row" | "col";
 export type Justify = "between" | "center" | "around" | "start";
 
-// 1. Mise à jour des types avec les nouvelles animations complexes
-export type BubbleAnimationType = 'subtle-pop' | 'bubble-grow' | 'float-in' | 'glass-reveal';
+export type BubbleAnimationType =
+    | 'subtle-pop'
+    | 'bubble-grow'
+    | 'float-in'
+    | 'glass-reveal'
+    | 'ease-bottom'
+    | 'bubble-top-right'; // Ajout du nouveau type
 
 interface BubbleContainerProps {
     children: React.ReactNode;
@@ -18,17 +23,17 @@ interface BubbleContainerProps {
     justify?: Justify;
     disableAnimation?: boolean;
     animationType?: BubbleAnimationType;
+    flatBottom?: boolean;
     flatBottomOnMobile?: boolean;
+    onScroll?: (e: UIEvent<HTMLDivElement>) => void;
 }
 
-// 2. Dictionnaire de configurations d'animations scalables
 interface AnimationPreset {
     initial: TargetAndTransition;
     animate: TargetAndTransition;
 }
 
 const ANIMATION_PRESETS: Record<BubbleAnimationType, AnimationPreset> = {
-    // Très sobre : un pop ultra-rapide et discret
     'subtle-pop': {
         initial: { scale: 0.92, opacity: 0 },
         animate: {
@@ -37,7 +42,6 @@ const ANIMATION_PRESETS: Record<BubbleAnimationType, AnimationPreset> = {
             transition: { type: "spring", stiffness: 200, damping: 20, opacity: { duration: 0.15 } }
         }
     },
-    // Le concept Bulle de base : la bulle gonfle et se stabilise
     'bubble-grow': {
         initial: { scale: 0.6, opacity: 0 },
         animate: {
@@ -46,7 +50,6 @@ const ANIMATION_PRESETS: Record<BubbleAnimationType, AnimationPreset> = {
             transition: { type: "spring", stiffness: 160, damping: 12, opacity: { duration: 0.25 } }
         }
     },
-    // Moderne : la bulle monte légèrement tout en se gonflant
     'float-in': {
         initial: { scale: 0.85, y: 30, opacity: 0 },
         animate: {
@@ -56,7 +59,6 @@ const ANIMATION_PRESETS: Record<BubbleAnimationType, AnimationPreset> = {
             transition: { type: "spring", stiffness: 140, damping: 15 }
         }
     },
-    // NOUVEAU - Très Complexe : Arrivée en pivot diagonal, redressement et stabilisation
     'glass-reveal': {
         initial: { scale: 0.7, y: 50, x: -30, rotate: -6, opacity: 0 },
         animate: {
@@ -69,8 +71,35 @@ const ANIMATION_PRESETS: Record<BubbleAnimationType, AnimationPreset> = {
                 type: "spring",
                 stiffness: 120,
                 damping: 14,
-                mass: 0.9, // Réduit la masse pour rendre le mouvement plus aérien
+                mass: 0.9,
                 opacity: { duration: 0.3 }
+            }
+        }
+    },
+    'ease-bottom': {
+        initial: { scale: 0.3, opacity: 0, transformOrigin: "bottom" },
+        animate: {
+            scale: 1,
+            opacity: 1,
+            transformOrigin: "bottom",
+            transition: {
+                duration: 0.5,
+                ease: "easeOut"
+            }
+        }
+    },
+    // Nouvelle animation : apparition depuis le coin supérieur droit
+    'bubble-top-right': {
+        initial: { scale: 0.4, opacity: 0, transformOrigin: "top right" },
+        animate: {
+            scale: 1,
+            opacity: 1,
+            transformOrigin: "top right",
+            transition: {
+                type: "spring",
+                stiffness: 220,
+                damping: 16,
+                opacity: { duration: 0.2 }
             }
         }
     }
@@ -84,11 +113,13 @@ export default function BubbleContainer({
                                             justify = 'start',
                                             disableAnimation = false,
                                             animationType = 'subtle-pop',
+                                            flatBottom = false,
                                             flatBottomOnMobile = false,
+                                            onScroll,
                                         }: BubbleContainerProps) {
 
-    // Dictionnaire des arrondis globaux
     const roundedClasses: Record<RoundedSize, string> = {
+        none: 'rounded-none',
         sm: 'rounded-sm',
         md: 'rounded-md',
         lg: 'rounded-lg',
@@ -98,8 +129,8 @@ export default function BubbleContainer({
         full: 'rounded-full',
     };
 
-    // Dictionnaire des arrondis pour le bas sur écran moyen/large (pc)
     const mdRoundedBottomClasses: Record<RoundedSize, string> = {
+        none: 'md:rounded-b-none',
         sm: 'md:rounded-b-sm',
         md: 'md:rounded-b-md',
         lg: 'md:rounded-b-lg',
@@ -112,9 +143,17 @@ export default function BubbleContainer({
     const selectedRounded = roundedClasses[rounded];
     const mdRoundedBottom = mdRoundedBottomClasses[rounded];
 
-    // Combinaison des classes : Arrondi normal + (si actif : casse l'arrondi en bas sur mobile, le remet sur PC)
-    const combinedRoundedClasses = `${selectedRounded} ${flatBottomOnMobile ? `rounded-b-none ${mdRoundedBottom}` : ''}`;
+    const getRoundedClassName = () => {
+        if (flatBottom) {
+            return `${selectedRounded} rounded-b-none`;
+        }
+        if (flatBottomOnMobile) {
+            return `${selectedRounded} rounded-b-none ${mdRoundedBottom}`;
+        }
+        return selectedRounded;
+    };
 
+    const combinedRoundedClasses = getRoundedClassName();
     const currentAnimation = ANIMATION_PRESETS[animationType];
 
     return (
@@ -124,10 +163,9 @@ export default function BubbleContainer({
                 animate={currentAnimation.animate}
                 exit={currentAnimation.initial}
                 viewport={{ once: true, amount: 0.1 }}
-                style={{ transformOrigin: "center center" }}
+                onScroll={onScroll}
                 className={`
                     relative
-                    w-fit
                     p-6
                     overflow-hidden
                     ${combinedRoundedClasses}

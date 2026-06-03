@@ -18,8 +18,6 @@ export default function EditWebsiteForm({ setDataAction, initialValue, setDataVa
     const [website, setWebsite] = useState<Website>(initialValue ? initialValue : {id:-1, owner_id: user?.id || -1, title: "", website_domain: undefined, lang: undefined, image_src: undefined})
 
     const editWebsiteData = (data: Website) => {
-        console.log("editWebsiteData", data);
-        console.log("data", website);
         setWebsite(data);
         checkWebsiteData(data)
         setDataAction(data);

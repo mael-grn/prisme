@@ -20,6 +20,7 @@ export interface SharedButtonProps {
     hideTextMobile?: boolean;
     className?: string;
     takeFullWidth?: boolean;
+    size?: "small" | "default"; // NOUVEAU PARAMÈTRE
 }
 
 export const ButtonView = forwardRef<HTMLDivElement, SharedButtonProps>(({
@@ -30,23 +31,43 @@ export const ButtonView = forwardRef<HTMLDivElement, SharedButtonProps>(({
                                                                              disabled,
                                                                              loading,
                                                                              takeFullWidth,
-                                                                             btnType = ButtonType.Neutral
+                                                                             btnType = ButtonType.Neutral,
+                                                                             size = "default" // Valeur par défaut
                                                                          }, ref) => {
     const isIconOnly = iconSrc && !text;
     const isInteractive = !disabled && !loading;
 
     const radiusClass = isIconOnly ? "rounded-full" : "rounded-full md:rounded-xl";
 
+    // 1. GESTION DU PADDING (s'adapte à la taille et au mobile)
     const paddingClass = isIconOnly
-        ? "p-1"
+        ? (size === "small" ? "p-1.5" : "p-2")
         : hideTextMobile
-            ? "p-1 md:px-5 md:py-2.5"
-            : "px-5 py-2.5";
+            ? (size === "small" ? "p-1.5 md:px-3 md:py-1.5" : "p-1 md:px-5 md:py-2.5")
+            : (size === "small" ? "px-3 py-1.5" : "px-5 py-2.5");
+
+    // 2. GESTION DE LA TAILLE DU TEXTE (Corrige le bug sur ordinateur)
+    const textSizeClass = size === "small"
+        ? "text-xs md:text-sm"
+        : "text-sm md:text-lg";
+
+    // 3. GESTION DE LA TAILLE DE L'ICÔNE
+    const iconSizeClass = isIconOnly
+        ? (size === "small" ? "w-6 h-6" : "w-10 h-10")
+        : hideTextMobile
+            ? (size === "small" ? "w-6 h-6 md:w-4 md:h-4" : "w-10 h-10 md:w-6 md:h-6")
+            : (size === "small" ? "w-4 h-4" : "w-6 h-6");
+
+    // 4. GESTION DE LA TAILLE DU LOADER
+    const loadingSize = isIconOnly
+        ? (size === "small" ? 24 : 35)
+        : (size === "small" ? 16 : 20);
 
     return (
         <div
             ref={ref}
             className={`
+            shrink-0
                 relative items-center justify-center gap-2 max-h-fit
                 font-bold transition-all
                 min-w-fit
@@ -60,7 +81,7 @@ export const ButtonView = forwardRef<HTMLDivElement, SharedButtonProps>(({
                 border border-white/20
                 shadow-lg shadow-black/10 shadow-inner
                 ${btnType === ButtonType.Neutral ? "text-foreground" : "text-white"}
-                ${hideTextMobile ? "text-[0px] md:text-sm" : "text-sm md:text-lg"}
+                ${textSizeClass}
                 ${className}
             `}
         >
@@ -77,7 +98,7 @@ export const ButtonView = forwardRef<HTMLDivElement, SharedButtonProps>(({
             <div className="relative z-10 flex items-center gap-2">
                 {loading ? (
                     <LoadingIcon
-                        size={isIconOnly ? 35 : 20}
+                        size={loadingSize}
                         color={LoadingIconColor.light}
                     />
                 ) : (
@@ -85,16 +106,11 @@ export const ButtonView = forwardRef<HTMLDivElement, SharedButtonProps>(({
                         <img
                             src={iconSrc}
                             alt="icon"
-                            className={`object-contain ${
-                                isIconOnly
-                                    ? "w-10 h-10"
-                                    : hideTextMobile
-                                        ? "w-10 h-10 md:w-6 md:h-6"
-                                        : "w-6 h-6"
-                            }`}
+                            className={`object-contain ${iconSizeClass}`}
                         />
                     )
                 )}
+                {/* Le texte est géré ici avec hidden si hideTextMobile est true */}
                 {text && <span className={hideTextMobile ? "hidden md:inline" : ""}>{text}</span>}
             </div>
         </div>

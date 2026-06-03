@@ -12,14 +12,10 @@ export default function ImageInputUploader(props: imageInputUploaderProps) {
     const [loading, setLoading] = useState<boolean>(false);
     const upload = async (file: File) => {
         setLoading(true);
-        console.log(file);
         try {
-            console.log("upload")
             const link = await ImageUtil.uploadImage(file);
-            console.log(link);
             props.setLinkAction(link);
         } catch (e) {
-            console.log(e);
             setError(String(e));
         } finally {
             setLoading(false);

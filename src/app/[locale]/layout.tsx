@@ -10,6 +10,7 @@ import {ThemeProvider} from "@/app/context/ThemeContext";
 import {NotificationProvider} from "@/app/context/NotificationContext";
 import {DialogProvider} from "@/app/context/DialogContext";
 import {FormDialogProvider} from "@/app/context/FormContext";
+import {IsAdminProvider} from "@/app/context/IsAdminContext";
 
 const montserrat = Montserrat({
     subsets: ["latin"],
@@ -52,11 +53,13 @@ export default async function RootLayout({
             <DialogProvider>
                 <NotificationProvider>
                     <UserProvider>
-                        <FormDialogProvider>
-                            <ThemeProvider>
-                                {children}
-                            </ThemeProvider>
-                        </FormDialogProvider>
+                        <IsAdminProvider>
+                            <FormDialogProvider>
+                                <ThemeProvider>
+                                    {children}
+                                </ThemeProvider>
+                            </FormDialogProvider>
+                        </IsAdminProvider>
                     </UserProvider>
                 </NotificationProvider>
             </DialogProvider>

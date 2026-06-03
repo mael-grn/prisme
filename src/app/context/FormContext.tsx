@@ -47,11 +47,8 @@ export function FormDialogProvider({ children }: { children: ReactNode }) {
     };
 
     const submit = async () => {
-        console.log("submit", form);
         if (!form) return;
-        console.log("data", data);
         if (!data) return;
-        console.log("valid", dataIsValid);
         if (!dataIsValid) return;
         closeForm();
 
@@ -74,7 +71,7 @@ export function FormDialogProvider({ children }: { children: ReactNode }) {
     return (
         <FormDialogContext.Provider value={{ openForm, closeForm }}>
             {children}
-            <form onSubmit={(e) => {
+            <form className={"z-999"} onSubmit={(e) => {
                 e.preventDefault();
                 submit()
             }}>

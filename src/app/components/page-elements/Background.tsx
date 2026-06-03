@@ -3,7 +3,7 @@
 import { useTheme } from "@/app/context/ThemeContext";
 import Image from "next/image";
 
-export default function Background() {
+export default function Background({zoom}: {zoom?: boolean}) {
     const { themeImage, themeLoading } = useTheme();
 
     return (
@@ -15,7 +15,7 @@ export default function Background() {
                     src={themeImage}
                     alt="background"
                     fill
-                    className="object-cover"
+                    className={`transition-all duration-700 object-cover ${zoom ? "scale-125" : "scale-100"}`}
                     sizes="100vw"
                     priority
                 />

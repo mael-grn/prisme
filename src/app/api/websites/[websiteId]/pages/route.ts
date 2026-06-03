@@ -38,6 +38,9 @@ export async function POST(request: Request, { params }: { params: Promise<{ web
         }
         const pages : Page[] = await sql`SELECT * FROM page WHERE website_id = ${website.id}` as unknown as Page[];
         const pos = LexicalPositionUtil.getNextPosition(pages);
+        if (insertablePage.path === "/" || insertablePage.path === "") {
+            insertablePage.path = "root";
+        }
         const [res] = await sql`INSERT INTO page (path, website_id, icon_svg, title, position)
               VALUES (${insertablePage.path}, ${website.id}, ${insertablePage.icon_svg}, ${insertablePage.title}, ${pos})
               RETURNING *`;
@@ -58,7 +61,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ webs
 
         const sql = SqlUtil.getSql()
         const res = await sql`
-        SELECT page.* FROM website, page WHERE (website.id = ${websiteId} or website_domain = ${websiteId}) and page.website_id = website.id ORDER BY page.position
+        SELECT page.* FROM website, page WHERE (website.id = ${websiteId}) and page.website_id = website.id ORDER BY page.position
     `;
         return ApiUtil.getSuccessNextResponse<Page[]>(res as Page[]);
     } catch (e) {

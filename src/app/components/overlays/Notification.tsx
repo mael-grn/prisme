@@ -27,7 +27,7 @@ export default function Notification({title, iconSrc, description, onCloseAction
     return <AnimatePresence>
         {
             show &&
-            <div className={"fixed top-5 left-5 right-5 md:top-3 md:left-3 md:right-3 flex justify-center items-center"}>
+            <div className={"fixed top-5 z-999 left-5 right-5 md:top-3 md:left-3 md:right-3 flex justify-center items-center"}>
                 <motion.div
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}

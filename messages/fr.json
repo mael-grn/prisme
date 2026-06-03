@@ -40,12 +40,33 @@
   },
 
   "fields-names": {
-    "websiteTitle" : "Titre"
+    "websiteTitle" : "Titre",
+    "pagePath": "Chemin d'accès"
   },
 
   "form": {
     "defaultSuccessMessage": "L'opération à réussi !",
     "defaultErrorMessage": "L'opération à échoué",
     "imageUpload": "Cliquez pour sélectionner une image, ou glissez-en une ici"
+  },
+
+  "page": {
+    "noPage": "Il semble que cette page n'existe pas. Revenez plus tard, ou vérifiez l'url.",
+    "createPageButtonName": "Créer la page pour la rendre accessible",
+    "noContentForPage" : "Il semble que cette page n'a pas de contenu pour le moment.",
+    "searchText" : "Rechercher",
+    "homeName" : "Accueil",
+    "menuName" : "Menu",
+    "closeName": "Fermer",
+    "noPages": "Ce site ne contient pas de page pour le moment.",
+    "dashboardName": "Tableau de bord",
+    "connexionName": "Connexion",
+    "createPageName" : "Créer une page",
+    "createPageSuccess": "La page à bien été créée !",
+    "createPageError": "Une erreur s'est produite lors de la création de la page",
+    "deletePageValidationTitle": "Voulez-vous vraiment supprimer les pages sélectionnées ?",
+    "deletePageValidationDesc": "Tout le contenu de ces pages, incluant les éléments seront supprimés.",
+    "deletePageError":"Une erreur s'est produite lors de la suppression de la page",
+    "deletePageSuccess": "La page a bien été supprimée"
   }
 }

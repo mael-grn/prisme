@@ -1,6 +1,7 @@
 import {InsertablePage, Page} from "@/app/models/Page";
 import axios, {AxiosError} from "axios";
 import StringUtil from "@/app/utils/StringUtil";
+import WebsiteService from "@/app/services/WebsiteService";
 
 export default class PageService {
 
@@ -29,6 +30,22 @@ export default class PageService {
         }
     }
 
+    static async getPageFromWebsite(websiteId: string, pageId: string) : Promise<Page>  {
+        try {
+            let page = pageId
+            if (page === "/" || page === "") {
+                page = "root";
+            }
+            if (page.startsWith('/')) {
+                page = page.slice(1)
+            }
+            const response = await axios.get(`/api/websites/${websiteId}/pages/${page}`);
+            return response.data.data as Page;
+        } catch (e) {
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
+        }
+    }
+
     /**
      * Insert a new page and return the newly created page
      * @param newPage
@@ -36,6 +53,21 @@ export default class PageService {
     static async insertPage(newPage: InsertablePage) : Promise<Page> {
         try {
             const response = await axios.post(`/api/websites/${newPage.website_id}/pages`, newPage);
+            return response.data.data as Page;
+        } catch (e) {
+            const perso = {code: 409, message: "The page name is already used. Please choose another name."}
+            throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1, perso)
+        }
+    }
+
+    static async createRootPage(websiteId: number) : Promise<Page> {
+        const root: InsertablePage = {
+            path: 'root',
+            title: 'Home',
+            website_id: websiteId,
+        }
+        try {
+            const response = await axios.post(`/api/websites/${websiteId}/pages`, {});
             return response.data.data as Page;
         } catch (e) {
             const perso = {code: 409, message: "The page name is already used. Please choose another name."}

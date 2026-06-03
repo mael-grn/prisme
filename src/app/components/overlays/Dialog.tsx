@@ -29,7 +29,7 @@ export default function Dialog({title, iconSrc, disableValidate=false, descripti
                     duration: 0.3,
                     ease: "linear"
                 }}
-                className={"fixed top-0 left-0 right-0 bottom-0 w-full h-screen flex justify-center md:items-center items-end bg-black/60"}
+                className={"fixed z-999 top-0 left-0 right-0 bottom-0 w-full h-screen flex justify-center md:items-center items-end bg-black/60"}
             >
                 <motion.div
                     initial={{ opacity: 0, scale: 0.7 }}
