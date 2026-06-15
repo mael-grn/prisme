@@ -37,7 +37,7 @@ export default function CreatePageForm({ setDataAction, initialValue, setDataVal
 
     return (
         <div className="flex flex-col gap-4">
-            <Input placeHolder={t('websiteTitle')} onChangeAction={(s) => editWebsiteData(page.path.replaceAll('%20', ' ').slice(1) === page.title ? {...page, path: '/' + s.replaceAll(' ', '%20'), title: s} : {...page, title: s})} validatorAction={StringUtil.basicStringValidator} value={page.title} />
+            <Input placeHolder={t('websiteTitle')} onChangeAction={(s) => editWebsiteData(StringUtil.nettoyerTexte(page.path).slice(1) === page.path ? {...page, path: '/' + StringUtil.nettoyerTexte(s), title: s} : {...page, title: s})} validatorAction={StringUtil.basicStringValidator} value={page.title} />
             <Input placeHolder={t('pagePath')} onChangeAction={(s) => editWebsiteData({...page, path: s})} validatorAction={StringUtil.pathStringValidator} value={page.path} />
         </div>
     );

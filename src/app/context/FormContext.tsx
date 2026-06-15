@@ -14,6 +14,7 @@ export interface ChildFormProps<T> {
 
 export interface FormOptions<T> {
     title: string;
+    triggerId?: string;
     description?: string;
     iconSrc?: string;
     form: React.ComponentType<ChildFormProps<T>>;
@@ -76,6 +77,7 @@ export function FormDialogProvider({ children }: { children: ReactNode }) {
                 submit()
             }}>
                 <Dialog
+                    triggerId={form?.triggerId}
                     title={form?.title || "Formulaire"}
                     description={form?.description || undefined}
                     show={form !== null}

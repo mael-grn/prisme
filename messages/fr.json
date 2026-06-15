@@ -21,6 +21,12 @@
     "unavailableText": "Ce projet est encore en beta, et certaines options peuvent ne pas être encore disponible. Merci de revenir plus tard."
   },
 
+  "Dashboard-user": {
+    "button": "Accéder au gestionnaire Azimut",
+    "title": "La gestion du compte à été déplacée !",
+    "text": "Pour gérer votre compte utilisateur, vous pouvez maintenant vous rendre directement sur le gestionnaire Azimut."
+  },
+
   "Dashboard-websites": {
     "websiteListName": "Vos sites internet",
     "createWebsiteName": "Créer",

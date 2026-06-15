@@ -37,7 +37,12 @@ export default function NavBar(props: NavBarProps) {
 
     const fetcher = async () => await PageService.getMyPages(props.websiteId);
     const fetchWebsite = async () => await WebsiteService.getWebsite(String(props.websiteId));
-    const {data: website, error: websiteError, isLoading: websiteLoading, mutate: mutateWebsite} = useSWR(`website-${props.websiteId}`, fetchWebsite);
+    const {
+        data: website,
+        error: websiteError,
+        isLoading: websiteLoading,
+        mutate: mutateWebsite
+    } = useSWR(`website-${props.websiteId}`, fetchWebsite);
     const {data: pages, error, isLoading, mutate} = useSWR('website-pages', fetcher);
 
     const togglePageEditionMode = () => {
@@ -59,6 +64,7 @@ export default function NavBar(props: NavBarProps) {
 
     const onDeleteSelectedPages = () => {
         showDialog({
+            triggerId: "delete-pages-trigger",
             title: t('deletePageValidationTitle'),
             description: t('deletePageValidationDesc'),
             iconSrc: '/illustrations/bin.png',
@@ -87,11 +93,9 @@ export default function NavBar(props: NavBarProps) {
         <div
             className={`flex gap-4 px-1/12 w-10/12 items-center  justify-between h-full transition-all
             ${props.scrolled ? `` : ""}`}>
-            <ButtonLink hideTextMobile={true} iconSrc={"/illustrations/magnifier.png"} /*text={t('searchText')}*//>
+            <ButtonLink hideTextMobile={true} iconSrc={"/illustrations/magnifier.png"}/>
 
-
-
-            <div className={`flex-1 justify-center flex items-center gap-6 h-full overflow-x-auto`}>
+            <div className={`flex-1 justify-center flex items-center gap-2 h-full overflow-x-auto`}>
                 {
                     !pageEditionMode &&
                     <motion.div key="home" layout className={"shrink-0"}>
@@ -99,7 +103,8 @@ export default function NavBar(props: NavBarProps) {
                             const homeHref = `/${website?.title.replaceAll(' ', '%20')}`;
                             const isHomeActive = pathname.endsWith(homeHref) || pathname.endsWith(`${homeHref}/`);
                             return (
-                                <Link className={`relative shrink-0 px-3 py-1.5 z-10 flex items-center`} href={homeHref}>
+                                <Link className={`relative shrink-0 px-3 py-1.5 z-10 flex items-center`}
+                                      href={homeHref}>
                                     {t('homeName')}
 
                                     {!pageEditionMode && isHomeActive && (
@@ -117,7 +122,7 @@ export default function NavBar(props: NavBarProps) {
                         const isActive = pathname.endsWith(pageHref);
                         return <div key={page.id} className={`flex items-center justify-center gap-1`}>
                             <AnimatePresence>
-                                { page.path != 'root' && pageEditionMode && (
+                                {page.path != 'root' && pageEditionMode && (
                                     <Checkbox
                                         key={1}
                                         onChange={(isChecked) => addOrRemovePageToEditing(page)}
@@ -125,8 +130,9 @@ export default function NavBar(props: NavBarProps) {
                                     />
                                 )}
                                 {
-                                    page.path != 'root' &&  <motion.div layout className={"shrink-0"}>
-                                        <Link className={`relative shrink-0 px-3 py-1.5 z-10 flex items-center`} href={pageHref}>
+                                    page.path != 'root' && <motion.div layout className={"shrink-0"}>
+                                        <Link className={`relative shrink-0 px-3 py-1.5 z-10 flex items-center`}
+                                              href={pageHref}>
                                             {page.title}
 
                                             {!pageEditionMode && isActive && (
@@ -139,9 +145,6 @@ export default function NavBar(props: NavBarProps) {
                         </div>
                     })
                 }
-
-
-
             </div>
 
             {
@@ -149,7 +152,9 @@ export default function NavBar(props: NavBarProps) {
                 <div className={"flex gap-2"}>
                     <AnimatePresence>
                         {
-                            pageEditionMode && <Button key={1} size={"small"} iconSrc={"/ico/trash.svg"} onClickAction={onDeleteSelectedPages} btnType={ButtonType.Danger}/>
+                            pageEditionMode &&
+                            <Button key={1} layoutId="delete-pages-trigger" size={"small"} iconSrc={"/ico/trash.svg"}
+                                    onClickAction={onDeleteSelectedPages} btnType={ButtonType.Danger}/>
                         }
                         <Button
                             key={2}
@@ -161,7 +166,9 @@ export default function NavBar(props: NavBarProps) {
                             !pageEditionMode && <Button
                                 key={3}
                                 size={"small"}
+                                layoutId={"create-page-trigger"}
                                 onClickAction={() => openForm<InsertablePage>({
+                                    triggerId: "create-page-trigger",
                                     form: CreatePageForm,
                                     initialValue: {title: "", path: "/", website_id: props.websiteId},
                                     title: t('createPageName'),
@@ -180,7 +187,8 @@ export default function NavBar(props: NavBarProps) {
                 </div>
             }
 
-            <ButtonLink loading={userLoading} href={'/dashboard'} iconSrc={user ? "/illustrations/binoculars.png" : "/illustrations/avatar.png"}/>
+            <ButtonLink loading={userLoading} href={'/dashboard'}
+                        iconSrc={user ? "/illustrations/binoculars.png" : "/illustrations/avatar.png"}/>
 
         </div>
     </nav>
@@ -189,13 +197,13 @@ export default function NavBar(props: NavBarProps) {
 function ActiveBackground() {
     return <motion.div
         layoutId="active-nav-background"
-        className={`backdrop-blur-xl absolute inset-0 -z-10 bg-gradient-to-br from-white/15 via-white/5 to-transparent
+        className={`backdrop-blur-xl absolute inset-0 -z-10 bg-linear-to-br from-white/15 via-white/5 to-transparent
                 border border-white/20
-                shadow-lg shadow-black/10 shadow-inner rounded-full`}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                shadow-lg shadow-black/10 shadow-inner rounded-full bg-background/60`}
+        transition={{type: "spring", stiffness: 400, damping: 30}}
     >
         <div
-            className={`absolute inset-0 pointer-events-none rounded-full bg-gradient-to-b from-white/15 to-transparent`}
+            className={`absolute inset-0 pointer-events-none rounded-full bg-linear-to-b from-white/15 to-transparent`}
             style={{
                 maskImage: 'linear-gradient(to bottom, black 0%, transparent 40%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 40%)'

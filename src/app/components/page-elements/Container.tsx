@@ -1,110 +1,29 @@
 'use client';
 
-import React, { UIEvent } from 'react';
-import { motion, MotionConfig, TargetAndTransition } from 'framer-motion';
+import React, {UIEvent} from 'react';
+import {motion, MotionConfig, TargetAndTransition} from 'framer-motion';
 
 export type RoundedSize = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full';
 export type Orientation = "row" | "col";
 export type Justify = "between" | "center" | "around" | "start";
 
-export type BubbleAnimationType =
-    | 'subtle-pop'
-    | 'bubble-grow'
-    | 'float-in'
-    | 'glass-reveal'
-    | 'ease-bottom'
-    | 'bubble-top-right'; // Ajout du nouveau type
-
 interface BubbleContainerProps {
     children: React.ReactNode;
+    layoutId?: string;
     rounded?: RoundedSize;
     className?: string;
     orientation?: Orientation;
     justify?: Justify;
     disableAnimation?: boolean;
-    animationType?: BubbleAnimationType;
     flatBottom?: boolean;
     flatBottomOnMobile?: boolean;
     onScroll?: (e: UIEvent<HTMLDivElement>) => void;
+    initial?: TargetAndTransition;
+    animate?: TargetAndTransition;
 }
 
-interface AnimationPreset {
-    initial: TargetAndTransition;
-    animate: TargetAndTransition;
-}
-
-const ANIMATION_PRESETS: Record<BubbleAnimationType, AnimationPreset> = {
-    'subtle-pop': {
-        initial: { scale: 0.92, opacity: 0 },
-        animate: {
-            scale: 1,
-            opacity: 1,
-            transition: { type: "spring", stiffness: 200, damping: 20, opacity: { duration: 0.15 } }
-        }
-    },
-    'bubble-grow': {
-        initial: { scale: 0.6, opacity: 0 },
-        animate: {
-            scale: 1,
-            opacity: 1,
-            transition: { type: "spring", stiffness: 160, damping: 12, opacity: { duration: 0.25 } }
-        }
-    },
-    'float-in': {
-        initial: { scale: 0.85, y: 30, opacity: 0 },
-        animate: {
-            scale: 1,
-            y: 0,
-            opacity: 1,
-            transition: { type: "spring", stiffness: 140, damping: 15 }
-        }
-    },
-    'glass-reveal': {
-        initial: { scale: 0.7, y: 50, x: -30, rotate: -6, opacity: 0 },
-        animate: {
-            scale: 1,
-            y: 0,
-            x: 0,
-            rotate: 0,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                stiffness: 120,
-                damping: 14,
-                mass: 0.9,
-                opacity: { duration: 0.3 }
-            }
-        }
-    },
-    'ease-bottom': {
-        initial: { scale: 0.3, opacity: 0, transformOrigin: "bottom" },
-        animate: {
-            scale: 1,
-            opacity: 1,
-            transformOrigin: "bottom",
-            transition: {
-                duration: 0.5,
-                ease: "easeOut"
-            }
-        }
-    },
-    // Nouvelle animation : apparition depuis le coin supérieur droit
-    'bubble-top-right': {
-        initial: { scale: 0.4, opacity: 0, transformOrigin: "top right" },
-        animate: {
-            scale: 1,
-            opacity: 1,
-            transformOrigin: "top right",
-            transition: {
-                type: "spring",
-                stiffness: 220,
-                damping: 16,
-                opacity: { duration: 0.2 }
-            }
-        }
-    }
-};
-
+const defaultAnimate: TargetAndTransition = { opacity: 1, scale: 1 };
+const defaultInitial: TargetAndTransition = { opacity: 0, scale: 0.5 };
 export default function BubbleContainer({
                                             children,
                                             rounded = '3xl',
@@ -112,10 +31,12 @@ export default function BubbleContainer({
                                             orientation = 'col',
                                             justify = 'start',
                                             disableAnimation = false,
-                                            animationType = 'subtle-pop',
                                             flatBottom = false,
                                             flatBottomOnMobile = false,
                                             onScroll,
+                                            layoutId,
+                                            initial = defaultInitial,
+                                            animate = defaultAnimate,
                                         }: BubbleContainerProps) {
 
     const roundedClasses: Record<RoundedSize, string> = {
@@ -154,17 +75,23 @@ export default function BubbleContainer({
     };
 
     const combinedRoundedClasses = getRoundedClassName();
-    const currentAnimation = ANIMATION_PRESETS[animationType];
 
     return (
-        <MotionConfig reducedMotion={disableAnimation ? "always" : "user"}>
-            <motion.div
-                initial={currentAnimation.initial}
-                animate={currentAnimation.animate}
-                exit={currentAnimation.initial}
-                viewport={{ once: true, amount: 0.1 }}
-                onScroll={onScroll}
-                className={`
+        <motion.div
+            layout
+            layoutId={layoutId}
+            transition={{
+                type: "spring",
+                stiffness: 140,
+                damping: 15,
+                opacity: { duration: 0.3 }
+            }}
+            initial={disableAnimation ? undefined : initial}
+            animate={disableAnimation ? undefined : animate}
+
+            viewport={{once: true, amount: 0.1}}
+            onScroll={onScroll}
+            className={`
                     relative
                     p-6
                     overflow-hidden
@@ -181,19 +108,18 @@ export default function BubbleContainer({
                     
                     ${className}
                 `}
-            >
-                <div
-                    className={`absolute inset-0 pointer-events-none ${combinedRoundedClasses} bg-gradient-to-b from-white/15 to-transparent`}
-                    style={{
-                        maskImage: 'linear-gradient(to bottom, black 0%, transparent 50%)',
-                        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 50%)'
-                    }}
-                />
+        >
+            <div
+                className={`absolute inset-0 pointer-events-none ${combinedRoundedClasses} bg-gradient-to-b from-white/15 to-transparent`}
+                style={{
+                    maskImage: 'linear-gradient(to bottom, black 0%, transparent 50%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 50%)'
+                }}
+            />
 
-                <div className={`relative z-10 flex h-full flex-${orientation} justify-${justify} items-center gap-2`}>
-                    {children}
-                </div>
-            </motion.div>
-        </MotionConfig>
+            <div className={`relative z-10 flex h-full flex-${orientation} justify-${justify} items-center gap-2`}>
+                {children}
+            </div>
+        </motion.div>
     );
 }

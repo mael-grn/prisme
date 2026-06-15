@@ -20,13 +20,17 @@ export default function Layout({
 
     const {websiteId} = useParams();
     const fetcher = async () => await WebsiteService.getWebsite(websiteId as string);
-    const {themeStyles, changeTheme} = useTheme();
+    const {themeStyles, changeTheme, changeThemeRandom} = useTheme();
     const {data: website, error, isLoading, mutate} = useSWR('website', fetcher);
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        if (website && website.image_src) {
-            changeTheme(website.image_src)
+        if (!isLoading) {
+            if (website && website.image_src) {
+                changeTheme(website.image_src)
+            } else {
+                changeThemeRandom();
+            }
         }
     }, [website]);
 
@@ -49,7 +53,6 @@ export default function Layout({
         <main className="w-full h-screen fixed top-0 left-0 flex justify-center items-end overflow-hidden"
               style={themeStyles}>
             <Container
-                animationType={"ease-bottom"}
                 flatBottom={true}
                 onScroll={handleScroll}
                 className={`transition-all duration-500 ease-out overflow-y-auto overflow-x-hidden ${scrolled ? sizeClasses.full : sizeClasses.reduced}`}

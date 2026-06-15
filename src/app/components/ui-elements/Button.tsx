@@ -7,15 +7,17 @@ import { ButtonView, SharedButtonProps } from "@/app/components/ui-elements/Butt
 export interface ButtonProps extends SharedButtonProps {
     onClickAction?: () => void;
     submit?: boolean;
+    layoutId?: string;
 }
 
 export default function Button(props: ButtonProps) {
-    const { onClickAction, submit, disabled, loading, takeFullWidth } = props;
+    const { onClickAction, submit, disabled, loading, takeFullWidth, layoutId } = props;
     const isInteractive = !disabled && !loading;
 
     return (
         <motion.button
             layout
+            layoutId={layoutId}
             disabled={!isInteractive}
             onClick={onClickAction}
             type={submit ? "submit" : "button"}

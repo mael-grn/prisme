@@ -9,6 +9,7 @@ interface ThemeContextType {
     themeStyles: CSSProperties;
     themeLoading: boolean;
     changeTheme: (imageUrl: string) => Promise<void>;
+    changeThemeRandom: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -43,6 +44,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         }
     };
 
+    const changeThemeRandom = async () => {
+        const initialImage = ImageUtil.getRandomBackgroundImage();
+        changeTheme(initialImage);
+    }
+
     // Initialisation unique au premier chargement au niveau du navigateur
     useEffect(() => {
         if (isInitialized.current) return;
@@ -58,7 +64,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const currentThemeImage = themeImage || "/img/white.png";
 
     return (
-        <ThemeContext.Provider value={{ themeImage: currentThemeImage, themeStyles, themeLoading, changeTheme }}>
+        <ThemeContext.Provider value={{ changeThemeRandom: changeThemeRandom, themeImage: currentThemeImage, themeStyles, themeLoading, changeTheme }}>
             {children}
         </ThemeContext.Provider>
     );

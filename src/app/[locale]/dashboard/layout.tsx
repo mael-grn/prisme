@@ -53,7 +53,7 @@ export default function Layout({
     return <>
         <Background/>
         <main style={themeStyles} className={"relative flex flex-col gap-4 md:p-6 p-3 w-full h-screen max-h-screen"}>
-            <Container animationType={"glass-reveal"} orientation={"row"} justify={"between"} className={"w-full"}>
+            <Container orientation={"row"} justify={"between"} className={"w-full"}>
                 <div className={"flex items-center justify-center gap-2"}>
                     <Image width={50} height={50} src={"/img/icon.png"} alt="icon"/>
                     <h1 className={"md:text-3xl text-xl font-bold"}>{t('dashboardName')}</h1>
@@ -65,7 +65,7 @@ export default function Layout({
             </Container>
 
             <div className={"flex flex-col md:flex-row gap-4 w-full flex-1 min-h-0"}>
-                <Container animationType={"glass-reveal"} className={"md:h-full md:w-fit w-full"}>
+                <Container className={"md:h-full md:w-fit w-full"}>
                     <div className={"flex w-full h-full items-center gap-2 md:flex-col md:justify-start justify-around"}>
                         {
                             menuItems.map((item, i) => (
@@ -76,7 +76,7 @@ export default function Layout({
 
                 </Container>
 
-                <Container animationType={"glass-reveal"} className={"flex-1 overflow-y-auto w-full h-full"}>
+                <Container className={"flex-1 overflow-y-auto w-full h-full"}>
                     {children}
                 </Container>
             </div>

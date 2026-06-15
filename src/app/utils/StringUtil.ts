@@ -15,6 +15,14 @@ export default class StringUtil {
         return str.slice(0, num) + '...';
     }
 
+    static nettoyerTexte(chaine: string): string {
+        return chaine
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/ /g, "%20")
+            .replace(/[^a-zA-Z0-9%]/g, "");
+    }
+
     static getErrorMessageFromStatus(
         status: number,
         customMessage?: { code: number, message: string }

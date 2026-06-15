@@ -26,10 +26,23 @@ export async function POST(request: Request) {
         // Insertion en base de données
         const sql = SqlUtil.getSql()
         let res : Website;
-        if (insertableWebsite.website_domain) {
+
+        if (insertableWebsite.website_domain && insertableWebsite.image_src) {
+            [res] = await sql`
+                INSERT INTO website (owner_id, title, website_domain, image_src)
+                VALUES (${user.id}, ${insertableWebsite.title}, ${insertableWebsite.website_domain}, ${insertableWebsite.image_src})
+                    returning *
+            ` as unknown as Website[]
+        } else if (insertableWebsite.website_domain) {
             [res] = await sql`
             INSERT INTO website (owner_id, title, website_domain)
             VALUES (${user.id}, ${insertableWebsite.title}, ${insertableWebsite.website_domain})
+            returning *
+        ` as unknown as Website[]
+        } else if (insertableWebsite.image_src) {
+            [res] = await sql`
+            INSERT INTO website (owner_id, title, image_src)
+            VALUES (${user.id}, ${insertableWebsite.title}, ${insertableWebsite.image_src})
             returning *
         ` as unknown as Website[]
         } else {

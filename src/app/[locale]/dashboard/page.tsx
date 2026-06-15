@@ -27,12 +27,14 @@ export default function WebsitesDashboardSubpage() {
 
     const handleCreateWebsiteClick = () => {
         openForm({
+            triggerId: `create-website`,
             title: t('createWebsiteTitle'),
             description: t('createWebsiteDescription'),
             errorMsg: t('createWebsiteError'),
             successMsg: t('createWebsiteSuccess'),
             iconSrc: "/illustrations/domain.png",
             onSubmit: async (data) => {
+                console.log(data);
                 const result = await WebsiteService.createWebsite(data as InsertableWebsite);
                 await mutate();
                 return result;
@@ -46,6 +48,8 @@ export default function WebsitesDashboardSubpage() {
             <div className="flex gap-4 justify-between items-center w-full">
                 <h2 className="md:text-2xl text-lg w-fit font-bold">{t("websiteListName")}</h2>
                 <Button
+                    layoutId={`create-website`}
+
                     text={t("createWebsiteName")}
                     iconSrc="/illustrations/new.png"
                     btnType={ButtonType.Primary}
@@ -56,9 +60,9 @@ export default function WebsitesDashboardSubpage() {
             <div className="flex flex-col gap-2 mt-4">
                 {isLoading && (
                     <>
-                        <WebsiteListItemSkeleton />
-                        <WebsiteListItemSkeleton />
-                        <WebsiteListItemSkeleton />
+                        <WebsiteListItemSkeleton/>
+                        <WebsiteListItemSkeleton/>
+                        <WebsiteListItemSkeleton/>
                     </>
                 )}
                 {error && <Container className={"w-full bg-dangerous"}><p>{t('loadingError')}</p></Container>}
@@ -77,11 +81,11 @@ export default function WebsitesDashboardSubpage() {
 function WebsiteListItemSkeleton() {
     return (
         <Container orientation="row" justify="between" className="w-full animate-pulse  pointer-events-none">
-            <div className="h-6 w-48 bg-foreground/50 rounded-md" />
+            <div className="h-6 w-48 bg-foreground/50 rounded-md"/>
 
             <div className="flex gap-2">
-                <div className="w-10 h-10 bg-foreground/50 rounded-xl" />
-                <div className="w-10 h-10 bg-foreground/50 rounded-xl" />
+                <div className="w-10 h-10 bg-foreground/50 rounded-xl"/>
+                <div className="w-10 h-10 bg-foreground/50 rounded-xl"/>
             </div>
         </Container>
     );
@@ -133,28 +137,30 @@ function WebsiteListItem({website}: { website: Website }) {
 
     return (
         <Container orientation="row" justify="between"
-                       className={`w-full bg-secondary`}>
+                   className={`w-full bg-secondary`}>
 
-                <h3 className="text-xl font-bold">{website.title}</h3>
-                <div className="flex gap-2">
-                    <ButtonLink href={`/${website.title}`} iconSrc="/illustrations/binoculars.png"/>
-                    <Button iconSrc="/illustrations/pencil.png" onClickAction={handleEditWebsiteClick} />
-                    <Button
-                        iconSrc="/illustrations/bin.png"
-                        btnType={ButtonType.Danger}
-                        onClickAction={() =>
-                            showDialog({
-                                title: t("deleteValidationTitle"),
-                                description: t("deleteValidationDesc"),
-                                onValidateAction: () => {
-                                    deleteWebsite(website.id);
-                                },
-                                iconSrc: "/illustrations/bin.png"
-                            })
-                        }
+            <h3 className="text-xl font-bold">{website.title}</h3>
+            <div className="flex gap-2">
+                <ButtonLink href={`/${website.title}`} iconSrc="/illustrations/binoculars.png"/>
+                <Button iconSrc="/illustrations/pencil.png" onClickAction={handleEditWebsiteClick}/>
+                <Button
+                    layoutId={`delete-${website.id}`}
+                    iconSrc="/illustrations/bin.png"
+                    btnType={ButtonType.Danger}
+                    onClickAction={() =>
+                        showDialog({
+                            triggerId: `delete-${website.id}`,
+                            title: t("deleteValidationTitle"),
+                            description: t("deleteValidationDesc"),
+                            onValidateAction: () => {
+                                deleteWebsite(website.id);
+                            },
+                            iconSrc: "/illustrations/bin.png"
+                        })
+                    }
 
-                    />
-                </div>
-            </Container>
+                />
+            </div>
+        </Container>
     );
 }

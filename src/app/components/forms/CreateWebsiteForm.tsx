@@ -8,6 +8,7 @@ import Input from "@/app/components/forms-inputs/Input";
 import StringUtil from "@/app/utils/StringUtil";
 import {useTranslations} from "next-intl";
 import {websiteSchema} from "@/app/schemas/WebsiteSchema";
+import ImageInputUploader from "@/app/components/forms-inputs/ImageInputUploader";
 
 export default function CreateWebsiteForm({ setDataAction, initialValue, setDataValidAction }: ChildFormProps<InsertableWebsite>) {
     const {user} = useUser();
@@ -35,9 +36,8 @@ export default function CreateWebsiteForm({ setDataAction, initialValue, setData
 
     return (
         <div className="flex flex-col gap-4">
-            <div>
-                <Input placeHolder={t('websiteTitle')} onChangeAction={(s) => editWebsiteData({...website, title: s})} validatorAction={StringUtil.basicStringValidator} value={website.title} />
-            </div>
+            <Input placeHolder={t('websiteTitle')} onChangeAction={(s) => editWebsiteData({...website, title: s})} validatorAction={StringUtil.basicStringValidator} value={website.title} />
+            <ImageInputUploader initialImage={website.image_src} setLinkAction={(s) => editWebsiteData({...website, image_src: s})}/>
         </div>
     );
 }
