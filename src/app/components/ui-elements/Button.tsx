@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from "framer-motion";
-import { buttonTransition, buttonVariants, getHoverTapProps } from "@/app/components/ui-elements/ButtonTransitions";
+import { buttonVariants, getHoverTapProps } from "../../transitions/ButtonTransitions";
 import { ButtonView, SharedButtonProps } from "@/app/components/ui-elements/ButtonView";
+import {globalTransitions} from "@/app/transitions/GlobalTransitions";
 
 export interface ButtonProps extends SharedButtonProps {
     onClickAction?: () => void;
@@ -24,8 +25,9 @@ export default function Button(props: ButtonProps) {
             initial="initial"
             whileInView="whileInView"
             animate="animate"
+            exit="exit"
             variants={buttonVariants}
-            transition={buttonTransition}
+            transition={globalTransitions}
             viewport={{ once: true, amount: 0.1 }}
             {...getHoverTapProps(isInteractive)}
             className={takeFullWidth ? "block w-full" : "inline-block min-w-fit w-fit"}

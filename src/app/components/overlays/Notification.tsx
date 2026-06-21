@@ -11,22 +11,22 @@ export interface NotificationProps {
     onCloseAction?: () => void;
 }
 
-export default function Notification({title, iconSrc, description, onCloseAction, show}: NotificationProps) {
+export default function Notification(props: NotificationProps) {
 
     // Effet pour fermer automatiquement la notification après 5 secondes
     useEffect(() => {
-        if (!show || !onCloseAction) return;
+        if (!props.show || !props.onCloseAction) return;
 
         const timer = setTimeout(() => {
-            onCloseAction();
+            props.onCloseAction!();
         }, 5000); // 5000 ms = 5 secondes
 
         return () => clearTimeout(timer); // Nettoyage du timer si le composant est démonté avant les 5s
-    }, [show, onCloseAction]);
+    }, [props.show, props.onCloseAction]);
 
     return <AnimatePresence>
         {
-            show &&
+            props.show &&
             <div className={"fixed top-5 z-999 left-5 right-5 md:top-3 md:left-3 md:right-3 flex justify-center items-center"}>
                 <motion.div
                     initial={{ opacity: 0, scale: 0 }}
@@ -41,12 +41,12 @@ export default function Notification({title, iconSrc, description, onCloseAction
                 >
                     <Container>
                         <div className={"flex items-center justify-center gap-4"}>
-                            {iconSrc && <img src={iconSrc} alt={"icon"} className={"w-16 min-w-16 min-h-16 h-16"}/>}
+                            {props.iconSrc && <img src={props.iconSrc} alt={"icon"} className={"w-16 min-w-16 min-h-16 h-16"}/>}
                             <div className={"flex flex-col items-center"}>
-                                <h2 className="font-bold w-full">{title}</h2>
-                                {description && <p className="text-sm w-full opacity-90">{description}</p>}
+                                <h2 className="font-bold w-full">{props.title}</h2>
+                                {props.description && <p className="text-sm w-full opacity-90">{props.description}</p>}
                             </div>
-                            <Button iconSrc={"/ico/close.svg"} onClickAction={onCloseAction}/>
+                            <Button iconSrc={"/ico/close.svg"} onClickAction={props.onCloseAction}/>
 
                         </div>
 

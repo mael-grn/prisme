@@ -8,7 +8,7 @@ import {useEffect, useState, UIEvent} from "react";
 import useSWR from "swr";
 import WebsiteService from "@/app/services/WebsiteService";
 import Container from "@/app/components/page-elements/Container";
-import NavBar from "@/app/components/page-elements/navbar/NavBar";
+import NavBar from "../../components/page-elements/NavBar";
 
 type SizeType = "reduced" | "full"
 
@@ -50,20 +50,24 @@ export default function Layout({
 
     return <>
         <Background zoom={scrolled}/>
-        <main className="w-full h-screen fixed top-0 left-0 flex justify-center items-end overflow-hidden"
+        <main className={`w-full h-screen fixed top-0 left-0 flex justify-center items-end overflow-hidden`}
               style={themeStyles}>
             <Container
                 flatBottom={true}
                 onScroll={handleScroll}
                 className={`transition-all duration-500 ease-out overflow-y-auto overflow-x-hidden ${scrolled ? sizeClasses.full : sizeClasses.reduced}`}
             >
-                {children}
+                {/* Ce wrapper garantit que même s'il y a peu de contenu,
+                  la zone scrollable fait au moins la hauteur de l'écran + 50px.
+                  Ainsi, le scroll ne disparaît jamais brutalement lors de l'agrandissement.
+                */}
+                <div className="min-h-[calc(100vh+50px)] w-full">
+                    {children}
+                </div>
             </Container>
         </main>
         {
             website && <NavBar websiteId={website?.id} scrolled={scrolled}/>
-
         }
-
     </>
 }

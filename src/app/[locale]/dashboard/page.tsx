@@ -120,6 +120,7 @@ function WebsiteListItem({website}: { website: Website }) {
 
     const handleEditWebsiteClick = () => {
         openForm({
+            triggerId: "editWebsite" + website.id,
             title: t('editWebsiteTitle'),
             description: t('editWebsiteDescription'),
             errorMsg: t('editWebsiteError'),
@@ -142,7 +143,7 @@ function WebsiteListItem({website}: { website: Website }) {
             <h3 className="text-xl font-bold">{website.title}</h3>
             <div className="flex gap-2">
                 <ButtonLink href={`/${website.title}`} iconSrc="/illustrations/binoculars.png"/>
-                <Button iconSrc="/illustrations/pencil.png" onClickAction={handleEditWebsiteClick}/>
+                <Button iconSrc="/illustrations/pencil.png" layoutId={"editWebsite" + website.id} onClickAction={handleEditWebsiteClick}/>
                 <Button
                     layoutId={`delete-${website.id}`}
                     iconSrc="/illustrations/bin.png"

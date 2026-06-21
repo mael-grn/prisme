@@ -52,7 +52,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ pag
 
         // Si father id, on verifie que le father appartien au user
         const [fatherWebsite] = await sql`
-        SELECT website.* FROM website, page, element WHERE element.id = ${insertableElement.father_element_id} and page.id = element.page_id and website.id = website_id LIMIT 1
+        SELECT website.* FROM website, page WHERE page.id = ${insertableElement.page_id} and website.id = website_id LIMIT 1
     `;
         if (fatherWebsite.owner_id !== user.id) {
             return ApiUtil.getErrorNextResponse("You are not the owner of the website of the father element", 403);
@@ -60,6 +60,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ pag
 
         // Validation des données
         const resultat = elementSchema.safeParse(insertableElement);
+        console.log(resultat);
         if (!resultat.success) {
             return ApiUtil.getErrorNextResponse("Entity not good", 422);
         }

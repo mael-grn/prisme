@@ -16,6 +16,11 @@
     "aboutName": "À propos"
   },
 
+  "Dialog" : {
+    "close": "Fermer",
+    "validate": "Valider"
+  },
+
   "Dashboard-default": {
     "unavailableTitle": "Désolé, ce paramètre n'est pas encore disponible",
     "unavailableText": "Ce projet est encore en beta, et certaines options peuvent ne pas être encore disponible. Merci de revenir plus tard."
@@ -57,6 +62,9 @@
   },
 
   "page": {
+    "cancelAddElementName": "Annuler",
+    "valAddElementName": "Ajouter la section",
+    "addElementName": "Ajouter du contenu",
     "noPage": "Il semble que cette page n'existe pas. Revenez plus tard, ou vérifiez l'url.",
     "createPageButtonName": "Créer la page pour la rendre accessible",
     "noContentForPage" : "Il semble que cette page n'a pas de contenu pour le moment.",
@@ -73,6 +81,14 @@
     "deletePageValidationTitle": "Voulez-vous vraiment supprimer les pages sélectionnées ?",
     "deletePageValidationDesc": "Tout le contenu de ces pages, incluant les éléments seront supprimés.",
     "deletePageError":"Une erreur s'est produite lors de la suppression de la page",
-    "deletePageSuccess": "La page a bien été supprimée"
+    "deletePageSuccess": "La page a bien été supprimée",
+    "createSectionError": "Une erreur s'est produite lors de la création de la section"
+  },
+
+  "ContainerTypeSelection": {
+    "title": "Comment voulez-vous organiser vos éléments ?",
+    "tuile_conteneur": "Tuile",
+    "item_conteneur": "Élément",
+    "section_conteneur": "Classique"
   }
 }

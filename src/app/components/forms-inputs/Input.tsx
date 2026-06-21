@@ -11,13 +11,13 @@ export interface InputProps {
     className?: string;
 }
 
-export default function Input({ placeHolder, onChangeAction, validatorAction, value, className = '' }: InputProps) {
+export default function Input(props: InputProps) {
     const [error, setError] = useState<string | null>(null);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
-        setError(validatorAction(val));
-        onChangeAction(val);
+        setError(props.validatorAction(val));
+        props.onChangeAction(val);
     };
 
     return (
@@ -44,14 +44,14 @@ export default function Input({ placeHolder, onChangeAction, validatorAction, va
                     
                     ${error
                     ? 'bg-dangerous/20 border-dangerous/40'
-                    : 'bg-background/60 border-white/20 bg-gradient-to-br from-white/10 via-white/5 to-transparent'
+                    : 'bg-background/60 border-white/20 bg-linear-to-br from-white/10 via-white/5 to-transparent'
                 }
-                    ${className}
+                    ${props.className}
                 `}
             >
                 {/* Reflet supérieur style bulle */}
                 <div
-                    className="absolute inset-0 pointer-events-none rounded-2xl bg-gradient-to-b from-white/10 to-transparent"
+                    className="absolute inset-0 pointer-events-none rounded-2xl bg-linear-to-b from-white/10 to-transparent"
                     style={{
                         maskImage: 'linear-gradient(to bottom, black 0%, transparent 40%)',
                         WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 40%)'
@@ -60,8 +60,8 @@ export default function Input({ placeHolder, onChangeAction, validatorAction, va
 
                 {/* Input HTML brut épuré */}
                 <input
-                    placeholder={placeHolder}
-                    value={value}
+                    placeholder={props.placeHolder}
+                    value={props.value}
                     onChange={onChange}
                     className="relative z-10 w-full bg-transparent outline-none border-none placeholder:text-muted-foreground text-foreground"
                 />

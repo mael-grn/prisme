@@ -5,14 +5,8 @@ export const buttonVariants: Variants = {
     initial: { scale: 0.5, opacity: 0 },
     whileInView: { scale: 1, opacity: 1 },
     animate: { opacity: 1 },
-};
+    exit: { scale: 0.5, opacity: 0 },
 
-// 2. La transition d'apparition
-export const buttonTransition: Transition = {
-    type: "spring",
-    stiffness: 140,
-    damping: 15,
-    opacity: { duration: 0.3 }
 };
 
 // Interface pour le retour de notre fonction helper

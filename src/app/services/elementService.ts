@@ -1,4 +1,4 @@
-import {InsertableElement} from "@/app/models/Element";
+import {InsertableElement, SortedElement, sortElements} from "@/app/models/Element";
 import axios, {AxiosError} from "axios";
 import StringUtil from "@/app/utils/StringUtil";
 import {Element} from "@/app/models/Element";
@@ -16,6 +16,21 @@ export default class ElementService {
         } catch (e) {
             throw StringUtil.getErrorMessageFromStatus((e as AxiosError).status || -1)
         }
+    }
+
+    static async getMyRootElementsWithNoFatherId(pageId: number) : Promise<Element[]> {
+        const elements = await this.getMyElements(pageId);
+        return elements.filter(e => e.father_element_id === null || e.father_element_id === undefined);
+    }
+
+    static async getMyElementsWithFatherId(pageId: number, fatherId: number) : Promise<Element[]> {
+        const elements = await this.getMyElements(pageId);
+        return elements.filter(e => e.father_element_id !== null || e.father_element_id === fatherId );
+    }
+
+    static async getMyElementsSorted(pageId: number) : Promise<SortedElement[]> {
+        const elements = await this.getMyElements(pageId);
+        return sortElements(elements);
     }
 
     static getElementTypes() : string[] {

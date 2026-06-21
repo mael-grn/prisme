@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Link } from '@/i18n/routing';
-import { buttonTransition, buttonVariants, getHoverTapProps } from "@/app/components/ui-elements/ButtonTransitions";
+import { buttonVariants, getHoverTapProps } from "../../transitions/ButtonTransitions";
 import { ButtonView, SharedButtonProps } from "@/app/components/ui-elements/ButtonView";
+import {globalTransitions} from "@/app/transitions/GlobalTransitions";
 
 export interface ButtonLinkProps extends SharedButtonProps {
     href?: string;
@@ -22,7 +23,7 @@ export default function ButtonLink(props: ButtonLinkProps) {
             whileInView="whileInView"
             animate="animate"
             variants={buttonVariants}
-            transition={buttonTransition}
+            transition={globalTransitions}
             viewport={{ once: true, amount: 0.1 }}
             {...getHoverTapProps(isInteractive)}
             className={widthClass}

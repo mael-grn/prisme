@@ -11,29 +11,29 @@ import {websiteSchema} from "@/app/schemas/WebsiteSchema";
 import ImageInput from "@/app/components/forms-inputs/imageInput";
 import ImageInputUploader from "@/app/components/forms-inputs/ImageInputUploader";
 
-export default function EditWebsiteForm({ setDataAction, initialValue, setDataValidAction }: ChildFormProps<Website>) {
+export default function EditWebsiteForm(props: ChildFormProps<Website>) {
     const {user} = useUser();
     const t = useTranslations('fields-names');
 
-    const [website, setWebsite] = useState<Website>(initialValue ? initialValue : {id:-1, owner_id: user?.id || -1, title: "", website_domain: undefined, lang: undefined, image_src: undefined})
+    const [website, setWebsite] = useState<Website>(props.initialValue ? props.initialValue : {id:-1, owner_id: user?.id || -1, title: "", website_domain: undefined, lang: undefined, image_src: undefined})
 
     const editWebsiteData = (data: Website) => {
         setWebsite(data);
         checkWebsiteData(data)
-        setDataAction(data);
+        props.setDataAction(data);
     }
 
     const checkWebsiteData = (website?: Website) => {
         if (!website) {
-            setDataValidAction(false);
+            props.setDataValidAction(false);
         }
         const res = websiteSchema.safeParse(website);
-        setDataValidAction(res.success);
+        props.setDataValidAction(res.success);
     }
 
     useEffect(() => {
-        checkWebsiteData(initialValue);
-    }, [initialValue, setDataValidAction]);
+        checkWebsiteData(props.initialValue);
+    }, [props.initialValue, props.setDataValidAction]);
 
     return (
         <div className="flex flex-col gap-4">

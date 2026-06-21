@@ -16,6 +16,7 @@ import Link from "next/link";
 import WebsiteService from "@/app/services/WebsiteService";
 import Checkbox from "@/app/components/forms-inputs/CheckboxInput";
 import {useDialog} from "@/app/context/DialogContext";
+import {useRouter} from "next/navigation";
 
 export interface NavBarProps {
     websiteId: number;
@@ -24,6 +25,7 @@ export interface NavBarProps {
 
 export default function NavBar(props: NavBarProps) {
 
+    const router = useRouter();
     const pathname = usePathname();
     const {user, userLoading} = useUser();
     const {openForm} = useFormDialog();
@@ -43,7 +45,12 @@ export default function NavBar(props: NavBarProps) {
         isLoading: websiteLoading,
         mutate: mutateWebsite
     } = useSWR(`website-${props.websiteId}`, fetchWebsite);
-    const {data: pages, error, isLoading, mutate} = useSWR('website-pages', fetcher);
+    const {
+        data: pages,
+        error: pagesError,
+        isLoading: pagesLoading,
+        mutate: mutatePages
+    } = useSWR('website-pages', fetcher);
 
     const togglePageEditionMode = () => {
         if (pageEditionMode) {
@@ -53,7 +60,6 @@ export default function NavBar(props: NavBarProps) {
     }
 
     const addOrRemovePageToEditing = (page: Page) => {
-        console.log(pageToEdit);
         if (!pageEditionMode) return;
         if (pageToEdit.find((p) => p.id === page.id)) {
             setPageToEdit(pageToEdit.filter((p) => p.id !== page.id));
@@ -77,7 +83,7 @@ export default function NavBar(props: NavBarProps) {
                         title: t('deletePageSuccess'),
                         iconSrc: '/illustrations/check.png',
                     })
-                    mutate();
+                    mutatePages();
                 } catch (e) {
                     showNotification({
                         title: t('deletePageError'),
@@ -156,12 +162,14 @@ export default function NavBar(props: NavBarProps) {
                             <Button key={1} layoutId="delete-pages-trigger" size={"small"} iconSrc={"/ico/trash.svg"}
                                     onClickAction={onDeleteSelectedPages} btnType={ButtonType.Danger}/>
                         }
-                        <Button
-                            key={2}
-                            size={"small"}
-                            onClickAction={togglePageEditionMode}
-                            btnType={pageEditionMode ? ButtonType.Primary : ButtonType.Neutral}
-                            iconSrc={"/ico/edit.svg"}/>
+                        {
+                            pages && pages.length > 1 && <Button
+                                key={2}
+                                size={"small"}
+                                onClickAction={togglePageEditionMode}
+                                btnType={pageEditionMode ? ButtonType.Primary : ButtonType.Neutral}
+                                iconSrc={"/ico/edit.svg"}/>
+                        }
                         {
                             !pageEditionMode && <Button
                                 key={3}
@@ -175,7 +183,7 @@ export default function NavBar(props: NavBarProps) {
                                     iconSrc: '/illustrations/wrench.png',
                                     onSubmit: async (p) => {
                                         await PageService.insertPage(p)
-                                        mutate();
+                                        mutatePages();
                                         return p;
                                     },
                                     successMsg: t('createPageSuccess'),

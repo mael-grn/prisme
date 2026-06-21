@@ -11,9 +11,9 @@ export interface ImageInputProps {
     className?: string;
 }
 
-export default function ImageInput({ setFileAction, initialValue, error, className = '' }: ImageInputProps) {
+export default function ImageInput(props: ImageInputProps) {
     const [newFile, setNewFile] = useState<File | null>(null);
-    const [imageSrc, setImageSrc] = useState<string | null>(initialValue ? initialValue : null);
+    const [imageSrc, setImageSrc] = useState<string | null>(props.initialValue ? props.initialValue : null);
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const t = useTranslations('form')
 
@@ -32,7 +32,7 @@ export default function ImageInput({ setFileAction, initialValue, error, classNa
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file && file.type.startsWith("image/")) {
-            setFileAction(file);
+            props.setFileAction(file);
             setNewFile(file);
             setImageSrc(URL.createObjectURL(file));
         }
@@ -43,14 +43,14 @@ export default function ImageInput({ setFileAction, initialValue, error, classNa
         setIsDragging(false);
         const file = event.dataTransfer.files?.[0];
         if (file && file.type.startsWith("image/")) {
-            setFileAction(file);
+            props.setFileAction(file);
             setNewFile(file);
             setImageSrc(URL.createObjectURL(file));
         }
     };
 
     return (
-        <div className={`flex flex-col gap-2 w-full max-w-sm ${className}`}>
+        <div className={`flex flex-col gap-2 w-full max-w-sm ${props.className}`}>
             <motion.label
                 htmlFor="file-input"
                 initial={{ scale: 0.95, opacity: 0 }}
@@ -75,18 +75,18 @@ export default function ImageInput({ setFileAction, initialValue, error, classNa
                     transition-colors duration-300
                     shadow-xl shadow-black/10 shadow-inner
                     cursor-pointer
-                    min-h-[140px]
+                    min-h-35
                     flex flex-col items-center justify-center
-                    ${error
+                    ${props.error
                     ? 'bg-dangerous/20 border-dangerous/40'
                     : isDragging
-                        ? 'bg-background/80 border-white/40 bg-gradient-to-br from-white/20 via-white/10 to-transparent'
-                        : 'bg-background/60 border-white/20 bg-gradient-to-br from-white/10 via-white/5 to-transparent'
+                        ? 'bg-background/80 border-white/40 bg-linear-to-br from-white/20 via-white/10 to-transparent'
+                        : 'bg-background/60 border-white/20 bg-linear-to-br from-white/10 via-white/5 to-transparent'
                 }
                 `}
             >
                 <div
-                    className="absolute inset-0 pointer-events-none rounded-2xl bg-gradient-to-b from-white/10 to-transparent"
+                    className="absolute inset-0 pointer-events-none rounded-2xl bg-linear-to-b from-white/10 to-transparent"
                     style={{
                         maskImage: 'linear-gradient(to bottom, black 0%, transparent 40%)',
                         WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 40%)'
@@ -127,7 +127,7 @@ export default function ImageInput({ setFileAction, initialValue, error, classNa
             />
 
             <AnimatePresence>
-                {error && (
+                {props.error && (
                     <motion.p
                         initial={{ opacity: 0, y: -6 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -135,7 +135,7 @@ export default function ImageInput({ setFileAction, initialValue, error, classNa
                         transition={{ duration: 0.15 }}
                         className="text-sm text-dangerous px-2"
                     >
-                        {error}
+                        {props.error}
                     </motion.p>
                 )}
             </AnimatePresence>

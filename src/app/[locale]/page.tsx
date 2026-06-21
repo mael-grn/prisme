@@ -3,10 +3,9 @@
 import Image from "next/image";
 import {useState} from "react";
 import Button from "@/app/components/ui-elements/Button";
-import {useRouter} from "next/navigation";
 import Notification, {NotificationProps} from "@/app/components/overlays/Notification";
 import Container from "@/app/components/page-elements/Container";
-import ButtonLink, {ButtonLinkProps} from "@/app/components/ui-elements/ButtonLink";
+import ButtonLink from "@/app/components/ui-elements/ButtonLink";
 import {useTranslations} from "next-intl";
 import {useTheme} from "@/app/context/ThemeContext";
 import {useUser} from "@/app/context/UserContext";
@@ -17,20 +16,17 @@ export default function Page() {
 
     const t = useTranslations('Home');
 
-    const { themeImage, themeStyles } = useTheme();
+    const { themeStyles } = useTheme();
     const { user, userLoading } = useUser();
 
-
     const [notification, setNotification] = useState<NotificationProps | null>(null);
-
-    const router = useRouter();
 
     return (
         <>
             <Background/>
             <main style={themeStyles} className={"relative flex flex-col gap-6 justify-center w-full h-screen items-center"}>
                 <Container rounded={"full"} >
-                    <Image width={1000} height={1000} src={"/img/icon.png"} alt="icon" className={"md:w-72 w-48"}/>
+                    <Image width={1000} height={1000} src={"/img/icon.png"} alt="icon" className={"w-48"}/>
                 </Container>
 
                 <Container className={"md:max-w-2/3 max-w-10/12"}>

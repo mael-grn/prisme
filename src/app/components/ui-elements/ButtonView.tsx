@@ -77,7 +77,7 @@ export const ButtonView = forwardRef<HTMLDivElement, SharedButtonProps>(({
                 ${radiusClass} 
                 ${btnType} 
                 backdrop-blur-xl
-                bg-gradient-to-br from-white/15 via-white/5 to-transparent
+                bg-linear-to-br from-white/15 via-white/5 to-transparent
                 border border-white/20
                 shadow-lg shadow-black/10 shadow-inner
                 ${btnType === ButtonType.Neutral ? "text-foreground" : "text-white"}
@@ -87,7 +87,7 @@ export const ButtonView = forwardRef<HTMLDivElement, SharedButtonProps>(({
         >
             {/* REFLET SUPÉRIEUR */}
             <div
-                className={`absolute inset-0 pointer-events-none ${radiusClass} bg-gradient-to-b from-white/15 to-transparent`}
+                className={`absolute inset-0 pointer-events-none ${radiusClass} bg-linear-to-b from-white/15 to-transparent`}
                 style={{
                     maskImage: 'linear-gradient(to bottom, black 0%, transparent 40%)',
                     WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 40%)'
@@ -106,7 +106,7 @@ export const ButtonView = forwardRef<HTMLDivElement, SharedButtonProps>(({
                         <img
                             src={iconSrc}
                             alt="icon"
-                            className={`object-contain ${iconSizeClass}`}
+                            className={`object-contain ${iconSizeClass} ${iconSrc.endsWith('.svg') && btnType !== ButtonType.Neutral ? 'invert' : ''}`}
                         />
                     )
                 )}
