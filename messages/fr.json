@@ -85,6 +85,10 @@
     "createSectionError": "Une erreur s'est produite lors de la création de la section"
   },
 
+  "element": {
+    "addElementElementName": "Ajouter un élément"
+  },
+
   "ContainerTypeSelection": {
     "title": "Comment voulez-vous organiser vos éléments ?",
     "tuile_conteneur": "Tuile",

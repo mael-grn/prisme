@@ -9,6 +9,7 @@ export interface DialogOptions {
     iconSrc?: string;
     onValidateAction?: () => void;
     triggerId?: string;
+    htmlContent?: string;
 }
 
 interface DialogContextType {
@@ -43,7 +44,9 @@ export function DialogProvider({ children }: { children: ReactNode }) {
                     dialog?.onValidateAction?.();
                     hideDialog();
                 }}
-            />
+            >
+                {dialog?.htmlContent}
+            </Dialog>
         </DialogContext.Provider>
     );
 }

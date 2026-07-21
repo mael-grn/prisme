@@ -25,7 +25,7 @@ export default class ElementService {
 
     static async getMyElementsWithFatherId(pageId: number, fatherId: number) : Promise<Element[]> {
         const elements = await this.getMyElements(pageId);
-        return elements.filter(e => e.father_element_id !== null || e.father_element_id === fatherId );
+        return elements.filter(e => e.father_element_id === fatherId)
     }
 
     static async getMyElementsSorted(pageId: number) : Promise<SortedElement[]> {
